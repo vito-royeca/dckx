@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ComicView.swift
 //  dckx
 //
 //  Created by Vito Royeca on 2/13/20.
@@ -8,14 +8,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ComicView: View {
     var body: some View {
         Text("Hello, World!")
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct ComicView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ComicView()
     }
 }

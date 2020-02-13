@@ -9,5 +9,31 @@
 import UIKit
 
 class API: NSObject {
-
+    // MARK: API methods
+    func fetchCurrentComic() {
+        
+    }
+    
+    func fetchAllComics() {
+        
+    }
+    
+    // MARK: Core Data methods
+    func saveComic(json: [String: Any]) {
+        
+    }
+    
+    func saveComics(jsonArray: [[String: Any]]) {
+        
+    }
+    
+    func loadCurrentComic() -> Comic {
+        // TODO: fix this
+        return Comic()
+    }
+    
+    func loadRandomComic() -> Comic {
+        // TODO: fix this
+        return Comic()
+    }
 }

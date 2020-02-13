@@ -3,13 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		8B4F4B9923F5F444008446F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9823F5F444008446F4 /* AppDelegate.swift */; };
 		8B4F4B9B23F5F444008446F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */; };
-		8B4F4B9D23F5F444008446F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9C23F5F444008446F4 /* ContentView.swift */; };
+		8B4F4B9D23F5F444008446F4 /* ComicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9C23F5F444008446F4 /* ComicView.swift */; };
 		8B4F4B9F23F5F445008446F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9E23F5F445008446F4 /* Assets.xcassets */; };
 		8B4F4BA223F5F445008446F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B4F4BA123F5F445008446F4 /* Preview Assets.xcassets */; };
 		8B4F4BA523F5F445008446F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B4F4BA323F5F445008446F4 /* LaunchScreen.storyboard */; };
@@ -27,6 +27,10 @@
 		8B4F4BD923F5F6FD008446F4 /* ComicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BD823F5F6FD008446F4 /* ComicController.swift */; };
 		8B4F4BDA23F5F6FD008446F4 /* ComicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BD823F5F6FD008446F4 /* ComicController.swift */; };
 		8B4F4BDB23F5F6FD008446F4 /* ComicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BD823F5F6FD008446F4 /* ComicController.swift */; };
+		8B4F4BDE23F5F8A9008446F4 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4F4BDD23F5F8A9008446F4 /* PromiseKit */; };
+		8B4F4BE023F5F9D5008446F4 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BDF23F5F9D5008446F4 /* API.swift */; };
+		8B4F4BE123F5F9D5008446F4 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BDF23F5F9D5008446F4 /* API.swift */; };
+		8B4F4BE223F5F9D5008446F4 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BDF23F5F9D5008446F4 /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +54,7 @@
 		8B4F4B9523F5F444008446F4 /* dckx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dckx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B4F4B9823F5F444008446F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8B4F4B9C23F5F444008446F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8B4F4B9C23F5F444008446F4 /* ComicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicView.swift; sourceTree = "<group>"; };
 		8B4F4B9E23F5F445008446F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B4F4BA123F5F445008446F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8B4F4BA423F5F445008446F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,6 +69,7 @@
 		8B4F4BCF23F5F67B008446F4 /* Comic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comic+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8B4F4BD023F5F67B008446F4 /* Comic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comic+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8B4F4BD823F5F6FD008446F4 /* ComicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicController.swift; sourceTree = "<group>"; };
+		8B4F4BDF23F5F9D5008446F4 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B4F4BDE23F5F8A9008446F4 /* PromiseKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +172,7 @@
 		8B4F4BCE23F5F637008446F4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8B4F4B9C23F5F444008446F4 /* ContentView.swift */,
+				8B4F4B9C23F5F444008446F4 /* ComicView.swift */,
 				8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */,
 			);
 			path = View;
@@ -176,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				8B4F4BD823F5F6FD008446F4 /* ComicController.swift */,
+				8B4F4BDF23F5F9D5008446F4 /* API.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -196,6 +203,9 @@
 			dependencies = (
 			);
 			name = dckx;
+			packageProductDependencies = (
+				8B4F4BDD23F5F8A9008446F4 /* PromiseKit */,
+			);
 			productName = dckx;
 			productReference = 8B4F4B9523F5F444008446F4 /* dckx.app */;
 			productType = "com.apple.product-type.application";
@@ -268,6 +278,9 @@
 				Base,
 			);
 			mainGroup = 8B4F4B8C23F5F444008446F4;
+			packageReferences = (
+				8B4F4BDC23F5F8A9008446F4 /* XCRemoteSwiftPackageReference "PromiseKit" */,
+			);
 			productRefGroup = 8B4F4B9623F5F444008446F4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -314,9 +327,10 @@
 				8B4F4B9923F5F444008446F4 /* AppDelegate.swift in Sources */,
 				8B4F4BD423F5F67B008446F4 /* Comic+CoreDataProperties.swift in Sources */,
 				8B4F4B9B23F5F444008446F4 /* SceneDelegate.swift in Sources */,
-				8B4F4B9D23F5F444008446F4 /* ContentView.swift in Sources */,
+				8B4F4B9D23F5F444008446F4 /* ComicView.swift in Sources */,
 				8B4F4BD923F5F6FD008446F4 /* ComicController.swift in Sources */,
 				8B4F4BD123F5F67B008446F4 /* Comic+CoreDataClass.swift in Sources */,
+				8B4F4BE023F5F9D5008446F4 /* API.swift in Sources */,
 				8B4F4BCB23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,6 +343,7 @@
 				8B4F4BD223F5F67B008446F4 /* Comic+CoreDataClass.swift in Sources */,
 				8B4F4BB023F5F445008446F4 /* dckxTests.swift in Sources */,
 				8B4F4BCC23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
+				8B4F4BE123F5F9D5008446F4 /* API.swift in Sources */,
 				8B4F4BD523F5F67B008446F4 /* Comic+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,6 +356,7 @@
 				8B4F4BD323F5F67B008446F4 /* Comic+CoreDataClass.swift in Sources */,
 				8B4F4BBB23F5F445008446F4 /* dckxUITests.swift in Sources */,
 				8B4F4BCD23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
+				8B4F4BE223F5F9D5008446F4 /* API.swift in Sources */,
 				8B4F4BD623F5F67B008446F4 /* Comic+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -644,6 +660,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8B4F4BDC23F5F8A9008446F4 /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mxcl/PromiseKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.13.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8B4F4BDD23F5F8A9008446F4 /* PromiseKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B4F4BDC23F5F8A9008446F4 /* XCRemoteSwiftPackageReference "PromiseKit" */;
+			productName = PromiseKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8B4F4BC923F5F551008446F4 /* dckx.xcdatamodeld */ = {
