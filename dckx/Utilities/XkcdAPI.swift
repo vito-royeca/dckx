@@ -16,18 +16,6 @@ class XkcdAPI {
         
     }
     
-    // MARK: Utility methods
-    func fetchData(urlString: String) -> Promise<(data: Data, response: URLResponse)> {
-        guard let cleanURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-            let url = URL(string: cleanURL) else {
-            fatalError("Malformed url")
-        }
-        
-        let rq = URLRequest(url: url)
-        
-        return URLSession.shared.dataTask(.promise, with: rq)
-    }
-    
     // MARK: API methods
     func fetchLastComic() -> Promise<Comic> {
         return Promise { seal in
@@ -90,6 +78,18 @@ class XkcdAPI {
                 seal.reject(error)
             }
         }
+    }
+    
+    // MARK: Helper methods
+    private func fetchData(urlString: String) -> Promise<(data: Data, response: URLResponse)> {
+        guard let cleanURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+            let url = URL(string: cleanURL) else {
+                fatalError("Malformed url")
+        }
+           
+        let rq = URLRequest(url: url)
+           
+        return URLSession.shared.dataTask(.promise, with: rq)
     }
     
     private func generateRandomNumber(max: Int) -> Promise<Int> {
