@@ -28,7 +28,7 @@ class XkcdAPI {
             }.then { data in
                 CoreData.sharedInstance.saveComics(data: [data])
             }.then {
-                CoreData.sharedInstance.loadCurrentComic()
+                CoreData.sharedInstance.loadLastComic()
             }.done { comic in
                 seal.fulfill(comic)
             }.catch { error in

@@ -58,7 +58,7 @@ class CoreData {
         }
     }
     
-    func loadCurrentComic() -> Promise<Comic> {
+    func loadLastComic() -> Promise<Comic> {
         return Promise { seal in
             let error = NSError(domain: "",
                                 code: 404,
