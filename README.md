@@ -10,7 +10,7 @@ $ pod install
 $ open dckx.xcworkspace
 ```
 
-##Author
+## Author
 Vito Royeca
 https://vitoroyeca.com
 
