@@ -12,6 +12,7 @@ import SDWebImageSwiftUI
 
 struct ComicView: View {
     @ObservedObject var fetcher = ComicFetcher()
+    @State private var showingText = false
     
     var body: some View {
         NavigationView {
@@ -63,9 +64,21 @@ struct ComicView: View {
                         Text(">|")
                     }.disabled(!fetcher.canDoNext())
                     
-                }.padding()
-            }
+                }
+            }.padding()
             .navigationBarTitle(fetcher.currentComic?.title ?? "")
+            .navigationBarItems(trailing:
+                Button(action: {
+                    self.showingText = true
+                }) {
+                    Text("Alt Text")
+                }
+                .alert(isPresented: $showingText) {
+                    Alert(title: Text("Alt Text"),
+                          message: Text(fetcher.currentComic?.alt ?? "No Alt Text"),
+                          dismissButton: .default(Text("Close")))
+                }
+            )
             
         }
     }
