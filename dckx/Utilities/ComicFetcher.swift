@@ -20,7 +20,7 @@ class ComicFetcher: ObservableObject {
         loadLastComic()
     }
 
-    // MARK: Button methods
+    // MARK: Button actions
     func loadFirstComic() {
         loadComic(num: 1)
     }
@@ -60,6 +60,7 @@ class ComicFetcher: ObservableObject {
         }
     }
     
+    // MARK: Button states
     func canDoPrevious() -> Bool {
         guard let currentComic = currentComic else {
             return false

@@ -47,7 +47,7 @@ class CoreData {
                                 userInfo: [NSLocalizedDescriptionKey: "Comic with ID \(num) not found."])
             
             do {
-                if let comic = try dataStack.fetch(num, inEntityNamed: "Comic") as? Comic {
+                if let comic = try dataStack.fetch(num, inEntityNamed: String(describing: Comic.self)) as? Comic {
                     seal.fulfill(comic)
                 } else {
                     seal.reject(error)
@@ -75,7 +75,6 @@ class CoreData {
                 }
                 seal.fulfill(comic)
             } catch {
-                
                 seal.reject(error)
             }
         }
