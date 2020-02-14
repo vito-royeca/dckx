@@ -12,71 +12,77 @@ import SwiftUI
 import PromiseKit
 
 class ComicFetcher: ObservableObject {
-    @Published var comic: Comic?
+    @Published var currentComic: Comic?
+    @Published var lastComic: Comic?
     
+    // MARK: Initializer
     init() {
-        loadCurrentComic()
+        loadLastComic()
     }
 
-    func loadCurrentComic() {
-        firstly {
-            XkcdAPI.sharedInstance.fetchCurrentComic()
-        }.done { comic in
-            self.comic = comic
-        }.catch { error in
-            print(error)
-        }
-    }
-    
+    // MARK: Button methods
     func loadFirstComic() {
-        firstly {
-            XkcdAPI.sharedInstance.fetchComic(num: 1)
-        }.done { comic in
-            self.comic = comic
-        }.catch { error in
-            print(error)
-        }
+        loadComic(num: 1)
     }
     
     func loadPreviousComic() {
-        guard let comic = comic else {
+        guard let currentComic = currentComic else {
             return
         }
-        
-        firstly {
-            XkcdAPI.sharedInstance.fetchComic(num: Int16(comic.num - 1))
-        }.done { comic in
-            self.comic = comic
-        }.catch { error in
-            print(error)
-        }
+        loadComic(num: Int16(currentComic.num - 1))
     }
     
     func loadRandomComic() {
         firstly {
             XkcdAPI.sharedInstance.fetchRandomComic()
         }.done { comic in
-            self.comic = comic
+            self.currentComic = comic
         }.catch { error in
             print(error)
         }
     }
     
     func loadNextComic() {
-        guard let comic = comic else {
+        guard let currentComic = currentComic else {
             return
         }
-        
+        loadComic(num: Int16(currentComic.num + 1))
+    }
+    
+    func loadLastComic() {
         firstly {
-            XkcdAPI.sharedInstance.fetchComic(num: Int16(comic.num + 1))
+            XkcdAPI.sharedInstance.fetchLastComic()
         }.done { comic in
-            self.comic = comic
+            self.currentComic = comic
+            self.lastComic = comic
         }.catch { error in
             print(error)
         }
     }
     
-    func loadLastComic() {
-        loadCurrentComic()
+    func canDoPrevious() -> Bool {
+        guard let currentComic = currentComic else {
+            return false
+        }
+        return currentComic.num > 1
+    }
+    
+    func canDoNext() -> Bool {
+        guard let currentComic = currentComic,
+            let lastComic = lastComic else {
+            return false
+        }
+        return currentComic.num < lastComic.num
+    }
+    
+    // MARK: Helper methods
+    private func loadComic(num: Int16) {
+        firstly {
+            XkcdAPI.sharedInstance.fetchComic(num: num)
+        }.done { comic in
+            self.currentComic = comic
+        }.catch { error in
+            print(error)
+        }
     }
 }

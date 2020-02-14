@@ -16,7 +16,7 @@ struct ComicView: View {
     var body: some View {
         NavigationView {
             VStack {
-                WebImage(url: URL(string: fetcher.comic?.img ?? ""))
+                WebImage(url: URL(string: fetcher.currentComic?.img ?? ""))
                 .onSuccess { image, cacheType in
                     // Success
                 }
@@ -37,13 +37,13 @@ struct ComicView: View {
                         self.fetcher.loadFirstComic()
                     }) {
                         Text("|<")
-                    }
+                    }.disabled(!fetcher.canDoPrevious())
                     
                     Button(action: {
                         self.fetcher.loadPreviousComic()
                     }) {
                         Text("<Prev")
-                    }
+                    }.disabled(!fetcher.canDoPrevious())
                     
                     Button(action: {
                         self.fetcher.loadRandomComic()
@@ -55,17 +55,17 @@ struct ComicView: View {
                         self.fetcher.loadNextComic()
                     }) {
                         Text("Next>")
-                    }
+                    }.disabled(!fetcher.canDoNext())
                     
                     Button(action: {
                         self.fetcher.loadLastComic()
                     }) {
                         Text(">|")
-                    }
+                    }.disabled(!fetcher.canDoNext())
                     
                 }.padding()
             }
-            .navigationBarTitle(fetcher.comic?.title ?? "")
+            .navigationBarTitle(fetcher.currentComic?.title ?? "")
             
         }
     }

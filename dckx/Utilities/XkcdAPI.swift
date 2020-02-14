@@ -29,7 +29,7 @@ class XkcdAPI {
     }
     
     // MARK: API methods
-    func fetchCurrentComic() -> Promise<Comic> {
+    func fetchLastComic() -> Promise<Comic> {
         return Promise { seal in
             let url = "http://xkcd.com/info.0.json"
             
@@ -79,7 +79,7 @@ class XkcdAPI {
     func fetchRandomComic() -> Promise<Comic> {
         return Promise { seal in
             firstly {
-                fetchCurrentComic()
+                fetchLastComic()
             }.then { comic in
                 self.generateRandomNumber(max: Int(comic.num))
             }.then { random in
