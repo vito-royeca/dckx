@@ -20,7 +20,26 @@ class ComicFetcher: ObservableObject {
         loadLastComic()
     }
 
-    // MARK: Button actions
+    // MARK: Toolbar actions
+    func toggleIsFavorite() {
+        guard let currentComic = currentComic else {
+            return
+        }
+        currentComic.isFavorite = !currentComic.isFavorite
+        
+        let data = [["num": currentComic.num,
+                     "isFavorite": currentComic.isFavorite]]
+        
+        firstly {
+            CoreData.sharedInstance.saveComics(data: data)
+        }.done { comic in
+            self.loadComic(num: Int16(currentComic.num))
+        }.catch { error in
+            print(error)
+        }
+    }
+    
+    // MARK: Navigation actions
     func loadFirstComic() {
         loadComic(num: 1)
     }

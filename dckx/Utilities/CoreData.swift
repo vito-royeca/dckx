@@ -31,10 +31,16 @@ class CoreData {
                     seal.fulfill(())
                 }
             }
+            guard let first = data.first,
+                let num = first["num"] as? Int32 else {
+                seal.fulfill(())
+                return
+            }
+            let predicate = NSPredicate(format: "num = %i", num)
             
             dataStack.sync(data,
                            inEntityNamed: String(describing: Comic.self),
-                           predicate: nil,
+                           predicate: predicate,
                            operations: .all,
                            completion: completion)
         }
