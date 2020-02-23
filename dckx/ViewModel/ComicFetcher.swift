@@ -39,6 +39,24 @@ class ComicFetcher: ObservableObject {
         }
     }
     
+    private func toggleIsRead() {
+        guard let currentComic = currentComic else {
+            return
+        }
+        
+        if !currentComic.isRead {
+            let data = [["num": currentComic.num,
+                         "isRead": true]]
+            firstly {
+                CoreData.sharedInstance.saveComics(data: data)
+            }.done {
+                
+            }.catch { error in
+                print(error)
+            }
+        }
+    }
+    
     // MARK: Navigation actions
     func loadFirstComic() {
         loadComic(num: 1)
@@ -56,6 +74,7 @@ class ComicFetcher: ObservableObject {
             XkcdAPI.sharedInstance.fetchRandomComic()
         }.done { comic in
             self.currentComic = comic
+            self.toggleIsRead()
         }.catch { error in
             print(error)
         }
@@ -74,6 +93,7 @@ class ComicFetcher: ObservableObject {
         }.done { comic in
             self.currentComic = comic
             self.lastComic = comic
+            self.toggleIsRead()
         }.catch { error in
             print(error)
         }
@@ -101,6 +121,7 @@ class ComicFetcher: ObservableObject {
             XkcdAPI.sharedInstance.fetchComic(num: num)
         }.done { comic in
             self.currentComic = comic
+            self.toggleIsRead()
         }.catch { error in
             print(error)
         }

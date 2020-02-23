@@ -29,7 +29,7 @@
 		8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BDF23F5F9D5008446F4 /* XkcdAPI.swift */; };
 		8B4F4BE123F5F9D5008446F4 /* XkcdAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BDF23F5F9D5008446F4 /* XkcdAPI.swift */; };
 		8B4F4BE223F5F9D5008446F4 /* XkcdAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BDF23F5F9D5008446F4 /* XkcdAPI.swift */; };
-		8B626D6E23FFB5BE00972EED /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D6D23FFB5BE00972EED /* CollectionView.swift */; };
+		8B626D6E23FFB5BE00972EED /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D6D23FFB5BE00972EED /* ListView.swift */; };
 		8B626D702401B0A900972EED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D6F2401B0A900972EED /* Constants.swift */; };
 		8B626D712401B0A900972EED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D6F2401B0A900972EED /* Constants.swift */; };
 		8B626D742401BB6800972EED /* xkcd-script.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B626D732401BB6800972EED /* xkcd-script.ttf */; };
@@ -93,7 +93,7 @@
 		8B4F4BBC23F5F445008446F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B4F4BCA23F5F551008446F4 /* dckx.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = dckx.xcdatamodel; sourceTree = "<group>"; };
 		8B4F4BDF23F5F9D5008446F4 /* XkcdAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XkcdAPI.swift; sourceTree = "<group>"; };
-		8B626D6D23FFB5BE00972EED /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
+		8B626D6D23FFB5BE00972EED /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		8B626D6F2401B0A900972EED /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8B626D732401BB6800972EED /* xkcd-script.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "xkcd-script.ttf"; sourceTree = "<group>"; };
 		8B626D772401DB9000972EED /* 2020-02-22.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "2020-02-22.xcdatamodel"; sourceTree = "<group>"; };
@@ -178,6 +178,7 @@
 				8B4F4BE323F603B1008446F4 /* Utilities */,
 				8B4F4BC823F5F4A0008446F4 /* Model */,
 				8B4F4BCE23F5F637008446F4 /* View */,
+				8B626D922403172100972EED /* ViewModel */,
 				8B4F4B9823F5F444008446F4 /* AppDelegate.swift */,
 				8B4F4B9E23F5F445008446F4 /* Assets.xcassets */,
 				8B4F4BA323F5F445008446F4 /* LaunchScreen.storyboard */,
@@ -231,7 +232,7 @@
 			children = (
 				8B4F4B9C23F5F444008446F4 /* ComicView.swift */,
 				8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */,
-				8B626D6D23FFB5BE00972EED /* CollectionView.swift */,
+				8B626D6D23FFB5BE00972EED /* ListView.swift */,
 				8B626D862402122C00972EED /* BrowserView.swift */,
 			);
 			path = View;
@@ -243,7 +244,6 @@
 				8B626D6F2401B0A900972EED /* Constants.swift */,
 				8B4F4BDF23F5F9D5008446F4 /* XkcdAPI.swift */,
 				8B23367D23F646A700C88BA1 /* CoreData.swift */,
-				8B23368123F6683C00C88BA1 /* ComicFetcher.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -254,6 +254,14 @@
 				8B626D732401BB6800972EED /* xkcd-script.ttf */,
 			);
 			path = fonts;
+			sourceTree = "<group>";
+		};
+		8B626D922403172100972EED /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8B23368123F6683C00C88BA1 /* ComicFetcher.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		921AF9F2F90CBC7F2736030E /* Frameworks */ = {
@@ -535,7 +543,7 @@
 				8B4F4B9D23F5F444008446F4 /* ComicView.swift in Sources */,
 				8B23367E23F646A700C88BA1 /* CoreData.swift in Sources */,
 				8B23368223F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
-				8B626D6E23FFB5BE00972EED /* CollectionView.swift in Sources */,
+				8B626D6E23FFB5BE00972EED /* ListView.swift in Sources */,
 				8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8B4F4BCB23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
 				8B626D872402122C00972EED /* BrowserView.swift in Sources */,

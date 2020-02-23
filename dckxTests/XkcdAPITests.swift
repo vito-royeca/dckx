@@ -56,7 +56,7 @@ class XkcdAPITests: XCTestCase {
     }
     
     func testFetchAllComics() {
-        XkcdAPI.sharedInstance.fetchAllComics()
+        XkcdAPI.sharedInstance.setupDatabase()
         XCTAssert(true)
     }
 }
