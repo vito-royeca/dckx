@@ -49,6 +49,7 @@
 		8B626D8B2402291A00972EED /* ComicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9C23F5F444008446F4 /* ComicView.swift */; };
 		8B626D8C2402291B00972EED /* ComicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9C23F5F444008446F4 /* ComicView.swift */; };
 		8B626D8D2402294000972EED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */; };
+		8B626D8F240308C600972EED /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8B626D8E240308C600972EED /* dckx.sqlite */; };
 		A37EE27DDBDDD50B84BE7CDB /* Pods_dckxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209EA98A58DB01C4F3387409 /* Pods_dckxTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +101,7 @@
 		8B626D7E2401F8E600972EED /* Comic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comic+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8B626D7F2401F8E600972EED /* Comic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comic+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8B626D862402122C00972EED /* BrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserView.swift; sourceTree = "<group>"; };
+		8B626D8E240308C600972EED /* dckx.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = dckx.sqlite; sourceTree = "<group>"; };
 		A1695073ECC186DD58075EB6 /* Pods-dckxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dckxTests.debug.xcconfig"; path = "Target Support Files/Pods-dckxTests/Pods-dckxTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A442C4117396A55D840D6677 /* Pods_dckx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dckx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8F501949EA6610C1813EA04 /* Pods-dckx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dckx.release.xcconfig"; path = "Target Support Files/Pods-dckx/Pods-dckx.release.xcconfig"; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 		8B4F4BC823F5F4A0008446F4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8B626D8E240308C600972EED /* dckx.sqlite */,
 				8B626D7E2401F8E600972EED /* Comic+CoreDataClass.swift */,
 				8B626D7F2401F8E600972EED /* Comic+CoreDataProperties.swift */,
 				8B4F4BC923F5F551008446F4 /* dckx.xcdatamodeld */,
@@ -375,6 +378,7 @@
 			files = (
 				8B4F4BA523F5F445008446F4 /* LaunchScreen.storyboard in Resources */,
 				8B4F4BA223F5F445008446F4 /* Preview Assets.xcassets in Resources */,
+				8B626D8F240308C600972EED /* dckx.sqlite in Resources */,
 				8B4F4B9F23F5F445008446F4 /* Assets.xcassets in Resources */,
 				8B626D742401BB6800972EED /* xkcd-script.ttf in Resources */,
 			);

@@ -84,8 +84,31 @@ class XkcdAPI {
         }
     }
     
-    func fetchAllComics() {
-        print("docsPath = \(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])")
+    // MARK: Helper methods
+    func setupDatabase() {
+        guard let sourceUrl = Bundle.main.url(forResource: "dckx", withExtension: "sqlite"),
+            let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else {
+            return
+        }
+        let targetURL = URL(fileURLWithPath: "\(docsPath)/dckx.sqlite")
+
+        if !FileManager.default.fileExists(atPath: "\(docsPath)/dckx.sqlite") {
+            do {
+                try FileManager.default.copyItem(at: sourceUrl, to: targetURL)
+            } catch {
+                print(error)
+            }
+        }
+        fetchAllComics()
+    }
+    
+    func explainURL(of comic: Comic) -> String {
+        let baseUrl = "https://www.explainxkcd.com/wiki/index.php"
+        let comicUrl = "\(comic.num):_\((comic.title ?? "").components(separatedBy: " ").joined(separator: "_"))"
+        return "\(baseUrl)/\(comicUrl)"
+    }
+    
+    private func fetchAllComics() {
         print("Start fetching all Comics. \(Date())")
         
         firstly {
@@ -97,6 +120,10 @@ class XkcdAPI {
             var promises = [()->Promise<Comic>]()
             
             for i in stride(from: comic.num, to: 1, by: -1) {
+                // comic #404 is not found!
+                if i == 404 {
+                    continue
+                }
                 promises.append({
                     return self.fetchComic(num: i)
                     
@@ -108,19 +135,14 @@ class XkcdAPI {
         }
     }
     
-    // MARK: Helper methods
-    func explainURL(of comic: Comic) -> String {
-        let baseUrl = "https://www.explainxkcd.com/wiki/index.php"
-        let comicUrl = "\(comic.num):_\((comic.title ?? "").components(separatedBy: " ").joined(separator: "_"))"
-        return "\(baseUrl)/\(comicUrl)"
-    }
-    
-    func execInSequence(promises: [()->Promise<Comic>], completion: @escaping () -> Void) {
+    private func execInSequence(promises: [()->Promise<Comic>], completion: @escaping () -> Void) {
         var promise = promises.first!()
 
         for next in promises {
             promise = promise.then { n -> Promise<Comic> in
-                print("\(n.num): \(n.title ?? "")")
+                if n.title == nil {
+                    print("Fetching... \(n.num): \(n.title ?? "")")
+                }
                 return next()
             }
         }

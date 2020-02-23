@@ -85,21 +85,5 @@ class CoreData {
                 seal.reject(error)
             }
         }
-    }
-    
-//    func createBlankComics(lastNum: Int32) {
-//        var data = [[String: Any]]()
-//        
-//        for i in stride(from: lastNum, to: 1, by: -1) {
-//            data.append(["num": Int32(i)])
-//        }
-//        
-//        firstly {
-//            saveComics(data: data)
-//        }.done {
-//            
-//        }.catch { error in
-//            
-//        }
-//    }
+    }    
 }
