@@ -29,5 +29,5 @@ extension Comic {
     @NSManaged public var transcript: String?
     @NSManaged public var year: Int16
     @NSManaged public var isFavorite: Bool
-
+    @NSManaged public var isRead: Bool
 }

@@ -41,7 +41,7 @@ class XkcdAPI {
         }
     }
     
-    func fetchComic(num: Int16) -> Promise<Comic> {
+    func fetchComic(num: Int32) -> Promise<Comic> {
         return Promise { seal in
             firstly {
                 self.coreData.loadComic(num: num)
@@ -75,7 +75,7 @@ class XkcdAPI {
             }.then { comic in
                 self.generateRandomNumber(max: Int(comic.num))
             }.then { random in
-                self.fetchComic(num: Int16(random))
+                self.fetchComic(num: Int32(random))
             }.done { comic in
                 seal.fulfill(comic)
             }.catch { error in
@@ -84,11 +84,51 @@ class XkcdAPI {
         }
     }
     
+    func fetchAllComics() {
+        print("docsPath = \(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])")
+        print("Start fetching all Comics. \(Date())")
+        
+        firstly {
+            fetchLastComic()
+        }.done { comic in
+            let completion = {
+                print("Done fetching all Comics. \(Date())")
+            }
+            var promises = [()->Promise<Comic>]()
+            
+            for i in stride(from: comic.num, to: 1, by: -1) {
+                promises.append({
+                    return self.fetchComic(num: i)
+                    
+                })
+            }
+            self.execInSequence(promises: promises, completion: completion)
+        }.catch { error in
+            print(error)
+        }
+    }
+    
     // MARK: Helper methods
     func explainURL(of comic: Comic) -> String {
         let baseUrl = "https://www.explainxkcd.com/wiki/index.php"
         let comicUrl = "\(comic.num):_\((comic.title ?? "").components(separatedBy: " ").joined(separator: "_"))"
         return "\(baseUrl)/\(comicUrl)"
+    }
+    
+    func execInSequence(promises: [()->Promise<Comic>], completion: @escaping () -> Void) {
+        var promise = promises.first!()
+
+        for next in promises {
+            promise = promise.then { n -> Promise<Comic> in
+                print("\(n.num): \(n.title ?? "")")
+                return next()
+            }
+        }
+        promise.done {_ in
+            completion()
+        }.catch { error in
+            print(error)
+        }
     }
     
     private func fetchData(urlString: String) -> Promise<(data: Data, response: URLResponse)> {

@@ -33,7 +33,7 @@ class ComicFetcher: ObservableObject {
         firstly {
             CoreData.sharedInstance.saveComics(data: data)
         }.done { comic in
-            self.loadComic(num: Int16(currentComic.num))
+            self.loadComic(num: currentComic.num)
         }.catch { error in
             print(error)
         }
@@ -48,7 +48,7 @@ class ComicFetcher: ObservableObject {
         guard let currentComic = currentComic else {
             return
         }
-        loadComic(num: Int16(currentComic.num - 1))
+        loadComic(num: currentComic.num - 1)
     }
     
     func loadRandomComic() {
@@ -65,7 +65,7 @@ class ComicFetcher: ObservableObject {
         guard let currentComic = currentComic else {
             return
         }
-        loadComic(num: Int16(currentComic.num + 1))
+        loadComic(num: currentComic.num + 1)
     }
     
     func loadLastComic() {
@@ -96,7 +96,7 @@ class ComicFetcher: ObservableObject {
     }
     
     // MARK: Helper methods
-    private func loadComic(num: Int16) {
+    private func loadComic(num: Int32) {
         firstly {
             XkcdAPI.sharedInstance.fetchComic(num: num)
         }.done { comic in

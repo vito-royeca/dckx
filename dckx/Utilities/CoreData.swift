@@ -47,7 +47,7 @@ class CoreData {
         }
     }
     
-    func loadComic(num: Int16) -> Promise<Comic> {
+    func loadComic(num: Int32) -> Promise<Comic> {
         return Promise { seal in
             let error = NSError(domain: "",
                                 code: 404,
@@ -86,4 +86,20 @@ class CoreData {
             }
         }
     }
+    
+//    func createBlankComics(lastNum: Int32) {
+//        var data = [[String: Any]]()
+//        
+//        for i in stride(from: lastNum, to: 1, by: -1) {
+//            data.append(["num": Int32(i)])
+//        }
+//        
+//        firstly {
+//            saveComics(data: data)
+//        }.done {
+//            
+//        }.catch { error in
+//            
+//        }
+//    }
 }

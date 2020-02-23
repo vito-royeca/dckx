@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import CoreData
+import PromiseKit
 
 class XkcdAPITests: XCTestCase {
 
@@ -18,16 +20,42 @@ class XkcdAPITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testFetchLastComic() {
+        let expectation = self.expectation(description: "perform concurrent tasks")
+        
+        
+        firstly {
+            XkcdAPI.mockInstance.fetchLastComic()
+        }.done { comic in
+            XCTAssertEqual(comic.num, 1)
+        }.catch { error in
+            XCTFail(error.localizedDescription)
+        }
+        
+        waitForExpectations(timeout: 100.0, handler: nil)
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testFetchComic() {
+        firstly {
+            XkcdAPI.mockInstance.fetchComic(num: Int32(100))
+        }.done { comic in
+            XCTAssertEqual(comic.num, 100)
+        }.catch { error in
+            XCTFail(error.localizedDescription)
         }
     }
 
+    func testFetchRandomComic() {
+        firstly {
+            XkcdAPI.mockInstance.fetchRandomComic()
+        }.done { comic in
+            XCTAssert(comic.num > 0)
+        }.catch { error in
+            XCTFail(error.localizedDescription)
+        }
+    }
+    
+    func testFetchAllComics() {
+        
+    }
 }
