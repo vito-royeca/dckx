@@ -12,14 +12,15 @@ import PromiseKit
 import Sync
 
 class CoreData {
-    // MARK: Singleton
-    static let sharedInstance = CoreData()
-    private init() {
-        
-    }
-
     // MARK: DataStack
-    private let dataStack = DataStack(modelName: "dckx")
+    private let dataStack: DataStack!
+    
+    // MARK: Singleton
+    static let sharedInstance = CoreData(storeType: .sqLite)
+    static let mockInstance = CoreData(storeType: .inMemory)
+    private init(storeType: DataStackStoreType) {
+        dataStack = DataStack(modelName: "dckx", storeType: storeType)
+    }    
     
     // MARK: Database methods
     func saveComics(data: [[String: Any]]) -> Promise<Void> {

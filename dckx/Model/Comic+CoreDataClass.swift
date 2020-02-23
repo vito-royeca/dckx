@@ -2,7 +2,7 @@
 //  Comic+CoreDataClass.swift
 //  dckx
 //
-//  Created by Vito Royeca on 2/13/20.
+//  Created by Vito Royeca on 2/22/20.
 //  Copyright © 2020 Vito Royeca. All rights reserved.
 //
 //

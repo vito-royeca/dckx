@@ -10,10 +10,14 @@ import Foundation
 import PromiseKit
 
 class XkcdAPI {
+    // MArk: Variables
+    private var coreData: CoreData!
+    
     // MARK: Singleton
-    static let sharedInstance = XkcdAPI()
-    private init() {
-        
+    static let sharedInstance = XkcdAPI(coreData: CoreData.sharedInstance)
+    static let mockInstance = XkcdAPI(coreData: CoreData.mockInstance)
+    private init(coreData: CoreData) {
+        self.coreData = coreData
     }
     
     // MARK: API methods
@@ -26,9 +30,9 @@ class XkcdAPI {
             }.compactMap { (data, result) in
                 try JSONSerialization.jsonObject(with: data) as? [String: Any]
             }.then { data in
-                CoreData.sharedInstance.saveComics(data: [data])
+                self.coreData.saveComics(data: [data])
             }.then {
-                CoreData.sharedInstance.loadLastComic()
+                self.coreData.loadLastComic()
             }.done { comic in
                 seal.fulfill(comic)
             }.catch { error in
@@ -40,7 +44,7 @@ class XkcdAPI {
     func fetchComic(num: Int16) -> Promise<Comic> {
         return Promise { seal in
             firstly {
-                CoreData.sharedInstance.loadComic(num: num)
+                self.coreData.loadComic(num: num)
             }.done { comic in
                 seal.fulfill(comic)
             }.catch { error in
@@ -52,9 +56,9 @@ class XkcdAPI {
                 }.compactMap { (data, result) in
                     try JSONSerialization.jsonObject(with: data) as? [String: Any]
                 }.then { data in
-                    CoreData.sharedInstance.saveComics(data: [data])
+                    self.coreData.saveComics(data: [data])
                 }.then {
-                    CoreData.sharedInstance.loadComic(num: num)
+                    self.coreData.loadComic(num: num)
                 }.done { comic in
                     seal.fulfill(comic)
                 }.catch { error in
@@ -84,7 +88,7 @@ class XkcdAPI {
     private func fetchData(urlString: String) -> Promise<(data: Data, response: URLResponse)> {
         guard let cleanURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let url = URL(string: cleanURL) else {
-                fatalError("Malformed url")
+            fatalError("Malformed url")
         }
            
         let rq = URLRequest(url: url)

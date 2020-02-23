@@ -26,12 +26,6 @@
 		8B4F4BCB23F5F551008446F4 /* dckx.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BC923F5F551008446F4 /* dckx.xcdatamodeld */; };
 		8B4F4BCC23F5F551008446F4 /* dckx.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BC923F5F551008446F4 /* dckx.xcdatamodeld */; };
 		8B4F4BCD23F5F551008446F4 /* dckx.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BC923F5F551008446F4 /* dckx.xcdatamodeld */; };
-		8B4F4BD123F5F67B008446F4 /* Comic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BCF23F5F67B008446F4 /* Comic+CoreDataClass.swift */; };
-		8B4F4BD223F5F67B008446F4 /* Comic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BCF23F5F67B008446F4 /* Comic+CoreDataClass.swift */; };
-		8B4F4BD323F5F67B008446F4 /* Comic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BCF23F5F67B008446F4 /* Comic+CoreDataClass.swift */; };
-		8B4F4BD423F5F67B008446F4 /* Comic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BD023F5F67B008446F4 /* Comic+CoreDataProperties.swift */; };
-		8B4F4BD523F5F67B008446F4 /* Comic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BD023F5F67B008446F4 /* Comic+CoreDataProperties.swift */; };
-		8B4F4BD623F5F67B008446F4 /* Comic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BD023F5F67B008446F4 /* Comic+CoreDataProperties.swift */; };
 		8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BDF23F5F9D5008446F4 /* XkcdAPI.swift */; };
 		8B4F4BE123F5F9D5008446F4 /* XkcdAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BDF23F5F9D5008446F4 /* XkcdAPI.swift */; };
 		8B4F4BE223F5F9D5008446F4 /* XkcdAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4BDF23F5F9D5008446F4 /* XkcdAPI.swift */; };
@@ -41,6 +35,13 @@
 		8B626D742401BB6800972EED /* xkcd-script.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B626D732401BB6800972EED /* xkcd-script.ttf */; };
 		8B626D752401BB6800972EED /* xkcd-script.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B626D732401BB6800972EED /* xkcd-script.ttf */; };
 		8B626D762401C74600972EED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9E23F5F445008446F4 /* Assets.xcassets */; };
+		8B626D792401EB1200972EED /* XkcdAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D782401EB1200972EED /* XkcdAPITests.swift */; };
+		8B626D802401F8E600972EED /* Comic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D7E2401F8E600972EED /* Comic+CoreDataClass.swift */; };
+		8B626D812401F8E600972EED /* Comic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D7E2401F8E600972EED /* Comic+CoreDataClass.swift */; };
+		8B626D822401F8E600972EED /* Comic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D7E2401F8E600972EED /* Comic+CoreDataClass.swift */; };
+		8B626D832401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D7F2401F8E600972EED /* Comic+CoreDataProperties.swift */; };
+		8B626D842401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D7F2401F8E600972EED /* Comic+CoreDataProperties.swift */; };
+		8B626D852401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D7F2401F8E600972EED /* Comic+CoreDataProperties.swift */; };
 		A37EE27DDBDDD50B84BE7CDB /* Pods_dckxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209EA98A58DB01C4F3387409 /* Pods_dckxTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,13 +84,14 @@
 		8B4F4BBA23F5F445008446F4 /* dckxUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dckxUITests.swift; sourceTree = "<group>"; };
 		8B4F4BBC23F5F445008446F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B4F4BCA23F5F551008446F4 /* dckx.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = dckx.xcdatamodel; sourceTree = "<group>"; };
-		8B4F4BCF23F5F67B008446F4 /* Comic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comic+CoreDataClass.swift"; sourceTree = "<group>"; };
-		8B4F4BD023F5F67B008446F4 /* Comic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comic+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8B4F4BDF23F5F9D5008446F4 /* XkcdAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XkcdAPI.swift; sourceTree = "<group>"; };
 		8B626D6D23FFB5BE00972EED /* ThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailView.swift; sourceTree = "<group>"; };
 		8B626D6F2401B0A900972EED /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8B626D732401BB6800972EED /* xkcd-script.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "xkcd-script.ttf"; sourceTree = "<group>"; };
 		8B626D772401DB9000972EED /* 2020-02-22.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "2020-02-22.xcdatamodel"; sourceTree = "<group>"; };
+		8B626D782401EB1200972EED /* XkcdAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XkcdAPITests.swift; sourceTree = "<group>"; };
+		8B626D7E2401F8E600972EED /* Comic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comic+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8B626D7F2401F8E600972EED /* Comic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comic+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A1695073ECC186DD58075EB6 /* Pods-dckxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dckxTests.debug.xcconfig"; path = "Target Support Files/Pods-dckxTests/Pods-dckxTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A442C4117396A55D840D6677 /* Pods_dckx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dckx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8F501949EA6610C1813EA04 /* Pods-dckx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dckx.release.xcconfig"; path = "Target Support Files/Pods-dckx/Pods-dckx.release.xcconfig"; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			children = (
 				8B4F4BAF23F5F445008446F4 /* dckxTests.swift */,
 				8B4F4BB123F5F445008446F4 /* Info.plist */,
+				8B626D782401EB1200972EED /* XkcdAPITests.swift */,
 			);
 			path = dckxTests;
 			sourceTree = "<group>";
@@ -205,8 +208,8 @@
 		8B4F4BC823F5F4A0008446F4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8B4F4BCF23F5F67B008446F4 /* Comic+CoreDataClass.swift */,
-				8B4F4BD023F5F67B008446F4 /* Comic+CoreDataProperties.swift */,
+				8B626D7E2401F8E600972EED /* Comic+CoreDataClass.swift */,
+				8B626D7F2401F8E600972EED /* Comic+CoreDataProperties.swift */,
 				8B4F4BC923F5F551008446F4 /* dckx.xcdatamodeld */,
 			);
 			path = Model;
@@ -513,12 +516,12 @@
 			files = (
 				8B4F4B9923F5F444008446F4 /* AppDelegate.swift in Sources */,
 				8B626D702401B0A900972EED /* Constants.swift in Sources */,
-				8B4F4BD423F5F67B008446F4 /* Comic+CoreDataProperties.swift in Sources */,
 				8B4F4B9B23F5F444008446F4 /* SceneDelegate.swift in Sources */,
+				8B626D802401F8E600972EED /* Comic+CoreDataClass.swift in Sources */,
+				8B626D832401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */,
 				8B4F4B9D23F5F444008446F4 /* ComicView.swift in Sources */,
 				8B23367E23F646A700C88BA1 /* CoreData.swift in Sources */,
 				8B23368223F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
-				8B4F4BD123F5F67B008446F4 /* Comic+CoreDataClass.swift in Sources */,
 				8B626D6E23FFB5BE00972EED /* ThumbnailView.swift in Sources */,
 				8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8B4F4BCB23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
@@ -530,12 +533,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B23368323F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
-				8B4F4BD223F5F67B008446F4 /* Comic+CoreDataClass.swift in Sources */,
 				8B4F4BB023F5F445008446F4 /* dckxTests.swift in Sources */,
 				8B4F4BCC23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
+				8B626D812401F8E600972EED /* Comic+CoreDataClass.swift in Sources */,
+				8B626D842401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */,
+				8B626D792401EB1200972EED /* XkcdAPITests.swift in Sources */,
 				8B23367F23F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8B4F4BE123F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
-				8B4F4BD523F5F67B008446F4 /* Comic+CoreDataProperties.swift in Sources */,
 				8B626D712401B0A900972EED /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,13 +548,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B626D852401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */,
 				8B23368423F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
-				8B4F4BD323F5F67B008446F4 /* Comic+CoreDataClass.swift in Sources */,
 				8B4F4BBB23F5F445008446F4 /* dckxUITests.swift in Sources */,
 				8B4F4BCD23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
+				8B626D822401F8E600972EED /* Comic+CoreDataClass.swift in Sources */,
 				8B23368023F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8B4F4BE223F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
-				8B4F4BD623F5F67B008446F4 /* Comic+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

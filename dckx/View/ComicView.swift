@@ -17,6 +17,7 @@ struct ComicView: View {
     var body: some View {
         NavigationView {
             VStack {
+                // title
                 HStack {
                     fetcher.currentComic.map({
                         Text("\($0.title ?? "")")
@@ -25,6 +26,7 @@ struct ComicView: View {
                 }
                 .padding()
                 
+                // Comic metadata
                 HStack {
                     fetcher.currentComic.map({
                         Text("#\(String($0.num))")
@@ -38,13 +40,16 @@ struct ComicView: View {
                             .font(.custom("xkcd-Script-Regular", size: 15))
                     })
                 }
+                
                 Divider()
+                
+                // Toolbar
                 HStack {
                     Button(action: {
                         self.fetcher.toggleIsFavorite()
                     }) {
                         Text("Bookmark \(fetcher.currentComic?.isFavorite ?? true ? "-" : "+")")
-                            .font(.custom("xkcd-Script-Regular", size: 20))
+                            .customButton(isDisabled: false)
                     }
                     Spacer()
                     
@@ -52,7 +57,7 @@ struct ComicView: View {
                         
                     }) {
                         Text("Explain")
-                            .font(.custom("xkcd-Script-Regular", size: 20))
+                            .customButton(isDisabled: false)
                     }
                     Spacer()
                     
@@ -60,7 +65,7 @@ struct ComicView: View {
                         self.showingAltText = true
                     }) {
                         Text("Alt Text")
-                            .font(.custom("xkcd-Script-Regular", size: 20))
+                            .customButton(isDisabled: false)
                     }
                     .alert(isPresented: $showingAltText) {
                         Alert(title: Text("Alt Text"),
@@ -71,13 +76,14 @@ struct ComicView: View {
                 
                 Spacer()
 
+                // Image
                 WebImage(url: URL(string: fetcher.currentComic?.img ?? ""))
                     .onSuccess { image, cacheType in
                         // Success
                     }
                     .resizable()
                     .placeholder {
-                        Rectangle().foregroundColor(.gray)
+                        Rectangle().foregroundColor(.backgroundColor)
                     }
                     .indicator(.activity) // Activity Indicator
                     .animation(.easeInOut(duration: 0.5))
@@ -87,14 +93,14 @@ struct ComicView: View {
                 
                 Spacer()
                 
+                // Navigation
                 HStack {
                     Button(action: {
                         self.fetcher.loadFirstComic()
                     }) {
                         Text("|<")
-                            .font(.custom("xkcd-Script-Regular", size: 20))
+                            .customButton(isDisabled: !fetcher.canDoPrevious())
                     }
-                    //.background(.buttonColor)
                     .disabled(!fetcher.canDoPrevious())
                     Spacer()
                     
@@ -102,7 +108,7 @@ struct ComicView: View {
                         self.fetcher.loadPreviousComic()
                     }) {
                         Text("<Prev")
-                            .font(.custom("xkcd-Script-Regular", size: 20))
+                            .customButton(isDisabled: !fetcher.canDoPrevious())
                     }
                         .disabled(!fetcher.canDoPrevious())
                     Spacer()
@@ -111,7 +117,7 @@ struct ComicView: View {
                         self.fetcher.loadRandomComic()
                     }) {
                         Text("Random")
-                            .font(.custom("xkcd-Script-Regular", size: 20))
+                            .customButton(isDisabled: false)
                     }
                     Spacer()
                     
@@ -119,7 +125,7 @@ struct ComicView: View {
                         self.fetcher.loadNextComic()
                     }) {
                         Text("Next>")
-                            .font(.custom("xkcd-Script-Regular", size: 20))
+                            .customButton(isDisabled: !fetcher.canDoNext())
                     }
                         .disabled(!fetcher.canDoNext())
                     Spacer()
@@ -128,7 +134,7 @@ struct ComicView: View {
                         self.fetcher.loadLastComic()
                     }) {
                         Text(">|")
-                            .font(.custom("xkcd-Script-Regular", size: 20))
+                            .customButton(isDisabled: !fetcher.canDoNext())
                     }
                         .disabled(!fetcher.canDoNext())
                     
