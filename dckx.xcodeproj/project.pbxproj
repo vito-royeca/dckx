@@ -42,6 +42,13 @@
 		8B626D832401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D7F2401F8E600972EED /* Comic+CoreDataProperties.swift */; };
 		8B626D842401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D7F2401F8E600972EED /* Comic+CoreDataProperties.swift */; };
 		8B626D852401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D7F2401F8E600972EED /* Comic+CoreDataProperties.swift */; };
+		8B626D872402122C00972EED /* BrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D862402122C00972EED /* BrowserView.swift */; };
+		8B626D882402122C00972EED /* BrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D862402122C00972EED /* BrowserView.swift */; };
+		8B626D892402122C00972EED /* BrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D862402122C00972EED /* BrowserView.swift */; };
+		8B626D8A2402274A00972EED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D6F2401B0A900972EED /* Constants.swift */; };
+		8B626D8B2402291A00972EED /* ComicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9C23F5F444008446F4 /* ComicView.swift */; };
+		8B626D8C2402291B00972EED /* ComicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9C23F5F444008446F4 /* ComicView.swift */; };
+		8B626D8D2402294000972EED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */; };
 		A37EE27DDBDDD50B84BE7CDB /* Pods_dckxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209EA98A58DB01C4F3387409 /* Pods_dckxTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +99,7 @@
 		8B626D782401EB1200972EED /* XkcdAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XkcdAPITests.swift; sourceTree = "<group>"; };
 		8B626D7E2401F8E600972EED /* Comic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comic+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8B626D7F2401F8E600972EED /* Comic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comic+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8B626D862402122C00972EED /* BrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserView.swift; sourceTree = "<group>"; };
 		A1695073ECC186DD58075EB6 /* Pods-dckxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dckxTests.debug.xcconfig"; path = "Target Support Files/Pods-dckxTests/Pods-dckxTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A442C4117396A55D840D6677 /* Pods_dckx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dckx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8F501949EA6610C1813EA04 /* Pods-dckx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dckx.release.xcconfig"; path = "Target Support Files/Pods-dckx/Pods-dckx.release.xcconfig"; sourceTree = "<group>"; };
@@ -221,6 +229,7 @@
 				8B4F4B9C23F5F444008446F4 /* ComicView.swift */,
 				8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */,
 				8B626D6D23FFB5BE00972EED /* ThumbnailView.swift */,
+				8B626D862402122C00972EED /* BrowserView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -525,6 +534,7 @@
 				8B626D6E23FFB5BE00972EED /* ThumbnailView.swift in Sources */,
 				8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8B4F4BCB23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
+				8B626D872402122C00972EED /* BrowserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,7 +545,9 @@
 				8B23368323F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8B4F4BB023F5F445008446F4 /* dckxTests.swift in Sources */,
 				8B4F4BCC23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
+				8B626D882402122C00972EED /* BrowserView.swift in Sources */,
 				8B626D812401F8E600972EED /* Comic+CoreDataClass.swift in Sources */,
+				8B626D8C2402291B00972EED /* ComicView.swift in Sources */,
 				8B626D842401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */,
 				8B626D792401EB1200972EED /* XkcdAPITests.swift in Sources */,
 				8B23367F23F646AC00C88BA1 /* CoreData.swift in Sources */,
@@ -548,13 +560,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B626D8B2402291A00972EED /* ComicView.swift in Sources */,
 				8B626D852401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */,
 				8B23368423F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8B4F4BBB23F5F445008446F4 /* dckxUITests.swift in Sources */,
+				8B626D892402122C00972EED /* BrowserView.swift in Sources */,
 				8B4F4BCD23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
 				8B626D822401F8E600972EED /* Comic+CoreDataClass.swift in Sources */,
+				8B626D8D2402294000972EED /* SceneDelegate.swift in Sources */,
 				8B23368023F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8B4F4BE223F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
+				8B626D8A2402274A00972EED /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,6 +722,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dckx/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = dckx/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -726,6 +743,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dckx/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = dckx/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

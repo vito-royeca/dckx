@@ -13,6 +13,7 @@ import SDWebImageSwiftUI
 struct ComicView: View {
     @ObservedObject var fetcher = ComicFetcher()
     @State private var showingAltText = false
+    @State private var showingBrowser = false
     
     var body: some View {
         NavigationView {
@@ -24,7 +25,7 @@ struct ComicView: View {
                             .font(.custom("xkcd-Script-Regular", size: 30))
                     })
                 }
-                .padding()
+                .padding(5)
                 
                 // Comic metadata
                 HStack {
@@ -54,11 +55,17 @@ struct ComicView: View {
                     Spacer()
                     
                     Button(action: {
-                        
+                        self.showingBrowser = true
                     }) {
                         Text("Explain")
                             .customButton(isDisabled: false)
                     }
+                        .sheet(isPresented: $showingBrowser, content: {
+                            self.fetcher.currentComic.map({
+                                BrowserView(title: $0.title ?? "",
+                                            link: XkcdAPI.sharedInstance.explainURL(of: $0))
+                            })
+                        })
                     Spacer()
                     
                     Button(action: {
@@ -67,10 +74,18 @@ struct ComicView: View {
                         Text("Alt Text")
                             .customButton(isDisabled: false)
                     }
-                    .alert(isPresented: $showingAltText) {
-                        Alert(title: Text("Alt Text"),
-                              message: Text(fetcher.currentComic?.alt ?? "No Alt Text"),
-                              dismissButton: .default(Text("Close")))
+                        .alert(isPresented: $showingAltText) {
+                            Alert(title: Text("Alt Text"),
+                                  message: Text(fetcher.currentComic?.alt ?? "No Alt Text"),
+                                  dismissButton: .default(Text("Close")))
+                        }
+                    Spacer()
+                    
+                    Button(action: {
+                        
+                    }) {
+                        Text("Share")
+                            .customButton(isDisabled: false)
                     }
                 }
                 
@@ -89,7 +104,6 @@ struct ComicView: View {
                     .animation(.easeInOut(duration: 0.5))
                     .transition(.fade)
                     .scaledToFit()
-//                  .frame(width: 300, height: 300, alignment: .center)
                 
                 Spacer()
                 
@@ -141,21 +155,12 @@ struct ComicView: View {
                 }
             }
                 .padding()
-            /*.navigationBarTitle(fetcher.currentComic?.title ?? "")
-            .navigationBarItems(trailing:
-                Button(action: {
-                    self.showingAltText = true
-                }) {
-                    Text("Alt Text")
-                }
-                .alert(isPresented: $showingText) {
-                    Alert(title: Text("Alt Text"),
-                          message: Text(fetcher.currentComic?.alt ?? "No Alt Text"),
-                          dismissButton: .default(Text("Close")))
-                }
-            )*/
-            
+                .navigationBarTitle(Text(""), displayMode: .inline)
         }
+    }
+    
+    func explain() {
+        
     }
 }
 

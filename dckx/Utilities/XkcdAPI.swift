@@ -85,6 +85,12 @@ class XkcdAPI {
     }
     
     // MARK: Helper methods
+    func explainURL(of comic: Comic) -> String {
+        let baseUrl = "https://www.explainxkcd.com/wiki/index.php"
+        let comicUrl = "\(comic.num):_\((comic.title ?? "").components(separatedBy: " ").joined(separator: "_"))"
+        return "\(baseUrl)/\(comicUrl)"
+    }
+    
     private func fetchData(urlString: String) -> Promise<(data: Data, response: URLResponse)> {
         guard let cleanURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let url = URL(string: cleanURL) else {
