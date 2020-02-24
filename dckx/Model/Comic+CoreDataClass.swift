@@ -11,6 +11,6 @@ import Foundation
 import CoreData
 
 @objc(Comic)
-public class Comic: NSManagedObject {
+public class Comic: NSManagedObject, Identifiable {
 
 }

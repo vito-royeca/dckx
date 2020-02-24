@@ -116,7 +116,7 @@ class ComicFetcher: ObservableObject {
     }
     
     // MARK: Helper methods
-    private func loadComic(num: Int32) {
+    func loadComic(num: Int32) {
         firstly {
             XkcdAPI.sharedInstance.fetchComic(num: num)
         }.done { comic in

@@ -18,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("docsPath = \(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])")
         XkcdAPI.sharedInstance.setupDatabase()
+        
+        // customize the navigation title
+//         let attrs = [
+//             NSAttributedString.Key.font: UIFont(name: "xkcd-Script-Regular", size: 15)!
+//         ]
+//         UINavigationBar.appearance().titleTextAttributes = attrs
         return true
     }
 

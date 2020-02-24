@@ -45,6 +45,7 @@ struct ComicView: View {
                     .animation(.easeInOut(duration: 0.5))
                     .transition(.fade)
                     .scaledToFit()
+                    .aspectRatio(contentMode: .fit)
                 
                 Spacer()
                 
@@ -52,7 +53,8 @@ struct ComicView: View {
                 NavigationBarView(fetcher: fetcher)
             }
                 .padding()
-                .navigationBarTitle(Text(""), displayMode: .inline)
+                .navigationBarTitle(Text("dxcd: xkcd"), displayMode: .inline)
+//                .navigationBarItems(leading: LeadingBarItemsView(fetcher: fetcher))
         }
     }
 }
@@ -66,6 +68,23 @@ struct ComicView_Previews: PreviewProvider {
         }
     }
 }
+
+//struct LeadingBarItemsView: View {
+//    @State private var showingList = false
+//    var fetcher: ComicFetcher
+//
+//    var body: some View {
+//        Button(action: {
+//            self.showingList = true
+//        }) {
+//            Text("List")
+//                .customButton(isDisabled: false)
+//        }
+//            .sheet(isPresented: $showingList, content: {
+//                ListView(fetcher: self.fetcher).environment(\.managedObjectContext, CoreData.sharedInstance.dataStack.viewContext)
+//            })
+//    }
+//}
 
 struct TitleView: View {
     var title: String
@@ -87,7 +106,7 @@ struct MetaDataView: View {
     
     var body: some View {
         HStack {
-            Text("#\(num)")
+            Text("#\(String(num))")
                 .font(.custom("xkcd-Script-Regular", size: 15))
             Spacer()
             Text("\(String(year))-\(month < 10 ? "0\(month)" : "\(month)")-\(day < 10 ? "0\(day)" : "\(day)")")
@@ -100,6 +119,7 @@ struct ToolBarView: View {
     @ObservedObject var fetcher: ComicFetcher
     @State private var showingAltText = false
     @State private var showingBrowser = false
+    @State private var showingList = false
     
     var body: some View {
         HStack {
@@ -117,12 +137,12 @@ struct ToolBarView: View {
                 Text("Explain")
                     .customButton(isDisabled: false)
             }
-            .sheet(isPresented: $showingBrowser, content: {
-                self.fetcher.currentComic.map({
-                    BrowserView(title: $0.title ?? "",
-                                link: XkcdAPI.sharedInstance.explainURL(of: $0))
+                .sheet(isPresented: $showingBrowser, content: {
+                    self.fetcher.currentComic.map({
+                        BrowserView(title: $0.title ?? "",
+                                    link: XkcdAPI.sharedInstance.explainURL(of: $0))
+                    })
                 })
-            })
             Spacer()
             
             Button(action: {
@@ -131,11 +151,11 @@ struct ToolBarView: View {
                 Text("Alt Text")
                     .customButton(isDisabled: false)
             }
-            .alert(isPresented: $showingAltText) {
-                Alert(title: Text("Alt Text"),
-                      message: Text(fetcher.currentComic?.alt ?? "No Alt Text"),
-                      dismissButton: .default(Text("Close")))
-            }
+                .alert(isPresented: $showingAltText) {
+                    Alert(title: Text("Alt Text"),
+                          message: Text(fetcher.currentComic?.alt ?? "No Alt Text"),
+                          dismissButton: .default(Text("Close")))
+                }
             Spacer()
             
             Button(action: {
@@ -144,6 +164,17 @@ struct ToolBarView: View {
                 Text("Share")
                     .customButton(isDisabled: false)
             }
+            Spacer()
+            
+            Button(action: {
+                self.showingList = true
+            }) {
+                Text("List")
+                    .customButton(isDisabled: false)
+            }
+                .sheet(isPresented: $showingList, content: {
+                    ListView(fetcher: self.fetcher).environment(\.managedObjectContext, CoreData.sharedInstance.dataStack.viewContext)
+                })
         }
     }
 }

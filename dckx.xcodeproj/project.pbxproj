@@ -50,6 +50,9 @@
 		8B626D8C2402291B00972EED /* ComicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9C23F5F444008446F4 /* ComicView.swift */; };
 		8B626D8D2402294000972EED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */; };
 		8B626D8F240308C600972EED /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8B626D8E240308C600972EED /* dckx.sqlite */; };
+		8B626D972403982D00972EED /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D6D23FFB5BE00972EED /* ListView.swift */; };
+		8B626DD72403BBCB00972EED /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D6D23FFB5BE00972EED /* ListView.swift */; };
+		8B626DD82403C6C700972EED /* xkcd-script.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B626D732401BB6800972EED /* xkcd-script.ttf */; };
 		A37EE27DDBDDD50B84BE7CDB /* Pods_dckxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209EA98A58DB01C4F3387409 /* Pods_dckxTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -396,6 +399,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B626DD82403C6C700972EED /* xkcd-script.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,6 +566,7 @@
 				8B626D8C2402291B00972EED /* ComicView.swift in Sources */,
 				8B626D842401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */,
 				8B626D792401EB1200972EED /* XkcdAPITests.swift in Sources */,
+				8B626DD72403BBCB00972EED /* ListView.swift in Sources */,
 				8B23367F23F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8B4F4BE123F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8B626D712401B0A900972EED /* Constants.swift in Sources */,
@@ -580,6 +585,7 @@
 				8B4F4BCD23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
 				8B626D822401F8E600972EED /* Comic+CoreDataClass.swift in Sources */,
 				8B626D8D2402294000972EED /* SceneDelegate.swift in Sources */,
+				8B626D972403982D00972EED /* ListView.swift in Sources */,
 				8B23368023F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8B4F4BE223F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8B626D8A2402274A00972EED /* Constants.swift in Sources */,
