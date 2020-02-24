@@ -32,7 +32,7 @@ struct  ListView: View {
             
             Spacer()
             
-            ComicListView(query: query, scopeIndex: scopeIndex)
+            ComicListView(query: query, scopeIndex: scopeIndex, action: selectComic(num:))
         }
     }
     
@@ -125,9 +125,11 @@ struct SearchBar: UIViewRepresentable {
 
 struct ComicListView: View {
     var fetchRequest: FetchRequest<Comic>
-//    var action: (Int32) -> Void
+    var action: (Int32) -> Void
     
-    init(query: String, scopeIndex: Int) {
+    init(query: String, scopeIndex: Int, action: @escaping (Int32) -> Void) {
+        self.action = action
+        
         var predicate: NSPredicate?
         
         if query.count == 1 {
@@ -140,9 +142,19 @@ struct ComicListView: View {
         case 0:
             ()
         case 1:
-            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, NSPredicate(format: "isFavorite == true")])
+            let newPredicate = NSPredicate(format: "isFavorite == true")
+            if predicate != nil {
+                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
+            } else {
+                predicate = newPredicate
+            }
         case 2:
-            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, NSPredicate(format: "isRead == true")])
+            let newPredicate = NSPredicate(format: "isRead == true")
+            if predicate != nil {
+                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
+            } else {
+                predicate = newPredicate
+            }
         default:
             ()
         }
@@ -155,10 +167,10 @@ struct ComicListView: View {
     var body: some View {
         HStack {
             List(fetchRequest.wrappedValue) { comic in
-//                ForEach(fetchRequest) { comic in
                 ComicRow(num: comic.num,
-                         title: comic.title ?? "")
-//                    .onTapGesture { self.action(comic.action) }
+                         title: comic.title ?? "",
+                         action: self.action)
+                    .onTapGesture { self.action(comic.num) }
             }
         }
     }
@@ -167,6 +179,7 @@ struct ComicListView: View {
 struct ComicRow: View {
     var num: Int32
     var title: String
+    var action: (Int32) -> Void
     
     var body: some View {
         HStack {
@@ -174,7 +187,7 @@ struct ComicRow: View {
                 .font(.custom("xkcd-Script-Regular", size: 15))
             Spacer()
             Button(action: {
-                
+                self.action(self.num)
             }) {
                 Text(">")
                     .font(.custom("xkcd-Script-Regular", size: 15))
