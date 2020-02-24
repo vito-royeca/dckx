@@ -172,6 +172,7 @@ struct ComicListView: View {
                          action: self.action)
                     .onTapGesture { self.action(comic.num) }
             }
+                .resignKeyboardOnDragGesture()
         }
     }
 }
