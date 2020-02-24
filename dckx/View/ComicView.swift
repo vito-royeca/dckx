@@ -15,6 +15,7 @@ struct ComicView: View {
     
     var body: some View {
         NavigationView {
+            
             VStack {
                 // Title
                 TitleView(title: fetcher.currentComic?.title ?? "Title")
@@ -53,8 +54,7 @@ struct ComicView: View {
                 NavigationBarView(fetcher: fetcher)
             }
                 .padding()
-                .navigationBarTitle(Text("dxcd: xkcd"), displayMode: .inline)
-//                .navigationBarItems(leading: LeadingBarItemsView(fetcher: fetcher))
+                .navigationBarTitle(Text(""), displayMode: .inline)
         }
     }
 }
@@ -68,23 +68,6 @@ struct ComicView_Previews: PreviewProvider {
         }
     }
 }
-
-//struct LeadingBarItemsView: View {
-//    @State private var showingList = false
-//    var fetcher: ComicFetcher
-//
-//    var body: some View {
-//        Button(action: {
-//            self.showingList = true
-//        }) {
-//            Text("List")
-//                .customButton(isDisabled: false)
-//        }
-//            .sheet(isPresented: $showingList, content: {
-//                ListView(fetcher: self.fetcher).environment(\.managedObjectContext, CoreData.sharedInstance.dataStack.viewContext)
-//            })
-//    }
-//}
 
 struct TitleView: View {
     var title: String
@@ -173,7 +156,10 @@ struct ToolBarView: View {
                     .customButton(isDisabled: false)
             }
                 .sheet(isPresented: $showingList, content: {
-                    ListView(fetcher: self.fetcher).environment(\.managedObjectContext, CoreData.sharedInstance.dataStack.viewContext)
+                    ListView(query: "",
+                         scopeIndex: 0,
+                         fetcher: ComicFetcher())
+                    .environment(\.managedObjectContext,  CoreData.sharedInstance.dataStack.viewContext)
                 })
         }
     }

@@ -11,24 +11,12 @@ import Combine
 import WebKit
 
 struct BrowserView: View {
-    @Environment(\.presentationMode) var presentationMode
     var title: String
     var link: String
     
     var body: some View {
         VStack {
-            HStack {
-                Text(title)
-                    .font(.custom("xkcd-Script-Regular", size: 20))
-                Spacer()
-                Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("X")
-                        .customButton(isDisabled: false)
-                }
-            }
-                .padding(5)
+            BrowserTitleView(title: title)
             Spacer()
             WebView(link: link)
         }
@@ -42,15 +30,26 @@ struct BrowserView_Previews: PreviewProvider {
     }
 }
 
-//class WebViewModel: ObservableObject {
-//    @Published var link: String
-//    @Published var didFinishLoading = false
-//    @Published var canGoBack = false
-//
-//    init (link: String) {
-//        self.link = link
-//    }
-//}
+struct BrowserTitleView: View {
+    @Environment(\.presentationMode) var presentationMode
+    var title: String
+
+    var body: some View {
+        HStack {
+            Spacer()
+            Text(title)
+                .font(.custom("xkcd-Script-Regular", size: 20))
+            Spacer()
+            Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("X")
+                    .customButton(isDisabled: false)
+            }
+        }
+            .padding(5)
+    }
+}
 
 struct WebView: UIViewRepresentable {
     private let webView = WKWebView()
@@ -58,6 +57,14 @@ struct WebView: UIViewRepresentable {
 
     init (link: String) {
         self.link = link
+    }
+    
+    class Coordinator: NSObject, WKNavigationDelegate {
+        private var control: WebView
+
+        init(_ control: WebView) {
+            self.control = control
+        }
     }
     
     func makeUIView(context: UIViewRepresentableContext<WebView>) -> WKWebView {
@@ -77,14 +84,5 @@ struct WebView: UIViewRepresentable {
     func makeCoordinator() -> WebView.Coordinator {
         Coordinator(self)
     }
-    
-    class Coordinator: NSObject, WKNavigationDelegate {
-        private var control: WebView
-
-        init(_ control: WebView) {
-            self.control = control
-        }
-    }
 }
-
 
