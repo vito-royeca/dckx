@@ -131,11 +131,11 @@ struct ComicListView: View {
         self.action = action
         
         var predicate: NSPredicate?
-        
+        // TODO: Handle comic.num
         if query.count == 1 {
-            predicate = NSPredicate(format: "title BEGINSWITH[cd] %@", query)
+            predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@ OR alt BEGINSWITH[cd] %@", query, query, query)
         } else if query.count > 1 {
-            predicate = NSPredicate(format: "title CONTAINS[cd] %@", query)
+            predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", query, query, query)
         }
         
         switch scopeIndex {
