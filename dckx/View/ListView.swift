@@ -88,11 +88,36 @@ struct SearchBar: UIViewRepresentable {
         }
         
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            query = searchText
+            // Throttle typing in the Search bar
+            NSObject.cancelPreviousPerformRequests(withTarget: self,
+                                                   selector: #selector(self.reloadQuery(_:)),
+                                                   object: searchBar)
+            perform(#selector(self.reloadQuery(_:)),
+                    with: searchBar,
+                    afterDelay: 0.75)
         }
         
         func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-            scopeIndex = selectedScope
+            // Throttle selecting scope in the Search bar
+            NSObject.cancelPreviousPerformRequests(withTarget: self,
+                                                   selector: #selector(self.reloadSearchScope(_:)),
+                                                   object: searchBar)
+            perform(#selector(self.reloadSearchScope(_:)),
+                    with: searchBar,
+                    afterDelay: 0.75)
+        }
+        
+        @objc func reloadQuery(_ searchBar: UISearchBar) {
+            guard let text = searchBar.text else {
+                return
+            }
+            query = text
+            print(query)
+        }
+        
+        @objc func reloadSearchScope(_ searchBar: UISearchBar) {
+            scopeIndex = searchBar.selectedScopeButtonIndex
+            print(scopeIndex)
         }
     }
     
