@@ -19,7 +19,7 @@ struct ButtonModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(5)
-            .font(.custom("xkcd-Script-Regular", size: 15))
+            .font(.custom("xkcd-Script-Regular", size: 14))
             .foregroundColor(isDisabled ? Color.gray : .white)
             .background(RoundedRectangle(cornerRadius: 4, style:   .circular).foregroundColor(.buttonColor))
     }

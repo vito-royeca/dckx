@@ -26,10 +26,10 @@ struct ComicView: View {
                              month: fetcher.currentComic?.month ?? 1,
                              day: fetcher.currentComic?.day ?? 1)
                 
-                Divider()
-                
-                // Tool bar
-                ToolBarView(fetcher: fetcher)
+//                Divider()
+//
+//                // Tool bar
+//                ToolBarView(fetcher: fetcher)
                 
                 Spacer()
 
@@ -55,6 +55,7 @@ struct ComicView: View {
             }
                 .padding()
                 .navigationBarTitle(Text(""), displayMode: .inline)
+                .navigationBarItems(leading: ToolBarView(fetcher: fetcher))
         }
     }
 }

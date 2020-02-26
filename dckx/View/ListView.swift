@@ -13,7 +13,7 @@ import CoreData
 struct  ListView: View {
     @Environment(\.managedObjectContext) var mainContext
     @Environment(\.presentationMode) var presentationMode
-    @State var viewModel: ComicListViewModel = ComicListViewModel(fetchRequest: nil)
+    @State var viewModel: ComicListViewModel = ComicListViewModel(query: "", scopeIndex: 0)
     @State var shouldAnimate: Bool = false
     
     var fetcher: ComicFetcher
@@ -135,7 +135,7 @@ struct SearchBar: UIViewRepresentable {
             
             DispatchQueue.global(qos: .background).async {
                 self.shouldAnimate = true
-                self.viewModel = ComicListViewModel(fetchRequest: self.createFetchRequest())
+                self.viewModel = ComicListViewModel(query: self.query, scopeIndex: self.scopeIndex)
                 
                 DispatchQueue.main.async {
                     self.shouldAnimate = false
@@ -148,7 +148,7 @@ struct SearchBar: UIViewRepresentable {
             
             DispatchQueue.global(qos: .background).async {
                 self.shouldAnimate = true
-                self.viewModel = ComicListViewModel(fetchRequest: self.createFetchRequest())
+                self.viewModel = ComicListViewModel(query: self.query, scopeIndex: self.scopeIndex)
                 
                 DispatchQueue.main.async {
                     self.shouldAnimate = false
@@ -156,44 +156,45 @@ struct SearchBar: UIViewRepresentable {
             }
         }
         
-        func createFetchRequest() -> NSFetchRequest<Comic> {
-            let param = query
-            var predicate: NSPredicate?
-            
-            if query.count == 1 {
-                
-                predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@", param, param)
-            } else if query.count > 1 {
-                predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", param, param, param)
-            }
-            
-            switch scopeIndex {
-            case 0:
-                ()
-            case 1:
-                let newPredicate = NSPredicate(format: "isFavorite == true")
-                if predicate != nil {
-                    predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
-                } else {
-                    predicate = newPredicate
-                }
-            case 2:
-                let newPredicate = NSPredicate(format: "isRead == true")
-                if predicate != nil {
-                    predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
-                } else {
-                    predicate = newPredicate
-                }
-            default:
-                ()
-            }
-            
-            let fetchRequest: NSFetchRequest<Comic> = Comic.fetchRequest()
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
-            fetchRequest.predicate = predicate
-            
-            return fetchRequest
-        }
+//        func createFetchRequest() -> NSFetchRequest<Comic> {
+//            let param = query
+//            var predicate: NSPredicate?
+//
+//            if query.count == 1 {
+//
+//                predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@", param, param)
+//            } else if query.count > 1 {
+//                predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", param, param, param)
+//            }
+//
+//            switch scopeIndex {
+//            case 0:
+//                ()
+//            case 1:
+//                let newPredicate = NSPredicate(format: "isFavorite == true")
+//                if predicate != nil {
+//                    predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
+//                } else {
+//                    predicate = newPredicate
+//                }
+//            case 2:
+//                let newPredicate = NSPredicate(format: "isRead == true")
+//                if predicate != nil {
+//                    predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
+//                } else {
+//                    predicate = newPredicate
+//                }
+//            default:
+//                ()
+//            }
+//
+//            let fetchRequest: NSFetchRequest<Comic> = Comic.fetchRequest()
+//            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
+//            fetchRequest.predicate = predicate
+//            fetchRequest.fetchBatchSize = 100
+//
+//            return fetchRequest
+//        }
     }
     
     func makeCoordinator() -> SearchBar.Coordinator {
@@ -253,17 +254,11 @@ struct ComicListView: View {
 class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
     private var controller: NSFetchedResultsController<Comic>?
  
-    init(fetchRequest: NSFetchRequest<Comic>?) {
+    init(query: String, scopeIndex: Int) {
         super.init()
-        var fr = fetchRequest
+        let fetchRequest = createFetchRequest(query: query, scopeIndex: scopeIndex)
         
-        if fr == nil {
-            fr = Comic.fetchRequest()
-            fr!.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
-        }
-        
-        
-        controller = NSFetchedResultsController<Comic>(fetchRequest: fr!,
+        controller = NSFetchedResultsController<Comic>(fetchRequest: fetchRequest,
                                                        managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
                                                        sectionNameKeyPath: nil,
                                                        cacheName: nil)
@@ -286,6 +281,45 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
      
     var comics: [Comic] {
         return controller?.fetchedObjects ?? []
+    }
+    
+    func createFetchRequest(query: String, scopeIndex: Int) -> NSFetchRequest<Comic> {
+        var predicate: NSPredicate?
+        
+        if query.count == 1 {
+            
+            predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@", query, query)
+        } else if query.count > 1 {
+            predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", query, query, query)
+        }
+        
+        switch scopeIndex {
+        case 0:
+            ()
+        case 1:
+            let newPredicate = NSPredicate(format: "isFavorite == true")
+            if predicate != nil {
+                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
+            } else {
+                predicate = newPredicate
+            }
+        case 2:
+            let newPredicate = NSPredicate(format: "isRead == true")
+            if predicate != nil {
+                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
+            } else {
+                predicate = newPredicate
+            }
+        default:
+            ()
+        }
+        
+        let fetchRequest: NSFetchRequest<Comic> = Comic.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
+        fetchRequest.predicate = predicate
+        fetchRequest.fetchBatchSize = 100
+        
+        return fetchRequest
     }
 }
 
