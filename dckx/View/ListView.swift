@@ -28,7 +28,8 @@ struct  ListView: View {
             
             Spacer()
             
-            SearchBar(query: $query, scopeIndex: $scopeIndex)
+            SearchBar(query: $query,
+                      scopeIndex: $scopeIndex)
             
             Spacer()
             
@@ -81,7 +82,7 @@ struct SearchBar: UIViewRepresentable {
     class Coordinator: NSObject, UISearchBarDelegate {
         @Binding var query: String
         @Binding var scopeIndex: Int
-        
+
         init(query: Binding<String>, scopeIndex: Binding<Int>) {
             _query = query
             _scopeIndex = scopeIndex
@@ -112,17 +113,16 @@ struct SearchBar: UIViewRepresentable {
                 return
             }
             query = text
-            print(query)
         }
         
         @objc func reloadSearchScope(_ searchBar: UISearchBar) {
             scopeIndex = searchBar.selectedScopeButtonIndex
-            print(scopeIndex)
         }
     }
     
     func makeCoordinator() -> SearchBar.Coordinator {
-        return Coordinator(query: $query, scopeIndex: $scopeIndex)
+        return Coordinator(query: $query,
+                           scopeIndex: $scopeIndex)
     }
 
     func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
@@ -144,21 +144,21 @@ struct SearchBar: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UISearchBar, context: UIViewRepresentableContext<SearchBar>) {
-//        uiView.text = text
+        uiView.text = query
+        uiView.selectedScopeButtonIndex = scopeIndex
     }
 }
 
 struct ComicListView: View {
-    var fetchRequest: FetchRequest<Comic>
+    @ObservedObject var viewModel: ComicListViewModel
+//    @Binding var shouldAnimate: Bool
     var action: (Int32) -> Void
     
     init(query: String, scopeIndex: Int, action: @escaping (Int32) -> Void) {
-        self.action = action
-        
         var predicate: NSPredicate?
-        // TODO: Handle comic.num
+        
         if query.count == 1 {
-            predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@ OR alt BEGINSWITH[cd] %@", query, query, query)
+            predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@", query, query)
         } else if query.count > 1 {
             predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", query, query, query)
         }
@@ -184,20 +184,66 @@ struct ComicListView: View {
             ()
         }
         
-        fetchRequest = FetchRequest<Comic>(entity: Comic.entity(),
-                                           sortDescriptors: [NSSortDescriptor(key: "num", ascending: false)],
-                                           predicate: predicate)
+        let fetchRequest: NSFetchRequest<Comic> = Comic.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
+        fetchRequest.predicate = predicate
+        
+        viewModel = ComicListViewModel(fetchRequest: fetchRequest)
+        self.action = action
     }
     
     var body: some View {
-        HStack {
-            List(fetchRequest.wrappedValue) { comic in
+        VStack {
+            ActivityIndicator(shouldAnimate: viewModel.$shouldAnimate)
+            List(viewModel.comics) { comic in
                 ComicRow(num: comic.num,
                          title: comic.title ?? "",
                          action: self.action)
                     .onTapGesture { self.action(comic.num) }
             }
                 .resignKeyboardOnDragGesture()
+            
+        }
+    }
+}
+
+extension ComicListView {
+    class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
+        private let controller: NSFetchedResultsController<Comic>
+        @State var shouldAnimate: Bool = false
+     
+        init(fetchRequest: NSFetchRequest<Comic>) {
+            
+            controller = NSFetchedResultsController<Comic>(fetchRequest: fetchRequest,
+                                                           managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
+                                                           sectionNameKeyPath: nil,
+                                                           cacheName: nil)
+            super.init()
+            controller.delegate = self
+            
+            do {
+                try controller.performFetch()
+            } catch {
+                print(error)
+            }
+        }
+     
+        func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+            objectWillChange.send()
+            // doesn't work
+            shouldAnimate.toggle()
+            print(shouldAnimate)
+        }
+        
+        func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+            objectWillChange.send()
+            // doesn't work
+            shouldAnimate.toggle()
+            print(shouldAnimate)
+        }
+         
+        var comics: [Comic] {
+            return controller.fetchedObjects ?? []
         }
     }
 }
@@ -222,3 +268,19 @@ struct ComicRow: View {
     }
 }
 
+struct ActivityIndicator: UIViewRepresentable {
+    @Binding var shouldAnimate: Bool
+    
+    func makeUIView(context: Context) -> UIActivityIndicatorView {
+        return UIActivityIndicatorView()
+    }
+
+    func updateUIView(_ uiView: UIActivityIndicatorView,
+                      context: Context) {
+        if self.shouldAnimate {
+            uiView.startAnimating()
+        } else {
+            uiView.stopAnimating()
+        }
+    }
+}

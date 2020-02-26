@@ -157,8 +157,8 @@ struct ToolBarView: View {
             }
                 .sheet(isPresented: $showingList, content: {
                     ListView(query: "",
-                         scopeIndex: 0,
-                         fetcher: self.fetcher)
+                             scopeIndex: 0,
+                             fetcher: self.fetcher)
                     .environment(\.managedObjectContext,  CoreData.sharedInstance.dataStack.viewContext)
                 })
         }
