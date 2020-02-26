@@ -13,13 +13,14 @@ import CoreData
 struct  ListView: View {
     @Environment(\.managedObjectContext) var mainContext
     @Environment(\.presentationMode) var presentationMode
-    @State var query: String
-    @State var scopeIndex: Int
+    @State var viewModel: ComicListViewModel = ComicListViewModel(fetchRequest: nil)
+    @State var shouldAnimate: Bool = false
+    
     var fetcher: ComicFetcher
 
     
-    func createPredicate() -> NSPredicate {
-        return NSPredicate(format: "title CONTAINS[cd] %@", "$searchText.wrappedValue")
+    init(fetcher: ComicFetcher) {
+        self.fetcher = fetcher
     }
     
     var body: some View {
@@ -28,12 +29,16 @@ struct  ListView: View {
             
             Spacer()
             
-            SearchBar(query: $query,
-                      scopeIndex: $scopeIndex)
+            SearchBar(viewModel: $viewModel,
+                      shouldAnimate: $shouldAnimate)
             
             Spacer()
             
-            ComicListView(query: query, scopeIndex: scopeIndex, action: selectComic(num:))
+            ZStack(alignment: .center) {
+                ComicListView(viewModel: $viewModel,
+                              action: selectComic(num:))
+                ActivityIndicator(shouldAnimate: $shouldAnimate)
+            }
         }
     }
     
@@ -45,9 +50,7 @@ struct  ListView: View {
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView(query: "",
-                 scopeIndex: 0,
-                 fetcher: ComicFetcher())
+        ListView(fetcher: ComicFetcher())
             .environment(\.managedObjectContext,  CoreData.sharedInstance.dataStack.viewContext)
     }
 }
@@ -76,16 +79,31 @@ struct ListTitleView: View {
 }
 
 struct SearchBar: UIViewRepresentable {
-    @Binding var query: String
-    @Binding var scopeIndex: Int
+    @Binding var viewModel: ComicListViewModel
+    @Binding var shouldAnimate: Bool
+    @State var query: String = ""
+    @State var scopeIndex: Int = 0
+    
+    init(viewModel: Binding<ComicListViewModel>,
+        shouldAnimate: Binding<Bool>) {
+        _viewModel = viewModel
+        _shouldAnimate = shouldAnimate
+    }
     
     class Coordinator: NSObject, UISearchBarDelegate {
         @Binding var query: String
         @Binding var scopeIndex: Int
+        @Binding var viewModel: ComicListViewModel
+        @Binding var shouldAnimate: Bool
 
-        init(query: Binding<String>, scopeIndex: Binding<Int>) {
+        init(query: Binding<String>,
+             scopeIndex: Binding<Int>,
+             viewModel: Binding<ComicListViewModel>,
+             shouldAnimate: Binding<Bool>) {
             _query = query
             _scopeIndex = scopeIndex
+            _viewModel = viewModel
+            _shouldAnimate = shouldAnimate
         }
         
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -112,17 +130,77 @@ struct SearchBar: UIViewRepresentable {
             guard let text = searchBar.text else {
                 return
             }
-            query = text
+            
+            self.query = text
+            
+            DispatchQueue.global(qos: .background).async {
+                self.shouldAnimate = true
+                self.viewModel = ComicListViewModel(fetchRequest: self.createFetchRequest())
+                
+                DispatchQueue.main.async {
+                    self.shouldAnimate = false
+                }
+            }
         }
         
         @objc func reloadSearchScope(_ searchBar: UISearchBar) {
-            scopeIndex = searchBar.selectedScopeButtonIndex
+            self.scopeIndex = searchBar.selectedScopeButtonIndex
+            
+            DispatchQueue.global(qos: .background).async {
+                self.shouldAnimate = true
+                self.viewModel = ComicListViewModel(fetchRequest: self.createFetchRequest())
+                
+                DispatchQueue.main.async {
+                    self.shouldAnimate = false
+                }
+            }
+        }
+        
+        func createFetchRequest() -> NSFetchRequest<Comic> {
+            let param = query
+            var predicate: NSPredicate?
+            
+            if query.count == 1 {
+                
+                predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@", param, param)
+            } else if query.count > 1 {
+                predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", param, param, param)
+            }
+            
+            switch scopeIndex {
+            case 0:
+                ()
+            case 1:
+                let newPredicate = NSPredicate(format: "isFavorite == true")
+                if predicate != nil {
+                    predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
+                } else {
+                    predicate = newPredicate
+                }
+            case 2:
+                let newPredicate = NSPredicate(format: "isRead == true")
+                if predicate != nil {
+                    predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
+                } else {
+                    predicate = newPredicate
+                }
+            default:
+                ()
+            }
+            
+            let fetchRequest: NSFetchRequest<Comic> = Comic.fetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
+            fetchRequest.predicate = predicate
+            
+            return fetchRequest
         }
     }
     
     func makeCoordinator() -> SearchBar.Coordinator {
         return Coordinator(query: $query,
-                           scopeIndex: $scopeIndex)
+                           scopeIndex: $scopeIndex,
+                           viewModel: $viewModel,
+                           shouldAnimate: $shouldAnimate)
     }
 
     func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
@@ -150,51 +228,17 @@ struct SearchBar: UIViewRepresentable {
 }
 
 struct ComicListView: View {
-    @ObservedObject var viewModel: ComicListViewModel
-//    @Binding var shouldAnimate: Bool
+    @Binding var viewModel: ComicListViewModel
     var action: (Int32) -> Void
     
-    init(query: String, scopeIndex: Int, action: @escaping (Int32) -> Void) {
-        var predicate: NSPredicate?
-        
-        if query.count == 1 {
-            predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@", query, query)
-        } else if query.count > 1 {
-            predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", query, query, query)
-        }
-        
-        switch scopeIndex {
-        case 0:
-            ()
-        case 1:
-            let newPredicate = NSPredicate(format: "isFavorite == true")
-            if predicate != nil {
-                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
-            } else {
-                predicate = newPredicate
-            }
-        case 2:
-            let newPredicate = NSPredicate(format: "isRead == true")
-            if predicate != nil {
-                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
-            } else {
-                predicate = newPredicate
-            }
-        default:
-            ()
-        }
-        
-        let fetchRequest: NSFetchRequest<Comic> = Comic.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
-        fetchRequest.predicate = predicate
-        
-        viewModel = ComicListViewModel(fetchRequest: fetchRequest)
+    init(viewModel: Binding<ComicListViewModel>, action: @escaping (Int32) -> Void) {
+
+        _viewModel = viewModel
         self.action = action
     }
     
     var body: some View {
         VStack {
-            ActivityIndicator(shouldAnimate: viewModel.$shouldAnimate)
             List(viewModel.comics) { comic in
                 ComicRow(num: comic.num,
                          title: comic.title ?? "",
@@ -202,49 +246,46 @@ struct ComicListView: View {
                     .onTapGesture { self.action(comic.num) }
             }
                 .resignKeyboardOnDragGesture()
-            
         }
     }
 }
 
-extension ComicListView {
-    class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
-        private let controller: NSFetchedResultsController<Comic>
-        @State var shouldAnimate: Bool = false
-     
-        init(fetchRequest: NSFetchRequest<Comic>) {
-            
-            controller = NSFetchedResultsController<Comic>(fetchRequest: fetchRequest,
-                                                           managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
-                                                           sectionNameKeyPath: nil,
-                                                           cacheName: nil)
-            super.init()
-            controller.delegate = self
-            
-            do {
-                try controller.performFetch()
-            } catch {
-                print(error)
-            }
-        }
-     
-        func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-            objectWillChange.send()
-            // doesn't work
-            shouldAnimate.toggle()
-            print(shouldAnimate)
+class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
+    private var controller: NSFetchedResultsController<Comic>?
+ 
+    init(fetchRequest: NSFetchRequest<Comic>?) {
+        super.init()
+        var fr = fetchRequest
+        
+        if fr == nil {
+            fr = Comic.fetchRequest()
+            fr!.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
         }
         
-        func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-            objectWillChange.send()
-            // doesn't work
-            shouldAnimate.toggle()
-            print(shouldAnimate)
+        
+        controller = NSFetchedResultsController<Comic>(fetchRequest: fr!,
+                                                       managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
+                                                       sectionNameKeyPath: nil,
+                                                       cacheName: nil)
+        controller!.delegate = self
+        
+        do {
+            try controller!.performFetch()
+        } catch {
+            print(error)
         }
-         
-        var comics: [Comic] {
-            return controller.fetchedObjects ?? []
-        }
+    }
+ 
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        objectWillChange.send()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        objectWillChange.send()
+    }
+     
+    var comics: [Comic] {
+        return controller?.fetchedObjects ?? []
     }
 }
 
@@ -279,6 +320,7 @@ struct ActivityIndicator: UIViewRepresentable {
                       context: Context) {
         if self.shouldAnimate {
             uiView.startAnimating()
+            
         } else {
             uiView.stopAnimating()
         }
