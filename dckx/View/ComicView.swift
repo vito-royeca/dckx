@@ -37,7 +37,7 @@ struct ComicView: View {
                            lastScaleValue: $lastScaleValue,
                            scale: $scale)
             Text("Alt Text: \(fetcher.currentComic?.alt ?? "")")
-                .font(.custom("xkcd-Script-Regular", size: 15))
+                .font(.custom("xkcd-Script-Regular", size: 20))
             
             Spacer()
             
@@ -45,6 +45,7 @@ struct ComicView: View {
             NavigationBarView(fetcher: fetcher,
                               resetAction: resetImageScale)
         }
+            .padding()
     }
     
     func resetImageScale() {
@@ -130,6 +131,7 @@ struct ComicImageView: View {
 struct ToolBarView: View {
     @ObservedObject var fetcher: ComicFetcher
     @State private var showingBrowser = false
+    @State private var showingShare = false
     @State private var showingList = false
     
     var body: some View {
@@ -157,11 +159,14 @@ struct ToolBarView: View {
             Spacer()
             
             Button(action: {
-                
+                self.showingShare = true
             }) {
                 Text("Share")
                     .customButton(isDisabled: false)
             }
+                .sheet(isPresented: $showingShare) {
+                    ShareSheet(comic: self.fetcher.currentComic)
+                }
             Spacer()
             
             Button(action: {
@@ -175,7 +180,73 @@ struct ToolBarView: View {
                     .environment(\.managedObjectContext,  CoreData.sharedInstance.dataStack.viewContext)
                 })
         }
+    }
+}
+
+struct ShareSheet: UIViewControllerRepresentable {
+    var comic: Comic?
+    
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        return UIActivityViewController(activityItems: [ComicItemSource(title: title(),
+                                                                        author: author(),
+                                                                        image: image()),
+                                                        author(),
+                                                        title()],
+                                        applicationActivities: nil)
+    }
+      
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
+        // nothing to do here
+    }
+    
+    func title() -> String {
+        if let comic = comic {
+            return "#\(comic.num): \(comic.title ?? "")"
+        } else {
+            return author()
+        }
+    }
+    
+    func author() -> String {
+        return "via @dckx - xkcd comics reader"
+    }
+    
+    func image() -> UIImage? {
+        if let comic = comic,
+            let img = comic.img,
+            let image = SDImageCache.shared.imageFromCache(forKey: img) {
+            return image
+        }
         
+        return nil
+    }
+    
+    class ComicItemSource: NSObject,  UIActivityItemSource {
+        var title: String
+        var author: String
+        var image: UIImage?
+        
+        init(title: String, author: String, image: UIImage?) {
+            self.title = title
+            self.author = author
+            self.image = image
+        }
+        
+        func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+            return "\(title)\n\(author)"
+        }
+
+        func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+            return image
+        }
+
+        func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
+            return title
+        }
+        
+        func activityViewController(_ activityViewController: UIActivityViewController, thumbnailImageForActivityType activityType: UIActivity.ActivityType?, suggestedSize size: CGSize) -> UIImage? {
+            return image
+        }
     }
 }
 
