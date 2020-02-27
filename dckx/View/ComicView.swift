@@ -36,6 +36,8 @@ struct ComicView: View {
             ComicImageView(url: fetcher.currentComic?.img ?? "",
                            lastScaleValue: $lastScaleValue,
                            scale: $scale)
+            Text("Alt Text: \(fetcher.currentComic?.alt ?? "")")
+                .font(.custom("xkcd-Script-Regular", size: 15))
             
             Spacer()
             
@@ -127,7 +129,6 @@ struct ComicImageView: View {
 
 struct ToolBarView: View {
     @ObservedObject var fetcher: ComicFetcher
-    @State private var showingAltText = false
     @State private var showingBrowser = false
     @State private var showingList = false
     
@@ -153,19 +154,6 @@ struct ToolBarView: View {
                                     link: XkcdAPI.sharedInstance.explainURL(of: $0))
                     })
                 })
-            Spacer()
-            
-            Button(action: {
-                self.showingAltText = true
-            }) {
-                Text("Alt Text")
-                    .customButton(isDisabled: false)
-            }
-                .alert(isPresented: $showingAltText) {
-                    Alert(title: Text("Alt Text"),
-                          message: Text(fetcher.currentComic?.alt ?? "No Alt Text"),
-                          dismissButton: .default(Text("Close")))
-                }
             Spacer()
             
             Button(action: {
