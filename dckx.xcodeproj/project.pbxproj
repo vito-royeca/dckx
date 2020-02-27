@@ -83,7 +83,7 @@
 		56149F6DEDDF1BA8A1D64427 /* Pods_dckxUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dckxUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B23367D23F646A700C88BA1 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		8B23368123F6683C00C88BA1 /* ComicFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicFetcher.swift; sourceTree = "<group>"; };
-		8B4F4B9523F5F444008446F4 /* dckx: xkcd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dckx: xkcd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B4F4B9523F5F444008446F4 /* dckx : xkcd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dckx : xkcd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B4F4B9823F5F444008446F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8B4F4B9C23F5F444008446F4 /* ComicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicView.swift; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 		8B4F4B9623F5F444008446F4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8B4F4B9523F5F444008446F4 /* dckx: xkcd.app */,
+				8B4F4B9523F5F444008446F4 /* dckx : xkcd.app */,
 				8B4F4BAB23F5F445008446F4 /* dckxTests.xctest */,
 				8B4F4BB623F5F445008446F4 /* dckxUITests.xctest */,
 			);
@@ -301,7 +301,7 @@
 			);
 			name = dckx;
 			productName = dckx;
-			productReference = 8B4F4B9523F5F444008446F4 /* dckx: xkcd.app */;
+			productReference = 8B4F4B9523F5F444008446F4 /* dckx : xkcd.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8B4F4BAA23F5F445008446F4 /* dckxTests */ = {
@@ -756,7 +756,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckx;
-				PRODUCT_NAME = "dckx: xkcd";
+				PRODUCT_NAME = "dckx : xkcd";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -777,7 +777,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckx;
-				PRODUCT_NAME = "dckx: xkcd";
+				PRODUCT_NAME = "dckx : xkcd";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
