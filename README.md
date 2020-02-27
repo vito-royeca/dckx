@@ -1,3 +1,5 @@
+![dckx](images/ic_launcher/ios/iTunesArtwork@1x.png)
+
 # dckx
 An xkcd comics reader.
 
