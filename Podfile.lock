@@ -13,7 +13,7 @@ PODS:
   - SDWebImage (5.5.2):
     - SDWebImage/Core (= 5.5.2)
   - SDWebImage/Core (5.5.2)
-  - SDWebImageSwiftUI (1.0.0-beta2):
+  - SDWebImageSwiftUI (1.0.0-beta3):
     - SDWebImage (~> 5.3)
   - Sync (6.0.0)
 
@@ -38,7 +38,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
-  SDWebImageSwiftUI: 82d3dc7a739d856ac62536e9052eee592b725e64
+  SDWebImageSwiftUI: f1065026e8d73bce63c11f6e314f9259dcabd322
   Sync: a6288926bee65a1ac3c72055446c558776af43f3
 
 PODFILE CHECKSUM: 4f95f76b3a88abafa02aa8aee9d0d8df67b7477d

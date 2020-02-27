@@ -10,10 +10,11 @@ import SwiftUI
 import Combine
 import CoreData
 
+// MARK: ListView
 struct  ListView: View {
     @Environment(\.managedObjectContext) var mainContext
     @Environment(\.presentationMode) var presentationMode
-    @State var viewModel: ComicListViewModel = ComicListViewModel(query: "", scopeIndex: 0)
+    @State var viewModel: ComicListViewModel = ComicListViewModel()
     @State var shouldAnimate: Bool = false
     
     var fetcher: ComicFetcher
@@ -48,6 +49,7 @@ struct  ListView: View {
     }
 }
 
+// MARK: ListView_Previews
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
         ListView(fetcher: ComicFetcher())
@@ -55,6 +57,7 @@ struct ListView_Previews: PreviewProvider {
     }
 }
 
+// MARK: ListTitleView
 struct ListTitleView: View {
     var presentationMode: Binding<PresentationMode>
     
@@ -78,6 +81,7 @@ struct ListTitleView: View {
     }
 }
 
+// MARK: SearchBar
 struct SearchBar: UIViewRepresentable {
     @Binding var viewModel: ComicListViewModel
     @Binding var shouldAnimate: Bool
@@ -155,46 +159,6 @@ struct SearchBar: UIViewRepresentable {
                 }
             }
         }
-        
-//        func createFetchRequest() -> NSFetchRequest<Comic> {
-//            let param = query
-//            var predicate: NSPredicate?
-//
-//            if query.count == 1 {
-//
-//                predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@", param, param)
-//            } else if query.count > 1 {
-//                predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", param, param, param)
-//            }
-//
-//            switch scopeIndex {
-//            case 0:
-//                ()
-//            case 1:
-//                let newPredicate = NSPredicate(format: "isFavorite == true")
-//                if predicate != nil {
-//                    predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
-//                } else {
-//                    predicate = newPredicate
-//                }
-//            case 2:
-//                let newPredicate = NSPredicate(format: "isRead == true")
-//                if predicate != nil {
-//                    predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
-//                } else {
-//                    predicate = newPredicate
-//                }
-//            default:
-//                ()
-//            }
-//
-//            let fetchRequest: NSFetchRequest<Comic> = Comic.fetchRequest()
-//            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
-//            fetchRequest.predicate = predicate
-//            fetchRequest.fetchBatchSize = 100
-//
-//            return fetchRequest
-//        }
     }
     
     func makeCoordinator() -> SearchBar.Coordinator {
@@ -228,6 +192,7 @@ struct SearchBar: UIViewRepresentable {
     }
 }
 
+// MARK: ComicListView
 struct ComicListView: View {
     @Binding var viewModel: ComicListViewModel
     var action: (Int32) -> Void
@@ -251,9 +216,14 @@ struct ComicListView: View {
     }
 }
 
+// MARK: ComicListViewModel
 class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
     private var controller: NSFetchedResultsController<Comic>?
  
+    override convenience init() {
+        self.init(query: "", scopeIndex: 0)
+    }
+    
     init(query: String, scopeIndex: Int) {
         super.init()
         let fetchRequest = createFetchRequest(query: query, scopeIndex: scopeIndex)
@@ -317,12 +287,13 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
         let fetchRequest: NSFetchRequest<Comic> = Comic.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
         fetchRequest.predicate = predicate
-        fetchRequest.fetchBatchSize = 100
+        fetchRequest.fetchBatchSize = 20
         
         return fetchRequest
     }
 }
 
+// MARK: ComicRow
 struct ComicRow: View {
     var num: Int32
     var title: String
@@ -343,6 +314,7 @@ struct ComicRow: View {
     }
 }
 
+// MARK: ActivityIndicator
 struct ActivityIndicator: UIViewRepresentable {
     @Binding var shouldAnimate: Bool
     

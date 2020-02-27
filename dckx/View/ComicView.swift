@@ -12,51 +12,42 @@ import SDWebImageSwiftUI
 
 struct ComicView: View {
     @ObservedObject var fetcher = ComicFetcher()
+    @State var lastScaleValue: CGFloat = 1.0
+    @State var scale: CGFloat = 1.0
     
     var body: some View {
-        NavigationView {
+        VStack {
+            // Title
+            TitleView(title: fetcher.currentComic?.title ?? "Title")
             
-            VStack {
-                // Title
-                TitleView(title: fetcher.currentComic?.title ?? "Title")
-                
-                // Metadata
-                MetaDataView(num: fetcher.currentComic?.num ?? 1,
-                             year: fetcher.currentComic?.year ?? 2020,
-                             month: fetcher.currentComic?.month ?? 1,
-                             day: fetcher.currentComic?.day ?? 1)
-                
-//                Divider()
-//
-//                // Tool bar
-//                ToolBarView(fetcher: fetcher)
-                
-                Spacer()
-
-                // Image
-                WebImage(url: URL(string: fetcher.currentComic?.img ?? ""))
-                    .onSuccess { image, cacheType in
-                        // Success
-                    }
-                    .resizable()
-                    .placeholder {
-                        Rectangle().foregroundColor(.backgroundColor)
-                    }
-                    .indicator(.activity) // Activity Indicator
-                    .animation(.easeInOut(duration: 0.5))
-                    .transition(.fade)
-                    .scaledToFit()
-                    .aspectRatio(contentMode: .fit)
-                
-                Spacer()
-                
-                // Navigation
-                NavigationBarView(fetcher: fetcher)
-            }
-                .padding()
-                .navigationBarTitle(Text(""), displayMode: .inline)
-                .navigationBarItems(leading: ToolBarView(fetcher: fetcher))
+            // Metadata
+            MetaDataView(num: fetcher.currentComic?.num ?? 1,
+                         year: fetcher.currentComic?.year ?? 2020,
+                         month: fetcher.currentComic?.month ?? 1,
+                         day: fetcher.currentComic?.day ?? 1)
+            
+            // Toolbar
+            Divider()
+            ToolBarView(fetcher: fetcher)
+            
+            Spacer()
+            
+            // Image
+            ComicImageView(url: fetcher.currentComic?.img ?? "",
+                           lastScaleValue: $lastScaleValue,
+                           scale: $scale)
+            
+            Spacer()
+            
+            // Navigation
+            NavigationBarView(fetcher: fetcher,
+                              resetAction: resetImageScale)
         }
+    }
+    
+    func resetImageScale() {
+        lastScaleValue = 1.0
+        scale = 1.0
     }
 }
 
@@ -95,6 +86,41 @@ struct MetaDataView: View {
             Spacer()
             Text("\(String(year))-\(month < 10 ? "0\(month)" : "\(month)")-\(day < 10 ? "0\(day)" : "\(day)")")
                 .font(.custom("xkcd-Script-Regular", size: 15))
+        }
+    }
+}
+
+struct ComicImageView: View {
+    var url: String
+    @Binding var lastScaleValue: CGFloat
+    @Binding var scale: CGFloat
+    
+    var body: some View {
+        VStack {
+            zoomView()
+        }
+    }
+    
+    func zoomView() -> some View {
+        return contentView()
+            .scaleEffect(self.scale)
+            .gesture(MagnificationGesture(minimumScaleDelta: 0.1)
+                .onChanged { value in
+                    let delta = value / self.lastScaleValue
+                    self.lastScaleValue = value
+                    let newScale = self.scale * delta
+                    self.scale = min(max(newScale, 0.5), 2)
+                }.onEnded { value in
+                    self.lastScaleValue = 1.0
+                })
+    }
+    
+    func contentView() -> some View {
+        HStack {
+            WebImage(url: URL(string:url), options: [.progressiveLoad])
+                .resizable()
+                .indicator(.progress)
+                .scaledToFit()
         }
     }
 }
@@ -161,16 +187,19 @@ struct ToolBarView: View {
                     .environment(\.managedObjectContext,  CoreData.sharedInstance.dataStack.viewContext)
                 })
         }
+        
     }
 }
 
 struct NavigationBarView: View {
     @ObservedObject var fetcher: ComicFetcher
-    
+    var resetAction: () -> Void
+
     var body: some View {
         HStack {
             Button(action: {
                 self.fetcher.loadFirstComic()
+                self.resetAction()
             }) {
                 Text("|<")
                     .customButton(isDisabled: !fetcher.canDoPrevious())
@@ -180,6 +209,7 @@ struct NavigationBarView: View {
             
             Button(action: {
                 self.fetcher.loadPreviousComic()
+                self.resetAction()
             }) {
                 Text("<Prev")
                     .customButton(isDisabled: !fetcher.canDoPrevious())
@@ -189,6 +219,7 @@ struct NavigationBarView: View {
             
             Button(action: {
                 self.fetcher.loadRandomComic()
+                self.resetAction()
             }) {
                 Text("Random")
                     .customButton(isDisabled: false)
@@ -197,6 +228,7 @@ struct NavigationBarView: View {
             
             Button(action: {
                 self.fetcher.loadNextComic()
+                self.resetAction()
             }) {
                 Text("Next>")
                     .customButton(isDisabled: !fetcher.canDoNext())
@@ -206,6 +238,7 @@ struct NavigationBarView: View {
             
             Button(action: {
                 self.fetcher.loadLastComic()
+                self.resetAction()
             }) {
                 Text(">|")
                     .customButton(isDisabled: !fetcher.canDoNext())
