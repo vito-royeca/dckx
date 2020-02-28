@@ -15,6 +15,7 @@
 		8B23368223F6683C00C88BA1 /* ComicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23368123F6683C00C88BA1 /* ComicFetcher.swift */; };
 		8B23368323F6683C00C88BA1 /* ComicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23368123F6683C00C88BA1 /* ComicFetcher.swift */; };
 		8B23368423F6683C00C88BA1 /* ComicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23368123F6683C00C88BA1 /* ComicFetcher.swift */; };
+		8B4A1285240828FD00D4F8B2 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A1284240828FC00D4F8B2 /* SnapshotHelper.swift */; };
 		8B4F4B9923F5F444008446F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9823F5F444008446F4 /* AppDelegate.swift */; };
 		8B4F4B9B23F5F444008446F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */; };
 		8B4F4B9D23F5F444008446F4 /* ComicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9C23F5F444008446F4 /* ComicView.swift */; };
@@ -53,6 +54,12 @@
 		8B626D972403982D00972EED /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D6D23FFB5BE00972EED /* ListView.swift */; };
 		8B626DD72403BBCB00972EED /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D6D23FFB5BE00972EED /* ListView.swift */; };
 		8B626DD82403C6C700972EED /* xkcd-script.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B626D732401BB6800972EED /* xkcd-script.ttf */; };
+		8BA50E4924097CF000138D11 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4824097CF000138D11 /* MainView.swift */; };
+		8BA50E4A24097CF000138D11 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4824097CF000138D11 /* MainView.swift */; };
+		8BA50E4B24097CF000138D11 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4824097CF000138D11 /* MainView.swift */; };
+		8BA50E4D24097D0200138D11 /* WhatIfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4C24097D0200138D11 /* WhatIfView.swift */; };
+		8BA50E4E24097D0200138D11 /* WhatIfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4C24097D0200138D11 /* WhatIfView.swift */; };
+		8BA50E4F24097D0200138D11 /* WhatIfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4C24097D0200138D11 /* WhatIfView.swift */; };
 		8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
@@ -83,6 +90,7 @@
 		56149F6DEDDF1BA8A1D64427 /* Pods_dckxUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dckxUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B23367D23F646A700C88BA1 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		8B23368123F6683C00C88BA1 /* ComicFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicFetcher.swift; sourceTree = "<group>"; };
+		8B4A1284240828FC00D4F8B2 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		8B4F4B9523F5F444008446F4 /* dckx : xkcd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dckx : xkcd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B4F4B9823F5F444008446F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +116,8 @@
 		8B626D7F2401F8E600972EED /* Comic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comic+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8B626D862402122C00972EED /* BrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserView.swift; sourceTree = "<group>"; };
 		8B626D8E240308C600972EED /* dckx.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = dckx.sqlite; sourceTree = "<group>"; };
+		8BA50E4824097CF000138D11 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		8BA50E4C24097D0200138D11 /* WhatIfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfView.swift; sourceTree = "<group>"; };
 		8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ResignKeyboardOnDragGesture.swift"; sourceTree = "<group>"; };
 		A1695073ECC186DD58075EB6 /* Pods-dckxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dckxTests.debug.xcconfig"; path = "Target Support Files/Pods-dckxTests/Pods-dckxTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A442C4117396A55D840D6677 /* Pods_dckx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dckx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +227,7 @@
 		8B4F4BB923F5F445008446F4 /* dckxUITests */ = {
 			isa = PBXGroup;
 			children = (
+				8B4A1284240828FC00D4F8B2 /* SnapshotHelper.swift */,
 				8B4F4BBA23F5F445008446F4 /* dckxUITests.swift */,
 				8B4F4BBC23F5F445008446F4 /* Info.plist */,
 			);
@@ -237,10 +248,12 @@
 		8B4F4BCE23F5F637008446F4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8B4F4B9C23F5F444008446F4 /* ComicView.swift */,
-				8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */,
-				8B626D6D23FFB5BE00972EED /* ListView.swift */,
 				8B626D862402122C00972EED /* BrowserView.swift */,
+				8B4F4B9C23F5F444008446F4 /* ComicView.swift */,
+				8B626D6D23FFB5BE00972EED /* ListView.swift */,
+				8BA50E4824097CF000138D11 /* MainView.swift */,
+				8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */,
+				8BA50E4C24097D0200138D11 /* WhatIfView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -545,6 +558,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B4F4B9923F5F444008446F4 /* AppDelegate.swift in Sources */,
+				8BA50E4924097CF000138D11 /* MainView.swift in Sources */,
 				8B626D702401B0A900972EED /* Constants.swift in Sources */,
 				8B4F4B9B23F5F444008446F4 /* SceneDelegate.swift in Sources */,
 				8B626D802401F8E600972EED /* Comic+CoreDataClass.swift in Sources */,
@@ -554,6 +568,7 @@
 				8B23368223F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8B626D6E23FFB5BE00972EED /* ListView.swift in Sources */,
 				8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
+				8BA50E4D24097D0200138D11 /* WhatIfView.swift in Sources */,
 				8B4F4BCB23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
 				8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
 				8B626D872402122C00972EED /* BrowserView.swift in Sources */,
@@ -565,6 +580,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B23368323F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
+				8BA50E4A24097CF000138D11 /* MainView.swift in Sources */,
 				8B4F4BB023F5F445008446F4 /* dckxTests.swift in Sources */,
 				8B4F4BCC23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
 				8B626D882402122C00972EED /* BrowserView.swift in Sources */,
@@ -574,6 +590,7 @@
 				8B626D792401EB1200972EED /* XkcdAPITests.swift in Sources */,
 				8B626DD72403BBCB00972EED /* ListView.swift in Sources */,
 				8B23367F23F646AC00C88BA1 /* CoreData.swift in Sources */,
+				8BA50E4E24097D0200138D11 /* WhatIfView.swift in Sources */,
 				8B4F4BE123F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
 				8B626D712401B0A900972EED /* Constants.swift in Sources */,
@@ -593,9 +610,12 @@
 				8B626D822401F8E600972EED /* Comic+CoreDataClass.swift in Sources */,
 				8B626D8D2402294000972EED /* SceneDelegate.swift in Sources */,
 				8B626D972403982D00972EED /* ListView.swift in Sources */,
+				8BA50E4F24097D0200138D11 /* WhatIfView.swift in Sources */,
+				8B4A1285240828FD00D4F8B2 /* SnapshotHelper.swift in Sources */,
 				8B23368023F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8B4F4BE223F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
+				8BA50E4B24097CF000138D11 /* MainView.swift in Sources */,
 				8B626D8A2402274A00972EED /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -677,7 +697,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -731,7 +751,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
