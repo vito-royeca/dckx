@@ -25,5 +25,7 @@ extension WhatIf {
     @NSManaged public var questioner: String?
     @NSManaged public var title: String?
     @NSManaged public var num: Int32
+    @NSManaged public var isFavorite: Bool
+    @NSManaged public var isRead: Bool
 
 }

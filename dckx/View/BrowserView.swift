@@ -18,7 +18,7 @@ struct BrowserView: View {
         VStack {
             BrowserTitleView(title: title)
             Spacer()
-            WebView(link: link)
+            WebView(link: link, html: nil, baseURL: nil)
         }
     }
 }
@@ -50,39 +50,3 @@ struct BrowserTitleView: View {
             .padding(5)
     }
 }
-
-struct WebView: UIViewRepresentable {
-    private let webView = WKWebView()
-    var link: String
-
-    init (link: String) {
-        self.link = link
-    }
-    
-    class Coordinator: NSObject, WKNavigationDelegate {
-        private var control: WebView
-
-        init(_ control: WebView) {
-            self.control = control
-        }
-    }
-    
-    func makeUIView(context: UIViewRepresentableContext<WebView>) -> WKWebView {
-        webView.navigationDelegate = context.coordinator
-        webView.allowsBackForwardNavigationGestures = true
-        
-        if let url = URL(string: link) {
-            self.webView.load(URLRequest(url: url))
-        }
-        return webView
-    }
-        
-    func updateUIView(_ uiView: WKWebView, context: UIViewRepresentableContext<WebView>) {
-        
-    }
-    
-    func makeCoordinator() -> WebView.Coordinator {
-        Coordinator(self)
-    }
-}
-

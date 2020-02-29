@@ -54,9 +54,4 @@ class XkcdAPITests: XCTestCase {
             XCTFail(error.localizedDescription)
         }
     }
-    
-    func testFetchAllComics() {
-        XkcdAPI.sharedInstance.setupDatabase()
-        XCTAssert(true)
-    }
 }

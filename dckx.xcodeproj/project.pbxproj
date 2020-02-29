@@ -71,6 +71,12 @@
 		8BA50E64240A2F6600138D11 /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BA50E63240A2F6600138D11 /* dckx.sqlite */; };
 		8BA50E65240A2F6600138D11 /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BA50E63240A2F6600138D11 /* dckx.sqlite */; };
 		8BA50E66240A2F6600138D11 /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BA50E63240A2F6600138D11 /* dckx.sqlite */; };
+		8BA50E68240A384400138D11 /* WhatIfFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E67240A384400138D11 /* WhatIfFetcher.swift */; };
+		8BA50E69240A384400138D11 /* WhatIfFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E67240A384400138D11 /* WhatIfFetcher.swift */; };
+		8BA50E6A240A384400138D11 /* WhatIfFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E67240A384400138D11 /* WhatIfFetcher.swift */; };
+		8BA50E6C240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
+		8BA50E6D240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
+		8BA50E6E240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
 		8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
@@ -133,6 +139,8 @@
 		8BA50E58240A18C000138D11 /* WhatIf+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WhatIf+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8BA50E5F240A2DA200138D11 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		8BA50E63240A2F6600138D11 /* dckx.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = dckx.sqlite; sourceTree = "<group>"; };
+		8BA50E67240A384400138D11 /* WhatIfFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfFetcher.swift; sourceTree = "<group>"; };
+		8BA50E6B240A425500138D11 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ResignKeyboardOnDragGesture.swift"; sourceTree = "<group>"; };
 		A1695073ECC186DD58075EB6 /* Pods-dckxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dckxTests.debug.xcconfig"; path = "Target Support Files/Pods-dckxTests/Pods-dckxTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A442C4117396A55D840D6677 /* Pods_dckx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dckx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -271,6 +279,7 @@
 				8BA50E4824097CF000138D11 /* MainView.swift */,
 				8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */,
 				8BA50E4C24097D0200138D11 /* WhatIfView.swift */,
+				8BA50E6B240A425500138D11 /* WebView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -299,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				8B23368123F6683C00C88BA1 /* ComicFetcher.swift */,
+				8BA50E67240A384400138D11 /* WhatIfFetcher.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -578,6 +588,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B4F4B9923F5F444008446F4 /* AppDelegate.swift in Sources */,
+				8BA50E6C240A425500138D11 /* WebView.swift in Sources */,
+				8BA50E68240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8BA50E4924097CF000138D11 /* MainView.swift in Sources */,
 				8B626D702401B0A900972EED /* Constants.swift in Sources */,
 				8B4F4B9B23F5F444008446F4 /* SceneDelegate.swift in Sources */,
@@ -603,6 +615,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B23368323F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
+				8BA50E6D240A425500138D11 /* WebView.swift in Sources */,
+				8BA50E69240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8BA50E4A24097CF000138D11 /* MainView.swift in Sources */,
 				8B4F4BB023F5F445008446F4 /* dckxTests.swift in Sources */,
 				8B4F4BCC23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
@@ -633,6 +647,7 @@
 				8B23368423F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8B4F4BBB23F5F445008446F4 /* dckxUITests.swift in Sources */,
 				8B626D892402122C00972EED /* BrowserView.swift in Sources */,
+				8BA50E6E240A425500138D11 /* WebView.swift in Sources */,
 				8B4F4BCD23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
 				8B626D822401F8E600972EED /* Comic+CoreDataClass.swift in Sources */,
 				8B626D8D2402294000972EED /* SceneDelegate.swift in Sources */,
@@ -645,6 +660,7 @@
 				8BA50E4B24097CF000138D11 /* MainView.swift in Sources */,
 				8BA50E5E240A18C000138D11 /* WhatIf+CoreDataProperties.swift in Sources */,
 				8BA50E62240A2DA200138D11 /* Database.swift in Sources */,
+				8BA50E6A240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8B626D8A2402274A00972EED /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

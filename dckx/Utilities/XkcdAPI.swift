@@ -115,10 +115,17 @@ class XkcdAPI {
             }.done { whatIf in
                 var newData = [String: Any]()
                 
-                for (k,v) in data {
-                    newData[k] = v
+                if whatIf.title == data["title"] as? String {
+                    newData["num"] = whatIf.num
+                } else {
+                    
+                    
+                    for (k,v) in data {
+                        newData[k] = v
+                    }
+                    newData["num"] = Int32(whatIf.num + 1)
                 }
-                newData["num"] = Int32(whatIf.num + 1)
+                
                 seal.fulfill(newData)
             }.catch { error in
                 seal.reject(error)

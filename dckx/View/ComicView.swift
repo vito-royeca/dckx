@@ -18,7 +18,7 @@ struct ComicView: View {
     var body: some View {
         VStack {
             // Title
-            TitleView(title: fetcher.currentComic?.title ?? "Title")
+            ComicTitleView(title: fetcher.currentComic?.title ?? "Title")
             
             // Metadata
             MetaDataView(num: fetcher.currentComic?.num ?? 1,
@@ -40,8 +40,8 @@ struct ComicView: View {
             Spacer()
             
             // Navigation
-            NavigationBarView(fetcher: fetcher,
-                              resetAction: resetImageScale)
+            ComicNavigationBarView(fetcher: fetcher,
+                                   resetAction: resetImageScale)
         }
             .padding()
     }
@@ -62,7 +62,7 @@ struct ComicView_Previews: PreviewProvider {
     }
 }
 
-struct TitleView: View {
+struct ComicTitleView: View {
     var title: String
     
     var body: some View {
@@ -257,7 +257,7 @@ struct ShareSheet: UIViewControllerRepresentable {
     }
 }
 
-struct NavigationBarView: View {
+struct ComicNavigationBarView: View {
     @ObservedObject var fetcher: ComicFetcher
     var resetAction: () -> Void
 

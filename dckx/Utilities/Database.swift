@@ -11,13 +11,11 @@ import Kanna
 import PromiseKit
 
 class Database {
-    // MArk: Variables
-    private var database: Database!
     
     // MARK: Singleton
     static let sharedInstance = Database()
     private init() {
-        self.database = Database()
+        
     }
     
     // MARK: Custom methods
@@ -73,6 +71,7 @@ class Database {
                 
                 for div in document.xpath("//article[@class='entry']") {
                     if let title = div.xpath("a").first,
+                        let titleContent = title.content,
                         let question = div.xpath("p[@id='question']").first,
                         let questionContent = question.content,
                         let questioner = div.xpath("p[@id='attribute']").first,
@@ -82,6 +81,7 @@ class Database {
                         div.removeChild(question)
                         div.removeChild(questioner)
                         
+                        data["title"] = titleContent
                         data["question"] = questionContent
                         data["questioner"] = questionerContent.replacingOccurrences(of: "-", with: "").trimmingCharacters(in: CharacterSet.whitespaces)
                         
