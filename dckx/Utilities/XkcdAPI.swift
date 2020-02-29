@@ -61,7 +61,7 @@ class XkcdAPI {
                 }.then {
                     self.coreData.loadComic(num: num)
                 }.done { comic in
-                    print("Done fetching Comic #\(comic.num))")
+                    print("Done fetching Comic #\(comic.num)")
                     seal.fulfill(comic)
                 }.catch { error in
                     seal.reject(error)
@@ -92,7 +92,7 @@ class XkcdAPI {
             let url = "https://what-if.xkcd.com"
             
             firstly {
-                Database.sharedInstance.scrapeWhatIf(link: url)
+                createScapeWhatIfpromise(link: url)
             }.then { data in
                 self.generateNewWhatIf(data: data)
             }.then {  data in
@@ -104,6 +104,12 @@ class XkcdAPI {
             }.catch { error in
                 seal.reject(error)
             }
+        }
+    }
+    
+    private func createScapeWhatIfpromise(link: String) -> Promise<[String: Any]> {
+        return Promise { seal in
+            seal.fulfill(Database.sharedInstance.scrapeWhatIf(link: link))
         }
     }
     

@@ -33,7 +33,6 @@ struct WebView: UIViewRepresentable {
         webView.navigationDelegate = context.coordinator
         webView.allowsBackForwardNavigationGestures = true
         
-        
         if let link = link,
             let url = URL(string: link) {
             webView.load(URLRequest(url: url))

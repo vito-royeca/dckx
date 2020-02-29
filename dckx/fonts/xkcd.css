@@ -1,0 +1,73 @@
+
+@font-face {
+    font-family: xkcd-script;
+    src: url('xkcd-script.woff') format('woff');
+}
+
+@font-face {
+    font-family: xkcd;
+    src: url('xkcd-Regular.otf');
+}
+
+:root {
+  --background: #ffffff;
+  --color: #000000;
+}
+
+body {
+    font-family: xkcd;
+    line-height: 150%;
+    font-size: 26px;
+    color: var(--color);
+    background-color: var(--background);
+}
+
+.question {
+    font-family: xkcd-script;
+    line-height: 150%;
+    font-size: 28px;
+    font-style: italic;
+    color: var(--color);
+    background-color: var(--background);
+    
+}
+.questioner {
+    font-family: xkcd-script;
+    line-height: 150%;
+    font-size: 28px;
+    color: var(--color);
+    background-color: var(--background);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+      --background: #000000;
+      --color: #ffffff;
+    }
+    
+    body {
+        color: var(--color);
+        background-color: var(--background);
+    }
+    
+    .question {
+        color: var(--color);
+        background-color: var(--background);
+    }
+    .questioner {
+        color: var(--color);
+        background-color: var(--background);
+    }
+    
+    img {
+        background-color: var(--color);
+    }
+    
+    a:link {
+        color: #0096e2;
+    }
+    a:visited {
+        color: #9d57df;
+    }
+}
+

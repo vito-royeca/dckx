@@ -59,45 +59,43 @@ class Database {
     }
     
     // MARK: Helper methods
-    func scrapeWhatIf(link: String) -> Promise<[String: Any]> {
-        return Promise { seal in
-            do {
-                guard let url = URL(string: link) else {
-                    fatalError("Malformed url")
-                }
-                
-                var data = [String: Any]()
-                let document = try HTML(url: url, encoding: .utf8)
-                
-                for div in document.xpath("//article[@class='entry']") {
-                    if let title = div.xpath("a").first,
-                        let titleContent = title.content,
-                        let question = div.xpath("p[@id='question']").first,
-                        let questionContent = question.content,
-                        let questioner = div.xpath("p[@id='attribute']").first,
-                        let questionerContent = questioner.content {
-                        
-                        div.removeChild(title)
-                        div.removeChild(question)
-                        div.removeChild(questioner)
-                        
-                        data["title"] = titleContent
-                        data["question"] = questionContent
-                        data["questioner"] = questionerContent.replacingOccurrences(of: "-", with: "").trimmingCharacters(in: CharacterSet.whitespaces)
-                        
-                        if let innerHTML = div.innerHTML {
-                            let answer = innerHTML.replacingOccurrences(of: "\n", with: "")
-                                               .replacingOccurrences(of: "src=\"/imgs\"", with: "src=\"\(link)/imgs\"")
-                                               .trimmingCharacters(in: CharacterSet.whitespaces)
-                            data["answer"] = "<html>\(answer)</html>"
-                        }
+    func scrapeWhatIf(link: String) -> [String: Any] {
+        do {
+            guard let url = URL(string: link) else {
+                fatalError("Malformed url")
+            }
+            
+            var data = [String: Any]()
+            let document = try HTML(url: url, encoding: .utf8)
+            
+            for div in document.xpath("//article[@class='entry']") {
+                if let title = div.xpath("a").first,
+                    let titleContent = title.content,
+                    let question = div.xpath("p[@id='question']").first,
+                    let questionContent = question.content,
+                    let questioner = div.xpath("p[@id='attribute']").first,
+                    let questionerContent = questioner.content {
+                    
+                    div.removeChild(title)
+                    div.removeChild(question)
+                    div.removeChild(questioner)
+                    
+                    data["title"] = titleContent
+                    data["question"] = questionContent
+                    data["questioner"] = questionerContent.replacingOccurrences(of: "—", with: "").trimmingCharacters(in: CharacterSet.whitespaces)
+                    
+                    if let innerHTML = div.innerHTML {
+                        let answer = innerHTML.replacingOccurrences(of: "\n", with: "")
+                                           .replacingOccurrences(of: "/imgs", with: "https://what-if.xkcd.com/imgs")
+                                           .trimmingCharacters(in: CharacterSet.whitespaces)
+                        data["answer"] = answer
                     }
                 }
-                
-                seal.fulfill(data)
-            } catch {
-                seal.reject(error)
             }
+            
+            return data
+        } catch {
+            fatalError(error.localizedDescription)
         }
     }
 
@@ -159,27 +157,20 @@ class Database {
                             whatif["date"] = dateObject
                             
                             // scrape the actual contents
-                            firstly {
-                                scrapeWhatIf(link: actualLink)
-                            }.done { data in
-                                for (k,v) in data {
-                                    whatif[k] = v
-                                }
-                                
-                                print("Done fetching Whatif #\(num)")
-                                whatifs.append(whatif)
-                            }.catch { error in
-                                seal.reject(error)
+                            let data = scrapeWhatIf(link: actualLink)
+                            
+                            for (k,v) in data {
+                                whatif[k] = v
                             }
+                            print("Done fetching Whatif #\(num)")
+                            whatifs.append(whatif)
                         }
                     }
                 }
+                seal.fulfill(whatifs)
             } catch {
                 seal.reject(error)
             }
-            
-            
-            seal.fulfill(whatifs)
         }
     }
     

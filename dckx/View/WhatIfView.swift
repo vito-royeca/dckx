@@ -14,19 +14,20 @@ struct WhatIfView: View {
     
     var body: some View {
         VStack {
+            
             Text(fetcher.currentWhatIf?.title ?? "Title")
                 .font(.custom("xkcd-Script-Regular", size: 30))
-            Text(fetcher.currentWhatIf?.question ?? "Question")
-                .font(.custom("xkcd-Script-Regular", size: 15))
+
+            Spacer()
             
-            Text(fetcher.currentWhatIf?.questioner ?? "Questioner")
-                .font(.custom("xkcd-Script-Regular", size: 15))
+            WhatIfToolBarView(fetcher: fetcher)
             
             Spacer()
             
             WebView(link: nil,
-                    html: fetcher.currentWhatIf?.answer,
-                    baseURL: URL(string: "https://what-if.xkcd.com"))
+                    html: composeHTML(),
+                    baseURL: baseURL()/*URL(string: "https://what-if.xkcd.com")*/)
+            
             
             Spacer()
             
@@ -34,6 +35,31 @@ struct WhatIfView: View {
             WhatIfNavigationBarView(fetcher: fetcher)
         }
             .padding()
+    }
+    
+    func composeHTML() -> String {
+        let head = """
+            <head>
+                <link href="xkcd.css" rel="stylesheet">
+            </head>
+        """
+        let html = """
+            <html>
+            \(head)
+            <p class="question">\(fetcher.currentWhatIf?.question ?? "")
+            <p class="questioner" align="right">- \(fetcher.currentWhatIf?.questioner ?? "")
+                <p/> &nbsp;
+            \(fetcher.currentWhatIf?.answer ?? "")
+            </html>
+        """
+        
+        return html
+    }
+    
+    func baseURL() -> URL? {
+        let bundlePath = Bundle.main.bundlePath
+        let url = URL(fileURLWithPath: bundlePath)
+        return url
     }
 }
 
@@ -57,6 +83,47 @@ struct WhatIfTitleView: View {
                 .font(.custom("xkcd-Script-Regular", size: 30))
         }
             .padding(5)
+    }
+}
+
+struct WhatIfToolBarView: View {
+    @ObservedObject var fetcher: WhatIfFetcher
+    @State private var showingShare = false
+    @State private var showingList = false
+    
+    var body: some View {
+        HStack {
+            Button(action: {
+                self.fetcher.toggleIsFavorite()
+            }) {
+                Text("Bookmark \(fetcher.currentWhatIf?.isFavorite ?? false ? "-" : "+")")
+                    .customButton(isDisabled: false)
+            }
+            Spacer()
+            
+            Button(action: {
+                self.fetcher.toggleIsFavorite()
+            }) {
+                Text("Ask")
+                    .customButton(isDisabled: false)
+            }
+            Spacer()
+            
+            Button(action: {
+                self.fetcher.toggleIsFavorite()
+            }) {
+                Text("List")
+                    .customButton(isDisabled: false)
+            }
+            Spacer()
+            
+            Button(action: {
+                self.fetcher.toggleIsFavorite()
+            }) {
+                Text("Share")
+                    .customButton(isDisabled: false)
+            }
+        }
     }
 }
 
