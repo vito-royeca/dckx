@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import MessageUI
 import WebKit
 
 struct WhatIfView: View {
@@ -14,16 +15,20 @@ struct WhatIfView: View {
     
     var body: some View {
         VStack {
+            // Title
+            ComicTitleView(title: fetcher.currentWhatIf?.title ?? "Title")
             
-            Text(fetcher.currentWhatIf?.title ?? "Title")
-                .font(.custom("xkcd-Script-Regular", size: 30))
+            // Metadata
+            WhatIfMetaDataView(num: fetcher.currentWhatIf?.num ?? 1,
+                               date: fetcher.currentWhatIf?.date)
 
-            Spacer()
-            
+            // Toolbar
+            Divider()
             WhatIfToolBarView(fetcher: fetcher)
             
             Spacer()
             
+            // WebView
             WebView(link: nil,
                     html: composeHTML(),
                     baseURL: baseURL()/*URL(string: "https://what-if.xkcd.com")*/)
@@ -38,20 +43,19 @@ struct WhatIfView: View {
     }
     
     func composeHTML() -> String {
-        let head = """
+        let head =
+        """
             <head>
                 <link href="xkcd.css" rel="stylesheet">
             </head>
         """
-        let html = """
-            <html>
-            \(head)
-            <p class="question">\(fetcher.currentWhatIf?.question ?? "")
-            <p class="questioner" align="right">- \(fetcher.currentWhatIf?.questioner ?? "")
-                <p/> &nbsp;
-            \(fetcher.currentWhatIf?.answer ?? "")
-            </html>
-        """
+
+        var html = "<html>\(head)"
+        html += "<p class='question'>\(fetcher.currentWhatIf?.question ?? "")"
+        html += "<p class='questioner' align='right'>- \(fetcher.currentWhatIf?.questioner ?? "")"
+        html += "<p/> &nbsp;"
+        html += "\(fetcher.currentWhatIf?.answer ?? "")"
+        html += "</html>"
         
         return html
     }
@@ -86,8 +90,36 @@ struct WhatIfTitleView: View {
     }
 }
 
+struct WhatIfMetaDataView: View {
+    var num: Int32
+    var date: Date?
+    
+    var body: some View {
+        HStack {
+            Text("#\(String(num))")
+                .font(.custom("xkcd-Script-Regular", size: 15))
+            Spacer()
+            Text(dateString())
+                .font(.custom("xkcd-Script-Regular", size: 15))
+        }
+    }
+    
+    func dateString() -> String {
+        if let date = date {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+        
+            return formatter.string(from: date)
+        } else {
+            return "2020-01-02"
+        }
+    }
+}
+
 struct WhatIfToolBarView: View {
     @ObservedObject var fetcher: WhatIfFetcher
+    @State private var mailResult: Result<MFMailComposeResult, Error>? = nil
+    @State private var showingMail = false
     @State private var showingShare = false
     @State private var showingList = false
     
@@ -102,9 +134,20 @@ struct WhatIfToolBarView: View {
             Spacer()
             
             Button(action: {
-                self.fetcher.toggleIsFavorite()
+                self.showingMail.toggle()
             }) {
                 Text("Ask")
+                    .customButton(isDisabled: false)
+            }
+                .sheet(isPresented: $showingMail, content: {
+                    MailView(result: self.$mailResult)
+                })
+            Spacer()
+            
+            Button(action: {
+                self.fetcher.toggleIsFavorite()
+            }) {
+                Text("Share")
                     .customButton(isDisabled: false)
             }
             Spacer()
@@ -113,14 +156,6 @@ struct WhatIfToolBarView: View {
                 self.fetcher.toggleIsFavorite()
             }) {
                 Text("List")
-                    .customButton(isDisabled: false)
-            }
-            Spacer()
-            
-            Button(action: {
-                self.fetcher.toggleIsFavorite()
-            }) {
-                Text("Share")
                     .customButton(isDisabled: false)
             }
         }

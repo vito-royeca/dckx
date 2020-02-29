@@ -21,8 +21,8 @@ struct ComicView: View {
             ComicTitleView(title: fetcher.currentComic?.title ?? "Title")
             
             // Metadata
-            MetaDataView(num: fetcher.currentComic?.num ?? 1,
-                         date: fetcher.currentComic?.date)
+            ComicMetaDataView(num: fetcher.currentComic?.num ?? 1,
+                              date: fetcher.currentComic?.date)
             
             // Toolbar
             Divider()
@@ -74,7 +74,7 @@ struct ComicTitleView: View {
     }
 }
 
-struct MetaDataView: View {
+struct ComicMetaDataView: View {
     var num: Int32
     var date: Date?
     
@@ -117,7 +117,7 @@ struct ComicToolBarView: View {
             Spacer()
             
             Button(action: {
-                self.showingBrowser = true
+                self.showingBrowser.toggle()
             }) {
                 Text("Explain")
                     .customButton(isDisabled: false)
@@ -131,7 +131,7 @@ struct ComicToolBarView: View {
             Spacer()
             
             Button(action: {
-                self.showingShare = true
+                self.showingShare.toggle()
             }) {
                 Text("Share")
                     .customButton(isDisabled: false)
@@ -142,7 +142,7 @@ struct ComicToolBarView: View {
             Spacer()
             
             Button(action: {
-                self.showingList = true
+                self.showingList.toggle()
             }) {
                 Text("List")
                     .customButton(isDisabled: false)

@@ -68,6 +68,9 @@
 		8B658013240AE94400A245DC /* xkcd.css in Resources */ = {isa = PBXBuildFile; fileRef = 8B658012240AE94400A245DC /* xkcd.css */; };
 		8B658014240AE94400A245DC /* xkcd.css in Resources */ = {isa = PBXBuildFile; fileRef = 8B658012240AE94400A245DC /* xkcd.css */; };
 		8B658015240AE94400A245DC /* xkcd.css in Resources */ = {isa = PBXBuildFile; fileRef = 8B658012240AE94400A245DC /* xkcd.css */; };
+		8B658017240AFED800A245DC /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B658016240AFED800A245DC /* MailView.swift */; };
+		8B658018240AFED800A245DC /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B658016240AFED800A245DC /* MailView.swift */; };
+		8B658019240AFED800A245DC /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B658016240AFED800A245DC /* MailView.swift */; };
 		8BA50E4924097CF000138D11 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4824097CF000138D11 /* MainView.swift */; };
 		8BA50E4A24097CF000138D11 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4824097CF000138D11 /* MainView.swift */; };
 		8BA50E4B24097CF000138D11 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4824097CF000138D11 /* MainView.swift */; };
@@ -149,6 +152,7 @@
 		8B658003240AD42500A245DC /* xkcd-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "xkcd-Regular.otf"; sourceTree = "<group>"; };
 		8B65800E240AE46D00A245DC /* dckx.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = dckx.sqlite; sourceTree = "<group>"; };
 		8B658012240AE94400A245DC /* xkcd.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = xkcd.css; sourceTree = "<group>"; };
+		8B658016240AFED800A245DC /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		8BA50E4824097CF000138D11 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8BA50E4C24097D0200138D11 /* WhatIfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfView.swift; sourceTree = "<group>"; };
 		8BA50E5024098B5100138D11 /* 2020-02-28.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "2020-02-28.xcdatamodel"; sourceTree = "<group>"; };
@@ -292,10 +296,11 @@
 				8B626D862402122C00972EED /* BrowserView.swift */,
 				8B4F4B9C23F5F444008446F4 /* ComicView.swift */,
 				8B626D6D23FFB5BE00972EED /* ListView.swift */,
+				8B658016240AFED800A245DC /* MailView.swift */,
 				8BA50E4824097CF000138D11 /* MainView.swift */,
 				8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */,
-				8BA50E4C24097D0200138D11 /* WhatIfView.swift */,
 				8BA50E6B240A425500138D11 /* WebView.swift */,
+				8BA50E4C24097D0200138D11 /* WhatIfView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -638,6 +643,7 @@
 				8BA50E59240A18C000138D11 /* WhatIf+CoreDataClass.swift in Sources */,
 				8B4F4BCB23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
 				8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
+				8B658017240AFED800A245DC /* MailView.swift in Sources */,
 				8B626D872402122C00972EED /* BrowserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,6 +671,7 @@
 				8BA50E5A240A18C000138D11 /* WhatIf+CoreDataClass.swift in Sources */,
 				8B4F4BE123F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
+				8B658018240AFED800A245DC /* MailView.swift in Sources */,
 				8B626D712401B0A900972EED /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -688,6 +695,7 @@
 				8B4A1285240828FD00D4F8B2 /* SnapshotHelper.swift in Sources */,
 				8B23368023F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8B4F4BE223F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
+				8B658019240AFED800A245DC /* MailView.swift in Sources */,
 				8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
 				8BA50E4B24097CF000138D11 /* MainView.swift in Sources */,
 				8BA50E5E240A18C000138D11 /* WhatIf+CoreDataProperties.swift in Sources */,
