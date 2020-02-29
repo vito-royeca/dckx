@@ -22,9 +22,7 @@ struct ComicView: View {
             
             // Metadata
             MetaDataView(num: fetcher.currentComic?.num ?? 1,
-                         year: fetcher.currentComic?.year ?? 2020,
-                         month: fetcher.currentComic?.month ?? 1,
-                         day: fetcher.currentComic?.day ?? 1)
+                         date: fetcher.currentComic?.date)
             
             // Toolbar
             Divider()
@@ -78,17 +76,26 @@ struct TitleView: View {
 
 struct MetaDataView: View {
     var num: Int32
-    var year: Int16
-    var month: Int16
-    var day: Int16
+    var date: Date?
     
     var body: some View {
         HStack {
             Text("#\(String(num))")
                 .font(.custom("xkcd-Script-Regular", size: 15))
             Spacer()
-            Text("\(String(year))-\(month < 10 ? "0\(month)" : "\(month)")-\(day < 10 ? "0\(day)" : "\(day)")")
+            Text(dateString())
                 .font(.custom("xkcd-Script-Regular", size: 15))
+        }
+    }
+    
+    func dateString() -> String {
+        if let date = date {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+        
+            return formatter.string(from: date)
+        } else {
+            return "2020-01-02"
         }
     }
 }

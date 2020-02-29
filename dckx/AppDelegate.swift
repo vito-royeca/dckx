@@ -17,7 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         print("docsPath = \(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])")
-        XkcdAPI.sharedInstance.setupDatabase()
+        Database.sharedInstance.copyDatabase()
+//        Database.sharedInstance.createDatabase()
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 30)!],
+                                                         for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 30)!],
+                                                         for: .selected)
         
         // customize the navigation title
 //         let attrs = [

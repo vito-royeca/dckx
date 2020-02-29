@@ -1,5 +1,6 @@
 PODS:
   - FontAwesome.swift (1.8.3)
+  - Kanna (5.0.0)
   - MBProgressHUD (1.2.0)
   - PromiseKit (6.13.1):
     - PromiseKit/CorePromise (= 6.13.1)
@@ -19,6 +20,7 @@ PODS:
 
 DEPENDENCIES:
   - FontAwesome.swift
+  - Kanna
   - MBProgressHUD
   - PromiseKit
   - SDWebImageSwiftUI (>= 1.0.0-beta2)
@@ -27,6 +29,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - FontAwesome.swift
+    - Kanna
     - MBProgressHUD
     - PromiseKit
     - SDWebImage
@@ -35,12 +38,13 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   FontAwesome.swift: 2a3235131a6caffc6b2ccba318e94d793b2fd342
+  Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
   SDWebImageSwiftUI: f1065026e8d73bce63c11f6e314f9259dcabd322
   Sync: a6288926bee65a1ac3c72055446c558776af43f3
 
-PODFILE CHECKSUM: 4f95f76b3a88abafa02aa8aee9d0d8df67b7477d
+PODFILE CHECKSUM: aa9761884eff422ac31584277518716c396b80df
 
 COCOAPODS: 1.8.4

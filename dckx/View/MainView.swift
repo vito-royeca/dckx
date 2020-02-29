@@ -10,7 +10,16 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        TabView()
+        TabView{
+            ComicView()
+                .tabItem({
+                    Text("Comics")
+                })
+            WhatIfView()
+                .tabItem({
+                    Text("What If?")
+                })
+        }
     }
 }
 

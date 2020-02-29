@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8B4F4B9423F5F444008446F4"
-               BuildableName = "dckx : xkcd.app"
+               BuildableName = "dckx.app"
                BlueprintName = "dckx"
                ReferencedContainer = "container:dckx.xcodeproj">
             </BuildableReference>
@@ -69,7 +69,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B4F4B9423F5F444008446F4"
-            BuildableName = "dckx : xkcd.app"
+            BuildableName = "dckx.app"
             BlueprintName = "dckx"
             ReferencedContainer = "container:dckx.xcodeproj">
          </BuildableReference>
@@ -86,7 +86,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B4F4B9423F5F444008446F4"
-            BuildableName = "dckx : xkcd.app"
+            BuildableName = "dckx.app"
             BlueprintName = "dckx"
             ReferencedContainer = "container:dckx.xcodeproj">
          </BuildableReference>

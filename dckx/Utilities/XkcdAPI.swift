@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 import PromiseKit
 
 class XkcdAPI {
@@ -20,7 +21,7 @@ class XkcdAPI {
         self.coreData = coreData
     }
     
-    // MARK: API methods
+    // MARK: Comic API methods
     func fetchLastComic() -> Promise<Comic> {
         return Promise { seal in
             let url = "http://xkcd.com/info.0.json"
@@ -30,7 +31,7 @@ class XkcdAPI {
             }.compactMap { (data, result) in
                 try JSONSerialization.jsonObject(with: data) as? [String: Any]
             }.then { data in
-                self.coreData.saveComics(data: [data])
+                self.coreData.saveComic(data: data)
             }.then {
                 self.coreData.loadLastComic()
             }.done { comic in
@@ -56,10 +57,11 @@ class XkcdAPI {
                 }.compactMap { (data, result) in
                     try JSONSerialization.jsonObject(with: data) as? [String: Any]
                 }.then { data in
-                    self.coreData.saveComics(data: [data])
+                    self.coreData.saveComic(data: data)
                 }.then {
                     self.coreData.loadComic(num: num)
                 }.done { comic in
+                    print("Done fetching Comic #\(comic.num))")
                     seal.fulfill(comic)
                 }.catch { error in
                     seal.reject(error)
@@ -84,73 +86,96 @@ class XkcdAPI {
         }
     }
     
-    // MARK: Helper methods
-    func setupDatabase() {
-        guard let sourceUrl = Bundle.main.url(forResource: "dckx", withExtension: "sqlite"),
-            let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else {
-            return
-        }
-        let targetURL = URL(fileURLWithPath: "\(docsPath)/dckx.sqlite")
-
-        if !FileManager.default.fileExists(atPath: "\(docsPath)/dckx.sqlite") {
-            do {
-                try FileManager.default.copyItem(at: sourceUrl, to: targetURL)
-            } catch {
-                print(error)
+    // MARK: Whatif API methods
+    func fetchLastWhatIf() -> Promise<WhatIf> {
+        return Promise { seal in
+            let url = "https://what-if.xkcd.com"
+            
+            firstly {
+                Database.sharedInstance.scrapeWhatIf(link: url)
+            }.then { data in
+                self.generateNewWhatIf(data: data)
+            }.then {  data in
+                self.coreData.saveWhatIf(data: data)
+            }.then {
+                self.coreData.loadLastWhatIf()
+            }.done { whatIf in
+                seal.fulfill(whatIf)
+            }.catch { error in
+                seal.reject(error)
             }
         }
-        fetchAllComics()
     }
     
+    private func generateNewWhatIf(data: [String: Any]) -> Promise<[String: Any]> {
+        return Promise { seal in
+            
+            firstly {
+                self.coreData.loadLastWhatIf()
+            }.done { whatIf in
+                var newData = [String: Any]()
+                
+                for (k,v) in data {
+                    newData[k] = v
+                }
+                newData["num"] = Int32(whatIf.num + 1)
+                seal.fulfill(newData)
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
+    
+    func fetchWhatIf(num: Int32) -> Promise<WhatIf> {
+        return Promise { seal in
+            firstly {
+                self.coreData.loadWhatIf(num: num)
+            }.done { whatIf in
+                seal.fulfill(whatIf)
+            }.catch { error in
+                seal.reject(error)
+//                // comic not found locally, should fetch remotely
+//                let url = "http://xkcd.com/\(num)/info.0.json"
+//
+//                firstly {
+//                    self.fetchData(urlString: url)
+//                }.compactMap { (data, result) in
+//                    try JSONSerialization.jsonObject(with: data) as? [String: Any]
+//                }.then { data in
+//                    self.coreData.saveComic(data: data)
+//                }.then {
+//                    self.coreData.loadComic(num: num)
+//                }.done { comic in
+//                    print("Done fetching Comic #\(comic.num))")
+//                    seal.fulfill(comic)
+//                }.catch { error in
+//                    seal.reject(error)
+//                }
+            }
+        }
+    }
+    
+    func fetchRandomWhatIf() -> Promise<WhatIf> {
+        return Promise { seal in
+            firstly {
+                fetchLastWhatIf()
+            }.then { whatIf in
+                self.generateRandomNumber(max: Int(whatIf.num))
+            }.then { random in
+                self.fetchWhatIf(num: Int32(random))
+            }.done { whatIf in
+                seal.fulfill(whatIf)
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
+    
+    // MARK: Helper methods
     func explainURL(of comic: Comic) -> String {
         let baseUrl = "https://www.explainxkcd.com/wiki/index.php"
         let comicUrl = "\(comic.num):_\((comic.title ?? "").components(separatedBy: " ").joined(separator: "_"))"
         return "\(baseUrl)/\(comicUrl)"
-    }
-    
-    private func fetchAllComics() {
-        print("Start fetching all Comics. \(Date())")
-        
-        firstly {
-            fetchLastComic()
-        }.done { comic in
-            let completion = {
-                print("Done fetching all Comics. \(Date())")
-            }
-            var promises = [()->Promise<Comic>]()
-            
-            for i in stride(from: comic.num, to: 1, by: -1) {
-                // comic #404 is not found!
-                if i == 404 {
-                    continue
-                }
-                promises.append({
-                    return self.fetchComic(num: i)
-                    
-                })
-            }
-            self.execInSequence(promises: promises, completion: completion)
-        }.catch { error in
-            print(error)
-        }
-    }
-    
-    private func execInSequence(promises: [()->Promise<Comic>], completion: @escaping () -> Void) {
-        var promise = promises.first!()
-
-        for next in promises {
-            promise = promise.then { n -> Promise<Comic> in
-                if n.title == nil {
-                    print("Fetching... \(n.num): \(n.title ?? "")")
-                }
-                return next()
-            }
-        }
-        promise.done {_ in
-            completion()
-        }.catch { error in
-            print(error)
-        }
     }
     
     private func fetchData(urlString: String) -> Promise<(data: Data, response: URLResponse)> {

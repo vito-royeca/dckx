@@ -27,11 +27,11 @@ class ComicFetcher: ObservableObject {
         }
         currentComic.isFavorite = !currentComic.isFavorite
         
-        let data = [["num": currentComic.num,
-                     "isFavorite": currentComic.isFavorite]]
+        let data = ["num": currentComic.num,
+                    "isFavorite": currentComic.isFavorite] as [String : Any]
         
         firstly {
-            CoreData.sharedInstance.saveComics(data: data)
+            CoreData.sharedInstance.saveComic(data: data)
         }.done { comic in
             self.loadComic(num: currentComic.num)
         }.catch { error in
@@ -45,10 +45,10 @@ class ComicFetcher: ObservableObject {
         }
         
         if !currentComic.isRead {
-            let data = [["num": currentComic.num,
-                         "isRead": true]]
+            let data = ["num": currentComic.num,
+                        "isRead": true] as [String : Any]
             firstly {
-                CoreData.sharedInstance.saveComics(data: data)
+                CoreData.sharedInstance.saveComic(data: data)
             }.done {
                 
             }.catch { error in

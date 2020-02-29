@@ -18,16 +18,14 @@ extension Comic {
     }
 
     @NSManaged public var alt: String?
-    @NSManaged public var day: Int16
+    @NSManaged public var date: Date?
     @NSManaged public var img: String?
     @NSManaged public var link: String?
-    @NSManaged public var month: Int16
     @NSManaged public var news: String?
     @NSManaged public var num: Int32
     @NSManaged public var safeTitle: String?
     @NSManaged public var title: String?
     @NSManaged public var transcript: String?
-    @NSManaged public var year: Int16
     @NSManaged public var isFavorite: Bool
     @NSManaged public var isRead: Bool
 }
