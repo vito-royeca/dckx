@@ -20,10 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Database.sharedInstance.createDatabase()
         Database.sharedInstance.copyDatabase()
         
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 30)!],
-                                                         for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 30)!],
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 30)!,
+                                                          NSAttributedString.Key.foregroundColor: UIColor(named: "ButtonColor") ?? UIColor.blue],
                                                          for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 30)!,
+                                                          NSAttributedString.Key.foregroundColor: UIColor(named: "BackgroundColor") ?? UIColor.blue],
+                                                         for: .normal)
+        
+        
         return true
     }
 
