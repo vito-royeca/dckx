@@ -17,7 +17,7 @@ class WhatIfFetcher: ObservableObject {
     
     // MARK: Initializer
     init() {
-        loadLastWhatIf()
+        loadLast()
     }
 
     // MARK: Toolbar actions
@@ -33,7 +33,7 @@ class WhatIfFetcher: ObservableObject {
         firstly {
             CoreData.sharedInstance.saveWhatIf(data: data)
         }.done { comic in
-            self.loadWhatIf(num: currentWhatIf.num)
+            self.load(num: currentWhatIf.num)
         }.catch { error in
             print(error)
         }
@@ -58,18 +58,18 @@ class WhatIfFetcher: ObservableObject {
     }
     
     // MARK: Navigation actions
-    func loadFirstWhatIf() {
-        loadWhatIf(num: 1)
+    func loadFirst() {
+        load(num: 1)
     }
     
-    func loadPreviousWhatIf() {
+    func loadPrevious() {
         guard let currentWhatIf = currentWhatIf else {
             return
         }
-        loadWhatIf(num: currentWhatIf.num - 1)
+        load(num: currentWhatIf.num - 1)
     }
     
-    func loadRandomWhatIf() {
+    func loadRandom() {
         firstly {
             XkcdAPI.sharedInstance.fetchRandomWhatIf()
         }.done { whatIf in
@@ -80,14 +80,14 @@ class WhatIfFetcher: ObservableObject {
         }
     }
     
-    func loadNextWhatIf() {
+    func loadNext() {
         guard let currentWhatIf = currentWhatIf else {
             return
         }
-        loadWhatIf(num: currentWhatIf.num + 1)
+        load(num: currentWhatIf.num + 1)
     }
     
-    func loadLastWhatIf() {
+    func loadLast() {
         firstly {
             XkcdAPI.sharedInstance.fetchLastWhatIf()
         }.done { whatIf in
@@ -116,7 +116,7 @@ class WhatIfFetcher: ObservableObject {
     }
     
     // MARK: Helper methods
-    func loadWhatIf(num: Int32) {
+    func load(num: Int32) {
         firstly {
             XkcdAPI.sharedInstance.fetchWhatIf(num: num)
         }.done { whatIf in

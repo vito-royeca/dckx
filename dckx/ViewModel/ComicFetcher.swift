@@ -17,7 +17,7 @@ class ComicFetcher: ObservableObject {
     
     // MARK: Initializer
     init() {
-        loadLastComic()
+        loadLast()
     }
 
     // MARK: Toolbar actions
@@ -33,7 +33,7 @@ class ComicFetcher: ObservableObject {
         firstly {
             CoreData.sharedInstance.saveComic(data: data)
         }.done { comic in
-            self.loadComic(num: currentComic.num)
+            self.load(num: currentComic.num)
         }.catch { error in
             print(error)
         }
@@ -58,18 +58,18 @@ class ComicFetcher: ObservableObject {
     }
     
     // MARK: Navigation actions
-    func loadFirstComic() {
-        loadComic(num: 1)
+    func loadFirst() {
+        load(num: 1)
     }
     
-    func loadPreviousComic() {
+    func loadPrevious() {
         guard let currentComic = currentComic else {
             return
         }
-        loadComic(num: currentComic.num - 1)
+        load(num: currentComic.num - 1)
     }
     
-    func loadRandomComic() {
+    func loadRandom() {
         firstly {
             XkcdAPI.sharedInstance.fetchRandomComic()
         }.done { comic in
@@ -80,14 +80,14 @@ class ComicFetcher: ObservableObject {
         }
     }
     
-    func loadNextComic() {
+    func loadNext() {
         guard let currentComic = currentComic else {
             return
         }
-        loadComic(num: currentComic.num + 1)
+        load(num: currentComic.num + 1)
     }
     
-    func loadLastComic() {
+    func loadLast() {
         firstly {
             XkcdAPI.sharedInstance.fetchLastComic()
         }.done { comic in
@@ -116,7 +116,7 @@ class ComicFetcher: ObservableObject {
     }
     
     // MARK: Helper methods
-    func loadComic(num: Int32) {
+    func load(num: Int32) {
         firstly {
             XkcdAPI.sharedInstance.fetchComic(num: num)
         }.done { comic in

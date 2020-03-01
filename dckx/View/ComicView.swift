@@ -19,24 +19,24 @@ struct ComicView: View {
         VStack {
             // Title
             ComicTitleView(title: fetcher.currentComic?.title ?? "Title")
-            
+
             // Metadata
             ComicMetaDataView(num: fetcher.currentComic?.num ?? 1,
                               date: fetcher.currentComic?.date)
-            
+
             // Toolbar
             Divider()
             ComicToolBarView(fetcher: fetcher)
-            
+
             Spacer()
-            
+
             // Image
             ComicImageView(url: fetcher.currentComic?.img ?? "",
                            lastScaleValue: $lastScaleValue,
                            scale: $scale)
             Text("Alt Text: \(fetcher.currentComic?.alt ?? "")")
                 .font(.custom("xkcd-Script-Regular", size: 20))
-            
+
             Spacer()
             
             // Navigation
@@ -137,7 +137,8 @@ struct ComicToolBarView: View {
                     .customButton(isDisabled: false)
             }
                 .sheet(isPresented: $showingShare) {
-                    ShareSheet(comic: self.fetcher.currentComic)
+                    ShareSheetView(activityItems: self.activityItems(),
+                                   applicationActivities: nil)
                 }
             Spacer()
             
@@ -148,10 +149,16 @@ struct ComicToolBarView: View {
                     .customButton(isDisabled: false)
             }
                 .sheet(isPresented: $showingList, content: {
-                    ListView(fetcher: self.fetcher)
-                    .environment(\.managedObjectContext,  CoreData.sharedInstance.dataStack.viewContext)
+                    ComicListView(fetcher: self.fetcher)
+                        .environment(\.managedObjectContext,  CoreData.sharedInstance.dataStack.viewContext)
                 })
         }
+    }
+    
+    func activityItems() -> [Any] {
+        let item = ComicItemSource(comic: fetcher.currentComic)
+        
+        return [item, "\(item.title())\n\(item.author())"]
     }
 }
 
@@ -190,20 +197,27 @@ struct ComicImageView: View {
     }
 }
 
-struct ShareSheet: UIViewControllerRepresentable {
+class ComicItemSource: NSObject,  UIActivityItemSource {
     var comic: Comic?
     
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        return UIActivityViewController(activityItems: [ComicItemSource(title: title(),
-                                                                        author: author(),
-                                                                        image: image()),
-                                                        author(),
-                                                        title()],
-                                        applicationActivities: nil)
+    init(comic: Comic?) {
+        self.comic = comic
     }
-      
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
-        // nothing to do here
+
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return "\(title())\n\(author())"
+    }
+
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        return image()
+    }
+
+    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
+        return title()
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, thumbnailImageForActivityType activityType: UIActivity.ActivityType?, suggestedSize size: CGSize) -> UIImage? {
+        return image()
     }
     
     func title() -> String {
@@ -227,34 +241,6 @@ struct ShareSheet: UIViewControllerRepresentable {
         
         return nil
     }
-    
-    class ComicItemSource: NSObject,  UIActivityItemSource {
-        var title: String
-        var author: String
-        var image: UIImage?
-        
-        init(title: String, author: String, image: UIImage?) {
-            self.title = title
-            self.author = author
-            self.image = image
-        }
-        
-        func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-            return "\(title)\n\(author)"
-        }
-
-        func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-            return image
-        }
-
-        func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
-            return title
-        }
-        
-        func activityViewController(_ activityViewController: UIActivityViewController, thumbnailImageForActivityType activityType: UIActivity.ActivityType?, suggestedSize size: CGSize) -> UIImage? {
-            return image
-        }
-    }
 }
 
 struct ComicNavigationBarView: View {
@@ -264,7 +250,7 @@ struct ComicNavigationBarView: View {
     var body: some View {
         HStack {
             Button(action: {
-                self.fetcher.loadFirstComic()
+                self.fetcher.loadFirst()
                 self.resetAction()
             }) {
                 Text("|<")
@@ -274,7 +260,7 @@ struct ComicNavigationBarView: View {
             Spacer()
             
             Button(action: {
-                self.fetcher.loadPreviousComic()
+                self.fetcher.loadPrevious()
                 self.resetAction()
             }) {
                 Text("<Prev")
@@ -284,7 +270,7 @@ struct ComicNavigationBarView: View {
             Spacer()
             
             Button(action: {
-                self.fetcher.loadRandomComic()
+                self.fetcher.loadRandom()
                 self.resetAction()
             }) {
                 Text("Random")
@@ -293,7 +279,7 @@ struct ComicNavigationBarView: View {
             Spacer()
             
             Button(action: {
-                self.fetcher.loadNextComic()
+                self.fetcher.loadNext()
                 self.resetAction()
             }) {
                 Text("Next>")
@@ -303,14 +289,13 @@ struct ComicNavigationBarView: View {
             Spacer()
             
             Button(action: {
-                self.fetcher.loadLastComic()
+                self.fetcher.loadLast()
                 self.resetAction()
             }) {
                 Text(">|")
                     .customButton(isDisabled: !fetcher.canDoNext())
             }
             .disabled(!fetcher.canDoNext())
-            
         }
     }
 }

@@ -31,8 +31,7 @@ struct WhatIfView: View {
             // WebView
             WebView(link: nil,
                     html: composeHTML(),
-                    baseURL: baseURL()/*URL(string: "https://what-if.xkcd.com")*/)
-            
+                    baseURL: baseURL())
             
             Spacer()
             
@@ -145,11 +144,15 @@ struct WhatIfToolBarView: View {
             Spacer()
             
             Button(action: {
-                self.fetcher.toggleIsFavorite()
+                self.showingShare.toggle()
             }) {
                 Text("Share")
                     .customButton(isDisabled: false)
             }
+                .sheet(isPresented: $showingShare) {
+                    ShareSheetView(activityItems: self.activityItems(),
+                                   applicationActivities: nil)
+                }
             Spacer()
             
             Button(action: {
@@ -160,6 +163,18 @@ struct WhatIfToolBarView: View {
             }
         }
     }
+    
+    func activityItems() -> [Any] {
+        var items = [Any]()
+        
+        if let whatIf = fetcher.currentWhatIf,
+            let link = whatIf.link,
+            let url = URL(string: link) {
+            items.append(url)
+        }
+        
+        return items
+    }
 }
 
 struct WhatIfNavigationBarView: View {
@@ -168,7 +183,7 @@ struct WhatIfNavigationBarView: View {
     var body: some View {
         HStack {
             Button(action: {
-                self.fetcher.loadFirstWhatIf()
+                self.fetcher.loadFirst()
             }) {
                 Text("|<")
                     .customButton(isDisabled: !fetcher.canDoPrevious())
@@ -177,7 +192,7 @@ struct WhatIfNavigationBarView: View {
             Spacer()
             
             Button(action: {
-                self.fetcher.loadPreviousWhatIf()
+                self.fetcher.loadPrevious()
             }) {
                 Text("<Prev")
                     .customButton(isDisabled: !fetcher.canDoPrevious())
@@ -186,7 +201,7 @@ struct WhatIfNavigationBarView: View {
             Spacer()
             
             Button(action: {
-                self.fetcher.loadRandomWhatIf()
+                self.fetcher.loadRandom()
             }) {
                 Text("Random")
                     .customButton(isDisabled: false)
@@ -194,7 +209,7 @@ struct WhatIfNavigationBarView: View {
             Spacer()
             
             Button(action: {
-                self.fetcher.loadNextWhatIf()
+                self.fetcher.loadNext()
             }) {
                 Text("Next>")
                     .customButton(isDisabled: !fetcher.canDoNext())
@@ -203,7 +218,7 @@ struct WhatIfNavigationBarView: View {
             Spacer()
             
             Button(action: {
-                self.fetcher.loadLastWhatIf()
+                self.fetcher.loadLast()
             }) {
                 Text(">|")
                     .customButton(isDisabled: !fetcher.canDoNext())

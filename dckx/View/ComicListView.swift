@@ -1,5 +1,5 @@
 //
-//  ListView.swift
+//  ComicListView.swift
 //  dckx
 //
 //  Created by Vito Royeca on 2/21/20.
@@ -10,15 +10,13 @@ import SwiftUI
 import Combine
 import CoreData
 
-// MARK: ListView
-struct  ListView: View {
+// MARK: ComicListView
+struct  ComicListView: View {
     @Environment(\.managedObjectContext) var mainContext
     @Environment(\.presentationMode) var presentationMode
     @State var viewModel: ComicListViewModel = ComicListViewModel()
     @State var shouldAnimate: Bool = false
-    
     var fetcher: ComicFetcher
-
     
     init(fetcher: ComicFetcher) {
         self.fetcher = fetcher
@@ -36,23 +34,23 @@ struct  ListView: View {
             Spacer()
             
             ZStack(alignment: .center) {
-                ComicListView(viewModel: $viewModel,
-                              action: selectComic(num:))
+                ComicTextListView(viewModel: $viewModel,
+                                  action: selectComic(num:))
                 ActivityIndicator(shouldAnimate: $shouldAnimate)
             }
         }
     }
     
     func selectComic(num: Int32) {
-        fetcher.loadComic(num: num)
+        fetcher.load(num: num)
         presentationMode.wrappedValue.dismiss()
     }
 }
 
 // MARK: ListView_Previews
-struct ListView_Previews: PreviewProvider {
+struct ComicListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView(fetcher: ComicFetcher())
+        ComicListView(fetcher: ComicFetcher())
             .environment(\.managedObjectContext,  CoreData.sharedInstance.dataStack.viewContext)
     }
 }
@@ -193,7 +191,7 @@ struct SearchBar: UIViewRepresentable {
 }
 
 // MARK: ComicListView
-struct ComicListView: View {
+struct ComicTextListView: View {
     @Binding var viewModel: ComicListViewModel
     var action: (Int32) -> Void
     
