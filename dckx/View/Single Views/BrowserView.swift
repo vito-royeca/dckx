@@ -13,12 +13,15 @@ import WebKit
 struct BrowserView: View {
     var title: String
     var link: String
-    
+    var baseURL: URL?
+
     var body: some View {
         VStack {
             BrowserTitleView(title: title)
             Spacer()
-            WebView(link: link, html: nil, baseURL: nil)
+            WebView(link: link,
+                    html: nil,
+                    baseURL: baseURL)
         }
     }
 }

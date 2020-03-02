@@ -12,7 +12,6 @@ import CoreData
 
 // MARK: ComicListView
 struct  ComicListView: View {
-    @Environment(\.managedObjectContext) var mainContext
     @Environment(\.presentationMode) var presentationMode
     @State var viewModel: ComicListViewModel = ComicListViewModel()
     @State var shouldAnimate: Bool = false
@@ -51,7 +50,6 @@ struct  ComicListView: View {
 struct ComicListView_Previews: PreviewProvider {
     static var previews: some View {
         ComicListView(fetcher: ComicFetcher())
-            .environment(\.managedObjectContext,  CoreData.sharedInstance.dataStack.viewContext)
     }
 }
 

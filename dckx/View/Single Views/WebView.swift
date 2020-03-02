@@ -18,7 +18,7 @@ struct WebView: UIViewRepresentable {
     init (link: String?, html: String?, baseURL: URL?) {
         self.link = link
         self.html = html
-        self.baseURL = baseURL
+        self.baseURL = baseURL == nil ? bundleBaseURL() : baseURL
     }
     
     class Coordinator: NSObject, WKNavigationDelegate {
@@ -54,5 +54,11 @@ struct WebView: UIViewRepresentable {
     
     func makeCoordinator() -> WebView.Coordinator {
         Coordinator(self)
+    }
+    
+    func bundleBaseURL() -> URL? {
+        let bundlePath = Bundle.main.bundlePath
+        let url = URL(fileURLWithPath: bundlePath)
+        return url
     }
 }

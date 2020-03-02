@@ -31,12 +31,15 @@ struct ComicView: View {
             Spacer()
 
             // Image
+//            Image(uiImage: image())
+//                .resizable()
+//                .scaledToFit()
             ComicImageView(url: fetcher.currentComic?.img ?? "",
                            lastScaleValue: $lastScaleValue,
                            scale: $scale)
-            Text("Alt Text: \(fetcher.currentComic?.alt ?? "")")
-                .font(.custom("xkcd-Script-Regular", size: 20))
-
+//            Text("Alt Text: \(fetcher.currentComic?.alt ?? "")")
+//                .font(.custom("xkcd-Script-Regular", size: 20))
+            
             Spacer()
             
             // Navigation
@@ -44,6 +47,16 @@ struct ComicView: View {
                                    resetAction: resetImageScale)
         }
             .padding()
+    }
+    
+    func image() -> UIImage {
+        if let comic = fetcher.currentComic,
+            let img = comic.img,
+            let image = SDImageCache.shared.imageFromCache(forKey: img) {
+            return image
+        }
+        
+        return UIImage(named: "logo")!
     }
     
     func resetImageScale() {
@@ -125,7 +138,8 @@ struct ComicToolBarView: View {
                 .sheet(isPresented: $showingBrowser, content: {
                     self.fetcher.currentComic.map({
                         BrowserView(title: $0.title ?? "",
-                                    link: XkcdAPI.sharedInstance.explainURL(of: $0))
+                                    link: XkcdAPI.sharedInstance.explainURL(of: $0),
+                                    baseURL: URL(string: "https://xkcd.com/"))
                     })
                 })
             Spacer()
@@ -150,7 +164,6 @@ struct ComicToolBarView: View {
             }
                 .sheet(isPresented: $showingList, content: {
                     ComicListView(fetcher: self.fetcher)
-                        .environment(\.managedObjectContext,  CoreData.sharedInstance.dataStack.viewContext)
                 })
         }
     }
@@ -189,7 +202,7 @@ struct ComicImageView: View {
     
     func contentView() -> some View {
         HStack {
-            WebImage(url: URL(string:url), options: [.progressiveLoad])
+            WebImage(url: URL(string: url), options: [.progressiveLoad])
                 .resizable()
                 .indicator(.progress)
                 .scaledToFit()

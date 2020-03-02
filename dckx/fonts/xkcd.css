@@ -29,6 +29,16 @@ a:visited {
     color: #96A8C8;
 }
 
+.image.xkcd {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    margin-top: -250px; /* Half the height */
+    margin-left: -250px; /* Half the width */
+}
+
 .question {
     font-family: xkcd-script;
     line-height: 150%;
@@ -67,6 +77,17 @@ a:visited {
     }
     
     img {
+        background-color: var(--color);
+    }
+    
+    .image.xkcd {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 500px;
+        height: 500px;
+        margin-top: -250px; /* Half the height */
+        margin-left: -250px; /* Half the width */
         background-color: var(--color);
     }
 }

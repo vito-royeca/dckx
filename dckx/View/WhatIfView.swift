@@ -31,7 +31,7 @@ struct WhatIfView: View {
             // WebView
             WebView(link: nil,
                     html: composeHTML(),
-                    baseURL: baseURL())
+                    baseURL: nil)
             
             Spacer()
             
@@ -57,12 +57,6 @@ struct WhatIfView: View {
         html += "</html>"
         
         return html
-    }
-    
-    func baseURL() -> URL? {
-        let bundlePath = Bundle.main.bundlePath
-        let url = URL(fileURLWithPath: bundlePath)
-        return url
     }
 }
 
