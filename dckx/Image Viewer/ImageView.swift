@@ -12,7 +12,7 @@ import SwiftUI
 struct ImageData: Codable, Identifiable {
     let id = UUID()
     var imageName: String = "wrist"
-    var cornerRadius: Length = 0
+    var cornerRadius: CGFloat = 0
 }
 
 /// Sets a `PreferenceKey` for the `CGRect` of an `ImageView`.
@@ -48,9 +48,9 @@ struct ImageView: View {
     
     var imageName: String
     
-    var width: Length?
-    var height: Length?
-    var cornerRadius: Length = 0
+    var width: CGFloat?
+    var height: CGFloat?
+    var cornerRadius: CGFloat = 0
     
     var body: some View {
         Image(imageName)

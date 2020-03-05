@@ -99,12 +99,6 @@
 		8BA50E6C240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
 		8BA50E6D240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
 		8BA50E6E240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
-		8BF77498240D709A003FE4F3 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF77497240D709A003FE4F3 /* ImageView.swift */; };
-		8BF77499240D709A003FE4F3 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF77497240D709A003FE4F3 /* ImageView.swift */; };
-		8BF7749A240D709A003FE4F3 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF77497240D709A003FE4F3 /* ImageView.swift */; };
-		8BF7749C240D70B9003FE4F3 /* ImageViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF7749B240D70B9003FE4F3 /* ImageViewAnimator.swift */; };
-		8BF7749D240D70B9003FE4F3 /* ImageViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF7749B240D70B9003FE4F3 /* ImageViewAnimator.swift */; };
-		8BF7749E240D70B9003FE4F3 /* ImageViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF7749B240D70B9003FE4F3 /* ImageViewAnimator.swift */; };
 		8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
@@ -176,8 +170,6 @@
 		8BA50E5F240A2DA200138D11 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		8BA50E67240A384400138D11 /* WhatIfFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfFetcher.swift; sourceTree = "<group>"; };
 		8BA50E6B240A425500138D11 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		8BF77497240D709A003FE4F3 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
-		8BF7749B240D70B9003FE4F3 /* ImageViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewAnimator.swift; sourceTree = "<group>"; };
 		8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ResignKeyboardOnDragGesture.swift"; sourceTree = "<group>"; };
 		A1695073ECC186DD58075EB6 /* Pods-dckxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dckxTests.debug.xcconfig"; path = "Target Support Files/Pods-dckxTests/Pods-dckxTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A442C4117396A55D840D6677 /* Pods_dckx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dckx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -252,7 +244,6 @@
 		8B4F4B9723F5F444008446F4 /* dckx */ = {
 			isa = PBXGroup;
 			children = (
-				8BF77496240D7076003FE4F3 /* Image Viewer */,
 				8B4F4BE323F603B1008446F4 /* Utilities */,
 				8B4F4BC823F5F4A0008446F4 /* Model */,
 				8B4F4BCE23F5F637008446F4 /* View */,
@@ -364,15 +355,6 @@
 				8B65801F240B1C6E00A245DC /* NavigationBarView.swift */,
 			);
 			path = "Single Views";
-			sourceTree = "<group>";
-		};
-		8BF77496240D7076003FE4F3 /* Image Viewer */ = {
-			isa = PBXGroup;
-			children = (
-				8BF77497240D709A003FE4F3 /* ImageView.swift */,
-				8BF7749B240D70B9003FE4F3 /* ImageViewAnimator.swift */,
-			);
-			path = "Image Viewer";
 			sourceTree = "<group>";
 		};
 		921AF9F2F90CBC7F2736030E /* Frameworks */ = {
@@ -661,8 +643,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BF77498240D709A003FE4F3 /* ImageView.swift in Sources */,
-				8BF7749C240D70B9003FE4F3 /* ImageViewAnimator.swift in Sources */,
 				8B4F4B9923F5F444008446F4 /* AppDelegate.swift in Sources */,
 				8BA50E6C240A425500138D11 /* WebView.swift in Sources */,
 				8BA50E68240A384400138D11 /* WhatIfFetcher.swift in Sources */,
@@ -693,7 +673,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BF77499240D709A003FE4F3 /* ImageView.swift in Sources */,
 				8B23368323F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8BA50E6D240A425500138D11 /* WebView.swift in Sources */,
 				8BA50E69240A384400138D11 /* WhatIfFetcher.swift in Sources */,
@@ -716,7 +695,6 @@
 				8B658021240B1C6E00A245DC /* NavigationBarView.swift in Sources */,
 				8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
 				8B658018240AFED800A245DC /* MailView.swift in Sources */,
-				8BF7749D240D70B9003FE4F3 /* ImageViewAnimator.swift in Sources */,
 				8B626D712401B0A900972EED /* Constants.swift in Sources */,
 				8B658023240B218700A245DC /* SceneDelegate.swift in Sources */,
 			);
@@ -726,7 +704,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BF7749A240D709A003FE4F3 /* ImageView.swift in Sources */,
 				8B626D8B2402291A00972EED /* ComicView.swift in Sources */,
 				8BA50E5B240A18C000138D11 /* WhatIf+CoreDataClass.swift in Sources */,
 				8B658022240B1C6E00A245DC /* NavigationBarView.swift in Sources */,
@@ -749,7 +726,6 @@
 				8BA50E4B24097CF000138D11 /* MainView.swift in Sources */,
 				8BA50E5E240A18C000138D11 /* WhatIf+CoreDataProperties.swift in Sources */,
 				8BA50E62240A2DA200138D11 /* Database.swift in Sources */,
-				8BF7749E240D70B9003FE4F3 /* ImageViewAnimator.swift in Sources */,
 				8BA50E6A240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8B626D8A2402274A00972EED /* Constants.swift in Sources */,
 			);
