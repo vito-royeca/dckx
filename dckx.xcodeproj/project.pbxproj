@@ -247,14 +247,13 @@
 				8BE1EC162416C2F9008B2D8C /* What If */,
 				8BE1EC152416C2F0008B2D8C /* Comics */,
 				8B4F4BE323F603B1008446F4 /* Utilities */,
-				8B4F4BC823F5F4A0008446F4 /* Model */,
 				8B4F4BCE23F5F637008446F4 /* View */,
 				8B4F4B9823F5F444008446F4 /* AppDelegate.swift */,
 				8B4F4B9E23F5F445008446F4 /* Assets.xcassets */,
 				8B4F4BA323F5F445008446F4 /* LaunchScreen.storyboard */,
 				8B4F4BA623F5F445008446F4 /* Info.plist */,
 				8B4F4BA023F5F445008446F4 /* Preview Content */,
-				8B626D722401BB1D00972EED /* fonts */,
+				8B626D722401BB1D00972EED /* resources */,
 			);
 			path = dckx;
 			sourceTree = "<group>";
@@ -287,19 +286,6 @@
 			path = dckxUITests;
 			sourceTree = "<group>";
 		};
-		8B4F4BC823F5F4A0008446F4 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				8B65800E240AE46D00A245DC /* dckx.sqlite */,
-				8B626D7E2401F8E600972EED /* Comic+CoreDataClass.swift */,
-				8B626D7F2401F8E600972EED /* Comic+CoreDataProperties.swift */,
-				8B4F4BC923F5F551008446F4 /* dckx.xcdatamodeld */,
-				8BA50E57240A18C000138D11 /* WhatIf+CoreDataClass.swift */,
-				8BA50E58240A18C000138D11 /* WhatIf+CoreDataProperties.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		8B4F4BCE23F5F637008446F4 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,24 +312,28 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		8B626D722401BB1D00972EED /* fonts */ = {
+		8B626D722401BB1D00972EED /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				8B65800E240AE46D00A245DC /* dckx.sqlite */,
+				8B4F4BC923F5F551008446F4 /* dckx.xcdatamodeld */,
 				8B658003240AD42500A245DC /* xkcd-Regular.otf */,
 				8B658002240AD42500A245DC /* xkcd.otf */,
 				8B657FFE240ACCE200A245DC /* xkcd-script.woff */,
 				8B626D732401BB6800972EED /* xkcd-script.ttf */,
 				8B658012240AE94400A245DC /* xkcd.css */,
 			);
-			path = fonts;
+			path = resources;
 			sourceTree = "<group>";
 		};
 		8BE1EC152416C2F0008B2D8C /* Comics */ = {
 			isa = PBXGroup;
 			children = (
-				8B4F4B9C23F5F444008446F4 /* ComicView.swift */,
-				8B626D6D23FFB5BE00972EED /* ComicListView.swift */,
+				8B626D7E2401F8E600972EED /* Comic+CoreDataClass.swift */,
+				8B626D7F2401F8E600972EED /* Comic+CoreDataProperties.swift */,
 				8B23368123F6683C00C88BA1 /* ComicFetcher.swift */,
+				8B626D6D23FFB5BE00972EED /* ComicListView.swift */,
+				8B4F4B9C23F5F444008446F4 /* ComicView.swift */,
 			);
 			path = Comics;
 			sourceTree = "<group>";
@@ -351,8 +341,10 @@
 		8BE1EC162416C2F9008B2D8C /* What If */ = {
 			isa = PBXGroup;
 			children = (
-				8BA50E4C24097D0200138D11 /* WhatIfView.swift */,
+				8BA50E57240A18C000138D11 /* WhatIf+CoreDataClass.swift */,
+				8BA50E58240A18C000138D11 /* WhatIf+CoreDataProperties.swift */,
 				8BA50E67240A384400138D11 /* WhatIfFetcher.swift */,
+				8BA50E4C24097D0200138D11 /* WhatIfView.swift */,
 			);
 			path = "What If";
 			sourceTree = "<group>";
