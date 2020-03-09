@@ -14,8 +14,6 @@ PODS:
   - SDWebImage (5.6.0):
     - SDWebImage/Core (= 5.6.0)
   - SDWebImage/Core (5.6.0)
-  - SDWebImageSwiftUI (1.0.0):
-    - SDWebImage (~> 5.3)
   - Sync (6.0.0)
 
 DEPENDENCIES:
@@ -23,7 +21,7 @@ DEPENDENCIES:
   - Kanna
   - MBProgressHUD
   - PromiseKit
-  - SDWebImageSwiftUI (>= 1.0.0-beta2)
+  - SDWebImage
   - Sync
 
 SPEC REPOS:
@@ -33,7 +31,6 @@ SPEC REPOS:
     - MBProgressHUD
     - PromiseKit
     - SDWebImage
-    - SDWebImageSwiftUI
     - Sync
 
 SPEC CHECKSUMS:
@@ -42,9 +39,8 @@ SPEC CHECKSUMS:
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   SDWebImage: 21b19f56b4226cdfe3aefe4e6848dc43ed129a86
-  SDWebImageSwiftUI: 52dabce85cfc575e08ca4ce26bed1334159dbc2b
   Sync: a6288926bee65a1ac3c72055446c558776af43f3
 
-PODFILE CHECKSUM: aa9761884eff422ac31584277518716c396b80df
+PODFILE CHECKSUM: b415b218c8424e78d9a796f4df26048482e93d11
 
 COCOAPODS: 1.8.4

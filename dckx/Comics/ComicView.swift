@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Combine
-import SDWebImageSwiftUI
+import SDWebImage
 
 struct ComicView: View {
     @ObservedObject var fetcher = ComicFetcher()
@@ -32,10 +32,6 @@ struct ComicView: View {
 
             Spacer()
 
-            // Image
-//            ComicImageView(url: fetcher.currentComic?.img ?? "",
-//                           lastScaleValue: $lastScaleValue,
-//                           scale: $scale)
             WebView(link: nil,
                     html: composeHTML(),
                     baseURL: nil)
@@ -208,41 +204,6 @@ struct ComicToolBarView: View {
         let item = ComicItemSource(comic: fetcher.currentComic)
         
         return [item, "\(item.title())\n\(item.author())"]
-    }
-}
-
-struct ComicImageView: View {
-    var url: String
-    @Binding var lastScaleValue: CGFloat
-    @Binding var scale: CGFloat
-    
-    var body: some View {
-        VStack {
-            zoomView()
-        }
-    }
-    
-    func zoomView() -> some View {
-        return contentView()
-            .scaleEffect(self.scale)
-            .gesture(MagnificationGesture(minimumScaleDelta: 0.1)
-                .onChanged { value in
-                    let delta = value / self.lastScaleValue
-                    self.lastScaleValue = value
-                    let newScale = self.scale * delta
-                    self.scale = min(max(newScale, 0.5), 2)
-                }.onEnded { value in
-                    self.lastScaleValue = 1.0
-                })
-    }
-    
-    func contentView() -> some View {
-        HStack {
-            WebImage(url: URL(string: url), options: [.progressiveLoad])
-                .resizable()
-                .indicator(.progress)
-                .scaledToFit()
-        }
     }
 }
 

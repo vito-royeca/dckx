@@ -10,6 +10,7 @@ import Foundation
 import Combine
 import SwiftUI
 import PromiseKit
+import SDWebImage
 
 class ComicFetcher: ObservableObject {
     @Published var currentComic: Comic?
@@ -124,6 +125,13 @@ class ComicFetcher: ObservableObject {
             self.toggleIsRead()
         }.catch { error in
             print(error)
+        }
+    }
+    
+    func fetchImage(urlString: String) -> Promise<Void> {
+        return Promise { seal in
+            
+            seal.fulfill(())
         }
     }
 }
