@@ -14,6 +14,7 @@ struct ComicView: View {
     @ObservedObject var fetcher = ComicFetcher()
     @State var lastScaleValue: CGFloat = 1.0
     @State var scale: CGFloat = 1.0
+    @State var showingAltText = false
     
     var body: some View {
         VStack {
@@ -26,19 +27,18 @@ struct ComicView: View {
 
             // Toolbar
             Divider()
-            ComicToolBarView(fetcher: fetcher)
+            ComicToolBarView(fetcher: fetcher,
+                             showingAltText: $showingAltText)
 
             Spacer()
 
             // Image
-//            Image(uiImage: image())
-//                .resizable()
-//                .scaledToFit()
-            ComicImageView(url: fetcher.currentComic?.img ?? "",
-                           lastScaleValue: $lastScaleValue,
-                           scale: $scale)
-//            Text("Alt Text: \(fetcher.currentComic?.alt ?? "")")
-//                .font(.custom("xkcd-Script-Regular", size: 20))
+//            ComicImageView(url: fetcher.currentComic?.img ?? "",
+//                           lastScaleValue: $lastScaleValue,
+//                           scale: $scale)
+            WebView(link: nil,
+                    html: composeHTML(),
+                    baseURL: nil)
             
             Spacer()
             
@@ -49,6 +49,38 @@ struct ComicView: View {
             .padding()
     }
     
+    func resetImageScale() {
+        lastScaleValue = 1.0
+        scale = 1.0
+    }
+    
+    func composeHTML() -> String {
+        let head =
+        """
+            <head>
+                <link href="xkcd.css" rel="stylesheet">
+            </head>
+        """
+        guard let comic = fetcher.currentComic,
+            let img = comic.img,
+            let imageUrl = SDImageCache.shared.cachePath(forKey: img) else {
+            return ""
+        }
+        
+        var html = "<html>\(head)<body>"
+        html += "<table id='wrapper'>"
+        html += "<tr><td>"
+        if showingAltText {
+            html += "<p class='altText'>\(comic.alt ?? "&nbsp;")</p>"
+        }
+        html += "<img src='\(imageUrl)' />"
+        html += "</td></tr>"
+        html += "</table>"
+        html += "</body></html>"
+        
+        return html
+    }
+    
     func image() -> UIImage {
         if let comic = fetcher.currentComic,
             let img = comic.img,
@@ -57,11 +89,6 @@ struct ComicView: View {
         }
         
         return UIImage(named: "logo")!
-    }
-    
-    func resetImageScale() {
-        lastScaleValue = 1.0
-        scale = 1.0
     }
 }
 
@@ -115,6 +142,7 @@ struct ComicMetaDataView: View {
 
 struct ComicToolBarView: View {
     @ObservedObject var fetcher: ComicFetcher
+    @Binding var showingAltText: Bool
     @State private var showingBrowser = false
     @State private var showingShare = false
     @State private var showingList = false
@@ -142,6 +170,14 @@ struct ComicToolBarView: View {
                                     baseURL: URL(string: "https://xkcd.com/"))
                     })
                 })
+            Spacer()
+            
+            Button(action: {
+                self.showingAltText.toggle()
+            }) {
+                Text("Alt Text")
+                    .customButton(isDisabled: false)
+            }
             Spacer()
             
             Button(action: {
