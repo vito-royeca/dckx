@@ -244,10 +244,11 @@
 		8B4F4B9723F5F444008446F4 /* dckx */ = {
 			isa = PBXGroup;
 			children = (
+				8BE1EC162416C2F9008B2D8C /* What If */,
+				8BE1EC152416C2F0008B2D8C /* Comics */,
 				8B4F4BE323F603B1008446F4 /* Utilities */,
 				8B4F4BC823F5F4A0008446F4 /* Model */,
 				8B4F4BCE23F5F637008446F4 /* View */,
-				8B626D922403172100972EED /* ViewModel */,
 				8B4F4B9823F5F444008446F4 /* AppDelegate.swift */,
 				8B4F4B9E23F5F445008446F4 /* Assets.xcassets */,
 				8B4F4BA323F5F445008446F4 /* LaunchScreen.storyboard */,
@@ -302,12 +303,13 @@
 		8B4F4BCE23F5F637008446F4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8B65801A240B127800A245DC /* Single Views */,
-				8B4F4B9C23F5F444008446F4 /* ComicView.swift */,
-				8B626D6D23FFB5BE00972EED /* ComicListView.swift */,
+				8B626D862402122C00972EED /* BrowserView.swift */,
+				8B658016240AFED800A245DC /* MailView.swift */,
+				8BA50E6B240A425500138D11 /* WebView.swift */,
+				8B65801B240B12E100A245DC /* ShareSheetView.swift */,
+				8B65801F240B1C6E00A245DC /* NavigationBarView.swift */,
 				8BA50E4824097CF000138D11 /* MainView.swift */,
 				8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */,
-				8BA50E4C24097D0200138D11 /* WhatIfView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -336,25 +338,23 @@
 			path = fonts;
 			sourceTree = "<group>";
 		};
-		8B626D922403172100972EED /* ViewModel */ = {
+		8BE1EC152416C2F0008B2D8C /* Comics */ = {
 			isa = PBXGroup;
 			children = (
+				8B4F4B9C23F5F444008446F4 /* ComicView.swift */,
+				8B626D6D23FFB5BE00972EED /* ComicListView.swift */,
 				8B23368123F6683C00C88BA1 /* ComicFetcher.swift */,
-				8BA50E67240A384400138D11 /* WhatIfFetcher.swift */,
 			);
-			path = ViewModel;
+			path = Comics;
 			sourceTree = "<group>";
 		};
-		8B65801A240B127800A245DC /* Single Views */ = {
+		8BE1EC162416C2F9008B2D8C /* What If */ = {
 			isa = PBXGroup;
 			children = (
-				8B626D862402122C00972EED /* BrowserView.swift */,
-				8B658016240AFED800A245DC /* MailView.swift */,
-				8BA50E6B240A425500138D11 /* WebView.swift */,
-				8B65801B240B12E100A245DC /* ShareSheetView.swift */,
-				8B65801F240B1C6E00A245DC /* NavigationBarView.swift */,
+				8BA50E4C24097D0200138D11 /* WhatIfView.swift */,
+				8BA50E67240A384400138D11 /* WhatIfFetcher.swift */,
 			);
-			path = "Single Views";
+			path = "What If";
 			sourceTree = "<group>";
 		};
 		921AF9F2F90CBC7F2736030E /* Frameworks */ = {

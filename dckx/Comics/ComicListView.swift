@@ -222,7 +222,8 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
     
     init(query: String, scopeIndex: Int) {
         super.init()
-        let fetchRequest = createFetchRequest(query: query, scopeIndex: scopeIndex)
+        let fetchRequest = createFetchRequest(query: query,
+                                              scopeIndex: scopeIndex)
         
         controller = NSFetchedResultsController<Comic>(fetchRequest: fetchRequest,
                                                        managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
