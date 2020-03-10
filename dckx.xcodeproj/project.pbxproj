@@ -15,6 +15,12 @@
 		8B23368223F6683C00C88BA1 /* ComicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23368123F6683C00C88BA1 /* ComicFetcher.swift */; };
 		8B23368323F6683C00C88BA1 /* ComicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23368123F6683C00C88BA1 /* ComicFetcher.swift */; };
 		8B23368423F6683C00C88BA1 /* ComicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23368123F6683C00C88BA1 /* ComicFetcher.swift */; };
+		8B30499F2418263E00D549DE /* WhatIfListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B30499E2418263E00D549DE /* WhatIfListView.swift */; };
+		8B3049A02418263E00D549DE /* WhatIfListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B30499E2418263E00D549DE /* WhatIfListView.swift */; };
+		8B3049A12418263E00D549DE /* WhatIfListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B30499E2418263E00D549DE /* WhatIfListView.swift */; };
+		8B3049A3241830CC00D549DE /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3049A2241830CC00D549DE /* ActivityIndicatorView.swift */; };
+		8B3049A4241830CC00D549DE /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3049A2241830CC00D549DE /* ActivityIndicatorView.swift */; };
+		8B3049A5241830CC00D549DE /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3049A2241830CC00D549DE /* ActivityIndicatorView.swift */; };
 		8B4A1285240828FD00D4F8B2 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A1284240828FC00D4F8B2 /* SnapshotHelper.swift */; };
 		8B4F4B9923F5F444008446F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9823F5F444008446F4 /* AppDelegate.swift */; };
 		8B4F4B9B23F5F444008446F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */; };
@@ -129,6 +135,8 @@
 		56149F6DEDDF1BA8A1D64427 /* Pods_dckxUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dckxUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B23367D23F646A700C88BA1 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		8B23368123F6683C00C88BA1 /* ComicFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicFetcher.swift; sourceTree = "<group>"; };
+		8B30499E2418263E00D549DE /* WhatIfListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfListView.swift; sourceTree = "<group>"; };
+		8B3049A2241830CC00D549DE /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		8B4A1284240828FC00D4F8B2 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		8B4F4B9523F5F444008446F4 /* dckx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dckx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B4F4B9823F5F444008446F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -289,13 +297,14 @@
 		8B4F4BCE23F5F637008446F4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8B3049A2241830CC00D549DE /* ActivityIndicatorView.swift */,
 				8B626D862402122C00972EED /* BrowserView.swift */,
 				8B658016240AFED800A245DC /* MailView.swift */,
-				8BA50E6B240A425500138D11 /* WebView.swift */,
-				8B65801B240B12E100A245DC /* ShareSheetView.swift */,
-				8B65801F240B1C6E00A245DC /* NavigationBarView.swift */,
 				8BA50E4824097CF000138D11 /* MainView.swift */,
+				8B65801F240B1C6E00A245DC /* NavigationBarView.swift */,
 				8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */,
+				8B65801B240B12E100A245DC /* ShareSheetView.swift */,
+				8BA50E6B240A425500138D11 /* WebView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -345,6 +354,7 @@
 				8BA50E58240A18C000138D11 /* WhatIf+CoreDataProperties.swift */,
 				8BA50E67240A384400138D11 /* WhatIfFetcher.swift */,
 				8BA50E4C24097D0200138D11 /* WhatIfView.swift */,
+				8B30499E2418263E00D549DE /* WhatIfListView.swift */,
 			);
 			path = "What If";
 			sourceTree = "<group>";
@@ -636,6 +646,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B4F4B9923F5F444008446F4 /* AppDelegate.swift in Sources */,
+				8B30499F2418263E00D549DE /* WhatIfListView.swift in Sources */,
 				8BA50E6C240A425500138D11 /* WebView.swift in Sources */,
 				8BA50E68240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8BA50E4924097CF000138D11 /* MainView.swift in Sources */,
@@ -650,6 +661,7 @@
 				8B23367E23F646A700C88BA1 /* CoreData.swift in Sources */,
 				8B23368223F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8B626D6E23FFB5BE00972EED /* ComicListView.swift in Sources */,
+				8B3049A3241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
 				8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8BA50E4D24097D0200138D11 /* WhatIfView.swift in Sources */,
 				8BA50E59240A18C000138D11 /* WhatIf+CoreDataClass.swift in Sources */,
@@ -669,6 +681,7 @@
 				8BA50E6D240A425500138D11 /* WebView.swift in Sources */,
 				8BA50E69240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8BA50E4A24097CF000138D11 /* MainView.swift in Sources */,
+				8B3049A4241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
 				8B4F4BB023F5F445008446F4 /* dckxTests.swift in Sources */,
 				8B4F4BCC23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
 				8B65801D240B12E100A245DC /* ShareSheetView.swift in Sources */,
@@ -679,6 +692,7 @@
 				8B626D8C2402291B00972EED /* ComicView.swift in Sources */,
 				8B626D842401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */,
 				8B626D792401EB1200972EED /* XkcdAPITests.swift in Sources */,
+				8B3049A02418263E00D549DE /* WhatIfListView.swift in Sources */,
 				8B626DD72403BBCB00972EED /* ComicListView.swift in Sources */,
 				8B23367F23F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8BA50E4E24097D0200138D11 /* WhatIfView.swift in Sources */,
@@ -700,6 +714,7 @@
 				8BA50E5B240A18C000138D11 /* WhatIf+CoreDataClass.swift in Sources */,
 				8B658022240B1C6E00A245DC /* NavigationBarView.swift in Sources */,
 				8B65801E240B12E100A245DC /* ShareSheetView.swift in Sources */,
+				8B3049A5241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
 				8B626D852401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */,
 				8B23368423F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8B4F4BBB23F5F445008446F4 /* dckxUITests.swift in Sources */,
@@ -710,6 +725,7 @@
 				8B626D8D2402294000972EED /* SceneDelegate.swift in Sources */,
 				8B626D972403982D00972EED /* ComicListView.swift in Sources */,
 				8BA50E4F24097D0200138D11 /* WhatIfView.swift in Sources */,
+				8B3049A12418263E00D549DE /* WhatIfListView.swift in Sources */,
 				8B4A1285240828FD00D4F8B2 /* SnapshotHelper.swift in Sources */,
 				8B23368023F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8B4F4BE223F5F9D5008446F4 /* XkcdAPI.swift in Sources */,

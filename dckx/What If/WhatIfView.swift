@@ -132,11 +132,14 @@ struct WhatIfToolBarView: View {
             Spacer()
             
             Button(action: {
-                self.fetcher.toggleIsFavorite()
+                self.showingList.toggle()
             }) {
                 Text("LIST")
                     .customButton(isDisabled: false)
             }
+                .sheet(isPresented: $showingList, content: {
+                    WhatIfListView(fetcher: self.fetcher)
+                })
         }
     }
     

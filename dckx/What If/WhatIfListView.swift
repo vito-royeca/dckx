@@ -1,67 +1,67 @@
 //
-//  ComicListView.swift
+//  WhatIfListView.swift
 //  dckx
 //
-//  Created by Vito Royeca on 2/21/20.
+//  Created by Vito Royeca on 3/10/20.
 //  Copyright © 2020 Vito Royeca. All rights reserved.
 //
 
 import SwiftUI
 import Combine
 import CoreData
+import PromiseKit
+import SDWebImage
 
-// MARK: ComicListView
-struct  ComicListView: View {
+struct WhatIfListView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State var viewModel: ComicListViewModel = ComicListViewModel()
+    @State var viewModel: WhatIfListViewModel = WhatIfListViewModel()
     @State var shouldAnimate: Bool = false
-    var fetcher: ComicFetcher
+    var fetcher: WhatIfFetcher
     
-    init(fetcher: ComicFetcher) {
+    init(fetcher: WhatIfFetcher) {
         self.fetcher = fetcher
     }
     
     var body: some View {
         VStack {
-            ComicListTitleView(presentationMode: presentationMode)
+            WhatIfListTitleView(presentationMode: presentationMode)
             
             Spacer()
             
-            ComicSearchBar(viewModel: $viewModel,
-                           shouldAnimate: $shouldAnimate)
+            WhatIfSearchBar(viewModel: $viewModel,
+                            shouldAnimate: $shouldAnimate)
             
             Spacer()
             
             ZStack(alignment: .center) {
-                ComicTextListView(viewModel: $viewModel,
-                                  action: selectComic(num:))
+                WhatIfTextListView(viewModel: $viewModel,
+                                   action: selectWhatIf(num:))
                 ActivityIndicatorView(shouldAnimate: $shouldAnimate)
             }
         }
     }
     
-    func selectComic(num: Int32) {
+    func selectWhatIf(num: Int32) {
         fetcher.load(num: num)
         presentationMode.wrappedValue.dismiss()
     }
 }
 
-// MARK: ListView_Previews
-struct ComicListView_Previews: PreviewProvider {
+struct WhatIfListView_Previews: PreviewProvider {
     static var previews: some View {
-        ComicListView(fetcher: ComicFetcher())
+        WhatIfListView(fetcher: WhatIfFetcher())
     }
 }
 
-// MARK: ListTitleView
-struct ComicListTitleView: View {
+// MARK: WhatIfListTitleView
+struct WhatIfListTitleView: View {
     var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         HStack {
             Spacer()
             
-            Text("Comics List")
+            Text("What If? List")
                 .font(.custom("xkcd-Script-Regular", size: 20))
             
             Spacer()
@@ -77,14 +77,14 @@ struct ComicListTitleView: View {
     }
 }
 
-// MARK: ComicSearchBar
-struct ComicSearchBar: UIViewRepresentable {
-    @Binding var viewModel: ComicListViewModel
+// MARK: WhatIfSearchBar
+struct WhatIfSearchBar: UIViewRepresentable {
+    @Binding var viewModel: WhatIfListViewModel
     @Binding var shouldAnimate: Bool
     @State var query: String = ""
     @State var scopeIndex: Int = 0
     
-    init(viewModel: Binding<ComicListViewModel>,
+    init(viewModel: Binding<WhatIfListViewModel>,
         shouldAnimate: Binding<Bool>) {
         _viewModel = viewModel
         _shouldAnimate = shouldAnimate
@@ -93,12 +93,12 @@ struct ComicSearchBar: UIViewRepresentable {
     class Coordinator: NSObject, UISearchBarDelegate {
         @Binding var query: String
         @Binding var scopeIndex: Int
-        @Binding var viewModel: ComicListViewModel
+        @Binding var viewModel: WhatIfListViewModel
         @Binding var shouldAnimate: Bool
 
         init(query: Binding<String>,
              scopeIndex: Binding<Int>,
-             viewModel: Binding<ComicListViewModel>,
+             viewModel: Binding<WhatIfListViewModel>,
              shouldAnimate: Binding<Bool>) {
             _query = query
             _scopeIndex = scopeIndex
@@ -135,8 +135,8 @@ struct ComicSearchBar: UIViewRepresentable {
             
             DispatchQueue.global(qos: .background).async {
                 self.shouldAnimate = true
-                self.viewModel = ComicListViewModel(query: self.query,
-                                                    scopeIndex: self.scopeIndex)
+                self.viewModel = WhatIfListViewModel(query: self.query,
+                                                     scopeIndex: self.scopeIndex)
                 
                 DispatchQueue.main.async {
                     self.shouldAnimate = false
@@ -149,8 +149,8 @@ struct ComicSearchBar: UIViewRepresentable {
             
             DispatchQueue.global(qos: .background).async {
                 self.shouldAnimate = true
-                self.viewModel = ComicListViewModel(query: self.query,
-                                                    scopeIndex: self.scopeIndex)
+                self.viewModel = WhatIfListViewModel(query: self.query,
+                                                     scopeIndex: self.scopeIndex)
                 
                 DispatchQueue.main.async {
                     self.shouldAnimate = false
@@ -159,14 +159,14 @@ struct ComicSearchBar: UIViewRepresentable {
         }
     }
     
-    func makeCoordinator() -> ComicSearchBar.Coordinator {
+    func makeCoordinator() -> WhatIfSearchBar.Coordinator {
         return Coordinator(query: $query,
                            scopeIndex: $scopeIndex,
                            viewModel: $viewModel,
                            shouldAnimate: $shouldAnimate)
     }
 
-    func makeUIView(context: UIViewRepresentableContext<ComicSearchBar>) -> UISearchBar {
+    func makeUIView(context: UIViewRepresentableContext<WhatIfSearchBar>) -> UISearchBar {
         let searchBar = UISearchBar(frame: .zero)
         searchBar.delegate = context.coordinator
         searchBar.autocapitalizationType = .none
@@ -184,18 +184,18 @@ struct ComicSearchBar: UIViewRepresentable {
         return searchBar
     }
 
-    func updateUIView(_ uiView: UISearchBar, context: UIViewRepresentableContext<ComicSearchBar>) {
+    func updateUIView(_ uiView: UISearchBar, context: UIViewRepresentableContext<WhatIfSearchBar>) {
         uiView.text = query
         uiView.selectedScopeButtonIndex = scopeIndex
     }
 }
 
-// MARK: ComicTextListView
-struct ComicTextListView: View {
-    @Binding var viewModel: ComicListViewModel
+// MARK: WhatIfTextListView
+struct WhatIfTextListView: View {
+    @Binding var viewModel: WhatIfListViewModel
     var action: (Int32) -> Void
     
-    init(viewModel: Binding<ComicListViewModel>, action: @escaping (Int32) -> Void) {
+    init(viewModel: Binding<WhatIfListViewModel>, action: @escaping (Int32) -> Void) {
 
         _viewModel = viewModel
         self.action = action
@@ -203,20 +203,21 @@ struct ComicTextListView: View {
     
     var body: some View {
         VStack {
-            List(viewModel.comics) { comic in
-                ComicListRow(num: comic.num,
-                             title: comic.title ?? "",
-                             action: self.action)
-                    .onTapGesture { self.action(comic.num) }
+            List(viewModel.whatIfs) { whatIf in
+                WhatIfListRow(num: whatIf.num,
+                              thumbnail: whatIf.thumbnail ?? "",
+                              title: whatIf.title ?? "",
+                              action: self.action)
+                    .onTapGesture { self.action(whatIf.num) }
             }
                 .resignKeyboardOnDragGesture()
         }
     }
 }
 
-// MARK: ComicListViewModel
-class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
-    private var controller: NSFetchedResultsController<Comic>?
+// MARK: WhatIfListViewModel
+class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
+    private var controller: NSFetchedResultsController<WhatIf>?
  
     override convenience init() {
         self.init(query: "", scopeIndex: 0)
@@ -227,10 +228,10 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
         let fetchRequest = createFetchRequest(query: query,
                                               scopeIndex: scopeIndex)
         
-        controller = NSFetchedResultsController<Comic>(fetchRequest: fetchRequest,
-                                                       managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
-                                                       sectionNameKeyPath: nil,
-                                                       cacheName: nil)
+        controller = NSFetchedResultsController<WhatIf>(fetchRequest: fetchRequest,
+                                                        managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
+                                                        sectionNameKeyPath: nil,
+                                                        cacheName: nil)
         controller!.delegate = self
         
         do {
@@ -248,11 +249,11 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
         objectWillChange.send()
     }
      
-    var comics: [Comic] {
+    var whatIfs: [WhatIf] {
         return controller?.fetchedObjects ?? []
     }
     
-    func createFetchRequest(query: String, scopeIndex: Int) -> NSFetchRequest<Comic> {
+    func createFetchRequest(query: String, scopeIndex: Int) -> NSFetchRequest<WhatIf> {
         var predicate: NSPredicate?
         
         if query.count == 1 {
@@ -283,7 +284,7 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
             ()
         }
         
-        let fetchRequest: NSFetchRequest<Comic> = Comic.fetchRequest()
+        let fetchRequest: NSFetchRequest<WhatIf> = WhatIf.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
         fetchRequest.predicate = predicate
         fetchRequest.fetchBatchSize = 20
@@ -292,14 +293,21 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
     }
 }
 
-// MARK: ComicListRow
-struct ComicListRow: View {
+// MARK: WhatIfListRow
+struct WhatIfListRow: View {
     var num: Int32
+    var thumbnail: String
     var title: String
     var action: (Int32) -> Void
     
     var body: some View {
         HStack {
+            VStack {
+                Image(uiImage: SDImageCache.shared.imageFromCache(forKey: thumbnail) ?? UIImage(named: "logo")!)
+                .resizable()
+                .frame(width: 50, height: 50)
+            }
+                .background(Color.white)
             Text("#\(String(num)): \(title)")
                 .font(.custom("xkcd-Script-Regular", size: 15))
             Spacer()
@@ -311,4 +319,32 @@ struct ComicListRow: View {
             }
         }
     }
+    
+    func fetchThumbnail(thumbnail: String) -> Promise<UIImage> {
+        return Promise { seal in
+            if let image = SDImageCache.shared.imageFromCache(forKey: thumbnail) {
+                seal.fulfill(image)
+            } else {
+                let callback = { (image: UIImage?, data: Data?, error: Error?, finished: Bool) in
+                    if let error = error {
+                        seal.reject(error)
+                    } else {
+                        SDWebImageManager.shared.imageCache.store(image,
+                                                                  imageData: data,
+                                                                  forKey: thumbnail,
+                                                                  cacheType: .disk,
+                                                                  completion: {
+                                                                    seal.fulfill(image ?? UIImage(named: "logo")!)
+                        })
+                    }
+                }
+                SDWebImageManager.shared.imageLoader.requestImage(with: URL(string: thumbnail),
+                                                                  options: .highPriority,
+                                                                  context: nil,
+                                                                  progress: nil,
+                                                                  completed: callback)
+            }
+        }
+    }
 }
+
