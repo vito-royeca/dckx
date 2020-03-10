@@ -103,7 +103,7 @@ struct WhatIfToolBarView: View {
             Button(action: {
                 self.fetcher.toggleIsFavorite()
             }) {
-                Text("Bookmark \(fetcher.currentWhatIf?.isFavorite ?? false ? "-" : "+")")
+                Text("BOOKMARK \(fetcher.currentWhatIf?.isFavorite ?? false ? "-" : "+")")
                     .customButton(isDisabled: false)
             }
             Spacer()
@@ -111,7 +111,7 @@ struct WhatIfToolBarView: View {
             Button(action: {
                 self.showingMail.toggle()
             }) {
-                Text("Ask")
+                Text("ASK")
                     .customButton(isDisabled: false)
             }
                 .sheet(isPresented: $showingMail, content: {
@@ -122,7 +122,7 @@ struct WhatIfToolBarView: View {
             Button(action: {
                 self.showingShare.toggle()
             }) {
-                Text("Share")
+                Text("SHARE")
                     .customButton(isDisabled: false)
             }
                 .sheet(isPresented: $showingShare) {
@@ -134,7 +134,7 @@ struct WhatIfToolBarView: View {
             Button(action: {
                 self.fetcher.toggleIsFavorite()
             }) {
-                Text("List")
+                Text("LIST")
                     .customButton(isDisabled: false)
             }
         }
@@ -170,7 +170,7 @@ struct WhatIfNavigationBarView: View {
             Button(action: {
                 self.fetcher.loadPrevious()
             }) {
-                Text("<Prev")
+                Text("<PREV")
                     .customButton(isDisabled: !fetcher.canDoPrevious())
             }
             .disabled(!fetcher.canDoPrevious())
@@ -179,7 +179,7 @@ struct WhatIfNavigationBarView: View {
             Button(action: {
                 self.fetcher.loadRandom()
             }) {
-                Text("Random")
+                Text("RANDOM")
                     .customButton(isDisabled: false)
             }
             Spacer()
@@ -187,7 +187,7 @@ struct WhatIfNavigationBarView: View {
             Button(action: {
                 self.fetcher.loadNext()
             }) {
-                Text("Next>")
+                Text("NEXT>")
                     .customButton(isDisabled: !fetcher.canDoNext())
             }
             .disabled(!fetcher.canDoNext())

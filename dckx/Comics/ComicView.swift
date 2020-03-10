@@ -111,7 +111,7 @@ struct ComicToolBarView: View {
             Button(action: {
                 self.fetcher.toggleIsFavorite()
             }) {
-                Text("Bookmark \(fetcher.currentComic?.isFavorite ?? false ? "-" : "+")")
+                Text("BOOKMARK \(fetcher.currentComic?.isFavorite ?? false ? "-" : "+")")
                     .customButton(isDisabled: false)
             }
             Spacer()
@@ -119,7 +119,7 @@ struct ComicToolBarView: View {
             Button(action: {
                 self.showingBrowser.toggle()
             }) {
-                Text("Explain")
+                Text("EXPLAIN")
                     .customButton(isDisabled: false)
             }
                 .sheet(isPresented: $showingBrowser, content: {
@@ -134,7 +134,7 @@ struct ComicToolBarView: View {
             Button(action: {
                 self.showingAltText.toggle()
             }) {
-                Text("Alt Text")
+                Text("ALT TEXT")
                     .customButton(isDisabled: false)
             }
             Spacer()
@@ -142,7 +142,7 @@ struct ComicToolBarView: View {
             Button(action: {
                 self.showingShare.toggle()
             }) {
-                Text("Share")
+                Text("SHARE")
                     .customButton(isDisabled: false)
             }
                 .sheet(isPresented: $showingShare) {
@@ -154,7 +154,7 @@ struct ComicToolBarView: View {
             Button(action: {
                 self.showingList.toggle()
             }) {
-                Text("List")
+                Text("LIST")
                     .customButton(isDisabled: false)
             }
                 .sheet(isPresented: $showingList, content: {
@@ -236,7 +236,7 @@ struct ComicNavigationBarView: View {
                 self.fetcher.loadPrevious()
                 self.resetAction()
             }) {
-                Text("<Prev")
+                Text("<PREV")
                     .customButton(isDisabled: !fetcher.canDoPrevious())
             }
             .disabled(!fetcher.canDoPrevious())
@@ -246,7 +246,7 @@ struct ComicNavigationBarView: View {
                 self.fetcher.loadRandom()
                 self.resetAction()
             }) {
-                Text("Random")
+                Text("RANDOM")
                     .customButton(isDisabled: false)
             }
             Spacer()
@@ -255,7 +255,7 @@ struct ComicNavigationBarView: View {
                 self.fetcher.loadNext()
                 self.resetAction()
             }) {
-                Text("Next>")
+                Text("NEXT>")
                     .customButton(isDisabled: !fetcher.canDoNext())
             }
             .disabled(!fetcher.canDoNext())
