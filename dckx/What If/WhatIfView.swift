@@ -30,7 +30,7 @@ struct WhatIfView: View {
             
             // WebView
             WebView(link: nil,
-                    html: composeHTML(),
+                    html: fetcher.composeHTML(),
                     baseURL: nil)
             
             Spacer()
@@ -39,24 +39,6 @@ struct WhatIfView: View {
             WhatIfNavigationBarView(fetcher: fetcher)
         }
             .padding()
-    }
-    
-    func composeHTML() -> String {
-        let head =
-        """
-            <head>
-                <link href="xkcd.css" rel="stylesheet">
-            </head>
-        """
-
-        var html = "<html>\(head)"
-        html += "<p class='question'>\(fetcher.currentWhatIf?.question ?? "")"
-        html += "<p class='questioner' align='right'>- \(fetcher.currentWhatIf?.questioner ?? "")"
-        html += "<p/> &nbsp;"
-        html += "\(fetcher.currentWhatIf?.answer ?? "")"
-        html += "</html>"
-        
-        return html
     }
 }
 

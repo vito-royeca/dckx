@@ -126,4 +126,22 @@ class WhatIfFetcher: ObservableObject {
             print(error)
         }
     }
+    
+    func composeHTML() -> String {
+        let head =
+        """
+            <head>
+                <link href="xkcd.css" rel="stylesheet">
+            </head>
+        """
+
+        var html = "<html>\(head)"
+        html += "<p class='question'>\(currentWhatIf?.question ?? "")"
+        html += "<p class='questioner' align='right'>- \(currentWhatIf?.questioner ?? "")"
+        html += "<p/> &nbsp;"
+        html += "\(currentWhatIf?.answer ?? "")"
+        html += "</html>"
+        
+        return html
+    }
 }

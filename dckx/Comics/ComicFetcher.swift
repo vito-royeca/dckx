@@ -73,6 +73,8 @@ class ComicFetcher: ObservableObject {
     func loadRandom() {
         firstly {
             XkcdAPI.sharedInstance.fetchRandomComic()
+        }.then { comic in
+            self.fetchImage(comic: comic)
         }.done { comic in
             self.currentComic = comic
             self.toggleIsRead()
@@ -91,6 +93,8 @@ class ComicFetcher: ObservableObject {
     func loadLast() {
         firstly {
             XkcdAPI.sharedInstance.fetchLastComic()
+        }.then { comic in
+            self.fetchImage(comic: comic)
         }.done { comic in
             self.currentComic = comic
             self.lastComic = comic
@@ -120,6 +124,8 @@ class ComicFetcher: ObservableObject {
     func load(num: Int32) {
         firstly {
             XkcdAPI.sharedInstance.fetchComic(num: num)
+        }.then { comic in
+            self.fetchImage(comic: comic)
         }.done { comic in
             self.currentComic = comic
             self.toggleIsRead()
@@ -128,10 +134,64 @@ class ComicFetcher: ObservableObject {
         }
     }
     
-    func fetchImage(urlString: String) -> Promise<Void> {
+    func fetchImage(comic: Comic) -> Promise<Comic> {
         return Promise { seal in
+            guard let urlString = comic.img,
+                let url = URL(string: urlString) else {
+                fatalError("Malformed URL")
+            }
             
-            seal.fulfill(())
+            if let _ = SDImageCache.shared.imageFromCache(forKey: urlString) {
+                seal.fulfill(comic)
+            } else {
+                let callback = { (image: UIImage?, data: Data?, error: Error?, finished: Bool) in
+                    if let error = error {
+                        seal.reject(error)
+                    } else {
+                        SDWebImageManager.shared.imageCache.store(image,
+                                                                  imageData: data,
+                                                                  forKey: urlString,
+                                                                  cacheType: .disk,
+                                                                  completion: {
+                                                                    seal.fulfill(comic)
+                        })
+                    }
+                }
+                SDWebImageManager.shared.imageLoader.requestImage(with: url,
+                                                                  options: .highPriority,
+                                                                  context: nil,
+                                                                  progress: nil,
+                                                                  completed: callback)
+            }
         }
+    }
+    
+    func composeHTML(showingAltText: Bool) -> String {
+        let head =
+        """
+            <head>
+                <link href='xkcd.css' rel='stylesheet'>
+            </head>
+        """
+        guard let comic = currentComic,
+            let img = comic.img,
+            let title = comic.title,
+            let image = SDImageCache.shared.imageFromCache(forKey: img),
+            let data = image.pngData() else {
+            return ""
+        }
+        let style = image.size.width > image.size.height ? "width:100%; height:auto;" :
+            "width:auto; height:100%;"
+        
+        var html = "<html>\(head)<body>"
+        html += "<table id='wrapper'>"
+        if showingAltText {
+            html += "<tr><td><p class='altText'>\(comic.alt ?? "&nbsp;")</p></td></tr>"
+        }
+        html += "<tr><td><img src='data:image/png;base64, \(data.base64EncodedString())' alt='\(title)' style='\(style)'/></td></tr>"
+        html += "</table>"
+        html += "</body></html>"
+        
+        return html
     }
 }

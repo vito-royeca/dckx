@@ -42,8 +42,7 @@ html, body, #wrapper {
 }
 
 img {
-    width: 100%;
-    height: auto;
+    background-color: var(--background);
 }
 
 .question {
@@ -82,8 +81,6 @@ img {
     }
     
     img {
-        width: 100%;
-        height: auto;
         background-color: var(--color);
     }
     

@@ -33,7 +33,7 @@ struct ComicView: View {
             Spacer()
 
             WebView(link: nil,
-                    html: composeHTML(),
+                    html: fetcher.composeHTML(showingAltText: showingAltText),
                     baseURL: nil)
             
             Spacer()
@@ -48,43 +48,6 @@ struct ComicView: View {
     func resetImageScale() {
         lastScaleValue = 1.0
         scale = 1.0
-    }
-    
-    func composeHTML() -> String {
-        let head =
-        """
-            <head>
-                <link href="xkcd.css" rel="stylesheet">
-            </head>
-        """
-        guard let comic = fetcher.currentComic,
-            let img = comic.img,
-            let imageUrl = SDImageCache.shared.cachePath(forKey: img) else {
-            return ""
-        }
-        
-        var html = "<html>\(head)<body>"
-        html += "<table id='wrapper'>"
-        html += "<tr><td>"
-        if showingAltText {
-            html += "<p class='altText'>\(comic.alt ?? "&nbsp;")</p>"
-        }
-        html += "<img src='\(imageUrl)' />"
-        html += "</td></tr>"
-        html += "</table>"
-        html += "</body></html>"
-        
-        return html
-    }
-    
-    func image() -> UIImage {
-        if let comic = fetcher.currentComic,
-            let img = comic.img,
-            let image = SDImageCache.shared.imageFromCache(forKey: img) {
-            return image
-        }
-        
-        return UIImage(named: "logo")!
     }
 }
 
