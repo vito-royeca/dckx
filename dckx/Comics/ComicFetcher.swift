@@ -12,15 +12,10 @@ import SwiftUI
 import PromiseKit
 import SDWebImage
 
-class ComicFetcher: ObservableObject {
+class ComicFetcher: NavigationBarViewNavigator, ObservableObject {
     @Published var currentComic: Comic?
     @Published var lastComic: Comic?
     
-    // MARK: Initializer
-    init() {
-        loadLast()
-    }
-
     // MARK: Toolbar actions
     func toggleIsFavorite() {
         guard let currentComic = currentComic else {
@@ -40,7 +35,7 @@ class ComicFetcher: ObservableObject {
         }
     }
     
-    private func toggleIsRead() {
+    func toggleIsRead() {
         guard let currentComic = currentComic else {
             return
         }
@@ -58,19 +53,26 @@ class ComicFetcher: ObservableObject {
         }
     }
     
-    // MARK: Navigation actions
-    func loadFirst() {
+    // MARK: NavigationBarViewDelegate
+    override func loadFirst() {
         load(num: 1)
     }
     
-    func loadPrevious() {
+    override func canDoPrevious() -> Bool {
+        guard let currentComic = currentComic else {
+            return false
+        }
+        return currentComic.num > 1
+    }
+    
+    override func loadPrevious() {
         guard let currentComic = currentComic else {
             return
         }
         load(num: currentComic.num - 1)
     }
     
-    func loadRandom() {
+    override func loadRandom() {
         firstly {
             XkcdAPI.sharedInstance.fetchRandomComic()
         }.then { comic in
@@ -83,14 +85,22 @@ class ComicFetcher: ObservableObject {
         }
     }
     
-    func loadNext() {
+    override func loadNext() {
         guard let currentComic = currentComic else {
             return
         }
         load(num: currentComic.num + 1)
     }
     
-    func loadLast() {
+    override func canDoNext() -> Bool {
+        guard let currentComic = currentComic,
+            let lastComic = lastComic else {
+            return false
+        }
+        return currentComic.num < lastComic.num
+    }
+    
+    override func loadLast() {
         firstly {
             XkcdAPI.sharedInstance.fetchLastComic()
         }.then { comic in
@@ -102,22 +112,6 @@ class ComicFetcher: ObservableObject {
         }.catch { error in
             print(error)
         }
-    }
-    
-    // MARK: Button states
-    func canDoPrevious() -> Bool {
-        guard let currentComic = currentComic else {
-            return false
-        }
-        return currentComic.num > 1
-    }
-    
-    func canDoNext() -> Bool {
-        guard let currentComic = currentComic,
-            let lastComic = lastComic else {
-            return false
-        }
-        return currentComic.num < lastComic.num
     }
     
     // MARK: Helper methods

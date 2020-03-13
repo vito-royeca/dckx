@@ -19,7 +19,7 @@ struct ComicView: View {
     var body: some View {
         VStack {
             // Title
-            TitleView(title: fetcher.currentComic?.title ?? "Title")
+            TitleView(title: fetcher.currentComic?.title ?? "")
 
             // Metadata
             MetaDataView(leftTitle: "\(fetcher.currentComic?.num ?? 1)",
@@ -39,8 +39,8 @@ struct ComicView: View {
             Spacer()
             
             // Navigation
-            ComicNavigationBarView(fetcher: fetcher,
-                                   resetAction: resetImageScale)
+            NavigationBarView(navigator: fetcher,
+                              resetAction: resetImageScale)
         }
             .padding()
     }
@@ -175,62 +175,5 @@ class ComicItemSource: NSObject,  UIActivityItemSource {
         }
         
         return nil
-    }
-}
-
-struct ComicNavigationBarView: View {
-    @ObservedObject var fetcher: ComicFetcher
-    var resetAction: () -> Void
-
-    var body: some View {
-        HStack {
-            Button(action: {
-                self.fetcher.loadFirst()
-                self.resetAction()
-            }) {
-                Text("|<")
-                    .customButton(isDisabled: !fetcher.canDoPrevious())
-            }
-            .disabled(!fetcher.canDoPrevious())
-            Spacer()
-            
-            Button(action: {
-                self.fetcher.loadPrevious()
-                self.resetAction()
-            }) {
-                Text("<PREV")
-                    .customButton(isDisabled: !fetcher.canDoPrevious())
-            }
-            .disabled(!fetcher.canDoPrevious())
-            Spacer()
-            
-            Button(action: {
-                self.fetcher.loadRandom()
-                self.resetAction()
-            }) {
-                Text("RANDOM")
-                    .customButton(isDisabled: false)
-            }
-            Spacer()
-            
-            Button(action: {
-                self.fetcher.loadNext()
-                self.resetAction()
-            }) {
-                Text("NEXT>")
-                    .customButton(isDisabled: !fetcher.canDoNext())
-            }
-            .disabled(!fetcher.canDoNext())
-            Spacer()
-            
-            Button(action: {
-                self.fetcher.loadLast()
-                self.resetAction()
-            }) {
-                Text(">|")
-                    .customButton(isDisabled: !fetcher.canDoNext())
-            }
-            .disabled(!fetcher.canDoNext())
-        }
     }
 }

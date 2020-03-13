@@ -12,15 +12,10 @@ import SwiftUI
 import PromiseKit
 import SDWebImage
 
-class WhatIfFetcher: ObservableObject {
+class WhatIfFetcher: NavigationBarViewNavigator, ObservableObject {
     @Published var currentWhatIf: WhatIf?
     @Published var lastWhatIf: WhatIf?
     
-    // MARK: Initializer
-    init() {
-        loadLast()
-    }
-
     // MARK: Toolbar actions
     func toggleIsFavorite() {
         guard let currentWhatIf = currentWhatIf else {
@@ -40,7 +35,7 @@ class WhatIfFetcher: ObservableObject {
         }
     }
     
-    private func toggleIsRead() {
+    func toggleIsRead() {
         guard let currentWhatIf = currentWhatIf else {
             return
         }
@@ -59,18 +54,25 @@ class WhatIfFetcher: ObservableObject {
     }
     
     // MARK: Navigation actions
-    func loadFirst() {
+    override func loadFirst() {
         load(num: 1)
     }
     
-    func loadPrevious() {
+    override func canDoPrevious() -> Bool {
+        guard let currentWhatIf = currentWhatIf else {
+            return false
+        }
+        return currentWhatIf.num > 1
+    }
+    
+    override func loadPrevious() {
         guard let currentWhatIf = currentWhatIf else {
             return
         }
         load(num: currentWhatIf.num - 1)
     }
     
-    func loadRandom() {
+    override func loadRandom() {
         firstly {
             XkcdAPI.sharedInstance.fetchRandomWhatIf()
         }.done { whatIf in
@@ -81,14 +83,22 @@ class WhatIfFetcher: ObservableObject {
         }
     }
     
-    func loadNext() {
+    override func loadNext() {
         guard let currentWhatIf = currentWhatIf else {
             return
         }
         load(num: currentWhatIf.num + 1)
     }
     
-    func loadLast() {
+    override func canDoNext() -> Bool {
+        guard let currentWhatIf = currentWhatIf,
+            let lastWhatIf = lastWhatIf else {
+            return false
+        }
+        return currentWhatIf.num < lastWhatIf.num
+    }
+    
+    override func loadLast() {
         firstly {
             XkcdAPI.sharedInstance.fetchLastWhatIf()
         }.done { whatIf in
@@ -98,22 +108,6 @@ class WhatIfFetcher: ObservableObject {
         }.catch { error in
             print(error)
         }
-    }
-    
-    // MARK: Button states
-    func canDoPrevious() -> Bool {
-        guard let currentWhatIf = currentWhatIf else {
-            return false
-        }
-        return currentWhatIf.num > 1
-    }
-    
-    func canDoNext() -> Bool {
-        guard let currentWhatIf = currentWhatIf,
-            let lastWhatIf = lastWhatIf else {
-            return false
-        }
-        return currentWhatIf.num < lastWhatIf.num
     }
     
     // MARK: Helper methods

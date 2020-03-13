@@ -8,48 +8,48 @@
 
 import SwiftUI
 
-class NavigationBarViewNavigator: ObservableObject {
+class NavigationBarViewNavigator {
     init() {
-        loadLastData()
+        loadLast()
     }
     
-    func loadFirstData() {}
-    func canDoPrevious() -> Bool  { return false}
-    func loadPreviousData()  {}
-    func loadRandomData()  {}
-    func loadNextData()  {}
-    func canDoNext() -> Bool  { return false }
-    func loadLastData()  {}
+    func loadFirst() {}
+    func canDoPrevious() -> Bool { return false }
+    func loadPrevious() {}
+    func loadRandom() {}
+    func loadNext() {}
+    func canDoNext() -> Bool { return false }
+    func loadLast() {}
 }
 
 struct NavigationBarView: View {
-    @ObservedObject var navigator: NavigationBarViewNavigator
+    var navigator: NavigationBarViewNavigator
     var resetAction: (() -> Void)?
     
     var body: some View {
         HStack {
             Button(action: {
-                self.navigator.loadFirstData()
+                self.navigator.loadFirst()
                 self.resetAction?()
             }) {
                 Text("|<")
-                    .customButton(isDisabled: !navigator.canDoPrevious())
+                    .customButton(isDisabled: !self.navigator.canDoPrevious())
             }
-            .disabled(!navigator.canDoPrevious())
+                .disabled(!self.navigator.canDoPrevious())
             Spacer()
             
             Button(action: {
-                self.navigator.loadPreviousData()
+                self.navigator.loadPrevious()
                 self.resetAction?()
             }) {
                 Text("<Prev")
-                    .customButton(isDisabled: !navigator.canDoPrevious())
+                    .customButton(isDisabled: !self.navigator.canDoPrevious())
             }
-            .disabled(!navigator.canDoPrevious())
+                .disabled(!self.navigator.canDoPrevious())
             Spacer()
             
             Button(action: {
-                self.navigator.loadRandomData()
+                self.navigator.loadRandom()
                 self.resetAction?()
             }) {
                 Text("Random")
@@ -58,30 +58,30 @@ struct NavigationBarView: View {
             Spacer()
             
             Button(action: {
-                self.navigator.loadNextData()
+                self.navigator.loadNext()
                 self.resetAction?()
             }) {
                 Text("Next>")
-                    .customButton(isDisabled: !navigator.canDoNext())
+                    .customButton(isDisabled: !self.navigator.canDoNext())
             }
-            .disabled(!navigator.canDoNext())
+                .disabled(!self.navigator.canDoNext())
             Spacer()
             
             Button(action: {
-                self.navigator.loadLastData()
+                self.navigator.loadLast()
                 self.resetAction?()
             }) {
                 Text(">|")
-                    .customButton(isDisabled: !navigator.canDoNext())
+                    .customButton(isDisabled: !self.navigator.canDoNext())
             }
-            .disabled(!navigator.canDoNext())
+                .disabled(!self.navigator.canDoNext())
         }
     }
 }
 
 struct NavigationBarView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBarView(navigator: NavigationBarViewNavigator(),
+        NavigationBarView(navigator: ComicFetcher(),
                           resetAction: nil)
     }
 }

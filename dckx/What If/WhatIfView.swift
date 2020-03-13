@@ -36,7 +36,8 @@ struct WhatIfView: View {
             Spacer()
             
             // Navigation
-            WhatIfNavigationBarView(fetcher: fetcher)
+            NavigationBarView(navigator: fetcher,
+                              resetAction: nil)
         }
             .padding()
     }
@@ -114,57 +115,5 @@ struct WhatIfToolBarView: View {
         }
         
         return items
-    }
-}
-
-struct WhatIfNavigationBarView: View {
-    @ObservedObject var fetcher: WhatIfFetcher
-
-    var body: some View {
-        HStack {
-            Button(action: {
-                self.fetcher.loadFirst()
-            }) {
-                Text("|<")
-                    .customButton(isDisabled: !fetcher.canDoPrevious())
-            }
-            .disabled(!fetcher.canDoPrevious())
-            Spacer()
-            
-            Button(action: {
-                self.fetcher.loadPrevious()
-            }) {
-                Text("<PREV")
-                    .customButton(isDisabled: !fetcher.canDoPrevious())
-            }
-            .disabled(!fetcher.canDoPrevious())
-            Spacer()
-            
-            Button(action: {
-                self.fetcher.loadRandom()
-            }) {
-                Text("RANDOM")
-                    .customButton(isDisabled: false)
-            }
-            Spacer()
-            
-            Button(action: {
-                self.fetcher.loadNext()
-            }) {
-                Text("NEXT>")
-                    .customButton(isDisabled: !fetcher.canDoNext())
-            }
-            .disabled(!fetcher.canDoNext())
-            Spacer()
-            
-            Button(action: {
-                self.fetcher.loadLast()
-            }) {
-                Text(">|")
-                    .customButton(isDisabled: !fetcher.canDoNext())
-            }
-            .disabled(!fetcher.canDoNext())
-            
-        }
     }
 }
