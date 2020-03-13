@@ -193,5 +193,16 @@ class ComicFetcher: ObservableObject {
         
         return html
     }
+    
+    func dateToString(date: Date?) -> String {
+        if let date = date {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+        
+            return formatter.string(from: date)
+        } else {
+            return "2020-01-02"
+        }
+    }
 }
 

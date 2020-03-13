@@ -13,7 +13,7 @@ import CoreData
 // MARK: ComicListView
 struct  ComicListView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State var viewModel: ComicListViewModel = ComicListViewModel()
+    @State var viewModel: ComicListViewModel = ComicListViewModel(query: nil, scopeIndex: 0)
     @State var shouldAnimate: Bool = false
     var fetcher: ComicFetcher
     
@@ -79,10 +79,10 @@ struct ComicListTitleView: View {
 
 // MARK: ComicSearchBar
 struct ComicSearchBar: UIViewRepresentable {
-    @Binding var viewModel: ComicListViewModel
-    @Binding var shouldAnimate: Bool
     @State var query: String = ""
     @State var scopeIndex: Int = 0
+    @Binding var viewModel: ComicListViewModel
+    @Binding var shouldAnimate: Bool
     
     init(viewModel: Binding<ComicListViewModel>,
         shouldAnimate: Binding<Bool>) {
@@ -196,7 +196,6 @@ struct ComicTextListView: View {
     var action: (Int32) -> Void
     
     init(viewModel: Binding<ComicListViewModel>, action: @escaping (Int32) -> Void) {
-
         _viewModel = viewModel
         self.action = action
     }
@@ -207,7 +206,14 @@ struct ComicTextListView: View {
                 ComicListRow(num: comic.num,
                              title: comic.title ?? "",
                              action: self.action)
-                    .onTapGesture { self.action(comic.num) }
+                    .onTapGesture {
+                        self.action(comic.num)
+                    }
+                    .onAppear(perform: {
+                        if self.viewModel.shouldLoadMore(comic: comic) {
+                            self.viewModel.loadData()
+                        }
+                    })
             }
                 .resignKeyboardOnDragGesture()
         }
@@ -217,29 +223,22 @@ struct ComicTextListView: View {
 // MARK: ComicListViewModel
 class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
     private var controller: NSFetchedResultsController<Comic>?
- 
-    override convenience init() {
-        self.init(query: "", scopeIndex: 0)
-    }
+    var fetchBatchSize = 20
+    var fetchLimit = 20
+    var fetchOffset = 0
+    var query: String?
+    var scopeIndex: Int
     
-    init(query: String, scopeIndex: Int) {
+    // MARK: Initializer
+    init(query: String?, scopeIndex: Int) {
+        self.query = query
+        self.scopeIndex = scopeIndex
         super.init()
-        let fetchRequest = createFetchRequest(query: query,
-                                              scopeIndex: scopeIndex)
         
-        controller = NSFetchedResultsController<Comic>(fetchRequest: fetchRequest,
-                                                       managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
-                                                       sectionNameKeyPath: nil,
-                                                       cacheName: nil)
-        controller!.delegate = self
-        
-        do {
-            try controller!.performFetch()
-        } catch {
-            print(error)
-        }
+        loadData()
     }
  
+    // MARK: NSFetchedResultsControllerDelegate
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         objectWillChange.send()
     }
@@ -247,19 +246,21 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         objectWillChange.send()
     }
-     
+    
+    // MARK: Custom methods
     var comics: [Comic] {
         return controller?.fetchedObjects ?? []
     }
     
-    func createFetchRequest(query: String, scopeIndex: Int) -> NSFetchRequest<Comic> {
+    func createFetchRequest(query: String?, scopeIndex: Int) -> NSFetchRequest<Comic> {
         var predicate: NSPredicate?
         
-        if query.count == 1 {
-            
-            predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@", query, query)
-        } else if query.count > 1 {
-            predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", query, query, query)
+        if let query = query {
+            if query.count == 1 {
+                predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@", query, query)
+            } else if query.count > 1 {
+                predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", query, query, query)
+            }
         }
         
         switch scopeIndex {
@@ -286,9 +287,38 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
         let fetchRequest: NSFetchRequest<Comic> = Comic.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
         fetchRequest.predicate = predicate
-        fetchRequest.fetchBatchSize = 20
+        fetchRequest.fetchOffset = fetchOffset
+        fetchRequest.fetchLimit = fetchLimit
+        
         
         return fetchRequest
+    }
+    
+    func shouldLoadMore(comic: Comic) -> Bool{
+        if let last = comics.last {
+            return comic.num ==  last.num
+        }
+        return false
+    }
+    
+    func loadData() {
+        let fetchRequest = createFetchRequest(query: query,
+                                              scopeIndex: scopeIndex)
+        
+        controller = NSFetchedResultsController<Comic>(fetchRequest: fetchRequest,
+                                                       managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
+                                                       sectionNameKeyPath: nil,
+                                                       cacheName: "ComicCache")
+        controller!.delegate = self
+        
+        do {
+            NSFetchedResultsController<Comic>.deleteCache(withName: controller!.cacheName)
+            try controller!.performFetch()
+            fetchOffset += fetchBatchSize
+            fetchLimit += fetchOffset
+        } catch {
+            print(error)
+        }
     }
 }
 

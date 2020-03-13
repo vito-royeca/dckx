@@ -19,11 +19,11 @@ struct ComicView: View {
     var body: some View {
         VStack {
             // Title
-            ComicTitleView(title: fetcher.currentComic?.title ?? "Title")
+            TitleView(title: fetcher.currentComic?.title ?? "Title")
 
             // Metadata
-            ComicMetaDataView(num: fetcher.currentComic?.num ?? 1,
-                              date: fetcher.currentComic?.date)
+            MetaDataView(leftTitle: "\(fetcher.currentComic?.num ?? 1)",
+                         rightTitle: fetcher.dateToString(date: fetcher.currentComic?.date))
 
             // Toolbar
             Divider()
@@ -57,44 +57,6 @@ struct ComicView_Previews: PreviewProvider {
             ComicView()
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
-        }
-    }
-}
-
-struct ComicTitleView: View {
-    var title: String
-    
-    var body: some View {
-        HStack {
-            Text(title)
-                .font(.custom("xkcd-Script-Regular", size: 30))
-        }
-            .padding(5)
-    }
-}
-
-struct ComicMetaDataView: View {
-    var num: Int32
-    var date: Date?
-    
-    var body: some View {
-        HStack {
-            Text("#\(String(num))")
-                .font(.custom("xkcd-Script-Regular", size: 15))
-            Spacer()
-            Text(dateString())
-                .font(.custom("xkcd-Script-Regular", size: 15))
-        }
-    }
-    
-    func dateString() -> String {
-        if let date = date {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-        
-            return formatter.string(from: date)
-        } else {
-            return "2020-01-02"
         }
     }
 }

@@ -257,7 +257,6 @@ class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observa
         var predicate: NSPredicate?
         
         if query.count == 1 {
-            
             predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@", query, query)
         } else if query.count > 1 {
             predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", query, query, query)

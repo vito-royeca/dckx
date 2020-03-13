@@ -105,6 +105,12 @@
 		8BA50E6C240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
 		8BA50E6D240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
 		8BA50E6E240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
+		8BA71CC6241C1C3F00762790 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA71CC5241C1C3F00762790 /* TitleView.swift */; };
+		8BA71CC8241C1F8000762790 /* MetaDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA71CC7241C1F8000762790 /* MetaDataView.swift */; };
+		8BA71CC9241C1F8900762790 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA71CC5241C1C3F00762790 /* TitleView.swift */; };
+		8BA71CCA241C1F8A00762790 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA71CC5241C1C3F00762790 /* TitleView.swift */; };
+		8BA71CCB241C1F8E00762790 /* MetaDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA71CC7241C1F8000762790 /* MetaDataView.swift */; };
+		8BA71CCC241C1F8F00762790 /* MetaDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA71CC7241C1F8000762790 /* MetaDataView.swift */; };
 		8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
@@ -178,6 +184,8 @@
 		8BA50E5F240A2DA200138D11 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		8BA50E67240A384400138D11 /* WhatIfFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfFetcher.swift; sourceTree = "<group>"; };
 		8BA50E6B240A425500138D11 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		8BA71CC5241C1C3F00762790 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		8BA71CC7241C1F8000762790 /* MetaDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaDataView.swift; sourceTree = "<group>"; };
 		8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ResignKeyboardOnDragGesture.swift"; sourceTree = "<group>"; };
 		A1695073ECC186DD58075EB6 /* Pods-dckxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dckxTests.debug.xcconfig"; path = "Target Support Files/Pods-dckxTests/Pods-dckxTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A442C4117396A55D840D6677 /* Pods_dckx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dckx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -252,10 +260,10 @@
 		8B4F4B9723F5F444008446F4 /* dckx */ = {
 			isa = PBXGroup;
 			children = (
-				8BE1EC162416C2F9008B2D8C /* What If */,
 				8BE1EC152416C2F0008B2D8C /* Comics */,
+				8BE1EC162416C2F9008B2D8C /* What If */,
 				8B4F4BE323F603B1008446F4 /* Utilities */,
-				8B4F4BCE23F5F637008446F4 /* View */,
+				8B4F4BCE23F5F637008446F4 /* Views */,
 				8B4F4B9823F5F444008446F4 /* AppDelegate.swift */,
 				8B4F4B9E23F5F445008446F4 /* Assets.xcassets */,
 				8B4F4BA323F5F445008446F4 /* LaunchScreen.storyboard */,
@@ -294,19 +302,21 @@
 			path = dckxUITests;
 			sourceTree = "<group>";
 		};
-		8B4F4BCE23F5F637008446F4 /* View */ = {
+		8B4F4BCE23F5F637008446F4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				8B3049A2241830CC00D549DE /* ActivityIndicatorView.swift */,
 				8B626D862402122C00972EED /* BrowserView.swift */,
 				8B658016240AFED800A245DC /* MailView.swift */,
 				8BA50E4824097CF000138D11 /* MainView.swift */,
+				8BA71CC7241C1F8000762790 /* MetaDataView.swift */,
 				8B65801F240B1C6E00A245DC /* NavigationBarView.swift */,
 				8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */,
 				8B65801B240B12E100A245DC /* ShareSheetView.swift */,
+				8BA71CC5241C1C3F00762790 /* TitleView.swift */,
 				8BA50E6B240A425500138D11 /* WebView.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		8B4F4BE323F603B1008446F4 /* Utilities */ = {
@@ -649,6 +659,7 @@
 				8B30499F2418263E00D549DE /* WhatIfListView.swift in Sources */,
 				8BA50E6C240A425500138D11 /* WebView.swift in Sources */,
 				8BA50E68240A384400138D11 /* WhatIfFetcher.swift in Sources */,
+				8BA71CC8241C1F8000762790 /* MetaDataView.swift in Sources */,
 				8BA50E4924097CF000138D11 /* MainView.swift in Sources */,
 				8B626D702401B0A900972EED /* Constants.swift in Sources */,
 				8B4F4B9B23F5F444008446F4 /* SceneDelegate.swift in Sources */,
@@ -656,6 +667,7 @@
 				8B626D802401F8E600972EED /* Comic+CoreDataClass.swift in Sources */,
 				8BA50E5C240A18C000138D11 /* WhatIf+CoreDataProperties.swift in Sources */,
 				8BA50E60240A2DA200138D11 /* Database.swift in Sources */,
+				8BA71CC6241C1C3F00762790 /* TitleView.swift in Sources */,
 				8B626D832401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */,
 				8B4F4B9D23F5F444008446F4 /* ComicView.swift in Sources */,
 				8B23367E23F646A700C88BA1 /* CoreData.swift in Sources */,
@@ -682,6 +694,8 @@
 				8BA50E69240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8BA50E4A24097CF000138D11 /* MainView.swift in Sources */,
 				8B3049A4241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
+				8BA71CCB241C1F8E00762790 /* MetaDataView.swift in Sources */,
+				8BA71CC9241C1F8900762790 /* TitleView.swift in Sources */,
 				8B4F4BB023F5F445008446F4 /* dckxTests.swift in Sources */,
 				8B4F4BCC23F5F551008446F4 /* dckx.xcdatamodeld in Sources */,
 				8B65801D240B12E100A245DC /* ShareSheetView.swift in Sources */,
@@ -715,6 +729,8 @@
 				8B658022240B1C6E00A245DC /* NavigationBarView.swift in Sources */,
 				8B65801E240B12E100A245DC /* ShareSheetView.swift in Sources */,
 				8B3049A5241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
+				8BA71CCC241C1F8F00762790 /* MetaDataView.swift in Sources */,
+				8BA71CCA241C1F8A00762790 /* TitleView.swift in Sources */,
 				8B626D852401F8E600972EED /* Comic+CoreDataProperties.swift in Sources */,
 				8B23368423F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8B4F4BBB23F5F445008446F4 /* dckxUITests.swift in Sources */,
