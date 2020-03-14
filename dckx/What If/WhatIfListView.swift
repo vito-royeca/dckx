@@ -14,7 +14,7 @@ import SDWebImage
 
 struct WhatIfListView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State var viewModel: WhatIfListViewModel = WhatIfListViewModel()
+    @State var viewModel: WhatIfListViewModel = WhatIfListViewModel(query: nil, scopeIndex: 0)
     @State var shouldAnimate: Bool = false
     var fetcher: WhatIfFetcher
     
@@ -218,27 +218,18 @@ struct WhatIfTextListView: View {
 // MARK: WhatIfListViewModel
 class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
     private var controller: NSFetchedResultsController<WhatIf>?
- 
-    override convenience init() {
-        self.init(query: "", scopeIndex: 0)
-    }
+    var fetchBatchSize = 20
+    var fetchLimit = 20
+    var fetchOffset = 0
+    var query: String?
+    var scopeIndex: Int
     
-    init(query: String, scopeIndex: Int) {
+    init(query: String?, scopeIndex: Int) {
+        self.query = query
+        self.scopeIndex = scopeIndex
         super.init()
-        let fetchRequest = createFetchRequest(query: query,
-                                              scopeIndex: scopeIndex)
         
-        controller = NSFetchedResultsController<WhatIf>(fetchRequest: fetchRequest,
-                                                        managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
-                                                        sectionNameKeyPath: nil,
-                                                        cacheName: nil)
-        controller!.delegate = self
-        
-        do {
-            try controller!.performFetch()
-        } catch {
-            print(error)
-        }
+        loadData()
     }
  
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -248,20 +239,23 @@ class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observa
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         objectWillChange.send()
     }
-     
+    
+    // MARK: Custom methods
     var whatIfs: [WhatIf] {
         return controller?.fetchedObjects ?? []
     }
     
-    func createFetchRequest(query: String, scopeIndex: Int) -> NSFetchRequest<WhatIf> {
+    func createFetchRequest(query: String?, scopeIndex: Int) -> NSFetchRequest<WhatIf> {
         var predicate: NSPredicate?
         
-        if query.count == 1 {
-            predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@", query, query)
-        } else if query.count > 1 {
-            predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", query, query, query)
+        if let query = query {
+            if query.count == 1 {
+                predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@", query, query)
+            } else if query.count > 1 {
+                predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", query, query, query)
+            }
         }
-        
+
         switch scopeIndex {
         case 0:
             ()
@@ -286,9 +280,30 @@ class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observa
         let fetchRequest: NSFetchRequest<WhatIf> = WhatIf.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
         fetchRequest.predicate = predicate
-        fetchRequest.fetchBatchSize = 20
+        fetchRequest.fetchOffset = fetchOffset
+        fetchRequest.fetchLimit = fetchLimit
         
         return fetchRequest
+    }
+    
+    func loadData() {
+        let fetchRequest = createFetchRequest(query: query,
+                                              scopeIndex: scopeIndex)
+        
+        controller = NSFetchedResultsController<WhatIf>(fetchRequest: fetchRequest,
+                                                        managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
+                                                        sectionNameKeyPath: nil,
+                                                        cacheName: "WhatIfCache")
+        controller!.delegate = self
+        
+        do {
+            NSFetchedResultsController<Comic>.deleteCache(withName: controller!.cacheName)
+            try controller!.performFetch()
+            fetchOffset += fetchBatchSize
+            fetchLimit += fetchOffset
+        } catch {
+            print(error)
+        }
     }
 }
 

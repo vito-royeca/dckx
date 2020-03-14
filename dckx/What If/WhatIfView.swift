@@ -16,7 +16,7 @@ struct WhatIfView: View {
     var body: some View {
         VStack {
             // Title
-            TitleView(title: fetcher.currentWhatIf?.title ?? "Title")
+            TitleView(title: fetcher.currentWhatIf?.title ?? "")
             
             // Metadata
             MetaDataView(leftTitle: "\(fetcher.currentWhatIf?.num ?? 1)",

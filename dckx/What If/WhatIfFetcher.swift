@@ -122,37 +122,37 @@ class WhatIfFetcher: NavigationBarViewNavigator, ObservableObject {
         }
     }
     
-//    func fetchThumbnail(whatIf: WhatIf) -> Promise<WhatIf> {
-//        return Promise { seal in
-//            guard let urlString = whatIf.thumbnail,
-//                let url = URL(string: urlString) else {
-//                fatalError("Malformed URL")
-//            }
-//
-//            if let _ = SDImageCache.shared.imageFromCache(forKey: urlString) {
-//                seal.fulfill(whatIf)
-//            } else {
-//                let callback = { (image: UIImage?, data: Data?, error: Error?, finished: Bool) in
-//                    if let error = error {
-//                        seal.reject(error)
-//                    } else {
-//                        SDWebImageManager.shared.imageCache.store(image,
-//                                                                  imageData: data,
-//                                                                  forKey: urlString,
-//                                                                  cacheType: .disk,
-//                                                                  completion: {
-//                                                                    seal.fulfill(whatIf)
-//                        })
-//                    }
-//                }
-//                SDWebImageManager.shared.imageLoader.requestImage(with: url,
-//                                                                  options: .highPriority,
-//                                                                  context: nil,
-//                                                                  progress: nil,
-//                                                                  completed: callback)
-//            }
-//        }
-//    }
+    func fetchThumbnail(whatIf: WhatIf) -> Promise<WhatIf> {
+        return Promise { seal in
+            guard let urlString = whatIf.thumbnail,
+                let url = URL(string: urlString) else {
+                fatalError("Malformed URL")
+            }
+
+            if let _ = SDImageCache.shared.imageFromCache(forKey: urlString) {
+                seal.fulfill(whatIf)
+            } else {
+                let callback = { (image: UIImage?, data: Data?, error: Error?, finished: Bool) in
+                    if let error = error {
+                        seal.reject(error)
+                    } else {
+                        SDWebImageManager.shared.imageCache.store(image,
+                                                                  imageData: data,
+                                                                  forKey: urlString,
+                                                                  cacheType: .disk,
+                                                                  completion: {
+                                                                    seal.fulfill(whatIf)
+                        })
+                    }
+                }
+                SDWebImageManager.shared.imageLoader.requestImage(with: url,
+                                                                  options: .highPriority,
+                                                                  context: nil,
+                                                                  progress: nil,
+                                                                  completed: callback)
+            }
+        }
+    }
     
     func composeHTML() -> String {
         let head =
@@ -170,16 +170,5 @@ class WhatIfFetcher: NavigationBarViewNavigator, ObservableObject {
         html += "</html>"
         
         return html
-    }
-    
-    func dateToString(date: Date?) -> String {
-        if let date = date {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-        
-            return formatter.string(from: date)
-        } else {
-            return "2020-01-02"
-        }
     }
 }

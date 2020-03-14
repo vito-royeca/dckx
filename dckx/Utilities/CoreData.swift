@@ -160,7 +160,7 @@ class CoreData {
         return Promise { seal in
             let error = NSError(domain: "",
                                 code: 404,
-                                userInfo: [NSLocalizedDescriptionKey: "Last WhatIF not found."])
+                                userInfo: [NSLocalizedDescriptionKey: "Last WhatIf not found."])
             
             do {
                 let request: NSFetchRequest<NSFetchRequestResult> = WhatIf.fetchRequest()

@@ -290,7 +290,6 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
         fetchRequest.fetchOffset = fetchOffset
         fetchRequest.fetchLimit = fetchLimit
         
-        
         return fetchRequest
     }
     
