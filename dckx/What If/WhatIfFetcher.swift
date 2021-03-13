@@ -12,11 +12,16 @@ import SwiftUI
 import PromiseKit
 import SDWebImage
 
-class WhatIfFetcher: NavigationBarViewNavigator, ObservableObject {
+class WhatIfFetcher: ObservableObject {
     @Published var currentWhatIf: WhatIf?
     @Published var lastWhatIf: WhatIf?
     
-    // MARK: Toolbar actions
+    // MARK: - Initializer
+    init() {
+        loadLast()
+    }
+
+    // MARK: - Toolbar methods
     func toggleIsFavorite() {
         guard let currentWhatIf = currentWhatIf else {
             return
@@ -53,64 +58,7 @@ class WhatIfFetcher: NavigationBarViewNavigator, ObservableObject {
         }
     }
     
-    // MARK: Navigation actions
-    override func loadFirst() {
-        load(num: 1)
-    }
-    
-    override func canDoPrevious() -> Bool {
-        guard let currentWhatIf = currentWhatIf else {
-            return false
-        }
-        return currentWhatIf.num > 1
-    }
-    
-    override func loadPrevious() {
-        guard let currentWhatIf = currentWhatIf else {
-            return
-        }
-        load(num: currentWhatIf.num - 1)
-    }
-    
-    override func loadRandom() {
-        firstly {
-            XkcdAPI.sharedInstance.fetchRandomWhatIf()
-        }.done { whatIf in
-            self.currentWhatIf = whatIf
-            self.toggleIsRead()
-        }.catch { error in
-            print(error)
-        }
-    }
-    
-    override func loadNext() {
-        guard let currentWhatIf = currentWhatIf else {
-            return
-        }
-        load(num: currentWhatIf.num + 1)
-    }
-    
-    override func canDoNext() -> Bool {
-        guard let currentWhatIf = currentWhatIf,
-            let lastWhatIf = lastWhatIf else {
-            return false
-        }
-        return currentWhatIf.num < lastWhatIf.num
-    }
-    
-    override func loadLast() {
-        firstly {
-            XkcdAPI.sharedInstance.fetchLastWhatIf()
-        }.done { whatIf in
-            self.currentWhatIf = whatIf
-            self.lastWhatIf = whatIf
-            self.toggleIsRead()
-        }.catch { error in
-            print(error)
-        }
-    }
-    
-    // MARK: Helper methods
+    // MARK: - Helper methods
     func load(num: Int32) {
         firstly {
             XkcdAPI.sharedInstance.fetchWhatIf(num: num)
@@ -170,5 +118,66 @@ class WhatIfFetcher: NavigationBarViewNavigator, ObservableObject {
         html += "</html>"
         
         return html
+    }
+}
+
+// MARK: - NavigationBarViewNavigator
+extension WhatIfFetcher: NavigationBarViewNavigator {
+    var canDoPrevious: Bool {
+        guard let currentWhatIf = currentWhatIf else {
+            return false
+        }
+        return currentWhatIf.num > 1
+    }
+    
+    var canDoNext: Bool {
+        guard let currentWhatIf = currentWhatIf,
+            let lastWhatIf = lastWhatIf else {
+            return false
+        }
+        return currentWhatIf.num < lastWhatIf.num
+    }
+    
+    func loadFirst() {
+        load(num: 1)
+    }
+    
+    func loadPrevious() {
+        guard let currentWhatIf = currentWhatIf else {
+            return
+        }
+        load(num: currentWhatIf.num - 1)
+    }
+    
+    func loadRandom() {
+        firstly {
+            XkcdAPI.sharedInstance.fetchRandomWhatIf()
+        }.done { whatIf in
+            self.currentWhatIf = whatIf
+            self.toggleIsRead()
+        }.catch { error in
+            print(error)
+        }
+    }
+    
+    func loadNext() {
+        guard let currentWhatIf = currentWhatIf else {
+            return
+        }
+        load(num: currentWhatIf.num + 1)
+    }
+    
+    func loadLast() {
+        firstly {
+            //XkcdAPI.sharedInstance.fetchLastWhatIf()
+            XkcdAPI.sharedInstance.fetchLastWhatIf()
+        }.done { whatIf in
+            self.currentWhatIf = whatIf
+            self.lastWhatIf = whatIf
+            self.toggleIsRead()
+            print("WhatIfFetcher loadLast")
+        }.catch { error in
+            print(error)
+        }
     }
 }

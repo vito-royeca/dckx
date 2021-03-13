@@ -16,11 +16,9 @@ struct WhatIfView: View {
     var body: some View {
         VStack {
             // Title
-            TitleView(title: fetcher.currentWhatIf?.title ?? "")
-            
-            // Metadata
-            MetaDataView(leftTitle: "\(fetcher.currentWhatIf?.num ?? 1)",
-                         rightTitle: fetcher.dateToString(date: fetcher.currentWhatIf?.date))
+            TitleView(title: fetcher.currentWhatIf?.title ?? "",
+                      leftTitle: "\(fetcher.currentWhatIf?.num ?? 1)",
+                      rightTitle: fetcher.dateToString(date: fetcher.currentWhatIf?.date))
 
             // Toolbar
             Divider()

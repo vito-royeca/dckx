@@ -19,7 +19,12 @@ class CoreData {
     static let sharedInstance = CoreData(storeType: .sqLite)
     static let mockInstance = CoreData(storeType: .inMemory)
     private init(storeType: DataStackStoreType) {
-        dataStack = DataStack(modelName: "dckx", storeType: storeType)
+        if let bundleURL = Bundle(for: CoreData.self).url(forResource: "dckx", withExtension: "momd"),
+            let objectModel = NSManagedObjectModel(contentsOf: bundleURL.appendingPathComponent("2020-04-05.mom")) {
+            dataStack = DataStack(model: objectModel, storeType: storeType)
+        } else {
+            dataStack = DataStack(modelName: "dckx", storeType: storeType)
+        }
     }
     
     // MARK: Comic Database methods

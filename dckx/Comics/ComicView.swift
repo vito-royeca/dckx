@@ -19,11 +19,9 @@ struct ComicView: View {
     var body: some View {
         VStack {
             // Title
-            TitleView(title: fetcher.currentComic?.title ?? "")
-
-            // Metadata
-            MetaDataView(leftTitle: "\(fetcher.currentComic?.num ?? 1)",
-                         rightTitle: fetcher.dateToString(date: fetcher.currentComic?.date))
+            TitleView(title: fetcher.currentComic?.title ?? "",
+                      leftTitle: "\(fetcher.currentComic?.num ?? 1)",
+                      rightTitle: fetcher.dateToString(date: fetcher.currentComic?.date))
 
             // Toolbar
             Divider()

@@ -7,7 +7,6 @@ def shared_pods
     pod 'Kanna'
     pod 'MBProgressHUD'
     pod 'PromiseKit'
-    #pod 'SDWebImageSwiftUI', '>= 1.0.0-beta2'
     pod 'SDWebImage'
     pod 'Sync'
 end

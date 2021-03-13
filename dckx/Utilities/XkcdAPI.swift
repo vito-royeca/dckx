@@ -92,7 +92,7 @@ class XkcdAPI {
             let url = "https://what-if.xkcd.com"
             
             firstly {
-                createScapeWhatIfpromise(link: url)
+                createScrapeWhatIfPromise(link: url)
             }.then { data in
                 self.generateNewWhatIf(data: data)
             }.then {  data in
@@ -107,7 +107,7 @@ class XkcdAPI {
         }
     }
     
-    private func createScapeWhatIfpromise(link: String) -> Promise<[String: Any]> {
+    private func createScrapeWhatIfPromise(link: String) -> Promise<[String: Any]> {
         return Promise { seal in
             seal.fulfill(Database.sharedInstance.scrapeWhatIf(link: link))
         }
@@ -115,7 +115,6 @@ class XkcdAPI {
     
     private func generateNewWhatIf(data: [String: Any]) -> Promise<[String: Any]> {
         return Promise { seal in
-            
             firstly {
                 self.coreData.loadLastWhatIf()
             }.done { whatIf in
@@ -124,8 +123,6 @@ class XkcdAPI {
                 if whatIf.title == data["title"] as? String {
                     newData["num"] = whatIf.num
                 } else {
-                    
-                    
                     for (k,v) in data {
                         newData[k] = v
                     }

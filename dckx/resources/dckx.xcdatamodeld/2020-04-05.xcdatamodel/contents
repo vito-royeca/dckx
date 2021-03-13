@@ -34,10 +34,6 @@
         <attribute name="questioner" optional="YES" attributeType="String"/>
         <attribute name="thumbnail" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <userInfo>
-            <entry key="hyper.isPrimaryKey" value="true"/>
-            <entry key="sync.isPrimaryKey" value="true"/>
-        </userInfo>
     </entity>
     <elements>
         <element name="Comic" positionX="-63" positionY="-18" width="128" height="208"/>

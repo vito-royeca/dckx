@@ -12,11 +12,16 @@ import SwiftUI
 import PromiseKit
 import SDWebImage
 
-class ComicFetcher: NavigationBarViewNavigator, ObservableObject {
+class ComicFetcher: ObservableObject {
     @Published var currentComic: Comic?
     @Published var lastComic: Comic?
     
-    // MARK: Toolbar actions
+    // MARK: - Initializer
+    init() {
+        loadLast()
+    }
+    
+    // MARK: - Toolbar methods
     func toggleIsFavorite() {
         guard let currentComic = currentComic else {
             return
@@ -53,68 +58,7 @@ class ComicFetcher: NavigationBarViewNavigator, ObservableObject {
         }
     }
     
-    // MARK: NavigationBarViewDelegate
-    override func loadFirst() {
-        load(num: 1)
-    }
-    
-    override func canDoPrevious() -> Bool {
-        guard let currentComic = currentComic else {
-            return false
-        }
-        return currentComic.num > 1
-    }
-    
-    override func loadPrevious() {
-        guard let currentComic = currentComic else {
-            return
-        }
-        load(num: currentComic.num - 1)
-    }
-    
-    override func loadRandom() {
-        firstly {
-            XkcdAPI.sharedInstance.fetchRandomComic()
-        }.then { comic in
-            self.fetchImage(comic: comic)
-        }.done { comic in
-            self.currentComic = comic
-            self.toggleIsRead()
-        }.catch { error in
-            print(error)
-        }
-    }
-    
-    override func loadNext() {
-        guard let currentComic = currentComic else {
-            return
-        }
-        load(num: currentComic.num + 1)
-    }
-    
-    override func canDoNext() -> Bool {
-        guard let currentComic = currentComic,
-            let lastComic = lastComic else {
-            return false
-        }
-        return currentComic.num < lastComic.num
-    }
-    
-    override func loadLast() {
-        firstly {
-            XkcdAPI.sharedInstance.fetchLastComic()
-        }.then { comic in
-            self.fetchImage(comic: comic)
-        }.done { comic in
-            self.currentComic = comic
-            self.lastComic = comic
-            self.toggleIsRead()
-        }.catch { error in
-            print(error)
-        }
-    }
-    
-    // MARK: Helper methods
+    // MARK: - Helper methods
     func load(num: Int32) {
         firstly {
             XkcdAPI.sharedInstance.fetchComic(num: num)
@@ -189,3 +133,67 @@ class ComicFetcher: NavigationBarViewNavigator, ObservableObject {
     }
 }
 
+// MARK: - NavigationBarViewDelegate
+extension ComicFetcher: NavigationBarViewNavigator {
+    
+    var canDoPrevious: Bool {
+        guard let currentComic = currentComic else {
+            return false
+        }
+        return currentComic.num > 1
+    }
+    
+    var canDoNext: Bool {
+        guard let currentComic = currentComic,
+            let lastComic = lastComic else {
+            return false
+        }
+        return currentComic.num < lastComic.num
+    }
+    
+    func loadFirst() {
+        load(num: 1)
+    }
+    
+    func loadPrevious() {
+        guard let currentComic = currentComic else {
+            return
+        }
+        load(num: currentComic.num - 1)
+    }
+    
+    func loadRandom() {
+        firstly {
+            XkcdAPI.sharedInstance.fetchRandomComic()
+        }.then { comic in
+            self.fetchImage(comic: comic)
+        }.done { comic in
+            self.currentComic = comic
+            self.toggleIsRead()
+        }.catch { error in
+            print(error)
+        }
+    }
+    
+    func loadNext() {
+        guard let currentComic = currentComic else {
+            return
+        }
+        load(num: currentComic.num + 1)
+    }
+    
+    func loadLast() {
+        firstly {
+            XkcdAPI.sharedInstance.fetchLastComic()
+        }.then { comic in
+            self.fetchImage(comic: comic)
+        }.done { comic in
+            self.currentComic = comic
+            self.lastComic = comic
+            self.toggleIsRead()
+            print("ComicFetcher loadLast")
+        }.catch { error in
+            print(error)
+        }
+    }
+}

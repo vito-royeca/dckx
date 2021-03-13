@@ -8,19 +8,19 @@
 
 import SwiftUI
 
-class NavigationBarViewNavigator {
-    init() {
-        loadLast()
-    }
+protocol NavigationBarViewNavigator {
+    var canDoPrevious: Bool { get }
+    var canDoNext: Bool { get }
+    func loadFirst()
+    func loadPrevious()
+    func loadRandom()
+    func loadNext()
+    func loadLast()
     
-    func loadFirst() {}
-    func canDoPrevious() -> Bool { return false }
-    func loadPrevious() {}
-    func loadRandom() {}
-    func loadNext() {}
-    func canDoNext() -> Bool { return false }
-    func loadLast() {}
-    
+    func dateToString(date: Date?) -> String
+}
+
+extension NavigationBarViewNavigator {
     func dateToString(date: Date?) -> String {
         if let date = date {
             let formatter = DateFormatter()
@@ -44,9 +44,9 @@ struct NavigationBarView: View {
                 self.resetAction?()
             }) {
                 Text("|<")
-                    .customButton(isDisabled: !self.navigator.canDoPrevious())
+                    .customButton(isDisabled: !self.navigator.canDoPrevious)
             }
-                .disabled(!self.navigator.canDoPrevious())
+                .disabled(!self.navigator.canDoPrevious)
             Spacer()
             
             Button(action: {
@@ -54,9 +54,9 @@ struct NavigationBarView: View {
                 self.resetAction?()
             }) {
                 Text("<Prev")
-                    .customButton(isDisabled: !self.navigator.canDoPrevious())
+                    .customButton(isDisabled: !self.navigator.canDoPrevious)
             }
-                .disabled(!self.navigator.canDoPrevious())
+                .disabled(!self.navigator.canDoPrevious)
             Spacer()
             
             Button(action: {
@@ -73,9 +73,9 @@ struct NavigationBarView: View {
                 self.resetAction?()
             }) {
                 Text("Next>")
-                    .customButton(isDisabled: !self.navigator.canDoNext())
+                    .customButton(isDisabled: !self.navigator.canDoNext)
             }
-                .disabled(!self.navigator.canDoNext())
+                .disabled(!self.navigator.canDoNext)
             Spacer()
             
             Button(action: {
@@ -83,9 +83,9 @@ struct NavigationBarView: View {
                 self.resetAction?()
             }) {
                 Text(">|")
-                    .customButton(isDisabled: !self.navigator.canDoNext())
+                    .customButton(isDisabled: !self.navigator.canDoNext)
             }
-                .disabled(!self.navigator.canDoNext())
+                .disabled(!self.navigator.canDoNext)
         }
     }
 }

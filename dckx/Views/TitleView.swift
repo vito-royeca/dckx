@@ -10,11 +10,22 @@ import SwiftUI
 
 struct TitleView: View {
     var title: String
+    var leftTitle: String
+    var rightTitle: String
     
     var body: some View {
-        HStack {
-            Text(title)
-                .font(.custom("xkcd-Script-Regular", size: 30))
+        VStack {
+            HStack {
+                Text(title)
+                    .font(.custom("xkcd-Script-Regular", size: 30))
+            }
+            HStack {
+                Text(leftTitle)
+                    .font(.custom("xkcd-Script-Regular", size: 15))
+                Spacer()
+                Text(rightTitle)
+                    .font(.custom("xkcd-Script-Regular", size: 15))
+            }
         }
             .padding(5)
     }
@@ -22,6 +33,6 @@ struct TitleView: View {
 
 struct TitleView_Previews: PreviewProvider {
     static var previews: some View {
-        TitleView(title: "Title")
+        TitleView(title: "Title", leftTitle: "Left", rightTitle: "Right")
     }
 }
