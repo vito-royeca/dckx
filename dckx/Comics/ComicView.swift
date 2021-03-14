@@ -25,8 +25,7 @@ struct ComicView: View {
                         baseURL: nil)
 
                 // Navigation
-                NavigationBarView(navigator: fetcher,
-                                  resetAction: resetImageScale)
+                NavigationBarView(navigator: fetcher)
             }
             .padding()
             .navigationBarTitle(fetcher.currentComic?.title ?? "")
@@ -71,7 +70,6 @@ struct ComicToolBarView: View {
     @Binding var showingAltText: Bool
     @State private var showingBrowser = false
     @State private var showingShare = false
-    @State private var showingList = false
     
     var body: some View {
         HStack {

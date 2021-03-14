@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-protocol NavigationBarViewNavigator {
+protocol NavigationBarViewNavigator: ObservableObject {
     var canDoPrevious: Bool { get }
     var canDoNext: Bool { get }
     func loadFirst()
@@ -33,15 +33,15 @@ extension NavigationBarViewNavigator {
     }
 }
 
-struct NavigationBarView: View {
-    var navigator: NavigationBarViewNavigator
-    var resetAction: (() -> Void)?
+struct NavigationBarView<Navigator>: View where Navigator: NavigationBarViewNavigator{
+    @ObservedObject var navigator: Navigator
+//    var action: (() -> Void) = {}
     
     var body: some View {
         HStack {
             Button(action: {
                 self.navigator.loadFirst()
-                self.resetAction?()
+//                self.resetAction?()
             }) {
                 Text("|<")
                     .customButton(isDisabled: !self.navigator.canDoPrevious)
@@ -51,7 +51,7 @@ struct NavigationBarView: View {
             
             Button(action: {
                 self.navigator.loadPrevious()
-                self.resetAction?()
+//                self.resetAction?()
             }) {
                 Text("<Prev")
                     .customButton(isDisabled: !self.navigator.canDoPrevious)
@@ -61,7 +61,7 @@ struct NavigationBarView: View {
             
             Button(action: {
                 self.navigator.loadRandom()
-                self.resetAction?()
+//                self.resetAction?()
             }) {
                 Text("Random")
                     .customButton(isDisabled: false)
@@ -70,7 +70,7 @@ struct NavigationBarView: View {
             
             Button(action: {
                 self.navigator.loadNext()
-                self.resetAction?()
+//                self.resetAction?()
             }) {
                 Text("Next>")
                     .customButton(isDisabled: !self.navigator.canDoNext)
@@ -80,7 +80,7 @@ struct NavigationBarView: View {
             
             Button(action: {
                 self.navigator.loadLast()
-                self.resetAction?()
+//                self.resetAction?()
             }) {
                 Text(">|")
                     .customButton(isDisabled: !self.navigator.canDoNext)
@@ -92,8 +92,7 @@ struct NavigationBarView: View {
 
 struct NavigationBarView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBarView(navigator: ComicFetcher(),
-                          resetAction: nil)
+        NavigationBarView(navigator: ComicFetcher())
     }
 }
 

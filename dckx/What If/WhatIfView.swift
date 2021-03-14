@@ -23,11 +23,8 @@ struct WhatIfView: View {
                         html: fetcher.composeHTML(),
                         baseURL: nil)
                 
-                Spacer()
-                
                 // Navigation
-                NavigationBarView(navigator: fetcher,
-                                  resetAction: nil)
+                NavigationBarView(navigator: fetcher)
             }
             .padding()
             .navigationBarTitle(fetcher.currentWhatIf?.title ?? "")
@@ -65,7 +62,6 @@ struct WhatIfToolBarView: View {
     @State private var mailResult: Result<MFMailComposeResult, Error>? = nil
     @State private var showingMail = false
     @State private var showingShare = false
-    @State private var showingList = false
     
     var body: some View {
         HStack {
