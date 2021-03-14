@@ -27,6 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                           NSAttributedString.Key.foregroundColor: UIColor(named: "BackgroundColor") ?? UIColor.blue],
                                                          for: .normal)
         
+        //Use this if NavigationBarTitle is with Large Font
+        UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "xkcd-Script-Regular", size: 25)!]
+
+        //Use this if NavigationBarTitle is with displayMode = .inline
+//        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "xkcd-Script-Regular", size: 25)!]
+        
         
         return true
     }

@@ -122,9 +122,9 @@ class ComicFetcher: ObservableObject {
             "width:auto; height:100%;"
         
         var html = "<html>\(head)<body>"
-        html += "<table id='wrapper'>"
-        html += "<tr><td><p class='altText'>\(showingAltText ? comic.alt ?? "&nbsp;" : "&nbsp;")</p></td></tr>"
-        html += "<tr><td><img src='data:image/png;base64, \(data.base64EncodedString())' alt='\(title)' style='\(style)'/></td></tr>"
+        html += "<table id='wrapper' width='100%'>"
+        html += "<tr><td colspan='2'><p class='altText'>\(showingAltText ? comic.alt ?? "&nbsp;" : "&nbsp;")</p></td></tr>"
+        html += "<tr><td colspan='2'><img src='data:image/png;base64, \(data.base64EncodedString())' alt='\(title)' style='\(style)'/></td></tr>"
         html += "<tr><td>&nbsp;</td></tr>"
         html += "</table>"
         html += "</body></html>"

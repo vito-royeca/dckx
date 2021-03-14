@@ -13,32 +13,48 @@ import WebKit
 
 struct WhatIfView: View {
     @ObservedObject var fetcher = WhatIfFetcher()
+    @State private var showingList = false
     
     var body: some View {
-        VStack {
-            // Title
-            TitleView(title: fetcher.currentWhatIf?.title ?? "",
-                      leftTitle: "\(fetcher.currentWhatIf?.num ?? 1)",
-                      rightTitle: fetcher.dateToString(date: fetcher.currentWhatIf?.date))
-
-            // Toolbar
-            Divider()
-            WhatIfToolBarView(fetcher: fetcher)
-            
-            Spacer()
-            
-            // WebView
-            WebView(link: nil,
-                    html: fetcher.composeHTML(),
-                    baseURL: nil)
-            
-            Spacer()
-            
-            // Navigation
-            NavigationBarView(navigator: fetcher,
-                              resetAction: nil)
-        }
+        NavigationView {
+            VStack {
+                HStack {
+                    Text("#\(fetcher.currentWhatIf?.num ?? 1)")
+                        .font(.custom("xkcd-Script-Regular", size: 15))
+                    Spacer()
+                    Text(fetcher.dateToString(date: fetcher.currentWhatIf?.date))
+                        .font(.custom("xkcd-Script-Regular", size: 15))
+                }
+                
+                // WebView
+                WebView(link: nil,
+                        html: fetcher.composeHTML(),
+                        baseURL: nil)
+                
+                Spacer()
+                
+                // Navigation
+                NavigationBarView(navigator: fetcher,
+                                  resetAction: nil)
+            }
             .padding()
+            .navigationBarTitle(fetcher.currentWhatIf?.title ?? "")
+            .navigationBarItems(
+                leading: Button(action: {
+                    self.showingList.toggle()
+                }) {
+                    Image(systemName: "list.dash")
+                        .imageScale(.large)
+                        .foregroundColor(.buttonColor)
+                }
+                    .sheet(isPresented: $showingList, content: {
+                        WhatIfListView(fetcher: self.fetcher)
+                    }),
+                
+                trailing:
+                WhatIfToolBarView(fetcher: fetcher)
+            )
+        }
     }
 }
 
@@ -64,16 +80,18 @@ struct WhatIfToolBarView: View {
             Button(action: {
                 self.fetcher.toggleIsFavorite()
             }) {
-                Text("BOOKMARK \(fetcher.currentWhatIf?.isFavorite ?? false ? "-" : "+")")
-                    .customButton(isDisabled: false)
+                Image(systemName: fetcher.currentWhatIf?.isFavorite ?? false ? "bookmark.fill" : "bookmark")
+                    .imageScale(.large)
+                    .foregroundColor(.buttonColor)
             }
             Spacer()
             
             Button(action: {
                 self.showingMail.toggle()
             }) {
-                Text("ASK")
-                    .customButton(isDisabled: false)
+                Image(systemName: "mail")
+                    .imageScale(.large)
+                    .foregroundColor(.buttonColor)
             }
                 .sheet(isPresented: $showingMail, content: {
                     MailView(result: self.$mailResult)
@@ -83,24 +101,14 @@ struct WhatIfToolBarView: View {
             Button(action: {
                 self.showingShare.toggle()
             }) {
-                Text("SHARE")
-                    .customButton(isDisabled: false)
+                Image(systemName: "square.and.arrow.up")
+                    .imageScale(.large)
+                    .foregroundColor(.buttonColor)
             }
                 .sheet(isPresented: $showingShare) {
                     ShareSheetView(activityItems: self.activityItems(),
                                    applicationActivities: nil)
                 }
-            Spacer()
-            
-            Button(action: {
-                self.showingList.toggle()
-            }) {
-                Text("LIST")
-                    .customButton(isDisabled: false)
-            }
-                .sheet(isPresented: $showingList, content: {
-                    WhatIfListView(fetcher: self.fetcher)
-                })
         }
     }
     

@@ -15,32 +15,47 @@ struct ComicView: View {
     @State var lastScaleValue: CGFloat = 1.0
     @State var scale: CGFloat = 1.0
     @State var showingAltText = false
+    @State private var showingList = false
     
     var body: some View {
-        VStack {
-            // Title
-            TitleView(title: fetcher.currentComic?.title ?? "",
-                      leftTitle: "\(fetcher.currentComic?.num ?? 1)",
-                      rightTitle: fetcher.dateToString(date: fetcher.currentComic?.date))
+        NavigationView {
+            VStack {
+                HStack {
+                    Text("#\(fetcher.currentComic?.num ?? 1)")
+                        .font(.custom("xkcd-Script-Regular", size: 15))
+                    Spacer()
+                    Text(fetcher.dateToString(date: fetcher.currentComic?.date))
+                        .font(.custom("xkcd-Script-Regular", size: 15))
+                }
+                
+                WebView(link: nil,
+                        html: fetcher.composeHTML(showingAltText: showingAltText),
+                        baseURL: nil)
 
-            // Toolbar
-            Divider()
-            ComicToolBarView(fetcher: fetcher,
-                             showingAltText: $showingAltText)
-
-            Spacer()
-
-            WebView(link: nil,
-                    html: fetcher.composeHTML(showingAltText: showingAltText),
-                    baseURL: nil)
-            
-            Spacer()
-            
-            // Navigation
-            NavigationBarView(navigator: fetcher,
-                              resetAction: resetImageScale)
-        }
+                // Navigation
+                NavigationBarView(navigator: fetcher,
+                                  resetAction: resetImageScale)
+            }
             .padding()
+            .navigationBarTitle(fetcher.currentComic?.title ?? "")
+            .navigationBarItems(
+                leading: Button(action: {
+                    self.showingList.toggle()
+                }) {
+                    Image(systemName: "list.dash")
+                        .imageScale(.large)
+                        .foregroundColor(.buttonColor)
+                }
+                    .sheet(isPresented: $showingList, content: {
+                        ComicListView(fetcher: self.fetcher)
+                    }),
+                
+                trailing:
+                ComicToolBarView(fetcher: fetcher,
+                                 showingAltText: $showingAltText)
+            )
+        }
+        
     }
     
     func resetImageScale() {
@@ -71,16 +86,27 @@ struct ComicToolBarView: View {
             Button(action: {
                 self.fetcher.toggleIsFavorite()
             }) {
-                Text("BOOKMARK \(fetcher.currentComic?.isFavorite ?? false ? "-" : "+")")
-                    .customButton(isDisabled: false)
+                Image(systemName: fetcher.currentComic?.isFavorite ?? false ? "bookmark.fill" : "bookmark")
+                    .imageScale(.large)
+                    .foregroundColor(.buttonColor)
+            }
+            Spacer()
+            
+            Button(action: {
+                self.showingAltText.toggle()
+            }) {
+                Image(systemName: showingAltText ? "doc.text.fill" : "doc.text" )
+                    .imageScale(.large)
+                    .foregroundColor(.buttonColor)
             }
             Spacer()
             
             Button(action: {
                 self.showingBrowser.toggle()
             }) {
-                Text("EXPLAIN")
-                    .customButton(isDisabled: false)
+                Image(systemName: "questionmark.circle")
+                    .imageScale(.large)
+                    .foregroundColor(.buttonColor)
             }
                 .sheet(isPresented: $showingBrowser, content: {
                     self.fetcher.currentComic.map({
@@ -92,34 +118,16 @@ struct ComicToolBarView: View {
             Spacer()
             
             Button(action: {
-                self.showingAltText.toggle()
-            }) {
-                Text("ALT TEXT")
-                    .customButton(isDisabled: false)
-            }
-            Spacer()
-            
-            Button(action: {
                 self.showingShare.toggle()
             }) {
-                Text("SHARE")
-                    .customButton(isDisabled: false)
+                Image(systemName: "square.and.arrow.up")
+                    .imageScale(.large)
+                    .foregroundColor(.buttonColor)
             }
                 .sheet(isPresented: $showingShare) {
                     ShareSheetView(activityItems: self.activityItems(),
                                    applicationActivities: nil)
                 }
-            Spacer()
-            
-            Button(action: {
-                self.showingList.toggle()
-            }) {
-                Text("LIST")
-                    .customButton(isDisabled: false)
-            }
-                .sheet(isPresented: $showingList, content: {
-                    ComicListView(fetcher: self.fetcher)
-                })
         }
     }
     

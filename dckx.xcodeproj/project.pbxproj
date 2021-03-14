@@ -88,9 +88,6 @@
 		8BA50E6C240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
 		8BA50E6D240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
 		8BA50E6E240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
-		8BA71CC6241C1C3F00762790 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA71CC5241C1C3F00762790 /* TitleView.swift */; };
-		8BA71CC9241C1F8900762790 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA71CC5241C1C3F00762790 /* TitleView.swift */; };
-		8BA71CCA241C1F8A00762790 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA71CC5241C1C3F00762790 /* TitleView.swift */; };
 		8BE8ECA3243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
 		8BE8ECA4243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
 		8BE8ECA5243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
@@ -163,7 +160,6 @@
 		8BA50E5F240A2DA200138D11 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		8BA50E67240A384400138D11 /* WhatIfFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfFetcher.swift; sourceTree = "<group>"; };
 		8BA50E6B240A425500138D11 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		8BA71CC5241C1C3F00762790 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		8BE8ECA2243A9B1E0037036E /* dckx.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = dckx.sqlite; sourceTree = "<group>"; };
 		8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ResignKeyboardOnDragGesture.swift"; sourceTree = "<group>"; };
 		A1695073ECC186DD58075EB6 /* Pods-dckxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dckxTests.debug.xcconfig"; path = "Target Support Files/Pods-dckxTests/Pods-dckxTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -291,7 +287,6 @@
 				8B65801F240B1C6E00A245DC /* NavigationBarView.swift */,
 				8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */,
 				8B65801B240B12E100A245DC /* ShareSheetView.swift */,
-				8BA71CC5241C1C3F00762790 /* TitleView.swift */,
 				8BA50E6B240A425500138D11 /* WebView.swift */,
 			);
 			path = Views;
@@ -639,7 +634,6 @@
 				8B4F4B9B23F5F444008446F4 /* SceneDelegate.swift in Sources */,
 				8B65801C240B12E100A245DC /* ShareSheetView.swift in Sources */,
 				8BA50E60240A2DA200138D11 /* Database.swift in Sources */,
-				8BA71CC6241C1C3F00762790 /* TitleView.swift in Sources */,
 				8B4F4B9D23F5F444008446F4 /* ComicView.swift in Sources */,
 				8B23367E23F646A700C88BA1 /* CoreData.swift in Sources */,
 				8B23368223F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
@@ -663,7 +657,6 @@
 				8BA50E69240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8BA50E4A24097CF000138D11 /* MainView.swift in Sources */,
 				8B3049A4241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
-				8BA71CC9241C1F8900762790 /* TitleView.swift in Sources */,
 				8B4F4BB023F5F445008446F4 /* dckxTests.swift in Sources */,
 				8B65801D240B12E100A245DC /* ShareSheetView.swift in Sources */,
 				8B626D882402122C00972EED /* BrowserView.swift in Sources */,
@@ -691,7 +684,6 @@
 				8B658022240B1C6E00A245DC /* NavigationBarView.swift in Sources */,
 				8B65801E240B12E100A245DC /* ShareSheetView.swift in Sources */,
 				8B3049A5241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
-				8BA71CCA241C1F8A00762790 /* TitleView.swift in Sources */,
 				8B23368423F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8B4F4BBB23F5F445008446F4 /* dckxUITests.swift in Sources */,
 				8B626D892402122C00972EED /* BrowserView.swift in Sources */,
