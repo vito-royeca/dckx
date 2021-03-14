@@ -105,12 +105,6 @@ class ComicFetcher: ObservableObject {
     }
     
     func composeHTML(showingAltText: Bool) -> String {
-        let head =
-        """
-            <head>
-                <link href='xkcd.css' rel='stylesheet'>
-            </head>
-        """
         guard let comic = currentComic,
             let img = comic.img,
             let title = comic.title,
@@ -118,12 +112,21 @@ class ComicFetcher: ObservableObject {
             let data = image.pngData() else {
             return ""
         }
+        let head =
+        """
+            <head>
+                <link href='xkcd.css' rel='stylesheet'>
+            </head>
+        """
         let style = image.size.width > image.size.height ? "width:100%; height:auto;" :
             "width:auto; height:100%;"
         
         var html = "<html>\(head)<body>"
         html += "<table id='wrapper' width='100%'>"
-        html += "<tr><td colspan='2'><p class='altText'>\(showingAltText ? comic.alt ?? "&nbsp;" : "&nbsp;")</p></td></tr>"
+        html += "<tr><td width='50%'><p class='subtitle' align='left'>#\(comic.num)</p></td><td width='50%'><p class='subtitle' align='right'>\(dateToString(date: comic.date))</p></td></tr>"
+        if showingAltText {
+            html += "<tr><td colspan='2'><p class='altText'>\(comic.alt ?? "&nbsp;")</p></td></tr>"
+        }
         html += "<tr><td colspan='2'><img src='data:image/png;base64, \(data.base64EncodedString())' alt='\(title)' style='\(style)'/></td></tr>"
         html += "<tr><td>&nbsp;</td></tr>"
         html += "</table>"

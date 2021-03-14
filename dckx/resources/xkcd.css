@@ -37,7 +37,7 @@ html, body, #wrapper {
    border: 0;
 }
 #wrapper td {
-   vertical-align: middle;
+   vertical-align: top;
    text-align: center;
 }
 
@@ -65,6 +65,20 @@ img {
     font-family: xkcd-script;
     line-height: 150%;
     font-size: 40px;
+    color: var(--color);
+    background-color: var(--background);
+}
+.title {
+    font-family: xkcd-script;
+    line-height: 150%;
+    font-size: 100px;
+    color: var(--color);
+    background-color: var(--background);
+}
+.subtitle {
+    font-family: xkcd-script;
+    line-height: 150%;
+    font-size: 60px;
     color: var(--color);
     background-color: var(--background);
 }

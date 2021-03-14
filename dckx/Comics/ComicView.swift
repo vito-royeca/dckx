@@ -20,14 +20,6 @@ struct ComicView: View {
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
-                    Text("#\(fetcher.currentComic?.num ?? 1)")
-                        .font(.custom("xkcd-Script-Regular", size: 15))
-                    Spacer()
-                    Text(fetcher.dateToString(date: fetcher.currentComic?.date))
-                        .font(.custom("xkcd-Script-Regular", size: 15))
-                }
-                
                 WebView(link: nil,
                         html: fetcher.composeHTML(showingAltText: showingAltText),
                         baseURL: nil)

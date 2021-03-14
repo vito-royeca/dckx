@@ -103,6 +103,12 @@ class WhatIfFetcher: ObservableObject {
     }
     
     func composeHTML() -> String {
+        guard let whatIf = currentWhatIf,
+            let question = whatIf.question,
+            let questioner = whatIf.questioner,
+            let answer = whatIf.answer else {
+            return ""
+        }
         let head =
         """
             <head>
@@ -111,10 +117,11 @@ class WhatIfFetcher: ObservableObject {
         """
 
         var html = "<html>\(head)"
-        html += "<p class='question'>\(currentWhatIf?.question ?? "")"
-        html += "<p class='questioner' align='right'>- \(currentWhatIf?.questioner ?? "")"
+        html += "<table width='100%'><tr><td width='50%'><p class='subtitle' align='left'>#\(whatIf.num)</p></td><td width='50%'><p class='subtitle' align='right'>\(dateToString(date: whatIf.date))</p></td></tr></table>"
+        html += "<p class='question'>\(question)"
+        html += "<p class='questioner' align='right'>- \(questioner)"
         html += "<p/> &nbsp;"
-        html += "\(currentWhatIf?.answer ?? "")"
+        html += "\(answer)"
         html += "</html>"
         
         return html

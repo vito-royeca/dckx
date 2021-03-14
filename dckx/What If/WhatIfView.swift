@@ -18,14 +18,6 @@ struct WhatIfView: View {
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
-                    Text("#\(fetcher.currentWhatIf?.num ?? 1)")
-                        .font(.custom("xkcd-Script-Regular", size: 15))
-                    Spacer()
-                    Text(fetcher.dateToString(date: fetcher.currentWhatIf?.date))
-                        .font(.custom("xkcd-Script-Regular", size: 15))
-                }
-                
                 // WebView
                 WebView(link: nil,
                         html: fetcher.composeHTML(),
