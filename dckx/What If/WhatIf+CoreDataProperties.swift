@@ -17,16 +17,16 @@ extension WhatIf {
         return NSFetchRequest<WhatIf>(entityName: "WhatIf")
     }
 
-    @NSManaged public var answer: String?
-    @NSManaged public var date: Date?
-    @NSManaged public var isFavorite: Bool
-    @NSManaged public var isRead: Bool
-    @NSManaged public var link: String?
-    @NSManaged public var num: Int32
-    @NSManaged public var question: String?
-    @NSManaged public var questioner: String?
-    @NSManaged public var thumbnail: String?
-    @NSManaged public var title: String?
+//    @NSManaged public var answer: String?
+//    @NSManaged public var date: Date?
+//    @NSManaged public var isFavorite: Bool
+//    @NSManaged public var isRead: Bool
+//    @NSManaged public var link: String?
+//    @NSManaged public var num: Int32
+//    @NSManaged public var question: String?
+//    @NSManaged public var questioner: String?
+//    @NSManaged public var thumbnail: String?
+//    @NSManaged public var title: String?
 
 }
 

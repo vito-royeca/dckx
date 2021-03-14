@@ -169,7 +169,6 @@ extension WhatIfFetcher: NavigationBarViewNavigator {
     
     func loadLast() {
         firstly {
-            //XkcdAPI.sharedInstance.fetchLastWhatIf()
             XkcdAPI.sharedInstance.fetchLastWhatIf()
         }.done { whatIf in
             self.currentWhatIf = whatIf

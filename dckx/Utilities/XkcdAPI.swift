@@ -115,17 +115,22 @@ class XkcdAPI {
     
     private func generateNewWhatIf(data: [String: Any]) -> Promise<[String: Any]> {
         return Promise { seal in
+            
             firstly {
+                // trigger dataStack init
+                self.coreData.loadWhatIf(num: Int32(1))
+            }.then {  _ in
                 self.coreData.loadLastWhatIf()
             }.done { whatIf in
                 var newData = [String: Any]()
                 
+                for (k,v) in data {
+                    newData[k] = v
+                }
+                
                 if whatIf.title == data["title"] as? String {
                     newData["num"] = whatIf.num
                 } else {
-                    for (k,v) in data {
-                        newData[k] = v
-                    }
                     newData["num"] = Int32(whatIf.num + 1)
                 }
                 

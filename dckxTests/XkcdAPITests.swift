@@ -28,8 +28,10 @@ class XkcdAPITests: XCTestCase {
             XkcdAPI.mockInstance.fetchLastComic()
         }.done { comic in
             XCTAssertEqual(comic.num, 1)
+            expectation.fulfill()
         }.catch { error in
             XCTFail(error.localizedDescription)
+            expectation.fulfill()
         }
         
         waitForExpectations(timeout: 100.0, handler: nil)

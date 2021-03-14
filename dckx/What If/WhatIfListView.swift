@@ -297,7 +297,7 @@ class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observa
         controller!.delegate = self
         
         do {
-            NSFetchedResultsController<Comic>.deleteCache(withName: controller!.cacheName)
+            NSFetchedResultsController<WhatIf>.deleteCache(withName: controller!.cacheName)
             try controller!.performFetch()
             fetchOffset += fetchBatchSize
             fetchLimit += fetchOffset

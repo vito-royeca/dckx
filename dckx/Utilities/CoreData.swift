@@ -81,14 +81,13 @@ class CoreData {
     
     func loadComic(num: Int32) -> Promise<Comic> {
         return Promise { seal in
-            let error = NSError(domain: "",
-                                code: 404,
-                                userInfo: [NSLocalizedDescriptionKey: "Comic with ID \(num) not found."])
-            
             do {
                 if let comic = try dataStack.fetch(num, inEntityNamed: String(describing: Comic.self)) as? Comic {
                     seal.fulfill(comic)
                 } else {
+                    let error = NSError(domain: "",
+                                        code: 404,
+                                        userInfo: [NSLocalizedDescriptionKey: "Comic with ID \(num) not found."])
                     seal.reject(error)
                 }
             } catch {
@@ -99,10 +98,6 @@ class CoreData {
     
     func loadLastComic() -> Promise<Comic> {
         return Promise { seal in
-            let error = NSError(domain: "",
-                                code: 404,
-                                userInfo: [NSLocalizedDescriptionKey: "Last Comic not found."])
-            
             do {
                 let request: NSFetchRequest<NSFetchRequestResult> = Comic.fetchRequest()
                 request.fetchLimit = 1
@@ -110,6 +105,9 @@ class CoreData {
                 
                 guard let array = try dataStack.execute(request, with: dataStack.mainContext) as? [NSManagedObject],
                     let comic = array.first as? Comic else {
+                    let error = NSError(domain: "",
+                                        code: 404,
+                                        userInfo: [NSLocalizedDescriptionKey: "Last Comic not found."])
                     throw(error)
                 }
                 seal.fulfill(comic)
@@ -145,14 +143,13 @@ class CoreData {
     
     func loadWhatIf(num: Int32) -> Promise<WhatIf> {
         return Promise { seal in
-            let error = NSError(domain: "",
-                                code: 404,
-                                userInfo: [NSLocalizedDescriptionKey: "WhatIf with ID \(num) not found."])
-            
             do {
                 if let whatIf = try dataStack.fetch(num, inEntityNamed: String(describing: WhatIf.self)) as? WhatIf {
                     seal.fulfill(whatIf)
                 } else {
+                    let error = NSError(domain: "",
+                                        code: 404,
+                                        userInfo: [NSLocalizedDescriptionKey: "WhatIf with ID \(num) not found."])
                     seal.reject(error)
                 }
             } catch {
@@ -163,17 +160,19 @@ class CoreData {
     
     func loadLastWhatIf() -> Promise<WhatIf> {
         return Promise { seal in
-            let error = NSError(domain: "",
-                                code: 404,
-                                userInfo: [NSLocalizedDescriptionKey: "Last WhatIf not found."])
-            
             do {
                 let request: NSFetchRequest<NSFetchRequestResult> = WhatIf.fetchRequest()
+//                let request = NSFetchRequest<WhatIf>(entityName: "WhatIf")
+//                let request: NSFetchRequest<WhatIf> = WhatIf.fetchRequest()
                 request.fetchLimit = 1
                 request.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
                 
                 guard let array = try dataStack.execute(request, with: dataStack.mainContext) as? [NSManagedObject],
                     let whatIf = array.first as? WhatIf else {
+                    
+                    let error = NSError(domain: "",
+                                        code: 404,
+                                        userInfo: [NSLocalizedDescriptionKey: "Last WhatIf not found."])
                     throw(error)
                 }
                 seal.fulfill(whatIf)
