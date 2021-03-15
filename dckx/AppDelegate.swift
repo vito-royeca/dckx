@@ -20,11 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Database.sharedInstance.createDatabase()
         Database.sharedInstance.copyDatabase()
         
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 30)!,
-                                                          NSAttributedString.Key.foregroundColor: UIColor(named: "ButtonColor") ?? UIColor.blue],
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 12)!/*,
+                                                          NSAttributedString.Key.foregroundColor: UIColor(named: "ButtonColor") ?? UIColor.blue*/],
                                                          for: .selected)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 30)!,
-                                                          NSAttributedString.Key.foregroundColor: UIColor(named: "BackgroundColor") ?? UIColor.blue],
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 12)!/*,
+                                                          NSAttributedString.Key.foregroundColor: UIColor(named: "BackgroundColor") ?? UIColor.blue*/],
                                                          for: .normal)
         
         //Use this if NavigationBarTitle is with Large Font

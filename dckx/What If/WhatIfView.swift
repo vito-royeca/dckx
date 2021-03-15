@@ -17,33 +17,36 @@ struct WhatIfView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                // WebView
+            if #available(iOS 14.0, *) {
                 WebView(link: nil,
                         html: fetcher.composeHTML(),
                         baseURL: nil)
-                
-                // Navigation
-                NavigationBarView(navigator: fetcher)
-            }
-            .padding()
-            .navigationBarTitle(fetcher.currentWhatIf?.title ?? "")
-            .navigationBarItems(
-                leading: Button(action: {
-                    self.showingList.toggle()
-                }) {
-                    Image(systemName: "list.dash")
-                        .imageScale(.large)
-                        .foregroundColor(.buttonColor)
+                .navigationBarTitle(Text(fetcher.currentWhatIf?.title ?? ""), displayMode: .automatic)
+                .navigationBarItems(
+                    leading: listButton,
+                    trailing:
+                        WhatIfToolBarView(fetcher: fetcher)
+                )
+                .toolbar {
+                    NavigationToolbar(loadFirst: fetcher.loadFirst, loadPrevious: fetcher.loadPrevious, loadRandom: fetcher.loadRandom, loadNext: fetcher.loadNext, loadLast: fetcher.loadLast, canDoPrevious: fetcher.canDoPrevious, canDoNext: fetcher.canDoNext)
                 }
-                    .sheet(isPresented: $showingList, content: {
-                        WhatIfListView(fetcher: self.fetcher)
-                    }),
-                
-                trailing:
-                WhatIfToolBarView(fetcher: fetcher)
-            )
+            } else {
+                Text("Unsupported iOS version")
+            }
         }
+    }
+    
+    var listButton: some View {
+        Button(action: {
+            self.showingList.toggle()
+        }) {
+            Image(systemName: "list.dash")
+                .imageScale(.large)
+//                            .foregroundColor(.buttonColor)
+        }
+        .sheet(isPresented: $showingList, content: {
+            WhatIfListView(fetcher: self.fetcher)
+        })
     }
 }
 
@@ -70,7 +73,7 @@ struct WhatIfToolBarView: View {
             }) {
                 Image(systemName: fetcher.currentWhatIf?.isFavorite ?? false ? "bookmark.fill" : "bookmark")
                     .imageScale(.large)
-                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.buttonColor)
             }
             Spacer()
             
@@ -79,7 +82,7 @@ struct WhatIfToolBarView: View {
             }) {
                 Image(systemName: "mail")
                     .imageScale(.large)
-                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.buttonColor)
             }
                 .sheet(isPresented: $showingMail, content: {
                     MailView(result: self.$mailResult)
@@ -91,7 +94,7 @@ struct WhatIfToolBarView: View {
             }) {
                 Image(systemName: "square.and.arrow.up")
                     .imageScale(.large)
-                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.buttonColor)
             }
                 .sheet(isPresented: $showingShare) {
                     ShareSheetView(activityItems: self.activityItems(),

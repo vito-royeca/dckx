@@ -17,11 +17,13 @@ class WhatIfFetcher: ObservableObject {
     @Published var lastWhatIf: WhatIf?
     
     // MARK: - Initializer
+    
     init() {
         loadLast()
     }
 
     // MARK: - Toolbar methods
+    
     func toggleIsFavorite() {
         guard let currentWhatIf = currentWhatIf else {
             return
@@ -59,6 +61,7 @@ class WhatIfFetcher: ObservableObject {
     }
     
     // MARK: - Helper methods
+    
     func load(num: Int32) {
         firstly {
             XkcdAPI.sharedInstance.fetchWhatIf(num: num)
@@ -129,7 +132,8 @@ class WhatIfFetcher: ObservableObject {
 }
 
 // MARK: - NavigationBarViewNavigator
-extension WhatIfFetcher: NavigationBarViewNavigator {
+
+extension WhatIfFetcher: NavigationToolbarDelegate {
     var canDoPrevious: Bool {
         guard let currentWhatIf = currentWhatIf else {
             return false

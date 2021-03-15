@@ -13,11 +13,17 @@ struct MainView: View {
         TabView{
             ComicView()
                 .tabItem({
+                    Image(systemName: "photo.on.rectangle.angled")
                     Text("Comics")
                 })
             WhatIfView()
                 .tabItem({
+                    Image(systemName: "questionmark.folder")
                     Text("What If?")
+                })
+            HideScrollView()
+                .tabItem({
+                    Text("Hide")
                 })
         }
     }

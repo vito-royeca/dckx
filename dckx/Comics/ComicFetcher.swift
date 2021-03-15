@@ -17,11 +17,13 @@ class ComicFetcher: ObservableObject {
     @Published var lastComic: Comic?
     
     // MARK: - Initializer
+    
     init() {
         loadLast()
     }
     
     // MARK: - Toolbar methods
+    
     func toggleIsFavorite() {
         guard let currentComic = currentComic else {
             return
@@ -59,6 +61,7 @@ class ComicFetcher: ObservableObject {
     }
     
     // MARK: - Helper methods
+    
     func load(num: Int32) {
         firstly {
             XkcdAPI.sharedInstance.fetchComic(num: num)
@@ -137,8 +140,8 @@ class ComicFetcher: ObservableObject {
 }
 
 // MARK: - NavigationBarViewDelegate
-extension ComicFetcher: NavigationBarViewNavigator {
-    
+
+extension ComicFetcher: NavigationToolbarDelegate {
     var canDoPrevious: Bool {
         guard let currentComic = currentComic else {
             return false

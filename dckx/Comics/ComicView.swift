@@ -16,37 +16,42 @@ struct ComicView: View {
     @State var scale: CGFloat = 1.0
     @State var showingAltText = false
     @State private var showingList = false
+    @State var isHidden = true
     
     var body: some View {
         NavigationView {
-            VStack {
+            if #available(iOS 14.0, *) {
                 WebView(link: nil,
                         html: fetcher.composeHTML(showingAltText: showingAltText),
                         baseURL: nil)
-
-                // Navigation
-                NavigationBarView(navigator: fetcher)
-            }
-            .padding()
-            .navigationBarTitle(fetcher.currentComic?.title ?? "")
-            .navigationBarItems(
-                leading: Button(action: {
-                    self.showingList.toggle()
-                }) {
-                    Image(systemName: "list.dash")
-                        .imageScale(.large)
-                        .foregroundColor(.buttonColor)
+                .navigationBarTitle(Text(fetcher.currentComic?.title ?? ""), displayMode: .automatic)
+                .navigationBarItems(
+                    leading: listButton,
+                    trailing:
+                        ComicToolBarView(fetcher: fetcher,
+                                         showingAltText: $showingAltText)
+                )
+                .toolbar() {
+                    NavigationToolbar(loadFirst: fetcher.loadFirst, loadPrevious: fetcher.loadPrevious, loadRandom: fetcher.loadRandom, loadNext: fetcher.loadNext, loadLast: fetcher.loadLast, canDoPrevious: fetcher.canDoPrevious, canDoNext: fetcher.canDoNext)
+                    
                 }
-                    .sheet(isPresented: $showingList, content: {
-                        ComicListView(fetcher: self.fetcher)
-                    }),
-                
-                trailing:
-                ComicToolBarView(fetcher: fetcher,
-                                 showingAltText: $showingAltText)
-            )
+            } else {
+                Text("Unsupported iOS version")
+            }
         }
-        
+    }
+    
+    var listButton: some View {
+        Button(action: {
+            self.showingList.toggle()
+        }) {
+            Image(systemName: "list.dash")
+                .imageScale(.large)
+//                            .foregroundColor(.buttonColor)
+        }
+        .sheet(isPresented: $showingList, content: {
+            ComicListView(fetcher: self.fetcher)
+        })
     }
     
     func resetImageScale() {
@@ -78,7 +83,7 @@ struct ComicToolBarView: View {
             }) {
                 Image(systemName: fetcher.currentComic?.isFavorite ?? false ? "bookmark.fill" : "bookmark")
                     .imageScale(.large)
-                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.buttonColor)
             }
             Spacer()
             
@@ -87,7 +92,7 @@ struct ComicToolBarView: View {
             }) {
                 Image(systemName: showingAltText ? "doc.text.fill" : "doc.text" )
                     .imageScale(.large)
-                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.buttonColor)
             }
             Spacer()
             
@@ -96,7 +101,7 @@ struct ComicToolBarView: View {
             }) {
                 Image(systemName: "questionmark.circle")
                     .imageScale(.large)
-                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.buttonColor)
             }
                 .sheet(isPresented: $showingBrowser, content: {
                     self.fetcher.currentComic.map({
@@ -112,7 +117,7 @@ struct ComicToolBarView: View {
             }) {
                 Image(systemName: "square.and.arrow.up")
                     .imageScale(.large)
-                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.buttonColor)
             }
                 .sheet(isPresented: $showingShare) {
                     ShareSheetView(activityItems: self.activityItems(),
