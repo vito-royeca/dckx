@@ -69,7 +69,7 @@ class ComicFetcher: ObservableObject {
             self.fetchImage(comic: comic)
         }.done { comic in
             self.currentComic = comic
-            self.toggleIsRead()
+//            self.toggleIsRead()
         }.catch { error in
             print(error)
         }

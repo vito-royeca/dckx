@@ -8,6 +8,7 @@ def shared_pods
     pod 'MBProgressHUD'
     pod 'PromiseKit'
     pod 'SDWebImage'
+    pod 'SDWebImageSwiftUI'
     pod 'Sync'
 end
 

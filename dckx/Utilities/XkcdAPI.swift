@@ -186,7 +186,8 @@ class XkcdAPI {
         }
     }
     
-    // MARK: Helper methods
+    // MARK: - Helper methods
+
     func explainURL(of comic: Comic) -> String {
         let baseUrl = "https://www.explainxkcd.com/wiki/index.php"
         let comicUrl = "\(comic.num):_\((comic.title ?? "").components(separatedBy: " ").joined(separator: "_"))"

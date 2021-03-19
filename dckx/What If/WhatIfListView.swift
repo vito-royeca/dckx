@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 import CoreData
 import PromiseKit
-import SDWebImage
+import SDWebImageSwiftUI
 
 // MARK: - WhatIfListView
 
@@ -122,7 +122,6 @@ struct WhatIfTextListView: View {
     var action: (Int32) -> Void
     
     init(viewModel: Binding<WhatIfListViewModel>, action: @escaping (Int32) -> Void) {
-
         _viewModel = viewModel
         self.action = action
     }
@@ -153,15 +152,30 @@ struct WhatIfListRow: View {
     var thumbnail: String
     var title: String
     var action: (Int32) -> Void
+    @ObservedObject var imageManager: ImageManager
+    
+    init(num: Int32, thumbnail: String, title: String, action: @escaping (Int32) -> Void) {
+        self.num = num
+        self.thumbnail = thumbnail
+        self.title = title
+        self.action = action
+        imageManager = ImageManager(url: URL(string: thumbnail))
+    }
     
     var body: some View {
         HStack {
             VStack {
-                Image(uiImage: SDImageCache.shared.imageFromCache(forKey: thumbnail) ?? UIImage(named: "logo")!)
+                Image(uiImage: imageManager.image ?? UIImage(named: "logo")!)
                 .resizable()
                 .frame(width: 50, height: 50)
             }
                 .background(Color.white)
+                .onAppear {
+                    self.imageManager.load()
+                }
+                .onDisappear {
+                    self.imageManager.cancel()
+                }
             Text("#\(String(num)): \(title)")
                 .font(.custom("xkcd-Script-Regular", size: 15))
             Spacer()
@@ -170,33 +184,6 @@ struct WhatIfListRow: View {
             }) {
                 Text(">")
                     .font(.custom("xkcd-Script-Regular", size: 15))
-            }
-        }
-    }
-    
-    func fetchThumbnail(thumbnail: String) -> Promise<UIImage> {
-        return Promise { seal in
-            if let image = SDImageCache.shared.imageFromCache(forKey: thumbnail) {
-                seal.fulfill(image)
-            } else {
-                let callback = { (image: UIImage?, data: Data?, error: Error?, finished: Bool) in
-                    if let error = error {
-                        seal.reject(error)
-                    } else {
-                        SDWebImageManager.shared.imageCache.store(image,
-                                                                  imageData: data,
-                                                                  forKey: thumbnail,
-                                                                  cacheType: .disk,
-                                                                  completion: {
-                                                                    seal.fulfill(image ?? UIImage(named: "logo")!)
-                        })
-                    }
-                }
-                SDWebImageManager.shared.imageLoader.requestImage(with: URL(string: thumbnail),
-                                                                  options: .highPriority,
-                                                                  context: nil,
-                                                                  progress: nil,
-                                                                  completed: callback)
             }
         }
     }
