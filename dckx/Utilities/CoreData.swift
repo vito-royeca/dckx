@@ -30,6 +30,11 @@ class CoreData {
     // MARK: Comic Database methods
     func saveComic(data: [String: Any]) -> Promise<Void> {
         return Promise { seal in
+            guard let num = data["num"] as? Int32 else {
+                seal.fulfill(())
+                return
+            }
+            
             let completion = { (error: NSError?) in
                 if let error = error {
                     seal.reject(error)
@@ -37,38 +42,37 @@ class CoreData {
                     seal.fulfill(())
                 }
             }
-            guard let num = data["num"] as? Int32 else {
-                seal.fulfill(())
-                return
-            }
             let predicate = NSPredicate(format: "num = %i", num)
             
             // create a date property
             var newData = [String: Any]()
-                var year = "2020"
-                var month = "1"
-                var day = "1"
+            var year = ""
+            var month = ""
+            var day = ""
                 
-                for (k,v) in data {
-                    switch k {
-                    case "year":
-                        if let v = v as? String {
-                            year = v
-                        }
-                    case "month":
-                        if let v = v as? String,
-                            let num = Int(v) {
-                            month = num < 10 ? "0\(num)" : "\(num)"
-                        }
-                    case "day":
-                        if let v = v as? String,
-                            let num = Int(v) {
-                            day = num < 10 ? "0\(num)" : "\(num)"
-                        }
-                    default:
-                        newData[k] = v
+            for (k,v) in data {
+                switch k {
+                case "year":
+                    if let v = v as? String {
+                        year = v
                     }
-                newData["date"] = "\(year)-\(month)-\(day)"
+                case "month":
+                    if let v = v as? String,
+                        let num = Int(v) {
+                        month = num < 10 ? "0\(num)" : "\(num)"
+                    }
+                case "day":
+                    if let v = v as? String,
+                        let num = Int(v) {
+                        day = num < 10 ? "0\(num)" : "\(num)"
+                    }
+                default:
+                    newData[k] = v
+                }
+                
+                if !year.isEmpty && !month.isEmpty && !day.isEmpty {
+                    newData["date"] = "\(year)-\(month)-\(day)"
+                }
             }
             
             dataStack.sync([newData],
@@ -120,16 +124,17 @@ class CoreData {
     // MARK: WhatIf Database methods
     func saveWhatIf(data: [String: Any]) -> Promise<Void> {
         return Promise { seal in
+            guard let num = data["num"] as? Int32 else {
+                seal.fulfill(())
+                return
+            }
+            
             let completion = { (error: NSError?) in
                 if let error = error {
                     seal.reject(error)
                 } else {
                     seal.fulfill(())
                 }
-            }
-            guard let num = data["num"] as? Int32 else {
-                seal.fulfill(())
-                return
             }
             let predicate = NSPredicate(format: "num = %i", num)
             
@@ -162,8 +167,6 @@ class CoreData {
         return Promise { seal in
             do {
                 let request: NSFetchRequest<NSFetchRequestResult> = WhatIf.fetchRequest()
-//                let request = NSFetchRequest<WhatIf>(entityName: "WhatIf")
-//                let request: NSFetchRequest<WhatIf> = WhatIf.fetchRequest()
                 request.fetchLimit = 1
                 request.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
                 

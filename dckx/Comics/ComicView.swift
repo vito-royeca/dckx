@@ -12,11 +12,12 @@ import SDWebImage
 
 struct ComicView: View {
     @ObservedObject var fetcher = ComicFetcher()
+    @State private var showingList = false
+    
     @State var lastScaleValue: CGFloat = 1.0
     @State var scale: CGFloat = 1.0
     @State var showingAltText = false
-    @State private var showingList = false
-    @State var isHidden = true
+    
     
     var body: some View {
         NavigationView {
@@ -32,7 +33,14 @@ struct ComicView: View {
                                          showingAltText: $showingAltText)
                 )
                 .toolbar() {
-                    NavigationToolbar(loadFirst: fetcher.loadFirst, loadPrevious: fetcher.loadPrevious, loadRandom: fetcher.loadRandom, loadNext: fetcher.loadNext, loadLast: fetcher.loadLast, canDoPrevious: fetcher.canDoPrevious, canDoNext: fetcher.canDoNext)
+                    NavigationToolbar(loadFirst: fetcher.loadFirst,
+                                      loadPrevious: fetcher.loadPrevious,
+                                      loadRandom: fetcher.loadRandom,
+                                      loadNext: fetcher.loadNext,
+                                      loadLast: fetcher.loadLast,
+                                      canDoPrevious: fetcher.canDoPrevious,
+                                      canDoNext: fetcher.canDoNext)
+                        
                     
                 }
             } else {
@@ -47,7 +55,7 @@ struct ComicView: View {
         }) {
             Image(systemName: "list.dash")
                 .imageScale(.large)
-//                            .foregroundColor(.buttonColor)
+//                .foregroundColor(.dckxBlue)
         }
         .sheet(isPresented: $showingList, content: {
             ComicListView(fetcher: self.fetcher)
@@ -83,7 +91,7 @@ struct ComicToolBarView: View {
             }) {
                 Image(systemName: fetcher.currentComic?.isFavorite ?? false ? "bookmark.fill" : "bookmark")
                     .imageScale(.large)
-//                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.dckxBlue)
             }
             Spacer()
             
@@ -92,7 +100,7 @@ struct ComicToolBarView: View {
             }) {
                 Image(systemName: showingAltText ? "doc.text.fill" : "doc.text" )
                     .imageScale(.large)
-//                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.dckxBlue)
             }
             Spacer()
             
@@ -101,7 +109,7 @@ struct ComicToolBarView: View {
             }) {
                 Image(systemName: "questionmark.circle")
                     .imageScale(.large)
-//                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.dckxBlue)
             }
                 .sheet(isPresented: $showingBrowser, content: {
                     self.fetcher.currentComic.map({
@@ -117,7 +125,7 @@ struct ComicToolBarView: View {
             }) {
                 Image(systemName: "square.and.arrow.up")
                     .imageScale(.large)
-//                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.dckxBlue)
             }
                 .sheet(isPresented: $showingShare) {
                     ShareSheetView(activityItems: self.activityItems(),

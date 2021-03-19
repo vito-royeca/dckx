@@ -23,7 +23,7 @@ struct MainView: View {
                 })
             HideScrollView()
                 .tabItem({
-                    Text("Hide")
+                    Text("Search Bar")
                 })
         }
     }

@@ -50,7 +50,7 @@ struct NavigationToolbar: ToolbarContent  {
             }) {
                 Image(systemName: "backward.end")
                     .imageScale(.large)
-//                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.dckxBlue)
             }
             .disabled(!self.canDoPrevious)
         }
@@ -64,7 +64,7 @@ struct NavigationToolbar: ToolbarContent  {
             }) {
                 Image(systemName: "arrowtriangle.backward")
                     .imageScale(.large)
-//                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.dckxBlue)
             }
             .disabled(!self.canDoPrevious)
         }
@@ -78,7 +78,7 @@ struct NavigationToolbar: ToolbarContent  {
             }) {
                 Image(systemName: "shuffle")
                     .imageScale(.large)
-//                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.dckxBlue)
             }
         }
         ToolbarItem(placement: .bottomBar) {
@@ -91,7 +91,7 @@ struct NavigationToolbar: ToolbarContent  {
             }) {
                 Image(systemName: "arrowtriangle.forward")
                     .imageScale(.large)
-//                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.dckxBlue)
             }
             .disabled(!self.canDoNext)
         }
@@ -105,75 +105,9 @@ struct NavigationToolbar: ToolbarContent  {
             }) {
                 Image(systemName: "forward.end")
                     .imageScale(.large)
-//                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.dckxBlue)
             }
             .disabled(!self.canDoNext)
         }
-        
-//        ToolbarItem(placement: .bottomBar) {
-//            Button(action: {
-//                self.delegate.loadFirst()
-//            }) {
-//                Image(systemName: "backward.end")
-//                    .imageScale(.large)
-////                    .foregroundColor(.buttonColor)
-//            }
-//            .disabled(!self.delegate.canDoPrevious)
-//        }
-//        ToolbarItem(placement: .bottomBar) {
-//            Spacer()
-//        }
-//
-//        ToolbarItem(placement: .bottomBar) {
-//            Button(action: {
-//                self.delegate.loadPrevious()
-//            }) {
-//                Image(systemName: "arrowtriangle.backward")
-//                    .imageScale(.large)
-////                    .foregroundColor(.buttonColor)
-//            }
-//            .disabled(!self.delegate.canDoPrevious)
-//        }
-//        ToolbarItem(placement: .bottomBar) {
-//            Spacer()
-//        }
-//
-//        ToolbarItem(placement: .bottomBar) {
-//            Button(action: {
-//                self.delegate.loadRandom()
-//            }) {
-//                Image(systemName: "shuffle")
-//                    .imageScale(.large)
-////                    .foregroundColor(.buttonColor)
-//            }
-//        }
-//        ToolbarItem(placement: .bottomBar) {
-//            Spacer()
-//        }
-//
-//        ToolbarItem(placement: .bottomBar) {
-//            Button(action: {
-//                self.delegate.loadNext()
-//            }) {
-//                Image(systemName: "arrowtriangle.forward")
-//                    .imageScale(.large)
-////                    .foregroundColor(.buttonColor)
-//            }
-//            .disabled(!self.delegate.canDoNext)
-//        }
-//        ToolbarItem(placement: .bottomBar) {
-//            Spacer()
-//        }
-//
-//        ToolbarItem(placement: .bottomBar) {
-//            Button(action: {
-//                self.delegate.loadLast()
-//            }) {
-//                Image(systemName: "forward.end")
-//                    .imageScale(.large)
-////                    .foregroundColor(.buttonColor)
-//            }
-//            .disabled(!self.delegate.canDoNext)
-//        }
     }
 }

@@ -11,6 +11,7 @@ import SwiftUI
 extension Color {
     static let buttonColor     = Color("ButtonColor")
     static let backgroundColor = Color("BackgroundColor")
+    static let dckxBlue        = Color(red: 0.43, green: 0.48, blue: 0.57)
 }
 
 struct ButtonModifier: ViewModifier {

@@ -28,7 +28,13 @@ struct WhatIfView: View {
                         WhatIfToolBarView(fetcher: fetcher)
                 )
                 .toolbar {
-                    NavigationToolbar(loadFirst: fetcher.loadFirst, loadPrevious: fetcher.loadPrevious, loadRandom: fetcher.loadRandom, loadNext: fetcher.loadNext, loadLast: fetcher.loadLast, canDoPrevious: fetcher.canDoPrevious, canDoNext: fetcher.canDoNext)
+                    NavigationToolbar(loadFirst: fetcher.loadFirst,
+                                      loadPrevious: fetcher.loadPrevious,
+                                      loadRandom: fetcher.loadRandom,
+                                      loadNext: fetcher.loadNext,
+                                      loadLast: fetcher.loadLast,
+                                      canDoPrevious: fetcher.canDoPrevious,
+                                      canDoNext: fetcher.canDoNext)
                 }
             } else {
                 Text("Unsupported iOS version")
@@ -42,7 +48,7 @@ struct WhatIfView: View {
         }) {
             Image(systemName: "list.dash")
                 .imageScale(.large)
-//                            .foregroundColor(.buttonColor)
+//                .foregroundColor(.dckxBlue)
         }
         .sheet(isPresented: $showingList, content: {
             WhatIfListView(fetcher: self.fetcher)
@@ -73,7 +79,7 @@ struct WhatIfToolBarView: View {
             }) {
                 Image(systemName: fetcher.currentWhatIf?.isFavorite ?? false ? "bookmark.fill" : "bookmark")
                     .imageScale(.large)
-//                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.dckxBlue)
             }
             Spacer()
             
@@ -82,7 +88,7 @@ struct WhatIfToolBarView: View {
             }) {
                 Image(systemName: "mail")
                     .imageScale(.large)
-//                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.dckxBlue)
             }
                 .sheet(isPresented: $showingMail, content: {
                     MailView(result: self.$mailResult)
@@ -94,7 +100,7 @@ struct WhatIfToolBarView: View {
             }) {
                 Image(systemName: "square.and.arrow.up")
                     .imageScale(.large)
-//                    .foregroundColor(.buttonColor)
+//                    .foregroundColor(.dckxBlue)
             }
                 .sheet(isPresented: $showingShare) {
                     ShareSheetView(activityItems: self.activityItems(),

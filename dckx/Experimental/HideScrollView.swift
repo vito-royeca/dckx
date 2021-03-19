@@ -37,7 +37,9 @@ struct HideScrollView: View {
             HStack {
                 Text("Hide Me")
                 Spacer()
-            }.padding(.horizontal) .frame(height: 60) .background(Color.red) .foregroundColor(Color.white).opacity(self.viewIsShown ? 1 : 0)
+            }.padding(.horizontal) .frame(height: 60) .background(Color.red) .foregroundColor(Color.white)//.opacity(self.viewIsShown ? 1 : 0)
+//            .position(x: self.frame().l, y: -(offset ?? 0))
+            
         }.onPreferenceChange(OffsetKey.self) {
             if self.initialOffset == nil || self.initialOffset == 0 {
                 self.initialOffset = $0
@@ -51,16 +53,13 @@ struct HideScrollView: View {
             }
             
                 
-                if(initialOffset > offset){
-                    self.viewIsShown = false
-                    print("hide")
-                } else {
-                    self.viewIsShown = true
-                    print("show")
-                }
-            
-        
-            
+            if(initialOffset > offset){
+                self.viewIsShown = false
+                print("hide: \(initialOffset):\(offset)")
+            } else {
+                self.viewIsShown = true
+                print("show \(initialOffset):\(offset)")
+            }
         }
         
     }
