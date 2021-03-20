@@ -84,6 +84,12 @@ struct  ComicListView: View {
     }
     
     func selectComic(num: Int32) {
+        if !query.isEmpty {
+            query = ""
+            scopeSelection = 0
+            viewModel = ComicListViewModel(query: query,
+                                           scopeIndex: scopeSelection)
+        }
         fetcher.load(num: num)
         presentationMode.wrappedValue.dismiss()
     }

@@ -28,16 +28,13 @@ class WhatIfFetcher: ObservableObject {
         guard let currentWhatIf = currentWhatIf else {
             return
         }
-        currentWhatIf.isFavorite = !currentWhatIf.isFavorite
         
-        let data = ["num": currentWhatIf.num,
-                    "isFavorite": currentWhatIf.isFavorite] as [String : Any]
-        
-        firstly {
-            CoreData.sharedInstance.saveWhatIf(data: data)
-        }.done { comic in
+        do {
+            currentWhatIf.isFavorite = !currentWhatIf.isFavorite
+            
+            try CoreData.sharedInstance.dataStack.mainContext.save()
             self.load(num: currentWhatIf.num)
-        }.catch { error in
+        } catch {
             print(error)
         }
     }
@@ -48,13 +45,11 @@ class WhatIfFetcher: ObservableObject {
         }
         
         if !currentWhatIf.isRead {
-            let data = ["num": currentWhatIf.num,
-                        "isRead": true] as [String : Any]
-            firstly {
-                CoreData.sharedInstance.saveWhatIf(data: data)
-            }.done {
-                
-            }.catch { error in
+            currentWhatIf.isRead = true
+            
+            do {
+                try CoreData.sharedInstance.dataStack.mainContext.save()
+            } catch {
                 print(error)
             }
         }

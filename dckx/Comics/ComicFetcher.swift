@@ -28,16 +28,13 @@ class ComicFetcher: ObservableObject {
         guard let currentComic = currentComic else {
             return
         }
-        currentComic.isFavorite = !currentComic.isFavorite
         
-        let data = ["num": currentComic.num,
-                    "isFavorite": currentComic.isFavorite] as [String : Any]
-        
-        firstly {
-            CoreData.sharedInstance.saveComic(data: data)
-        }.done { comic in
+        do {
+            currentComic.isFavorite = !currentComic.isFavorite
+            
+            try CoreData.sharedInstance.dataStack.mainContext.save()
             self.load(num: currentComic.num)
-        }.catch { error in
+        } catch {
             print(error)
         }
     }
@@ -46,15 +43,13 @@ class ComicFetcher: ObservableObject {
         guard let currentComic = currentComic else {
             return
         }
-        
+
         if !currentComic.isRead {
-            let data = ["num": currentComic.num,
-                        "isRead": true] as [String : Any]
-            firstly {
-                CoreData.sharedInstance.saveComic(data: data)
-            }.done {
-                
-            }.catch { error in
+            currentComic.isRead = true
+            
+            do {
+                try CoreData.sharedInstance.dataStack.mainContext.save()
+            } catch {
                 print(error)
             }
         }
@@ -69,7 +64,7 @@ class ComicFetcher: ObservableObject {
             self.fetchImage(comic: comic)
         }.done { comic in
             self.currentComic = comic
-//            self.toggleIsRead()
+            self.toggleIsRead()
         }.catch { error in
             print(error)
         }

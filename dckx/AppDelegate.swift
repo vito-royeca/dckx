@@ -30,13 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.font : UIFont(name: "xkcd-Script-Regular", size: 15)!],
                                                                                                           for: .normal)
         
-        //Use this if NavigationBarTitle is with Large Font
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "xkcd-Script-Regular", size: 25)!,]
         UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "xkcd-Script-Regular", size: 20)!,]
-        
-        //Use this if NavigationBarTitle is with displayMode = .inline
-//        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "xkcd-Script-Regular", size: 25)!]
-        
         
         return true
     }

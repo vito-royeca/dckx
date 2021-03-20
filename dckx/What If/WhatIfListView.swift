@@ -85,6 +85,12 @@ struct WhatIfListView: View {
     }
     
     func selectWhatIf(num: Int32) {
+        if !query.isEmpty {
+            query = ""
+            scopeSelection = 0
+            viewModel = WhatIfListViewModel(query: query,
+                                            scopeIndex: scopeSelection)
+        }
         fetcher.load(num: num)
         presentationMode.wrappedValue.dismiss()
     }
