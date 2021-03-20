@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Combine
-import MessageUI
 import WebKit
 
 struct WhatIfView: View {
@@ -68,8 +67,6 @@ struct WhatIfView_Previews: PreviewProvider {
 
 struct WhatIfToolBarView: View {
     @ObservedObject var fetcher: WhatIfFetcher
-    @State private var mailResult: Result<MFMailComposeResult, Error>? = nil
-    @State private var showingMail = false
     @State private var showingShare = false
     
     var body: some View {
@@ -81,18 +78,6 @@ struct WhatIfToolBarView: View {
                     .imageScale(.large)
 //                    .foregroundColor(.dckxBlue)
             }
-            Spacer()
-            
-            Button(action: {
-                self.showingMail.toggle()
-            }) {
-                Image(systemName: "mail")
-                    .imageScale(.large)
-//                    .foregroundColor(.dckxBlue)
-            }
-                .sheet(isPresented: $showingMail, content: {
-                    MailView(result: self.$mailResult)
-                })
             Spacer()
             
             Button(action: {

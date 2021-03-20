@@ -50,7 +50,6 @@ struct WhatIfListView: View {
                                     .scopeButtonTitles: ["All", "Bookmarked", "Read"],
                                     .scopeBarButtonTitleTextAttributes: [NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 15)],
                                     .searchTextFieldFont: UIFont(name: "xkcd Script", size: 15)!
-                                    
                                  ],
                                  actions: [
                                     .onCancelButtonClicked: {
