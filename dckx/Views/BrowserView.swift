@@ -18,17 +18,13 @@ struct BrowserView: View {
 
     var body: some View {
         NavigationView {
-            if #available(iOS 14.0, *) {
-                WebView(link: link,
-                        html: nil,
-                        baseURL: baseURL)
-                .navigationBarTitle(Text(title), displayMode: .automatic)
-                .navigationBarItems(
-                    trailing: closeButton
-                )
-            } else {
-                Text("Unsupported iOS version")
-            }
+            WebView(link: link,
+                    html: nil,
+                    baseURL: baseURL)
+            .navigationBarTitle(Text(title), displayMode: .automatic)
+            .navigationBarItems(
+                trailing: closeButton
+            )
         }
     }
     

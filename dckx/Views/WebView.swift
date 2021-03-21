@@ -8,6 +8,7 @@
 
 import SwiftUI
 import WebKit
+import ReadabilityKit
 
 struct WebView: UIViewRepresentable {
     private let webView = WKWebView()
@@ -46,7 +47,19 @@ struct WebView: UIViewRepresentable {
     func updateUIView(_ uiView: WKWebView, context: UIViewRepresentableContext<WebView>) {
         if let link = link,
             let url = URL(string: link) {
-            uiView.load(URLRequest(url: url))
+            Readability.parse(url: url, completion: { data in
+                let text = (data?.text ?? "").replacingOccurrences(of: "\n", with: "<p>")
+                let head = "<head><link href=\"xkcd.css\" rel=\"stylesheet\"></head>"
+
+                var html = "<html>\(head)<body>"
+                html += "\(text)"
+                html += "</body></html>"
+
+                uiView.loadHTMLString(html, baseURL: baseURL)
+            })
+            
+//                uiView.load(URLRequest(url: url))
+            
         } else if let html = html {
             uiView.loadHTMLString(html, baseURL: baseURL)
         }

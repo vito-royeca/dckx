@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,7 @@
 		8B23368423F6683C00C88BA1 /* ComicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23368123F6683C00C88BA1 /* ComicFetcher.swift */; };
 		8B276BDD26044EE300A5AE2F /* NavigationSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5307252602E6DF008BA7AB /* NavigationSearchBar.swift */; };
 		8B276BDE26044EE300A5AE2F /* NavigationSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5307252602E6DF008BA7AB /* NavigationSearchBar.swift */; };
+		8B2C04302606662C00AF58E0 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 8B2C042F2606662C00AF58E0 /* BetterSafariView */; };
 		8B30499F2418263E00D549DE /* WhatIfListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B30499E2418263E00D549DE /* WhatIfListView.swift */; };
 		8B3049A02418263E00D549DE /* WhatIfListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B30499E2418263E00D549DE /* WhatIfListView.swift */; };
 		8B3049A12418263E00D549DE /* WhatIfListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B30499E2418263E00D549DE /* WhatIfListView.swift */; };
@@ -181,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				196558F998D4A92D13BEEB36 /* Pods_dckx.framework in Frameworks */,
+				8B2C04302606662C00AF58E0 /* BetterSafariView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +384,9 @@
 			dependencies = (
 			);
 			name = dckx;
+			packageProductDependencies = (
+				8B2C042F2606662C00AF58E0 /* BetterSafariView */,
+			);
 			productName = dckx;
 			productReference = 8B4F4B9523F5F444008446F4 /* dckx.app */;
 			productType = "com.apple.product-type.application";
@@ -458,6 +463,9 @@
 				Base,
 			);
 			mainGroup = 8B4F4B8C23F5F444008446F4;
+			packageReferences = (
+				8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */,
+			);
 			productRefGroup = 8B4F4B9623F5F444008446F4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -877,6 +885,7 @@
 				DEVELOPMENT_TEAM = 43CD66539H;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = dckx/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -898,6 +907,7 @@
 				DEVELOPMENT_TEAM = 43CD66539H;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = dckx/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1033,6 +1043,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stleamist/BetterSafariView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8B2C042F2606662C00AF58E0 /* BetterSafariView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */;
+			productName = BetterSafariView;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8B33FE3125FD534F00CD0F35 /* dckx.xcdatamodeld */ = {

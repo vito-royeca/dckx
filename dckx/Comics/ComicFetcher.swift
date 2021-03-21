@@ -110,12 +110,7 @@ class ComicFetcher: ObservableObject {
             let data = image.pngData() else {
             return ""
         }
-        let head =
-        """
-            <head>
-                <link href='xkcd.css' rel='stylesheet'>
-            </head>
-        """
+        let head = "<head><link href=\"xkcd.css\" rel=\"stylesheet\"></head>"
         let style = image.size.width > image.size.height ? "width:100%; height:auto;" :
             "width:auto; height:100%;"
         

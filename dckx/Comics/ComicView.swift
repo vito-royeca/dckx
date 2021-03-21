@@ -8,10 +8,11 @@
 
 import SwiftUI
 import Combine
+import BetterSafariView
 import SDWebImage
 
 struct ComicView: View {
-    @ObservedObject var fetcher = ComicFetcher()
+    @StateObject var fetcher = ComicFetcher()
     @State private var showingList = false
     
     @State var lastScaleValue: CGFloat = 1.0
@@ -21,32 +22,28 @@ struct ComicView: View {
     
     var body: some View {
         NavigationView {
-            if #available(iOS 14.0, *) {
-                WebView(link: nil,
-                        html: fetcher.composeHTML(showingAltText: showingAltText),
-                        baseURL: nil)
-                .navigationBarTitle(Text(fetcher.currentComic?.title ?? ""), displayMode: .automatic)
-                .navigationBarItems(
-                    leading: listButton,
-                    trailing:
-                        ComicToolBarView(fetcher: fetcher,
-                                         showingAltText: $showingAltText)
-                )
-                .toolbar() {
-                    NavigationToolbar(loadFirst: fetcher.loadFirst,
-                                      loadPrevious: fetcher.loadPrevious,
-                                      loadRandom: fetcher.loadRandom,
-                                      loadNext: fetcher.loadNext,
-                                      loadLast: fetcher.loadLast,
-                                      canDoPrevious: fetcher.canDoPrevious,
-                                      canDoNext: fetcher.canDoNext)
-                        
+            WebView(link: nil,
+                    html: fetcher.composeHTML(showingAltText: showingAltText),
+                    baseURL: nil)
+            .navigationBarTitle(Text(fetcher.currentComic?.title ?? ""), displayMode: .automatic)
+            .navigationBarItems(
+                leading: listButton,
+                trailing:
+                    ComicToolBarView(showingAltText: $showingAltText)
+            )
+            .toolbar() {
+                NavigationToolbar(loadFirst: fetcher.loadFirst,
+                                  loadPrevious: fetcher.loadPrevious,
+                                  loadRandom: fetcher.loadRandom,
+                                  loadNext: fetcher.loadNext,
+                                  loadLast: fetcher.loadLast,
+                                  canDoPrevious: fetcher.canDoPrevious,
+                                  canDoNext: fetcher.canDoNext)
                     
-                }
-            } else {
-                Text("Unsupported iOS version")
+                
             }
         }
+        .environmentObject(fetcher)
     }
     
     var listButton: some View {
@@ -58,7 +55,7 @@ struct ComicView: View {
 //                .foregroundColor(.dckxBlue)
         }
         .sheet(isPresented: $showingList, content: {
-            ComicListView(fetcher: self.fetcher)
+            ComicListView()
         })
     }
     
@@ -79,7 +76,7 @@ struct ComicView_Previews: PreviewProvider {
 }
 
 struct ComicToolBarView: View {
-    @ObservedObject var fetcher: ComicFetcher
+    @EnvironmentObject var fetcher: ComicFetcher
     @Binding var showingAltText: Bool
     @State private var showingBrowser = false
     @State private var showingShare = false
@@ -111,13 +108,25 @@ struct ComicToolBarView: View {
                     .imageScale(.large)
 //                    .foregroundColor(.dckxBlue)
             }
-                .sheet(isPresented: $showingBrowser, content: {
-                    self.fetcher.currentComic.map({
-                        BrowserView(title: $0.title ?? "",
-                                    link: XkcdAPI.sharedInstance.explainURL(of: $0),
-                                    baseURL: URL(string: "https://xkcd.com/"))
-                    })
-                })
+            .safariView(isPresented: $showingBrowser) {
+                SafariView(
+                    url: URL(string: XkcdAPI.sharedInstance.explainURL(of: self.fetcher.currentComic!))!,
+                    configuration: SafariView.Configuration(
+                        entersReaderIfAvailable: true,
+                        barCollapsingEnabled: true
+                    )
+                )
+                .preferredBarAccentColor(.clear)
+                .preferredControlAccentColor(.dckxBlue)
+                .dismissButtonStyle(.close)
+            }
+//                .sheet(isPresented: $showingBrowser, content: {
+//                    self.fetcher.currentComic.map({
+//                        BrowserView(title: $0.title ?? "",
+//                                    link: XkcdAPI.sharedInstance.explainURL(of: $0),
+//                                    baseURL: nil/*URL(string: "https://xkcd.com/")*/)
+//                    })
+//                })
             Spacer()
             
             Button(action: {
@@ -129,7 +138,7 @@ struct ComicToolBarView: View {
             }
                 .sheet(isPresented: $showingShare) {
                     ShareSheetView(activityItems: self.activityItems(),
-                                   applicationActivities: nil)
+                                   applicationActivities: [])
                 }
         }
     }

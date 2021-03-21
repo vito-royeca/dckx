@@ -16,22 +16,18 @@ import SDWebImageSwiftUI
 
 struct WhatIfListView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State var viewModel: WhatIfListViewModel = WhatIfListViewModel(query: nil, scopeIndex: 0)
-    @State var shouldAnimate: Bool = false
-    var fetcher: WhatIfFetcher
-    
-    @State var query: String = ""
+    @EnvironmentObject var fetcher: WhatIfFetcher
+    @State var query: String?
     @State var scopeSelection: Int = 0
     
-    init(fetcher: WhatIfFetcher) {
-        self.fetcher = fetcher
-    }
+    @State var viewModel: WhatIfListViewModel = WhatIfListViewModel(query: nil,
+                                                                    scopeIndex: 0)
+    @State var shouldAnimate: Bool = false
     
     var body: some View {
         NavigationView {
             ZStack(alignment: .center) {
-                WhatIfTextListView(viewModel: $viewModel,
-                                   action: selectWhatIf(num:))
+                WhatIfTextListView(action: selectWhatIf(num:))
                 ActivityIndicatorView(shouldAnimate: $shouldAnimate)
             }
             .navigationBarTitle(Text("What If?"), displayMode: .automatic)
@@ -50,6 +46,7 @@ struct WhatIfListView: View {
                                     .scopeButtonTitles: ["All", "Bookmarked", "Read"],
                                     .scopeBarButtonTitleTextAttributes: [NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 15)],
                                     .searchTextFieldFont: UIFont(name: "xkcd Script", size: 15)!
+                                    
                                  ],
                                  actions: [
                                     .onCancelButtonClicked: {
@@ -66,12 +63,12 @@ struct WhatIfListView: View {
                                     }
                                  ], searchResultsContent: {
                                     ZStack(alignment: .center) {
-                                        WhatIfTextListView(viewModel: $viewModel,
-                                                          action: selectWhatIf(num:))
+                                        WhatIfTextListView(action: selectWhatIf(num:))
                                         ActivityIndicatorView(shouldAnimate: $shouldAnimate)
                                     }
                                  })
         }
+        .environmentObject(viewModel)
     }
     
     var closeButton: some View {
@@ -85,12 +82,6 @@ struct WhatIfListView: View {
     }
     
     func selectWhatIf(num: Int32) {
-        if !query.isEmpty {
-            query = ""
-            scopeSelection = 0
-            viewModel = WhatIfListViewModel(query: query,
-                                            scopeIndex: scopeSelection)
-        }
         fetcher.load(num: num)
         presentationMode.wrappedValue.dismiss()
     }
@@ -103,7 +94,7 @@ struct WhatIfListView: View {
         DispatchQueue.global(qos: .background).async {
             self.shouldAnimate = true
             self.viewModel = WhatIfListViewModel(query: self.query,
-                                                scopeIndex: self.scopeSelection)
+                                                 scopeIndex: self.scopeSelection)
             
             DispatchQueue.main.async {
                 self.shouldAnimate = false
@@ -116,20 +107,15 @@ struct WhatIfListView: View {
 
 struct WhatIfListView_Previews: PreviewProvider {
     static var previews: some View {
-        WhatIfListView(fetcher: WhatIfFetcher())
+        WhatIfListView().environmentObject(WhatIfFetcher())
     }
 }
 
 // MARK: - WhatIfTextListView
 
 struct WhatIfTextListView: View {
-    @Binding var viewModel: WhatIfListViewModel
+    @EnvironmentObject var viewModel: WhatIfListViewModel
     var action: (Int32) -> Void
-    
-    init(viewModel: Binding<WhatIfListViewModel>, action: @escaping (Int32) -> Void) {
-        _viewModel = viewModel
-        self.action = action
-    }
     
     var body: some View {
         VStack {
@@ -138,14 +124,16 @@ struct WhatIfTextListView: View {
                               thumbnail: whatIf.thumbnail ?? "",
                               title: whatIf.title ?? "",
                               action: self.action)
-                    .onTapGesture { self.action(whatIf.num) }
+                    .onTapGesture {
+                        self.action(whatIf.num)
+                    }
                     .onAppear(perform: {
                         if self.viewModel.shouldLoadMore(whatIf: whatIf) {
                             self.viewModel.loadData()
                         }
                     })
             }
-                .resignKeyboardOnDragGesture()
+            .resignKeyboardOnDragGesture()
         }
     }
 }
@@ -197,13 +185,17 @@ struct WhatIfListRow: View {
 // MARK: - WhatIfListViewModel
 
 class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
+    @Published var query: String?
+    @Published var scopeIndex: Int
+    
     private var controller: NSFetchedResultsController<WhatIf>?
     var fetchBatchSize = 20
 //    var fetchLimit = 20
     var fetchOffset = 0
-    var query: String?
-    var scopeIndex: Int
     
+    
+    // MARK: - Initializer
+
     init(query: String?, scopeIndex: Int) {
         self.query = query
         self.scopeIndex = scopeIndex
@@ -212,6 +204,8 @@ class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observa
         loadData()
     }
  
+    // MARK: - NSFetchedResultsControllerDelegate
+    
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         objectWillChange.send()
     }
@@ -230,9 +224,13 @@ class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observa
         
         if let query = query {
             if query.count == 1 {
-                predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@", query, query)
+                predicate = NSPredicate(format: "title BEGINSWITH[cd] %@ OR title ==[cd] %@", query, query)
             } else if query.count > 1 {
-                predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", query, query, query)
+                predicate = NSPredicate(format: "title CONTAINS[cd] %@ OR title ==[cd] %@", query, query)
+            }
+            if let num = Int(query) {
+                let newPredicate = NSPredicate(format: "num == %i", num)
+                predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [predicate!, newPredicate])
             }
         }
 
@@ -258,7 +256,7 @@ class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observa
         let fetchRequest: NSFetchRequest<WhatIf> = WhatIf.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
         fetchRequest.predicate = predicate
-        fetchRequest.fetchOffset = fetchOffset
+//        fetchRequest.fetchOffset = fetchOffset
 //        fetchRequest.fetchLimit = fetchLimit
         
         return fetchRequest

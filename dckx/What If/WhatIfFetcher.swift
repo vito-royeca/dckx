@@ -107,20 +107,15 @@ class WhatIfFetcher: ObservableObject {
             let answer = whatIf.answer else {
             return ""
         }
-        let head =
-        """
-            <head>
-                <link href="xkcd.css" rel="stylesheet">
-            </head>
-        """
+        let head = "<head><link href=\"xkcd.css\" rel=\"stylesheet\"></head>"
 
-        var html = "<html>\(head)"
+        var html = "<html>\(head)<body>"
         html += "<table width='100%'><tr><td width='50%'><p class='subtitle' align='left'>#\(whatIf.num)</p></td><td width='50%'><p class='subtitle' align='right'>\(dateToString(date: whatIf.date))</p></td></tr></table>"
         html += "<p class='question'>\(question)"
         html += "<p class='questioner' align='right'>- \(questioner)"
         html += "<p/> &nbsp;"
         html += "\(answer)"
-        html += "</html>"
+        html += "</body></html>"
         
         return html
     }

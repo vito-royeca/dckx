@@ -16,29 +16,26 @@ struct WhatIfView: View {
     
     var body: some View {
         NavigationView {
-            if #available(iOS 14.0, *) {
-                WebView(link: nil,
-                        html: fetcher.composeHTML(),
-                        baseURL: nil)
-                .navigationBarTitle(Text(fetcher.currentWhatIf?.title ?? ""), displayMode: .automatic)
-                .navigationBarItems(
-                    leading: listButton,
-                    trailing:
-                        WhatIfToolBarView(fetcher: fetcher)
-                )
-                .toolbar {
-                    NavigationToolbar(loadFirst: fetcher.loadFirst,
-                                      loadPrevious: fetcher.loadPrevious,
-                                      loadRandom: fetcher.loadRandom,
-                                      loadNext: fetcher.loadNext,
-                                      loadLast: fetcher.loadLast,
-                                      canDoPrevious: fetcher.canDoPrevious,
-                                      canDoNext: fetcher.canDoNext)
-                }
-            } else {
-                Text("Unsupported iOS version")
+            WebView(link: nil,
+                    html: fetcher.composeHTML(),
+                    baseURL: nil)
+            .navigationBarTitle(Text(fetcher.currentWhatIf?.title ?? ""), displayMode: .automatic)
+            .navigationBarItems(
+                leading: listButton,
+                trailing:
+                    WhatIfToolBarView(fetcher: fetcher)
+            )
+            .toolbar {
+                NavigationToolbar(loadFirst: fetcher.loadFirst,
+                                  loadPrevious: fetcher.loadPrevious,
+                                  loadRandom: fetcher.loadRandom,
+                                  loadNext: fetcher.loadNext,
+                                  loadLast: fetcher.loadLast,
+                                  canDoPrevious: fetcher.canDoPrevious,
+                                  canDoNext: fetcher.canDoNext)
             }
         }
+        .environmentObject(fetcher)
     }
     
     var listButton: some View {
@@ -50,7 +47,7 @@ struct WhatIfView: View {
 //                .foregroundColor(.dckxBlue)
         }
         .sheet(isPresented: $showingList, content: {
-            WhatIfListView(fetcher: self.fetcher)
+            WhatIfListView()
         })
     }
 }

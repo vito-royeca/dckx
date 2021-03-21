@@ -20,11 +20,11 @@
 import SwiftUI
 
 public extension View {
-    func navigationSearchBar(text: Binding<String>, scopeSelection: Binding<Int> = Binding.constant(0), options: [NavigationSearchBarOptionKey : Any] = [NavigationSearchBarOptionKey : Any](), actions: [NavigationSearchBarActionKey : NavigationSearchBarActionTask] = [NavigationSearchBarActionKey : NavigationSearchBarActionTask]()) -> some View {
+    func navigationSearchBar(text: Binding<String?>, scopeSelection: Binding<Int> = Binding.constant(0), options: [NavigationSearchBarOptionKey : Any] = [NavigationSearchBarOptionKey : Any](), actions: [NavigationSearchBarActionKey : NavigationSearchBarActionTask] = [NavigationSearchBarActionKey : NavigationSearchBarActionTask]()) -> some View {
         overlay(NavigationSearchBar<AnyView>(text: text, scopeSelection: scopeSelection, options: options, actions: actions).frame(width: 0, height: 0))
     }
 
-    func navigationSearchBar<SearchResultsContent>(text: Binding<String>, scopeSelection: Binding<Int> = Binding.constant(0), options: [NavigationSearchBarOptionKey : Any] = [NavigationSearchBarOptionKey : Any](), actions: [NavigationSearchBarActionKey : NavigationSearchBarActionTask] = [NavigationSearchBarActionKey : NavigationSearchBarActionTask](), @ViewBuilder searchResultsContent: @escaping () -> SearchResultsContent) -> some View where SearchResultsContent : View {
+    func navigationSearchBar<SearchResultsContent>(text: Binding<String?>, scopeSelection: Binding<Int> = Binding.constant(0), options: [NavigationSearchBarOptionKey : Any] = [NavigationSearchBarOptionKey : Any](), actions: [NavigationSearchBarActionKey : NavigationSearchBarActionTask] = [NavigationSearchBarActionKey : NavigationSearchBarActionTask](), @ViewBuilder searchResultsContent: @escaping () -> SearchResultsContent) -> some View where SearchResultsContent : View {
         overlay(NavigationSearchBar<SearchResultsContent>(text: text, scopeSelection: scopeSelection, options: options, actions: actions, searchResultsContent: searchResultsContent).frame(width: 0, height: 0))
     }
 }
@@ -85,14 +85,14 @@ fileprivate struct NavigationSearchBar<SearchResultsContent>: UIViewControllerRe
     typealias ActionKey = NavigationSearchBarActionKey
     typealias ActionTask = NavigationSearchBarActionTask
 
-    @Binding var text: String
+    @Binding var text: String?
     @Binding var scopeSelection: Int
     
     let options: [OptionKey : Any]
     let actions: [ActionKey : ActionTask]
     let searchResultsContent: () -> SearchResultsContent?
     
-    init(text: Binding<String>, scopeSelection: Binding<Int> = Binding.constant(0), options: [OptionKey : Any] = [OptionKey : Any](), actions: [ActionKey : ActionTask] = [ActionKey : ActionTask](), @ViewBuilder searchResultsContent: @escaping () -> SearchResultsContent? = { nil }) {
+    init(text: Binding<String?>, scopeSelection: Binding<Int> = Binding.constant(0), options: [OptionKey : Any] = [OptionKey : Any](), actions: [ActionKey : ActionTask] = [ActionKey : ActionTask](), @ViewBuilder searchResultsContent: @escaping () -> SearchResultsContent? = { nil }) {
         self._text = text
         self._scopeSelection = scopeSelection
         self.options = options
@@ -141,6 +141,7 @@ fileprivate struct NavigationSearchBar<SearchResultsContent>: UIViewControllerRe
         
         if let searchBar = wrapper.searchController?.searchBar {
             searchBar.text = text
+            searchBar.selectedScopeButtonIndex = self.scopeSelection
             
             if let placeholder = options[.placeholder] as? String {
                 searchBar.placeholder = placeholder

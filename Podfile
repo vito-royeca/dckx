@@ -7,6 +7,7 @@ def shared_pods
     pod 'Kanna'
     pod 'MBProgressHUD'
     pod 'PromiseKit'
+    pod 'ReadabilityKit'
     pod 'SDWebImage'
     pod 'SDWebImageSwiftUI'
     pod 'Sync'

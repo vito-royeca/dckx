@@ -14,22 +14,18 @@ import CoreData
 
 struct  ComicListView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State var viewModel: ComicListViewModel = ComicListViewModel(query: nil, scopeIndex: 0)
-    @State var shouldAnimate: Bool = false
-    var fetcher: ComicFetcher
-    
-    @State var query: String = ""
+    @EnvironmentObject var fetcher: ComicFetcher
+    @State var query: String?
     @State var scopeSelection: Int = 0
     
-    init(fetcher: ComicFetcher) {
-        self.fetcher = fetcher
-    }
+    @State var viewModel: ComicListViewModel = ComicListViewModel(query: nil,
+                                                                  scopeIndex: 0)
+    @State var shouldAnimate: Bool = false
     
     var body: some View {
         NavigationView {
             ZStack(alignment: .center) {
-                ComicTextListView(viewModel: $viewModel,
-                                  action: selectComic(num:))
+                ComicTextListView(action: selectComic(num:))
                 ActivityIndicatorView(shouldAnimate: $shouldAnimate)
             }
             .navigationBarTitle(Text("Comics"), displayMode: .automatic)
@@ -65,12 +61,12 @@ struct  ComicListView: View {
                                     }
                                  ], searchResultsContent: {
                                     ZStack(alignment: .center) {
-                                        ComicTextListView(viewModel: $viewModel,
-                                                          action: selectComic(num:))
+                                        ComicTextListView(action: selectComic(num:))
                                         ActivityIndicatorView(shouldAnimate: $shouldAnimate)
                                     }
                                  })
         }
+        .environmentObject(viewModel)
     }
     
     var closeButton: some View {
@@ -84,12 +80,6 @@ struct  ComicListView: View {
     }
     
     func selectComic(num: Int32) {
-        if !query.isEmpty {
-            query = ""
-            scopeSelection = 0
-            viewModel = ComicListViewModel(query: query,
-                                           scopeIndex: scopeSelection)
-        }
         fetcher.load(num: num)
         presentationMode.wrappedValue.dismiss()
     }
@@ -103,7 +93,6 @@ struct  ComicListView: View {
             self.shouldAnimate = true
             self.viewModel = ComicListViewModel(query: self.query,
                                                 scopeIndex: self.scopeSelection)
-            
             DispatchQueue.main.async {
                 self.shouldAnimate = false
             }
@@ -115,7 +104,7 @@ struct  ComicListView: View {
 
 struct ComicListView_Previews: PreviewProvider {
     static var previews: some View {
-        ComicListView(fetcher: ComicFetcher())
+        ComicListView().environmentObject(ComicFetcher())
     }
 }
 
@@ -123,13 +112,8 @@ struct ComicListView_Previews: PreviewProvider {
 // MARK: - ComicTextListView
 
 struct ComicTextListView: View {
-    @Binding var viewModel: ComicListViewModel
+    @EnvironmentObject var viewModel: ComicListViewModel
     var action: (Int32) -> Void
-    
-    init(viewModel: Binding<ComicListViewModel>, action: @escaping (Int32) -> Void) {
-        _viewModel = viewModel
-        self.action = action
-    }
     
     var body: some View {
         VStack {
@@ -176,14 +160,17 @@ struct ComicListRow: View {
 // MARK: - ComicListViewModel
 
 class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
+    @Published var query: String?
+    @Published var scopeIndex: Int
+    
     private var controller: NSFetchedResultsController<Comic>?
     var fetchBatchSize = 20
 //    var fetchLimit = 20
     var fetchOffset = 0
-    var query: String?
-    var scopeIndex: Int
     
-    // MARK: Initializer
+    
+    // MARK: - Initializer
+
     init(query: String?, scopeIndex: Int) {
         self.query = query
         self.scopeIndex = scopeIndex
@@ -192,7 +179,8 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
         loadData()
     }
  
-    // MARK: NSFetchedResultsControllerDelegate
+    // MARK: - NSFetchedResultsControllerDelegate
+    
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         objectWillChange.send()
     }
@@ -201,7 +189,8 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
         objectWillChange.send()
     }
     
-    // MARK: Custom methods
+    // MARK: - Custom methods
+
     var comics: [Comic] {
         return controller?.fetchedObjects ?? []
     }
@@ -211,9 +200,13 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
         
         if let query = query {
             if query.count == 1 {
-                predicate = NSPredicate(format: "num BEGINSWITH[cd] %@ OR title BEGINSWITH[cd] %@", query, query)
+                predicate = NSPredicate(format: "title BEGINSWITH[cd] %@ OR title ==[cd] %@", query, query)
             } else if query.count > 1 {
-                predicate = NSPredicate(format: "num CONTAINS[cd] %@ OR title CONTAINS[cd] %@ OR alt CONTAINS[cd] %@", query, query, query)
+                predicate = NSPredicate(format: "title CONTAINS[cd] %@ OR title ==[cd] %@", query, query)
+            }
+            if let num = Int(query) {
+                let newPredicate = NSPredicate(format: "num == %i", num)
+                predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [predicate!, newPredicate])
             }
         }
         
@@ -239,7 +232,7 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
         let fetchRequest: NSFetchRequest<Comic> = Comic.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
         fetchRequest.predicate = predicate
-        fetchRequest.fetchOffset = fetchOffset
+//        fetchRequest.fetchOffset = fetchOffset
 //        fetchRequest.fetchLimit = fetchLimit
         
         return fetchRequest
@@ -265,7 +258,7 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
         do {
             NSFetchedResultsController<Comic>.deleteCache(withName: controller!.cacheName)
             try controller!.performFetch()
-            fetchOffset += fetchBatchSize
+//            fetchOffset += fetchBatchSize
 //            fetchLimit += fetchOffset
         } catch {
             print(error)

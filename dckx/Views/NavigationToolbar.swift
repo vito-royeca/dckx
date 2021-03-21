@@ -42,7 +42,6 @@ struct NavigationToolbar: ToolbarContent  {
     @State var canDoPrevious: Bool
     @State var canDoNext: Bool
     
-    @available(iOS 14.0, *)
     var body: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
             Button(action: {
