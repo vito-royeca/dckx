@@ -108,25 +108,25 @@ struct ComicToolBarView: View {
                     .imageScale(.large)
 //                    .foregroundColor(.dckxBlue)
             }
-            .safariView(isPresented: $showingBrowser) {
-                SafariView(
-                    url: URL(string: XkcdAPI.sharedInstance.explainURL(of: self.fetcher.currentComic!))!,
-                    configuration: SafariView.Configuration(
-                        entersReaderIfAvailable: true,
-                        barCollapsingEnabled: true
-                    )
-                )
-                .preferredBarAccentColor(.clear)
-                .preferredControlAccentColor(.dckxBlue)
-                .dismissButtonStyle(.close)
-            }
-//                .sheet(isPresented: $showingBrowser, content: {
-//                    self.fetcher.currentComic.map({
-//                        BrowserView(title: $0.title ?? "",
-//                                    link: XkcdAPI.sharedInstance.explainURL(of: $0),
-//                                    baseURL: nil/*URL(string: "https://xkcd.com/")*/)
-//                    })
-//                })
+//            .safariView(isPresented: $showingBrowser) {
+//                SafariView(
+//                    url: URL(string: XkcdAPI.sharedInstance.explainURL(of: self.fetcher.currentComic!))!,
+//                    configuration: SafariView.Configuration(
+//                        entersReaderIfAvailable: true,
+//                        barCollapsingEnabled: true
+//                    )
+//                )
+//                .preferredBarAccentColor(.clear)
+//                .preferredControlAccentColor(.dckxBlue)
+//                .dismissButtonStyle(.close)
+//            }
+                .sheet(isPresented: $showingBrowser, content: {
+                    self.fetcher.currentComic.map({
+                        BrowserView(title: "Explanation",
+                                    link: XkcdAPI.sharedInstance.explainURL(of: $0),
+                                    baseURL: nil/*URL(string: "https://xkcd.com/")*/)
+                    })
+                })
             Spacer()
             
             Button(action: {

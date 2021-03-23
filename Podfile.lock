@@ -3,6 +3,7 @@ PODS:
   - Ji (5.0.0)
   - Kanna (5.2.4)
   - MBProgressHUD (1.2.0)
+  - OpenCV (3.1.0.1)
   - PromiseKit (6.13.1):
     - PromiseKit/CorePromise (= 6.13.1)
     - PromiseKit/Foundation (= 6.13.1)
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - FontAwesome.swift
   - Kanna
   - MBProgressHUD
+  - OpenCV (~> 3.1.0.1)
   - PromiseKit
   - ReadabilityKit
   - SDWebImage
@@ -37,6 +39,7 @@ SPEC REPOS:
     - Ji
     - Kanna
     - MBProgressHUD
+    - OpenCV
     - PromiseKit
     - ReadabilityKit
     - SDWebImage
@@ -48,12 +51,13 @@ SPEC CHECKSUMS:
   Ji: d795fed288fe78658b404c88946d753b17d8d7f4
   Kanna: b9d00d7c11428308c7f95e1f1f84b8205f567a8f
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  OpenCV: 41c4250e2b06a394d6fbb634b5fa622cdd846018
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   ReadabilityKit: 09e8b2ecb3d06f17f4c856e426c34f9016e86e6f
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
   SDWebImageSwiftUI: 8a3923c95108312b03a599ec1498754af55a6819
   Sync: 86bb8aa0ea2f955ea5ac97b7b73129f86591c39e
 
-PODFILE CHECKSUM: 49d8922c682f9d15e2d92a878e1e10edffa46a3a
+PODFILE CHECKSUM: 5594bb6d4bced49849f32fdede982d9152ad923b
 
 COCOAPODS: 1.10.1

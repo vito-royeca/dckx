@@ -48,11 +48,13 @@ struct WebView: UIViewRepresentable {
         if let link = link,
             let url = URL(string: link) {
             Readability.parse(url: url, completion: { data in
+                let title = (data?.title ?? "")
                 let text = (data?.text ?? "").replacingOccurrences(of: "\n", with: "<p>")
                 let head = "<head><link href=\"xkcd.css\" rel=\"stylesheet\"></head>"
-
+                
                 var html = "<html>\(head)<body>"
-                html += "\(text)"
+                html += "<h2>\(title)</h2>"
+                html += "<p>\(text)"
                 html += "</body></html>"
 
                 uiView.loadHTMLString(html, baseURL: baseURL)

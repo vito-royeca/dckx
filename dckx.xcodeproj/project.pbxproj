@@ -96,6 +96,7 @@
 		8BE8ECA3243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
 		8BE8ECA4243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
 		8BE8ECA5243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
+		8BFDD2BF2609826000B7B5F9 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */; };
 		8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
@@ -168,6 +169,9 @@
 		8BA50E6B240A425500138D11 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		8BA5921825FEBEC1001CD883 /* HideScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideScrollView.swift; sourceTree = "<group>"; };
 		8BE8ECA2243A9B1E0037036E /* dckx.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = dckx.sqlite; sourceTree = "<group>"; };
+		8BFDD2BD2609826000B7B5F9 /* dckx-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dckx-Bridging-Header.h"; sourceTree = "<group>"; };
+		8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
+		8BFDD2C62609828A00B7B5F9 /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 		8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ResignKeyboardOnDragGesture.swift"; sourceTree = "<group>"; };
 		A1695073ECC186DD58075EB6 /* Pods-dckxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dckxTests.debug.xcconfig"; path = "Target Support Files/Pods-dckxTests/Pods-dckxTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A442C4117396A55D840D6677 /* Pods_dckx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dckx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -246,8 +250,9 @@
 				8B73671D2601121300B06575 /* Experimental */,
 				8BE1EC152416C2F0008B2D8C /* Comics */,
 				8BE1EC162416C2F9008B2D8C /* What If */,
-				8B4F4BE323F603B1008446F4 /* Utilities */,
 				8B4F4BCE23F5F637008446F4 /* Views */,
+				8B4F4BE323F603B1008446F4 /* Utilities */,
+				8BFDD2A826097E2800B7B5F9 /* OpenCV */,
 				8B4F4B9823F5F444008446F4 /* AppDelegate.swift */,
 				8B4F4B9E23F5F445008446F4 /* Assets.xcassets */,
 				8B4F4BA323F5F445008446F4 /* LaunchScreen.storyboard */,
@@ -356,6 +361,16 @@
 			path = "What If";
 			sourceTree = "<group>";
 		};
+		8BFDD2A826097E2800B7B5F9 /* OpenCV */ = {
+			isa = PBXGroup;
+			children = (
+				8BFDD2BD2609826000B7B5F9 /* dckx-Bridging-Header.h */,
+				8BFDD2C62609828A00B7B5F9 /* OpenCVWrapper.h */,
+				8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */,
+			);
+			path = OpenCV;
+			sourceTree = "<group>";
+		};
 		921AF9F2F90CBC7F2736030E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,6 +458,7 @@
 				TargetAttributes = {
 					8B4F4B9423F5F444008446F4 = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1240;
 					};
 					8B4F4BAA23F5F445008446F4 = {
 						CreatedOnToolsVersion = 11.3.1;
@@ -662,6 +678,7 @@
 				8BA50E60240A2DA200138D11 /* Database.swift in Sources */,
 				8B4F4B9D23F5F444008446F4 /* ComicView.swift in Sources */,
 				8B23367E23F646A700C88BA1 /* CoreData.swift in Sources */,
+				8BFDD2BF2609826000B7B5F9 /* OpenCVWrapper.mm in Sources */,
 				8B23368223F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8B626D6E23FFB5BE00972EED /* ComicListView.swift in Sources */,
 				8B3049A3241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
@@ -880,6 +897,7 @@
 			baseConfigurationReference = F983B5B8CA970E28283ACCFB /* Pods-dckx.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dckx/Preview Content\"";
 				DEVELOPMENT_TEAM = 43CD66539H;
@@ -892,6 +910,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckx;
 				PRODUCT_NAME = dckx;
+				SWIFT_OBJC_BRIDGING_HEADER = "dckx/OpenCV/dckx-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -902,6 +922,7 @@
 			baseConfigurationReference = C8F501949EA6610C1813EA04 /* Pods-dckx.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"dckx/Preview Content\"";
 				DEVELOPMENT_TEAM = 43CD66539H;
@@ -914,6 +935,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckx;
 				PRODUCT_NAME = dckx;
+				SWIFT_OBJC_BRIDGING_HEADER = "dckx/OpenCV/dckx-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
