@@ -65,6 +65,12 @@ class ComicFetcher: ObservableObject {
         }.done { comic in
             self.currentComic = comic
             self.toggleIsRead()
+
+            if let cachePath = SDImageCache.shared.cachePath(forKey: self.currentComic!.img) {
+                for (k,v) in OpenCVWrapper.splitComics(cachePath, minimumPanelSizeRatio: 0) {
+                    print("\(k):\(v)")
+                }
+            }
         }.catch { error in
             print(error)
         }

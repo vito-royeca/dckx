@@ -9,12 +9,11 @@
 #ifndef OpenCVWrapper_h
 #define OpenCVWrapper_h
 
-#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
 @interface OpenCVWrapper : NSObject
 
-//    + (UIImage *)processImageWithOpenCV:(UIImage*)inputImage;
++ (NSDictionary*) splitComics:(NSString*) path minimumPanelSizeRatio:(NSInteger) ratio;
 
 @end
 
