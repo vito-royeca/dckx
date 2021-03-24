@@ -7,101 +7,90 @@
 //
 
 #include "ComicsPanelExtractor.hpp"
-#include <opencv2/opencv.hpp>
-#include <nlohmann_json/json.hpp>
 
 using namespace cv;
 using namespace std;
 using json = nlohmann::json;
 
 json ComicsPanelExtractor::splitComics(const std::string& path, const int minimumPanelSizeRatio) {
+    this->minimumPanelSizeRatio = minimumPanelSizeRatio;
+    this->image = imread(path, IMREAD_COLOR);
     json j;
-    Mat img = imread(path, IMREAD_COLOR);
+    
 
-    if (img.empty()) {
+    if (image.empty()) {
         return j;
     }
     j["filename"] = path;
 
-    cv::Size s = img.size();
+    cv::Size s = this->image.size();
     j["size"] = {s.width, s.height};
 
     Mat gray;
-    cv::cvtColor(img, gray, COLOR_BGR2GRAY);
+    cv::cvtColor(this->image, gray, COLOR_BGR2GRAY);
 
-//    for (bgColor in ["white", "black"]) {
-//        [self parse:img withGray: gray withBackgrundColor:bgColor withFilename: image_path withDictionary: dictionary];
-//        
+    for (std::string bgColor : {"white", "black"}) {
+        this->parse(gray, bgColor, j);
+        
 //        if ([dictionary objectForKey: @"panels"] != nil) {
 //            return dictionary;
 //        }
-//    }
+    }
     
     return j;
 }
 
-void foo() {
+void ComicsPanelExtractor::parse(Mat gray, const std::string& bgColor, json& dictionary) {
+    vector<vector<cv::Point>> contours = this->getContours(gray, bgColor);
+    dictionary["background"] = bgColor;
     
-}
-/*
-- (NSDictionary*) parse: (Mat) image withGray: (Mat) gray withBackgrundColor: (NSString*) bgColor withFilename: (std::string) filename withDictionary: (NSDictionary*) dictionary {
-    NSMutableDictionary *newDictionary = [[NSMutableDictionary alloc] initWithDictionary: dictionary];
-    
-    vector<vector<cv::Point>> contours = [self getContours:gray withBackgrundColor: bgColor];
-    newDictionary[@"background"] = bgColor;
-
     // Get (square) panels out of contours
-    NSNumber *sum = [dictionary[@"size"] valueForKeyPath:@"@sum.self"];
-    int contourSize = int(sum.intValue / 2 * 0.004);
+    std::vector<int> sizeArray  = dictionary["size"].get<std::vector<int>>();
+    int contourSize = std::accumulate(sizeArray.begin(), sizeArray.end(), 0) / 2 * 0.004;
+
+    vector<Panel> panels;
     
-    NSMutableArray *panels = [[NSMutableArray alloc] init];
     for(std::vector<vector<cv::Point>>::iterator it = std::begin(contours); it != std::end(contours); ++it) {
         double arcLength = cv::arcLength(*it, true);
         double epsilon = 0.001 * arcLength;
         vector<cv::Point> approx;
         cv::approxPolyDP(*it, approx, epsilon, true);
         
-        NSMutableArray *polygons = [[NSMutableArray alloc] init];
-        for (cv::Point point : approx) {
-            [polygons addObject: @(CGPointMake(point.x, point.y))];
-        }
-//        Panel *panel = [[Panel alloc] initWithPolygons: polygons];
+        Panel panel(NULL, &approx);
         
         // exclude very small panels
+        int w = dictionary["size"].get<std::vector<int>>()[0];
+        int h = dictionary["size"].get<std::vector<int>>()[1];
+        if (panel.w < (w * this->minimumPanelSizeRatio) ||
+            panel.h < (h * this->minimumPanelSizeRatio)) {
+            continue;
+        }
+        
+        panels.push_back(panel);
     }
     
-//    cv::arcLength(<#InputArray curve#>, <#bool closed#>)
-//    panels = []
-//    for contour in contours:
-//        arclength = cv.arcLength(contour,True)
-//        epsilon = 0.001 * arclength
-//        approx = cv.approxPolyDP(contour,epsilon,True)
-//
-//        panel = Panel(polygon=approx)
-//
-//        # exclude very small panels
-//        if panel.w < infos['size'][0] * self.options['min_panel_size_ratio'] or panel.h < infos['size'][1] * self.options['min_panel_size_ratio']:
-//            continue
-//
-//        if self.options['debug_dir']:
-//            cv.drawContours(self.img, [approx], 0, (0,0,255), contourSize)
-//
-//        panels.append(Panel(polygon=approx))
+    // See if panels can be cut into several (two non-consecutive points are close)
+    this->splitPanels(panels, this->image, contourSize);
     
-    return newDictionary;
+    // Merge panels that shouldn't have been split (speech bubble diving in a panel)
+    this->mergePanels(panels);
+    
+    
+    // splitting polygons may result in panels slightly overlapping, de-overlap them
+    this->deoverlapPanels(panels);
     
 }
 
-- (vector<vector<cv::Point>>) getContours: (Mat) gray withBackgrundColor: (NSString*) bgColor {
-    Mat thresh;//, contours, hierarchy;
+vector<vector<cv::Point>> ComicsPanelExtractor::getContours(Mat gray, const std::string& bgColor) {
+    Mat thresh;
     vector<vector<cv::Point>> contours;
     vector<Vec4i> hierarchy;
     
-    if ([bgColor isEqualToString: @"white"]) {
+    if (bgColor =="white") {
         // White background: values below 220 will be black, the rest white
         cv::threshold(gray, thresh, 220, 255, THRESH_BINARY_INV);
         cv::findContours(thresh, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
-    } else if ([bgColor isEqualToString: @"black"]) {
+    } else if (bgColor == "black") {
         // Black background: values above 25 will be black, the rest white
         cv::threshold(gray, thresh, 25, 255, THRESH_BINARY_INV);
         cv::findContours(thresh, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
@@ -109,4 +98,83 @@ void foo() {
     
     return contours;
 }
-*/
+
+void ComicsPanelExtractor::splitPanels(vector<Panel>& panels, Mat img, const int contourSize) {
+    vector<Panel> newPanels;
+    vector<Panel> oldPanels;
+    
+    for (Panel p : panels) {
+        std::vector<Panel> splitPanels = p.split();
+        
+        if (splitPanels.size() > 0) {
+            oldPanels.push_back(p);
+            
+            for (Panel np : newPanels) {
+                newPanels.push_back(np);
+            }
+        }
+    }
+    
+    for (Panel op : oldPanels) {
+        for (int i=0; i<panels.size()-1; i++) {
+            if (op == panels[i]) {
+                panels.erase(panels.begin()+i);
+            }
+        }
+    }
+    for (Panel np : newPanels) {
+        panels.push_back(np);
+    }
+}
+
+// Merge every two panels where one contains the other
+void ComicsPanelExtractor::mergePanels(std::vector<Panel>& panels) {
+    vector<Panel> panelsToRemove;
+    
+    for (int i=0; i<panels.size()-1; i++) {
+        for (int j=i+1; j<panels.size()-1; j++) {
+            if (panels[i].contains(panels[j])) {
+                panelsToRemove.push_back(panels[j]);
+            }
+            if (panels[j].contains(panels[i])) {
+                panelsToRemove.push_back(panels[i]);
+            }
+            
+        }
+    }
+    
+    std::sort(panelsToRemove.begin(), panelsToRemove.end(), std::greater<Panel>());
+    for (long i=panelsToRemove.size()-1; i==0; i--) {
+        panels.erase(panels.begin()+i);
+    }
+}
+
+void ComicsPanelExtractor::deoverlapPanels(std::vector<Panel>& panels) {
+    for (int i=0; i<panels.size()-1; i++) {
+        for (int j=0; j<panels.size()-1; j++) {
+            if (panels[i] == panels[j]) {
+                continue;
+            }
+            
+            Panel *opanel = panels[i].overlapPanel(panels[j]);
+            if (opanel == NULL) {
+                continue;
+            }
+            
+            if (opanel->w < opanel->h && panels[i].r == opanel->r) {
+                panels[i].r = opanel->x;
+                panels[j].x = opanel->r;
+//                free(opanel);
+                continue;
+            }
+            
+            if (opanel->w > opanel->h && panels[i].b == opanel->b) {
+                panels[i].b = opanel->y;
+                panels[j].y = opanel->b;
+//                free(opanel);
+                continue;
+            }
+        }
+    }
+}
+    
