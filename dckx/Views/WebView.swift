@@ -33,6 +33,7 @@ struct WebView: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<WebView>) -> WKWebView {
         webView.navigationDelegate = context.coordinator
         webView.allowsBackForwardNavigationGestures = true
+        webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         
         if let link = link,
             let url = URL(string: link) {

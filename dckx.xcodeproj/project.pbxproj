@@ -77,6 +77,21 @@
 		8B658021240B1C6E00A245DC /* NavigationToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B65801F240B1C6E00A245DC /* NavigationToolbar.swift */; };
 		8B658022240B1C6E00A245DC /* NavigationToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B65801F240B1C6E00A245DC /* NavigationToolbar.swift */; };
 		8B658023240B218700A245DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */; };
+		8B8D9629260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */; };
+		8B8D962A260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */; };
+		8B8D962B260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */; };
+		8B8D9633260C5DEF00A3C273 /* reader.js in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9632260C5DEF00A3C273 /* reader.js */; };
+		8B8D9634260C5DEF00A3C273 /* reader.js in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9632260C5DEF00A3C273 /* reader.js */; };
+		8B8D9635260C5DEF00A3C273 /* reader.js in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9632260C5DEF00A3C273 /* reader.js */; };
+		8B8D963D260C5DFF00A3C273 /* reader.css in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D963C260C5DFF00A3C273 /* reader.css */; };
+		8B8D963E260C5DFF00A3C273 /* reader.css in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D963C260C5DFF00A3C273 /* reader.css */; };
+		8B8D963F260C5DFF00A3C273 /* reader.css in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D963C260C5DFF00A3C273 /* reader.css */; };
+		8B8D964D260C84A000A3C273 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D964C260C84A000A3C273 /* test.html */; };
+		8B8D964E260C84A000A3C273 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D964C260C84A000A3C273 /* test.html */; };
+		8B8D964F260C84A000A3C273 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D964C260C84A000A3C273 /* test.html */; };
+		8B8D9657260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */; };
+		8B8D9658260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */; };
+		8B8D9659260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */; };
 		8B9ADBED260A78F900B0DED8 /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B9ADBEB260A78F900B0DED8 /* Panel.cpp */; };
 		8B9ADBEE260A78F900B0DED8 /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B9ADBEB260A78F900B0DED8 /* Panel.cpp */; };
 		8B9ADBEF260A78F900B0DED8 /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B9ADBEB260A78F900B0DED8 /* Panel.cpp */; };
@@ -171,6 +186,11 @@
 		8B658016240AFED800A245DC /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		8B65801B240B12E100A245DC /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		8B65801F240B1C6E00A245DC /* NavigationToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationToolbar.swift; sourceTree = "<group>"; };
+		8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.2.1.min.js"; sourceTree = "<group>"; };
+		8B8D9632260C5DEF00A3C273 /* reader.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = reader.js; sourceTree = "<group>"; };
+		8B8D963C260C5DFF00A3C273 /* reader.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = reader.css; sourceTree = "<group>"; };
+		8B8D964C260C84A000A3C273 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = test.html; path = ../../../../OSS/kumiko/test.html; sourceTree = "<group>"; };
+		8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = epistemic_uncertainty.png; sourceTree = "<group>"; };
 		8B9ADBEB260A78F900B0DED8 /* Panel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Panel.cpp; sourceTree = "<group>"; };
 		8B9ADBEC260A78F900B0DED8 /* Panel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Panel.hpp; sourceTree = "<group>"; };
 		8B9ADC0E260AC46600B0DED8 /* Ji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -337,13 +357,18 @@
 		8B626D722401BB1D00972EED /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				8B33FE3125FD534F00CD0F35 /* dckx.xcdatamodeld */,
 				8BE8ECA2243A9B1E0037036E /* dckx.sqlite */,
+				8B33FE3125FD534F00CD0F35 /* dckx.xcdatamodeld */,
+				8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */,
+				8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */,
+				8B8D9632260C5DEF00A3C273 /* reader.js */,
+				8B8D963C260C5DFF00A3C273 /* reader.css */,
+				8B8D964C260C84A000A3C273 /* test.html */,
 				8B658003240AD42500A245DC /* xkcd-Regular.otf */,
-				8B658002240AD42500A245DC /* xkcd.otf */,
-				8B657FFE240ACCE200A245DC /* xkcd-script.woff */,
 				8B626D732401BB6800972EED /* xkcd-script.ttf */,
+				8B657FFE240ACCE200A245DC /* xkcd-script.woff */,
 				8B658012240AE94400A245DC /* xkcd.css */,
+				8B658002240AD42500A245DC /* xkcd.otf */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -521,13 +546,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BE8ECA3243A9B1E0037036E /* dckx.sqlite in Resources */,
+				8B8D963D260C5DFF00A3C273 /* reader.css in Resources */,
+				8B8D9633260C5DEF00A3C273 /* reader.js in Resources */,
 				8B658007240AD42600A245DC /* xkcd-Regular.otf in Resources */,
 				8B657FFF240ACCE200A245DC /* xkcd-script.woff in Resources */,
 				8B658013240AE94400A245DC /* xkcd.css in Resources */,
 				8B4F4BA523F5F445008446F4 /* LaunchScreen.storyboard in Resources */,
 				8B4F4BA223F5F445008446F4 /* Preview Assets.xcassets in Resources */,
 				8B4F4B9F23F5F445008446F4 /* Assets.xcassets in Resources */,
+				8B8D9629260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */,
+				8B8D9657260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */,
 				8B658004240AD42600A245DC /* xkcd.otf in Resources */,
+				8B8D964D260C84A000A3C273 /* test.html in Resources */,
 				8B626D742401BB6800972EED /* xkcd-script.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,11 +567,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B658000240ACCE200A245DC /* xkcd-script.woff in Resources */,
+				8B8D963E260C5DFF00A3C273 /* reader.css in Resources */,
 				8B658005240AD42600A245DC /* xkcd.otf in Resources */,
 				8B626DD82403C6C700972EED /* xkcd-script.ttf in Resources */,
 				8BE8ECA4243A9B1E0037036E /* dckx.sqlite in Resources */,
 				8B658008240AD42600A245DC /* xkcd-Regular.otf in Resources */,
 				8B658014240AE94400A245DC /* xkcd.css in Resources */,
+				8B8D9658260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */,
+				8B8D962A260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */,
+				8B8D964E260C84A000A3C273 /* test.html in Resources */,
+				8B8D9634260C5DEF00A3C273 /* reader.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,12 +585,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B658006240AD42600A245DC /* xkcd.otf in Resources */,
+				8B8D9635260C5DEF00A3C273 /* reader.js in Resources */,
+				8B8D964F260C84A000A3C273 /* test.html in Resources */,
 				8B658015240AE94400A245DC /* xkcd.css in Resources */,
 				8B658001240ACCE200A245DC /* xkcd-script.woff in Resources */,
 				8B658009240AD42600A245DC /* xkcd-Regular.otf in Resources */,
 				8B626D762401C74600972EED /* Assets.xcassets in Resources */,
 				8BE8ECA5243A9B1E0037036E /* dckx.sqlite in Resources */,
+				8B8D9659260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */,
+				8B8D963F260C5DFF00A3C273 /* reader.css in Resources */,
 				8B626D752401BB6800972EED /* xkcd-script.ttf in Resources */,
+				8B8D962B260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

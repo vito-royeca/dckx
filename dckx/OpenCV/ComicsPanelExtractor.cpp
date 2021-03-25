@@ -94,7 +94,7 @@ void ComicsPanelExtractor::parse(Mat gray, const std::string& bgColor, json& dic
     
     // Number panels comics-wise (left to right for now)
     sort(panels.begin(), panels.end(), [](Panel p1, Panel p2) {
-        return p1.x > p2.x;
+        return p1.x < p2.x;
     });
     
     // Simplify panels back to lists (x,y,w,h)
@@ -247,7 +247,7 @@ void ComicsPanelExtractor::expandPanels(std::vector<Panel>& panels) {
             Panel *neighbor = p.findNeighbourPanel(d, panels);
             
             if (neighbor != NULL) {
-                cout << "d=" << d << ", neihgbor=" << "[left:" << neighbor->x << ", right: " << neighbor->r << ", top: " << neighbor->y << ", bottom: " << neighbor->b << " (" << neighbor->w << "x" << neighbor->y << ")]" << endl;
+//                cout << "d=" << d << ", neihgbor=" << "[left:" << neighbor->x << ", right: " << neighbor->r << ", top: " << neighbor->y << ", bottom: " << neighbor->b << " (" << neighbor->w << "x" << neighbor->y << ")]" << endl;
                 
                 // expand to that neighbour's edge (minus gutter)
                 if (d == "x") {
@@ -299,7 +299,7 @@ void ComicsPanelExtractor::expandPanels(std::vector<Panel>& panels) {
                 }
             }
             
-            cout << "newcoord=" << newCoord << endl;
+//            cout << "newcoord=" << newCoord << endl;
             if (newCoord != -1) {
                 if (((d == "r" || d == "b") && newCoord > pAttribute) ||
                     ((d == "x" || d == "y") && newCoord < pAttribute)) {
