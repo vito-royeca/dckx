@@ -13,7 +13,7 @@
 
 @interface OpenCVWrapper : NSObject
 
-+ (NSDictionary*) splitComics:(NSString*) path minimumPanelSizeRatio:(NSInteger) ratio;
++ (NSDictionary*) splitComics:(NSString*) path minimumPanelSizeRatio:(float) ratio;
 
 @end
 

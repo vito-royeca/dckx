@@ -23,9 +23,9 @@ using json = nlohmann::json;
 class ComicsPanelExtractor {
     
 public:
-    int minimumPanelSizeRatio;
+    float minimumPanelSizeRatio;
     Mat image;
-    json splitComics(const std::string& path, const int minimumPanelSizeRatio);
+    json splitComics(const std::string& path, const float minimumPanelSizeRatio);
     
     ComicsPanelExtractor() {
         subpanelColours = {{0,255,0},{255,0,0},{200,200,0},{200,0,200},{0,200,200},{150,150,150}};
@@ -38,6 +38,8 @@ private:
     void splitPanels(vector<Panel>& panels, Mat img, const int contourSize);
     void mergePanels(std::vector<Panel>& panels);
     void deoverlapPanels(std::vector<Panel>& panels);
+    json actualGutters(std::vector<Panel>& panels);
+    void expandPanels(std::vector<Panel>& panels);
 };
 
 #endif /* ComicsPanelExtractor_hpp */

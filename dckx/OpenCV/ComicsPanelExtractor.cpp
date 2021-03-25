@@ -12,7 +12,7 @@ using namespace cv;
 using namespace std;
 using json = nlohmann::json;
 
-json ComicsPanelExtractor::splitComics(const std::string& path, const int minimumPanelSizeRatio) {
+json ComicsPanelExtractor::splitComics(const std::string& path, const float minimumPanelSizeRatio) {
     this->minimumPanelSizeRatio = minimumPanelSizeRatio;
     this->image = imread(path, IMREAD_COLOR);
     json j;
@@ -32,9 +32,9 @@ json ComicsPanelExtractor::splitComics(const std::string& path, const int minimu
     for (std::string bgColor : {"white", "black"}) {
         this->parse(gray, bgColor, j);
         
-//        if ([dictionary objectForKey: @"panels"] != nil) {
-//            return dictionary;
-//        }
+        if (j.find("panels") != j.end()) {
+            return j;
+        }
     }
     
     return j;
@@ -79,6 +79,31 @@ void ComicsPanelExtractor::parse(Mat gray, const std::string& bgColor, json& dic
     // splitting polygons may result in panels slightly overlapping, de-overlap them
     this->deoverlapPanels(panels);
     
+    // get actual gutters before expanding panels
+    json actualGutters = this->actualGutters(panels);
+    dictionary["gutters"] = { actualGutters["x"], actualGutters["y"] };
+    
+//    std::sort (panels.begin(), panels.end());
+    this->expandPanels(panels);
+    
+    if (panels.size() == 0) {
+        cv::Rect rect(0, 0, dictionary["size"].get<std::vector<int>>()[0], dictionary["size"].get<std::vector<int>>()[1]);
+        Panel panel(&rect, NULL);
+        panels.push_back(panel);
+    }
+    
+    // Number panels comics-wise (left to right for now)
+    sort(panels.begin(), panels.end(), [](Panel p1, Panel p2) {
+        return p1.x > p2.x;
+    });
+    
+    // Simplify panels back to lists (x,y,w,h)
+    json panelsDictionary;
+    for (Panel p : panels) {
+        panelsDictionary.push_back(p.toXywh());
+    }
+    
+    dictionary["panels"] = panelsDictionary;
 }
 
 vector<vector<cv::Point>> ComicsPanelExtractor::getContours(Mat gray, const std::string& bgColor) {
@@ -178,3 +203,118 @@ void ComicsPanelExtractor::deoverlapPanels(std::vector<Panel>& panels) {
     }
 }
     
+// Find out actual gutters between panels
+json ComicsPanelExtractor::actualGutters(std::vector<Panel>& panels) {
+    std::vector<int> guttersX;
+    std::vector<int> guttersY;
+    json j;
+    
+    for (Panel p : panels) {
+        Panel *leftPanel = p.findLeftPanel(panels);
+        if (leftPanel != NULL) {
+            guttersX.push_back(p.x - leftPanel->r);
+        }
+        
+        Panel *topPanel = p.findTopPanel(panels);
+        if (topPanel != NULL) {
+            guttersY.push_back(p.y - topPanel->b);
+        }
+    }
+    
+    if (guttersX.size() == 0) {
+        guttersX.push_back(1);
+    }
+    if (guttersY.size() == 0) {
+        guttersY.push_back(1);
+    }
+    
+    j["x"] = *min_element(guttersX.begin(), guttersX.end());
+    j["y"] = *min_element(guttersY.begin(), guttersY.end());
+    j["r"] = -*min_element(guttersX.begin(), guttersX.end());
+    j["b"] = -*min_element(guttersY.begin(), guttersY.end());
+    return j;
+}
+
+// Expand panels to their neighbour's edge, or page frame
+void ComicsPanelExtractor::expandPanels(std::vector<Panel>& panels) {
+    json gutters = this->actualGutters(panels);
+    
+    for (Panel p : panels) {
+        for (std::string d : {"x", "y", "r", "b"}) {
+            json pcoords = {{"x", p.x}, {"y", p.y}, {"r", p.r}, {"b", p.b}};
+            int newCoord = -1;
+            int pAttribute = -1;
+            Panel *neighbor = p.findNeighbourPanel(d, panels);
+            
+            if (neighbor != NULL) {
+                cout << "d=" << d << ", neihgbor=" << "[left:" << neighbor->x << ", right: " << neighbor->r << ", top: " << neighbor->y << ", bottom: " << neighbor->b << " (" << neighbor->w << "x" << neighbor->y << ")]" << endl;
+                
+                // expand to that neighbour's edge (minus gutter)
+                if (d == "x") {
+                    newCoord = neighbor->r;
+                    pAttribute = p.x;
+                } else if (d == "y") {
+                    newCoord = neighbor->b;
+                    pAttribute = p.y;
+                } else if (d == "r") {
+                    newCoord = neighbor->x;
+                    pAttribute = p.r;
+                } else if (d == "b") {
+                    newCoord = neighbor->y;
+                    pAttribute = p.b;
+                }
+                newCoord += gutters[d].get<int>();
+            } else {
+                // expand to the furthest known edge (frame around all panels)
+                std::vector<Panel> sortedPanels;
+                for (int i=0; i<panels.size(); i++) {
+                    sortedPanels.push_back(panels[i]);
+                }
+                Panel *minPanel;
+                
+                
+                if (d == "x" || d == "y") {
+                    sort(sortedPanels.begin(), sortedPanels.end(), [](Panel p1, Panel p2) {
+                        return p1.b > p2.b;
+                    });
+                } else {
+                    sort(sortedPanels.begin(), sortedPanels.end(), [](Panel p1, Panel p2) {
+                        return p1.b < p2.b;
+                    });
+                }
+                minPanel = &sortedPanels.front();
+                
+                if (d == "x") {
+                    newCoord = minPanel->x;
+                    pAttribute = p.x;
+                } else if (d == "y") {
+                    newCoord = minPanel->y;
+                    pAttribute = p.y;
+                } else if (d == "r") {
+                    newCoord = minPanel->r;
+                    pAttribute = p.r;
+                } else if (d == "b") {
+                    newCoord = minPanel->b;
+                    pAttribute = p.b;
+                }
+            }
+            
+            cout << "newcoord=" << newCoord << endl;
+            if (newCoord != -1) {
+                if (((d == "r" || d == "b") && newCoord > pAttribute) ||
+                    ((d == "x" || d == "y") && newCoord < pAttribute)) {
+                    if (d == "x") {
+                        p.x = newCoord;
+                    } else if (d == "y") {
+                        p.y = newCoord;
+                    } else if (d == "r") {
+                        p.r = newCoord;
+                    } else if (d == "b") {
+                        p.b = newCoord;
+                    }
+                }
+            }
+        }
+    }
+
+}

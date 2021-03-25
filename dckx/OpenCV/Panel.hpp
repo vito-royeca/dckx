@@ -31,9 +31,17 @@ public:
     Panel(cv::Rect* xywh, vector<cv::Point>* polygons);
     
     std::vector<Panel> split();
+    std::vector<int> toXywh();
     bool contains(Panel other);
     Panel* overlapPanel(Panel other);
     int area() { return this->w * this->h; }
+    Panel* findTopPanel(std::vector<Panel>& panels);
+    Panel* findLeftPanel(std::vector<Panel>& panels);
+    Panel* findBottomPanel(std::vector<Panel>& panels);
+    Panel* findRightPanel(std::vector<Panel>& panels);
+    Panel* findNeighbourPanel(std::string d, std::vector<Panel>& panels);
+    inline bool sameRow(Panel other) { return other.y <= this->y <= other.b || this->y <= other.y <= this->b; }
+    inline bool sameCol(Panel other) { return other.x <= this->x <= other.r || this->x <= other.x <= this->r; }
 private:
     
 };
@@ -44,5 +52,6 @@ inline bool operator!=(const Panel& lhs, const Panel& rhs){ return !(lhs == rhs)
 inline bool operator> (const Panel& lhs, const Panel& rhs){ return !(lhs < rhs); }
 inline bool operator<=(const Panel& lhs, const Panel& rhs){ return lhs < rhs; }
 inline bool operator>=(const Panel& lhs, const Panel& rhs){ return lhs > rhs; }
+std::ostream& operator<<(std::ostream &strm, const Panel &panel);
 
 #endif /* Panel_hpp */
