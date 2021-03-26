@@ -110,57 +110,109 @@ std::vector<Panel> Panel::split() {
         }
         poly1len += this->polygons.size();
         
-//        cout << "finally... poly1=" << poly1len << ", poly2=" << poly2len << endl;
+        // A panel should have at least three edges
+        if (min(poly1len, poly2len) <= 2) {
+            continue;
+        }
+//        cout << "poly1=" << poly1len << ", poly2=" << poly2len << endl;
+        
+        // Construct two subpolygons by distributing the dots around our cut (our close dots)
+        vector<cv::Point> poly1;
+        poly1.resize(poly1len);
+        
+        vector<cv::Point> poly2;
+        poly2.resize(poly2len);
+//        vector<vector<vector<int> > >  poly2;
+//        poly1.resize(poly2len);
+//        poly1[0].resize(1);
+//        for(int i=0;i<1;i++) {
+//            poly1[0][i].resize(2);
+//            for(int j=0;j<2;j++) {
+//                poly1[0][i][j] = 0;
+//            }
+//        }
+        
+        int x = 0, y = 0, z = 0;
+        for (int i=0; i<this->polygons.size()-1; i++) {
+            index = 0;
+            
+            for(std::vector<int>::iterator elem = std::begin(*cut); elem != std::end(*cut); ++elem) {
+                if (index == 0) {
+                    if (i <= *elem) {
+                        poly1[x] = this->polygons[i];
+                        x += 1;
+                    } else {
+                        poly2[y] = this->polygons[i];
+                        y += 1;
+                    }
+                } else if (index == 1) {
+                    if (i > *elem) {
+                        poly1[x] = this->polygons[i];
+                        x += 1;
+                    } else {
+                        poly2[y] = this->polygons[i];
+                        y += 1;
+                    }
+                }
+                index++;
+            }
+        }
+        
+        Panel panel1(NULL, &poly1);
+        Panel panel2(NULL, &poly2);
+        
+        // Check that subpanels' width and height are not too small
+        bool whOk = true;
+        for (Panel p : {panel1,panel2}) {
+            if (p.h / this->h < 0.1) {
+                whOk = false;
+            }
+            if (p.w / this->w < 0.1) {
+                whOk = false;
+            }
+
+            if (!whOk) {
+                continue;
+            }
+        }
+        
+        // Check that subpanels' area is not too small
+        double area1 = cv::contourArea(poly1);
+        double area2 = cv::contourArea(poly2);
+        if (max(area1, area2) == 0) {
+            continue;
+        }
+        
+        double areaRatio = min(area1,area2) / max(area1,area2);
+        if (areaRatio < 0.1) {
+            continue;
+        }
+        
+        vector<Panel> subpanels1 = panel1.split();
+        vector<Panel> subpanels2 = panel2.split();
+        
+        // resurse (find subsubpanels in subpanels)
+        if (subpanels1.size() == 0) {
+            for(std::vector<Panel>::iterator it = std::begin(subpanels1); it != std::end(subpanels1); ++it) {
+                splitPanels.push_back(*it);
+            }
+        } else {
+            splitPanels.push_back(panel1);
+        }
+        
+        if (subpanels2.size() == 0) {
+            for(std::vector<Panel>::iterator it = std::begin(subpanels2); it != std::end(subpanels2); ++it) {
+                splitPanels.push_back(*it);
+            }
+        } else {
+            splitPanels.push_back(panel2);
+        }
     }
+    
     return splitPanels;
     
     /*
      for cut in cuts:
-         poly1len = len(self.polygon) - cut[1] + cut[0]
-         poly2len = cut[1] - cut[0]
-         
-         # A panel should have at least three edges
-         if min(poly1len,poly2len) <= 2:
-             continue
-         
-         # Construct two subpolygons by distributing the dots around our cut (our close dots)
-         poly1 = np.zeros(shape=(poly1len,1,2), dtype=int)
-         poly2 = np.zeros(shape=(poly2len,1,2), dtype=int)
-         
-         x = y = 0
-         for i in range(len(self.polygon)):
-             if i <= cut[0] or i > cut[1]:
-                 poly1[x][0] = self.polygon[i]
-                 x += 1
-             else:
-                 poly2[y][0] = self.polygon[i]
-                 y += 1
-         
-         panel1 = Panel(polygon=poly1)
-         panel2 = Panel(polygon=poly2)
-         
-         # Check that subpanels' width and height are not too small
-         wh_ok = True
-         for p in [panel1,panel2]:
-             if p.h / self.h < 0.1:
-                 wh_ok = False
-             if p.w / self.w < 0.1:
-                 wh_ok = False
-         
-         if not wh_ok:
-             continue
-         
-         # Check that subpanels' area is not too small
-         area1 = cv.contourArea(poly1)
-         area2 = cv.contourArea(poly2)
-         
-         if max(area1,area2) == 0:
-             continue
-         
-         areaRatio = min(area1,area2) / max(area1,area2)
-         if areaRatio < 0.1:
-             continue
-         
          subpanels1 = panel1.split()
          subpanels2 = panel2.split()
          
