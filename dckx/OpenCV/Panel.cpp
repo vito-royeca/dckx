@@ -48,51 +48,73 @@ std::vector<Panel> Panel::split() {
     if (this->polygons.size() == 0) {
         throw "Fatal error, trying to split a Panel with no polygon (not the result of opencv.findContours)";
     }
+    std::vector<Panel> splitPanels;
     
-    std::vector<int> closeDots;
+    std::vector<vector<int>> closeDots;
     for (int i=0; i<this->polygons.size()-1; i++) {
         bool allClose = true;
         
         for (int j=i+1; j<this->polygons.size(); j++) {
             cv::Point dot1 = this->polygons[i];
+            cv::Point dot2 = this->polygons[j];
+//            cout << "dot1: " << dot1 << ", dot2: " << dot2 << endl;
             
-//            int dot2 = this->polygons[j][0];
+            // elements that join panels together (e.g. speech bubbles) will be ignored (cut out) if their width and height is < min(panelwidth * ratio, panelheight * ratio)
+            float ratio = 0.25;
+            float maxDistance = min(this->w * ratio, this->h * ratio);
+            
+            if (abs(dot1.x-dot2.x) < maxDistance && abs(dot1.y-dot2.y) < maxDistance) {
+                if (!allClose) {
+                    closeDots.push_back({i, j});
+                }
+            } else {
+                allClose = false;
+            }
         }
     }
     
-    std::vector<Panel> panels;
+    if (closeDots.size() == 0) {
+        return splitPanels;
+    }
     
-    return panels;
+    // take the close dots that are closest from one another
+//    std::vector<vector<int>> cuts;
+//    sort(closeDots.begin(), closeDots.end(), [](cv::Point pt1, cv::Point pt2) {
+//        return abs(pt1.x - pt2.x) < abs(pt1.y-pt2.y);
+//    });
+    
+//    cout << "[";
+//    for(std::vector<vector<int>>::iterator row = std::begin(closeDots); row != std::end(closeDots); ++row) {
+//        cout << "[";
+//        for(std::vector<int>::iterator elem = std::begin(*row); elem != std::end(*row); ++elem) {
+//            cout << *elem << ",";
+//        }
+//        cout << "], ";
+//    }
+//    cout << "]" << endl;
+    
+    for(std::vector<vector<int>>::iterator cut = std::begin(closeDots); cut != std::end(closeDots); ++cut) {
+        int poly1len = 0;
+        int poly2len = 0;
+        int index = 0;
+        
+        for(std::vector<int>::iterator elem = std::begin(*cut); elem != std::end(*cut); ++elem) {
+            if (index == 0) {
+                poly1len += *elem;
+                poly2len -= *elem;
+            } else if (index == 1) {
+                poly1len -= *elem;
+                poly2len += *elem;
+            }
+            index++;
+        }
+        poly1len += this->polygons.size();
+        
+//        cout << "finally... poly1=" << poly1len << ", poly2=" << poly2len << endl;
+    }
+    return splitPanels;
     
     /*
-     if self.polygon is None:
-         raise Exception('Fatal error, trying to split a Panel with no polygon (not the result of opencv.findContours)')
-     
-     close_dots = []
-     for i in range(len(self.polygon)-1):
-         all_close = True
-         for j in range(i+1,len(self.polygon)):
-             dot1 = self.polygon[i][0]
-             dot2 = self.polygon[j][0]
-             
-             # elements that join panels together (e.g. speech bubbles) will be ignored (cut out) if their width and height is < min(panelwidth * ratio, panelheight * ratio)
-             ratio = 0.25
-             max_dist = min(self.w * ratio, self.h * ratio)
-             if abs(dot1[0]-dot2[0]) < max_dist and abs(dot1[1]-dot2[1]) < max_dist:
-                 if not all_close:
-                     close_dots.append([i,j])
-             else:
-                 all_close = False
-     
-     if len(close_dots) == 0:
-         return None
-     
-     # take the close dots that are closest from one another
-     cuts = sorted(close_dots, key=lambda d:
-         abs(self.polygon[d[0]][0][0]-self.polygon[d[1]][0][0]) +  # dot1.x - dot2.x
-         abs(self.polygon[d[0]][0][1]-self.polygon[d[1]][0][1])    # dot1.y - dot2.y
-     )
-     
      for cut in cuts:
          poly1len = len(self.polygon) - cut[1] + cut[0]
          poly2len = cut[1] - cut[0]

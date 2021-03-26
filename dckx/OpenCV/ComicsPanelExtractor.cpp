@@ -299,7 +299,6 @@ void ComicsPanelExtractor::expandPanels(std::vector<Panel>& panels) {
                 }
             }
             
-//            cout << "newcoord=" << newCoord << endl;
             if (newCoord != -1) {
                 if (((d == "r" || d == "b") && newCoord > pAttribute) ||
                     ((d == "x" || d == "y") && newCoord < pAttribute)) {
