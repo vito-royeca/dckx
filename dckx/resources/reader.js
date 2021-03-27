@@ -106,15 +106,14 @@ class Reader {
 	loadPage(page=0)
 	{
 		page = parseInt(page);
-		
+		console.log("page="+page+", length="+this.comic.length);
+
 		// don't go to a page below 0, or above the number of pages in this comic
 		if (page < 0 || page >= this.comic.length)
 			return false;
-		
+				
 		this.currpage = page;
 		this.setHashInfo({page: page ? page : null});
-		
-		$('.pagenb',this.gui).html('page '+(page+1)+' <small>/'+this.comic.length+'</small>')
 		
 		var imginfo = this.comic[page];
 		var imgurl = this.images_dir == 'urls' ? imginfo.filename : this.images_dir + imginfo.filename.split('/').reverse()[0];
@@ -128,16 +127,6 @@ class Reader {
 		
 		this.container.children('img').remove();
 		this.container.prepend(img);
-		
-		// show license
-		var license = this.get_license(imginfo);
-		if (license)
-		{
-			this.gui.append('<span class="license"/>');
-			this.gui.children('.license').html(license);
-		}
-		else
-			$('.license',this.gui).remove();
 		
 		var was_zoomed = this.container.is('.zoomed');
 		
@@ -262,7 +251,7 @@ class Reader {
 			};
 			panel.css(panelcss);
 			
-			panel.append('<span class="panelnb">'+(i++)+'</span>');
+			// panel.append('<span class="panelnb">'+(i++)+'</span>');
 			panel.append('<span class="top">'+y);
 			panel.append('<span class="bottom">'+(y+h));
 			panel.append('<span class="left">'+x);
@@ -275,85 +264,21 @@ class Reader {
 	add_controls()
 	{
 		var _reader = this;
-		// add controls and page info
-		this.gui.append('<span class="pagenb"/>');
-		
-		var burger = $('<i class="burger">☰</i>');
-		burger.data('reader',this);
-		burger.on('click touch', function (e) { $(this).data('reader').showMenu(); });
-		this.gui.append(burger);
 		
 		var btprev = $('<i class="prev">←</i>');
 		btprev.data('reader',this);
 		btprev.on('click touch', function (e) { $(this).data('reader').prev(); });
 		this.gui.append(btprev);
-		
-		var menu = $('<div class="menu"/>');
-		var menuul = $('<ul/>');
-		menuul.append('<li><label><input type="radio" name="viewmode" value="page"  autocomplete="off" />Page</label></li>');
-		menuul.append('<li><label><input type="radio" name="viewmode" value="panel" autocomplete="off" />Panel</label></li>');
-		menu.append(menuul);
-		
-		var btn_debug = $('<label><input type="checkbox" class="toggleDebug" autocomplete="off" />Show panels</label>');
-		if (this.debug)
-			btn_debug.children('.toggleDebug').prop('checked',true);
-		btn_debug.children('.toggleDebug').on('change', function () {
-			_reader.gui.toggleClass('debug');
-			_reader.setHashInfo({'debug': _reader.gui.hasClass('debug') ? '' : null});
-		});
-		menuul.append(btn_debug);
-		
-		menuul.append('<i class="exit">X</i>');
-		menuul.children('.exit').on('click touch', function () { _reader.showMenu(false); })
-		
-		menuul.append(' \
-			<li>---</li> \
-			<li class="kbd"><span>click/tap</span><span>next page/panel</span></li> \
-			<li class="kbd"><span>right/down</span><span>next page/panel</span></li> \
-			<li class="kbd"><span>left/up</span><span>previous page/panel</span></li> \
-			<li class="kbd"><span>p</span><span>switch page/panel view</span></li> \
-			<li class="kbd"><span>m</span><span>show this menu</span></li> \
-			<li class="kbd"><span>d</span><span>debug (show panels)</span></li> \
-		');
-		
-		this.gui.append(menu);
-		this.showMenu(false);
+
+		var btnext = $('<i class="next">→</i>');
+		btnext.data('reader',this);
+		btnext.on('click touch', function (e) { $(this).data('reader').next(); });
+		this.gui.append(btnext);
 		
 		$(document).ready( function () {
-			var mode = _reader.debug ? 'page' : 'panel';
-			$('input[name=viewmode][value='+mode+']',  _reader.gui).prop('checked',true).change();
+			_reader.gotoPanel(0);
+			_reader.container.focus();
 		});
-	}
-	
-	get_license(page)
-	{
-		if (!page.license)
-			return '';
-		
-		var html = [];
-		for (var i=0; i < 3; i++)
-		{
-			var k = ['title','author','license'][i];
-			if (k in page.license)
-			{
-				var elt = page.license;
-				html.push(
-					{title:'',author:'by ',license:''}[k] +
-					(elt[k+'_link'] ? '<a target="_blank" href="'+elt[k+'_link']+'">'+elt[k]+'</a>' : elt[k])
-				);
-			}
-		}
-		return html.join(', ');
-	}
-	
-	showMenu(show=true)
-	{
-		var menu = this.gui.children('.menu');
-		
-		if (show == 'toggle')
-			show = !menu.is(':visible');
-		
-		show ? menu.show() : menu.hide();
 	}
 }
 
@@ -381,12 +306,6 @@ $(document).delegate( '.kumiko-reader', 'click touch', function (e) {
 		$(this).data('reader').next();
 });
 
-// Prevent click on page when clicking on license links
-$(document).delegate( '.license a', 'click touch', function (e) {
-	e.stopPropagation();
-});
-
-
 /**** KEYBOARD NAVIGATION ****/
 
 $(document).keydown(function(e) {
@@ -409,9 +328,9 @@ $(document).keydown(function(e) {
 			d.prop('checked',!d.is(':checked')).change();
 			break;
 		
-		case 77: // 'm' key: toggle menu
-			reader.showMenu('toggle');
-			break;
+		// case 77: // 'm' key: toggle menu
+		// 	reader.showMenu('toggle');
+		// 	break;
 		
 		case 80: // 'p' key: switch between page and panel reading
 			$('input[name=viewmode]:not(:checked)').prop('checked',true).change();
