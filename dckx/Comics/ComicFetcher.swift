@@ -113,7 +113,7 @@ class ComicFetcher: ObservableObject {
             let img = comic.img,
             let title = comic.title,
             let cachePath = SDImageCache.shared.cachePath(forKey: img),
-            let splitComics = OpenCVWrapper.splitComics("/Users/vito.royeca/workspace/OSS/kumiko/1616602243-20210324.png", minimumPanelSizeRatio: 1/15) else {
+            let splitComics = OpenCVWrapper.splitComics(cachePath/*"/Users/vito.royeca/workspace/OSS/kumiko/1616602243-20210324.png"*/, minimumPanelSizeRatio: 1/15) else {
             return ""
         }
         
