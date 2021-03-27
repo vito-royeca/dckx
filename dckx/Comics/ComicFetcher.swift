@@ -144,7 +144,7 @@ class ComicFetcher: ObservableObject {
         head += " .sidebyside > div { width: 45%; }"
         head += " .version { text-align: center; }"
         head += " .kumiko-reader { height: 90vh; }"
-        head += " .kumiko-reader.fullpage { height: 100%; width: 100%; }"
+        head += " .kumiko-reader.fullpage { height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;}"
         head += "</style></head>"
         
         var reader = "<div id='reader' class='kumiko-reader fullpage'></div>"
@@ -168,7 +168,6 @@ class ComicFetcher: ObservableObject {
 //        html += "<tr><td>&nbsp;</td></tr>"
 //        html += "</table>"
         html += "\(reader)"
-//        html += "<img src='\(cachePath)'>"
         html += "</body></html>"
         
         return html

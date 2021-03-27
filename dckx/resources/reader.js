@@ -40,7 +40,7 @@ class Reader {
 			position: 'relative',
 			width: '95%',
 			height: '95%',
-			margin: 'auto',
+			margin: 'auto'
 		});
 		this.gui.append(this.container);
 		
@@ -106,12 +106,28 @@ class Reader {
 	loadPage(page=0)
 	{
 		page = parseInt(page);
-		console.log("page="+page+", length="+this.comic.length);
 
 		// don't go to a page below 0, or above the number of pages in this comic
-		if (page < 0 || page >= this.comic.length)
+		if (page < 0) {
+			this.dezoom();
 			return false;
 				
+		} else if (page >= this.comic.length) {	
+			var imginfo = this.comic[this.comic.length-1];
+			console.log("this.currpanel:" + this.currpanel + ", imginfo['panels'].length: " + imginfo['panels'].length);
+			if (this.currpanel == imginfo['panels'].length) {
+				this.dezoom();
+			} else {
+				var newPanel = $('.panel').eq(0);
+
+				if (newPanel.length > 0) {
+					this.currpanel = 0;
+					this.zoomOn(newPanel);
+				}
+			}
+			return false;
+		}
+
 		this.currpage = page;
 		this.setHashInfo({page: page ? page : null});
 		
@@ -122,7 +138,7 @@ class Reader {
 		img.css({
 			position: 'absolute',
 			'width': '100%',
-			'height': '100%'
+			'height': '100%',
 		});
 		
 		this.container.children('img').remove();
@@ -158,8 +174,8 @@ class Reader {
 		var newcss = {
 			top:  - panel.position().top  * growth,
 			left: - panel.position().left * growth,
-			height: this.container.height() * growth,
-			width:  this.container.width()  * growth
+			height: 'auto',//this.container.height() * growth,
+			width:  'auto'//this.container.width()  * growth
 		};
 		
 		// center panel horizontally or vertically within container's parent
@@ -178,13 +194,12 @@ class Reader {
 	dezoom ()
 	{
 		var size = this.getImgSize();
-		
 		var newcss = {
 			width: size.w,
 			height: size.h,
 			left: 0,
 			top: 0
-		};
+		}
 		this.container.removeClass('zoomed');
 		this.container.css(newcss);
 	}
@@ -251,12 +266,6 @@ class Reader {
 			};
 			panel.css(panelcss);
 			
-			// panel.append('<span class="panelnb">'+(i++)+'</span>');
-			panel.append('<span class="top">'+y);
-			panel.append('<span class="bottom">'+(y+h));
-			panel.append('<span class="left">'+x);
-			panel.append('<span class="right">'+(x+w));
-			
 			this.container.append(panel);
 		}
 	}
@@ -265,18 +274,18 @@ class Reader {
 	{
 		var _reader = this;
 		
-		var btprev = $('<i class="prev">←</i>');
+		var btprev = $('<i class="prev"><div class="center">←</div></i>');
 		btprev.data('reader',this);
 		btprev.on('click touch', function (e) { $(this).data('reader').prev(); });
 		this.gui.append(btprev);
 
-		var btnext = $('<i class="next">→</i>');
+		var btnext = $('<i class="next"><div class="center">→</div></i>');
 		btnext.data('reader',this);
 		btnext.on('click touch', function (e) { $(this).data('reader').next(); });
 		this.gui.append(btnext);
 		
 		$(document).ready( function () {
-			_reader.gotoPanel(0);
+			_reader.dezoom();
 			_reader.container.focus();
 		});
 	}
