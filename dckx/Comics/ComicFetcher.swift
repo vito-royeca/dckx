@@ -144,29 +144,26 @@ class ComicFetcher: ObservableObject {
         head += " .sidebyside > div { width: 45%; }"
         head += " .version { text-align: center; }"
         head += " .kumiko-reader { height: 90vh; }"
-        head += " .kumiko-reader.fullpage { height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;}"
+        head += " .kumiko-reader.fullpage { height: 100%; width: 100%; }"
         head += "</style></head>"
         
+        let altText = "\(comic.alt ?? "")".replacingOccurrences(of: "'", with: "\\x27").replacingOccurrences(of: "\"", with: "\\x22")
         var reader = "<div id='reader' class='kumiko-reader fullpage'></div>"
         reader += "<script type='text/javascript'>"
         reader += " var reader = new Reader({"
         reader += "  container: $('#reader'),"
         reader += "  comicsJson: \(comicsJson),"
         reader += "  images_dir: 'urls',"
-        reader += "  controls: true"
+        reader += "  controls: true,"
+        reader += "  num: '#\(comic.num)',"
+        reader += "  date: '\(dateToString(date: comic.date))',"
+        reader += "  altText: '\(altText)'"
         reader += " });"
         reader += " reader.start();"
         reader += "</script>"
         
         var html = "<!DOCTYPE html><html>\(head)<body>"
-//        html += "<table id='wrapper' width='100%'>"
-//        html += "<tr><td width='50%'><p class='subtitle' align='left'>#\(comic.num)</p></td><td width='50%'><p class='subtitle' align='right'>\(dateToString(date: comic.date))</p></td></tr>"
-//        if showingAltText {
-//            html += "<tr><td colspan='2'><p class='altText'>\(comic.alt ?? "&nbsp;")</p></td></tr>"
-//        }
-//        html += "<tr><td colspan='2'>\(reader)</td></tr>"
-//        html += "<tr><td>&nbsp;</td></tr>"
-//        html += "</table>"
+        
         html += "\(reader)"
         html += "</body></html>"
         

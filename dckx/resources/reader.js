@@ -44,6 +44,14 @@ class Reader {
 		});
 		this.gui.append(this.container);
 		
+		// add text
+		var leftText = $('<i class="leftText"><div>'+options['num']+'</div></i>');
+		this.gui.append(leftText);
+		var rightText = $('<i class="rightText"><div>'+options['date']+'</div></i>');
+		this.gui.append(rightText);
+		var altText = $('<i class="altText">'+options['altText'].replace(/'/g, '&quot;')+'</div></i>');
+		this.gui.append(altText);
+
 		if (options['controls'])
 			this.add_controls();
 		
@@ -106,7 +114,7 @@ class Reader {
 	loadPage(page=0)
 	{
 		page = parseInt(page);
-
+		
 		// don't go to a page below 0, or above the number of pages in this comic
 		if (page < 0) {
 			this.dezoom();
@@ -114,7 +122,7 @@ class Reader {
 				
 		} else if (page >= this.comic.length) {	
 			var imginfo = this.comic[this.comic.length-1];
-			console.log("this.currpanel:" + this.currpanel + ", imginfo['panels'].length: " + imginfo['panels'].length);
+			
 			if (this.currpanel == imginfo['panels'].length) {
 				this.dezoom();
 			} else {
@@ -127,7 +135,7 @@ class Reader {
 			}
 			return false;
 		}
-
+		
 		this.currpage = page;
 		this.setHashInfo({page: page ? page : null});
 		
@@ -137,8 +145,8 @@ class Reader {
 		var img = $('<img class="pageimg" src="'+imgurl+'"/>');
 		img.css({
 			position: 'absolute',
-			'width': '100%',
-			'height': '100%',
+			width: '100%',
+			height: '100%'
 		});
 		
 		this.container.children('img').remove();
@@ -174,8 +182,8 @@ class Reader {
 		var newcss = {
 			top:  - panel.position().top  * growth,
 			left: - panel.position().left * growth,
-			height: 'auto',//this.container.height() * growth,
-			width:  'auto'//this.container.width()  * growth
+			height: this.container.height() * growth,
+			width:  this.container.width()  * growth
 		};
 		
 		// center panel horizontally or vertically within container's parent
@@ -194,12 +202,13 @@ class Reader {
 	dezoom ()
 	{
 		var size = this.getImgSize();
+		
 		var newcss = {
 			width: size.w,
 			height: size.h,
 			left: 0,
 			top: 0
-		}
+		};
 		this.container.removeClass('zoomed');
 		this.container.css(newcss);
 	}
@@ -273,17 +282,22 @@ class Reader {
 	add_controls()
 	{
 		var _reader = this;
-		
-		var btprev = $('<i class="prev"><div class="center">←</div></i>');
-		btprev.data('reader',this);
-		btprev.on('click touch', function (e) { $(this).data('reader').prev(); });
-		this.gui.append(btprev);
 
-		var btnext = $('<i class="next"><div class="center">→</div></i>');
-		btnext.data('reader',this);
-		btnext.on('click touch', function (e) { $(this).data('reader').next(); });
-		this.gui.append(btnext);
-		
+		// TODO: don't add controls if we only have 1 panel
+		var imginfo = this.comic[this.comic.length-1];
+
+		if (imginfo['panels'].length > 1) {
+
+			var btprev = $('<i class="prev"><div class="center">←</div></i>');
+			btprev.data('reader',this);
+			btprev.on('click touch', function (e) { $(this).data('reader').prev(); });
+			this.gui.append(btprev);
+
+			var btnext = $('<i class="next"><div class="center">→</div></i>');
+			btnext.data('reader',this);
+			btnext.on('click touch', function (e) { $(this).data('reader').next(); });
+			this.gui.append(btnext);
+		}
 		$(document).ready( function () {
 			_reader.dezoom();
 			_reader.container.focus();
@@ -314,6 +328,12 @@ $(document).delegate( '.kumiko-reader', 'click touch', function (e) {
 	if ($(e.target).is('.panel,.kumiko-reader'))
 		$(this).data('reader').next();
 });
+
+// Prevent click on page when clicking on license links
+$(document).delegate( '.license a', 'click touch', function (e) {
+	e.stopPropagation();
+});
+
 
 /**** KEYBOARD NAVIGATION ****/
 

@@ -1,4 +1,14 @@
 
+@font-face {
+    font-family: xkcd-script;
+    src: url('xkcd-script.woff') format('woff');
+}
+
+@font-face {
+    font-family: xkcd;
+    src: url('xkcd-Regular.otf');
+}
+
 body {
 	color: #2c3e50;
 	margin: 0;
@@ -23,10 +33,22 @@ body {
 	height: 600px;
 	width:  600px;
 	cursor: pointer;
-	/*border: 1px dotted blue;*/
+	/* border: 1px dotted blue; */
 	padding: 1px; /* make sure to see panel borders even for pages with no margin (e.g. xkcd) */
 	overflow: hidden;
-	position: relative;
+	/* position: relative; */
+	/* display: flex; */
+  	/* justify-content: center; */
+  	/* align-items: center; */
+}
+
+img {
+    position: absolute;
+    top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
 }
 
 .prev, .next {
@@ -37,23 +59,53 @@ body {
 	font-weight: bold;
 }
 
+/* Textx */
+.leftText {
+	position: absolute;
+	top: 0;
+	left: 10;
+	font-family: xkcd-script;
+    line-height: 150%;
+    /* font-size: 60px; */
+    color: var(--color);
+    background-color: var(--background);
+}
+.rightText {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-family: xkcd-script;
+    line-height: 150%;
+    /* font-size: 60px; */
+    color: var(--color);
+    background-color: var(--background);
+}
+.altText {
+	position: absolute;
+	bottom: 0;
+	font-family: xkcd-script;
+    line-height: 150%;
+    /* font-size: 40px; */
+    color: var(--color);
+    background-color: var(--background);
+}
+
 /* Fading corner icons/infos */
 .prev {
 	position: absolute;
 	top: 0;
 	left: 0;
-	height: 100%;
 	font-size: 6vmin;
 	font-style: normal;
-	
+	height: 100%;
 }
 .next {
 	position: absolute;
 	top: 0;
 	right: 0;
-	height: 100%;
 	font-size: 6vmin;
 	font-style: normal;
+	height: 100%;
 }
 .prev, .next {
 	transition-property: opacity;
