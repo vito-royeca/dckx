@@ -29,11 +29,7 @@ using json = nlohmann::json;
                                            encoding: [NSString defaultCStringEncoding]];
         NSObject *value;
 
-        if ([key isEqualToString:@"filename"]) {
-            value = [NSString stringWithCString: item.value().get<std::string>().c_str()
-                                       encoding: [NSString defaultCStringEncoding]];
-
-        } else if ([key isEqualToString:@"size"] ||
+        if ([key isEqualToString:@"size"] ||
                    [key isEqualToString:@"gutters"]) {
             vector<int> size = item.value().get<vector<int>>();
             NSMutableArray *array = [[NSMutableArray alloc] init];

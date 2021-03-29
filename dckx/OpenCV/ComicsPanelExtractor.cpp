@@ -21,7 +21,6 @@ json ComicsPanelExtractor::splitComics(const std::string& path, const float mini
     if (image.empty()) {
         return j;
     }
-    j["filename"] = path;
 
     cv::Size s = this->image.size();
     j["size"] = {s.width, s.height};
