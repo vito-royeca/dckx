@@ -15,21 +15,16 @@ struct ComicView: View {
     @StateObject var fetcher = ComicFetcher()
     @State private var showingList = false
     
-    @State var lastScaleValue: CGFloat = 1.0
-    @State var scale: CGFloat = 1.0
-    @State var showingAltText = false
-    
-    
     var body: some View {
         NavigationView {
             WebView(link: nil,
-                    html: fetcher.composeHTML(showingAltText: showingAltText),
+                    html: fetcher.composeHTML(),
                     baseURL: nil)
             .navigationBarTitle(Text(fetcher.currentComic?.title ?? ""), displayMode: .automatic)
             .navigationBarItems(
                 leading: listButton,
                 trailing:
-                    ComicToolBarView(showingAltText: $showingAltText)
+                    ComicToolBarView()
             )
             .toolbar() {
                 NavigationToolbar(loadFirst: fetcher.loadFirst,
@@ -58,11 +53,6 @@ struct ComicView: View {
             ComicListView()
         })
     }
-    
-    func resetImageScale() {
-        lastScaleValue = 1.0
-        scale = 1.0
-    }
 }
 
 struct ComicView_Previews: PreviewProvider {
@@ -77,7 +67,6 @@ struct ComicView_Previews: PreviewProvider {
 
 struct ComicToolBarView: View {
     @EnvironmentObject var fetcher: ComicFetcher
-    @Binding var showingAltText: Bool
     @State private var showingBrowser = false
     @State private var showingShare = false
     
@@ -87,15 +76,6 @@ struct ComicToolBarView: View {
                 self.fetcher.toggleIsFavorite()
             }) {
                 Image(systemName: fetcher.currentComic?.isFavorite ?? false ? "bookmark.fill" : "bookmark")
-                    .imageScale(.large)
-//                    .foregroundColor(.dckxBlue)
-            }
-            Spacer()
-            
-            Button(action: {
-                self.showingAltText.toggle()
-            }) {
-                Image(systemName: showingAltText ? "doc.text.fill" : "doc.text" )
                     .imageScale(.large)
 //                    .foregroundColor(.dckxBlue)
             }

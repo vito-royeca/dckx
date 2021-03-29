@@ -86,9 +86,6 @@
 		8B8D963D260C5DFF00A3C273 /* reader.css in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D963C260C5DFF00A3C273 /* reader.css */; };
 		8B8D963E260C5DFF00A3C273 /* reader.css in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D963C260C5DFF00A3C273 /* reader.css */; };
 		8B8D963F260C5DFF00A3C273 /* reader.css in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D963C260C5DFF00A3C273 /* reader.css */; };
-		8B8D964D260C84A000A3C273 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D964C260C84A000A3C273 /* test.html */; };
-		8B8D964E260C84A000A3C273 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D964C260C84A000A3C273 /* test.html */; };
-		8B8D964F260C84A000A3C273 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D964C260C84A000A3C273 /* test.html */; };
 		8B8D9657260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */; };
 		8B8D9658260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */; };
 		8B8D9659260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */; };
@@ -189,7 +186,6 @@
 		8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.2.1.min.js"; sourceTree = "<group>"; };
 		8B8D9632260C5DEF00A3C273 /* reader.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = reader.js; sourceTree = "<group>"; };
 		8B8D963C260C5DFF00A3C273 /* reader.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = reader.css; sourceTree = "<group>"; };
-		8B8D964C260C84A000A3C273 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = test.html; path = ../../../../OSS/kumiko/test.html; sourceTree = "<group>"; };
 		8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = epistemic_uncertainty.png; sourceTree = "<group>"; };
 		8B9ADBEB260A78F900B0DED8 /* Panel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Panel.cpp; sourceTree = "<group>"; };
 		8B9ADBEC260A78F900B0DED8 /* Panel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Panel.hpp; sourceTree = "<group>"; };
@@ -363,7 +359,6 @@
 				8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */,
 				8B8D9632260C5DEF00A3C273 /* reader.js */,
 				8B8D963C260C5DFF00A3C273 /* reader.css */,
-				8B8D964C260C84A000A3C273 /* test.html */,
 				8B658003240AD42500A245DC /* xkcd-Regular.otf */,
 				8B626D732401BB6800972EED /* xkcd-script.ttf */,
 				8B657FFE240ACCE200A245DC /* xkcd-script.woff */,
@@ -557,7 +552,6 @@
 				8B8D9629260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */,
 				8B8D9657260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */,
 				8B658004240AD42600A245DC /* xkcd.otf in Resources */,
-				8B8D964D260C84A000A3C273 /* test.html in Resources */,
 				8B626D742401BB6800972EED /* xkcd-script.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -575,7 +569,6 @@
 				8B658014240AE94400A245DC /* xkcd.css in Resources */,
 				8B8D9658260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */,
 				8B8D962A260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */,
-				8B8D964E260C84A000A3C273 /* test.html in Resources */,
 				8B8D9634260C5DEF00A3C273 /* reader.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -586,7 +579,6 @@
 			files = (
 				8B658006240AD42600A245DC /* xkcd.otf in Resources */,
 				8B8D9635260C5DEF00A3C273 /* reader.js in Resources */,
-				8B8D964F260C84A000A3C273 /* test.html in Resources */,
 				8B658015240AE94400A245DC /* xkcd.css in Resources */,
 				8B658001240ACCE200A245DC /* xkcd-script.woff in Resources */,
 				8B658009240AD42600A245DC /* xkcd-Regular.otf in Resources */,

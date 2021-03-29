@@ -18,7 +18,10 @@ class Reader {
 			return;
 		}
 		this.imageSrc = options.imageSrc;
-		
+		this.num = options.num;
+		this.date = options.date;
+		this.altText = options.altText;
+
 		if (!options.comicsJson || typeof options.comicsJson != 'object') {
 			console.error('no comicsJson given in options, or not a javascript object');
 			return;
@@ -30,6 +33,7 @@ class Reader {
 		// init attributes
 		this.currpage = 0;
 		this.currpanel = 0;
+		this.showInfo = false;
 		this.debug = this.gui.hasClass('debug') || 'debug' in this.getHashInfo();
 		if (this.debug)
 			this.gui.addClass('debug');
@@ -44,14 +48,6 @@ class Reader {
 		});
 		this.gui.append(this.container);
 		
-		// add text
-		var leftText = $('<i class="leftText"><div>'+options['num']+'</div></i>');
-		this.gui.append(leftText);
-		var rightText = $('<i class="rightText"><div>'+options['date']+'</div></i>');
-		this.gui.append(rightText);
-		var altText = $('<i class="altText"><div>'+options['altText']+'</div></i>');
-		this.gui.append(altText);
-
 		if (options['controls'])
 			this.add_controls();
 		
@@ -145,8 +141,6 @@ class Reader {
 			position: 'absolute',
 			width: '100%',
 			height: '100%'
-			,color: 'var(--color)'
-			// ,'background-color': 'var(--background)'
 		});
 		
 		this.container.children('img').remove();
@@ -272,8 +266,6 @@ class Reader {
 				left: '' + x/imgw*100 + '%',
 				height: '' + h/imgh*100 + '%',
 				width: '' + w/imgw*100 + '%'
-				// ,color: 'var(--color)',
-				// 'background-color': 'var(--background)'
 			};
 			panel.css(panelcss);
 			
@@ -305,6 +297,30 @@ class Reader {
 			_reader.container.focus();
 		});
 	}
+
+	toggleShowInfo() {
+		this.showInfo = !this.showInfo;
+
+		if (this.showInfo == true) {
+			var leftText = $('<i class="leftText" id="leftText"><div>'+this.num+'</div></i>');
+			this.gui.append(leftText);
+			var rightText = $('<i class="rightText" id="rightText"><div>'+this.date+'</div></i>');
+			this.gui.append(rightText);
+			var altText = $('<i class="altText" id="altText"><div>'+this.altText+'</div></i>');
+			this.gui.append(altText);
+		} else {
+			const array1 = ['leftText', 'rightText', 'altText'];
+
+			array1.forEach(function(item) {
+				// var mydiv = document.getElementById(item);
+				// while (mydiv.firstChild) {
+  				// 	mydiv.removeChild(mydiv.firstChild);
+				// }
+				var thingToRemove = document.querySelectorAll("."+item)[0];
+				thingToRemove.parentNode.removeChild(thingToRemove);
+			})
+		}
+	}
 }
 
 
@@ -328,7 +344,8 @@ $(document).delegate( 'input[name=viewmode]', 'change', function () {
 // Next panel on simple click
 $(document).delegate( '.kumiko-reader', 'click touch', function (e) {
 	if ($(e.target).is('.panel,.kumiko-reader'))
-		$(this).data('reader').next();
+		// $(this).data('reader').next();
+		$(this).data('reader').toggleShowInfo();
 });
 
 // Prevent click on page when clicking on license links

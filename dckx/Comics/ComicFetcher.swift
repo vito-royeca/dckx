@@ -108,7 +108,7 @@ class ComicFetcher: ObservableObject {
         }
     }
     
-    func composeHTML(showingAltText: Bool) -> String {
+    func composeHTML() -> String {
         guard let comic = currentComic,
             let img = comic.img,
             let title = comic.title,
