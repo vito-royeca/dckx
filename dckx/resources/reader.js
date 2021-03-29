@@ -13,11 +13,11 @@ class Reader {
 		this.gui = options.container;
 		this.gui.data('reader',this);
 		
-		if (!options.images_dir) {
-			console.error('no images_dir given in options');
+		if (!options.imageSrc) {
+			console.error('no imageSrc given in options');
 			return;
 		}
-		this.images_dir = options.images_dir;
+		this.imageSrc = options.imageSrc;
 		
 		if (!options.comicsJson || typeof options.comicsJson != 'object') {
 			console.error('no comicsJson given in options, or not a javascript object');
@@ -49,7 +49,7 @@ class Reader {
 		this.gui.append(leftText);
 		var rightText = $('<i class="rightText"><div>'+options['date']+'</div></i>');
 		this.gui.append(rightText);
-		var altText = $('<i class="altText">'+options['altText'].replace(/'/g, '&quot;')+'</div></i>');
+		var altText = $('<i class="altText"><div>'+options['altText']+'</div></i>');
 		this.gui.append(altText);
 
 		if (options['controls'])
@@ -140,13 +140,13 @@ class Reader {
 		this.setHashInfo({page: page ? page : null});
 		
 		var imginfo = this.comic[page];
-		var imgurl = this.images_dir == 'urls' ? imginfo.filename : this.images_dir + imginfo.filename.split('/').reverse()[0];
-		
-		var img = $('<img class="pageimg" src="'+imgurl+'"/>');
+		var img = $('<img class="pageimg" src="'+this.imageSrc+'"/>');
 		img.css({
 			position: 'absolute',
 			width: '100%',
 			height: '100%'
+			,color: 'var(--color)'
+			// ,'background-color': 'var(--background)'
 		});
 		
 		this.container.children('img').remove();
@@ -272,6 +272,8 @@ class Reader {
 				left: '' + x/imgw*100 + '%',
 				height: '' + h/imgh*100 + '%',
 				width: '' + w/imgw*100 + '%'
+				// ,color: 'var(--color)',
+				// 'background-color': 'var(--background)'
 			};
 			panel.css(panelcss);
 			

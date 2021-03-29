@@ -113,6 +113,8 @@ class ComicFetcher: ObservableObject {
             let img = comic.img,
             let title = comic.title,
             let cachePath = SDImageCache.shared.cachePath(forKey: img),
+            let image = SDImageCache.shared.imageFromCache(forKey: img),
+            let data = image.pngData(),
             let splitComics = OpenCVWrapper.splitComics(cachePath/*"/Users/vito.royeca/workspace/OSS/kumiko/1616602243-20210324.png"*/, minimumPanelSizeRatio: 1/15) else {
             return ""
         }
@@ -146,14 +148,14 @@ class ComicFetcher: ObservableObject {
         head += " .kumiko-reader { height: 90vh; }"
         head += " .kumiko-reader.fullpage { height: 100%; width: 100%; }"
         head += "</style></head>"
-        
+
         let altText = "\(comic.alt ?? "")".replacingOccurrences(of: "'", with: "\\x27").replacingOccurrences(of: "\"", with: "\\x22")
         var reader = "<div id='reader' class='kumiko-reader fullpage'></div>"
         reader += "<script type='text/javascript'>"
         reader += " var reader = new Reader({"
         reader += "  container: $('#reader'),"
         reader += "  comicsJson: \(comicsJson),"
-        reader += "  images_dir: 'urls',"
+        reader += "  imageSrc: 'data:image/png;base64, \(data.base64EncodedString())',"
         reader += "  controls: true,"
         reader += "  num: '#\(comic.num)',"
         reader += "  date: '\(dateToString(date: comic.date))',"
@@ -161,9 +163,9 @@ class ComicFetcher: ObservableObject {
         reader += " });"
         reader += " reader.start();"
         reader += "</script>"
-        
+
         var html = "<!DOCTYPE html><html>\(head)<body>"
-        
+
         html += "\(reader)"
         html += "</body></html>"
         

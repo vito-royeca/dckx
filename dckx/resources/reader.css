@@ -9,14 +9,20 @@
     src: url('xkcd-Regular.otf');
 }
 
+:root {
+	--background: #ffffff;
+	--color: #000000;
+}
+  
 body {
-	color: #2c3e50;
 	margin: 0;
 	width: 96vw;
 	height: 96vh;
 	margin-top: 2vh;
 	margin-left: 2vw;
 	font-family: sans-serif;
+	color: var(--color);
+    background-color: var(--background);
 }
 
 .center {
@@ -39,17 +45,13 @@ body {
 	/* position: relative; */
 	display: flex;
 	flex-direction: column;
-  	/* justify-content: center; */
-  	/* align-items: center; */
+	/* color: var(--color); */
+    /* background-color: var(--background); */
 }
 
 img {
-    position: absolute;
-    top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin: auto;
+	color: var(--color);
+    background-color: var(--background);
 }
 
 .prev, .next {
@@ -66,8 +68,7 @@ img {
 	top: 0;
 	left: 10;
 	font-family: xkcd-script;
-    line-height: 150%;
-    /* font-size: 60px; */
+    /* line-height: 150%; */
     color: var(--color);
     background-color: var(--background);
 }
@@ -76,8 +77,7 @@ img {
 	top: 0;
 	right: 0;
 	font-family: xkcd-script;
-    line-height: 150%;
-    /* font-size: 60px; */
+    /* line-height: 150%; */
     color: var(--color);
     background-color: var(--background);
 }
@@ -85,8 +85,7 @@ img {
 	position: absolute;
 	bottom: 0;
 	font-family: xkcd-script;
-    line-height: 150%;
-    /* font-size: 40px; */
+    /* line-height: 150%; */
 	text-align: center;
     color: var(--color);
     background-color: var(--background);
@@ -161,3 +160,35 @@ img {
 .kumiko-reader.debug .container:not(.zoomed) .panel span.bottom  { position: absolute; bottom: 0; left: 45%; }
 .kumiko-reader.debug .container:not(.zoomed) .panel span.left    { position: absolute; left: 0;   top: 45%; }
 .kumiko-reader.debug .container:not(.zoomed) .panel span.right   { position: absolute; right: 0;  top: 45%; }
+
+/* Dark Theme */
+@media (prefers-color-scheme: dark) {
+    :root {
+      --background: #000000;
+      --color: #ffffff;
+    }
+    
+    body {
+        color: var(--color);
+        background-color: var(--background);
+    }
+    
+    img {
+		color: var(--color);
+        background-color: var(--color);
+		/* filter: invert(100%); */
+    }
+    
+    .leftText {
+        color: var(--color);
+        background-color: var(--background);
+    }
+    .rightText {
+        color: var(--color);
+        background-color: var(--background);
+    }
+    .altText {
+        color: var(--color);
+        background-color: var(--background);
+    }
+}
