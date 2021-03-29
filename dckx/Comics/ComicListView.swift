@@ -19,13 +19,14 @@ struct  ComicListView: View {
     @State var scopeSelection: Int = 0
     
     @State var viewModel: ComicListViewModel = ComicListViewModel(query: nil,
-                                                                  scopeIndex: 0)
+                                                                        scopeIndex: 0)
     @State var shouldAnimate: Bool = false
     
     var body: some View {
         NavigationView {
             ZStack(alignment: .center) {
-                ComicTextListView(action: selectComic(num:))
+                ComicTextListView(viewModel: $viewModel,
+                                  action: selectComic(num:))
                 ActivityIndicatorView(shouldAnimate: $shouldAnimate)
             }
             .navigationBarTitle(Text("Comics"), displayMode: .automatic)
@@ -61,12 +62,12 @@ struct  ComicListView: View {
                                     }
                                  ], searchResultsContent: {
                                     ZStack(alignment: .center) {
-                                        ComicTextListView(action: selectComic(num:))
+                                        ComicTextListView(viewModel: $viewModel,
+                                                          action: selectComic(num:))
                                         ActivityIndicatorView(shouldAnimate: $shouldAnimate)
                                     }
                                  })
         }
-        .environmentObject(viewModel)
     }
     
     var closeButton: some View {
@@ -112,7 +113,7 @@ struct ComicListView_Previews: PreviewProvider {
 // MARK: - ComicTextListView
 
 struct ComicTextListView: View {
-    @EnvironmentObject var viewModel: ComicListViewModel
+    @Binding var viewModel: ComicListViewModel
     var action: (Int32) -> Void
     
     var body: some View {

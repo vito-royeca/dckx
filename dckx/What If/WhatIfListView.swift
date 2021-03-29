@@ -27,7 +27,8 @@ struct WhatIfListView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .center) {
-                WhatIfTextListView(action: selectWhatIf(num:))
+                WhatIfTextListView(viewModel: $viewModel,
+                                   action: selectWhatIf(num:))
                 ActivityIndicatorView(shouldAnimate: $shouldAnimate)
             }
             .navigationBarTitle(Text("What If?"), displayMode: .automatic)
@@ -63,12 +64,12 @@ struct WhatIfListView: View {
                                     }
                                  ], searchResultsContent: {
                                     ZStack(alignment: .center) {
-                                        WhatIfTextListView(action: selectWhatIf(num:))
+                                        WhatIfTextListView(viewModel: $viewModel,
+                                                           action: selectWhatIf(num:))
                                         ActivityIndicatorView(shouldAnimate: $shouldAnimate)
                                     }
                                  })
         }
-        .environmentObject(viewModel)
     }
     
     var closeButton: some View {
@@ -114,7 +115,7 @@ struct WhatIfListView_Previews: PreviewProvider {
 // MARK: - WhatIfTextListView
 
 struct WhatIfTextListView: View {
-    @EnvironmentObject var viewModel: WhatIfListViewModel
+    @Binding var viewModel: WhatIfListViewModel
     var action: (Int32) -> Void
     
     var body: some View {
