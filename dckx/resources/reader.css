@@ -45,8 +45,6 @@ body {
 	/* position: relative; */
 	display: flex;
 	flex-direction: column;
-	/* color: var(--color); */
-    /* background-color: var(--background); */
 }
 
 img {

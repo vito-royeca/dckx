@@ -65,12 +65,6 @@ class ComicFetcher: ObservableObject {
         }.done { comic in
             self.currentComic = comic
             self.toggleIsRead()
-
-//            if let cachePath = SDImageCache.shared.cachePath(forKey: self.currentComic!.img) {
-//                for (k,v) in OpenCVWrapper.splitComics(cachePath, minimumPanelSizeRatio: 1/15) {
-//                    print("\(k): \(v)")
-//                }
-//            }
         }.catch { error in
             print(error)
         }
@@ -141,7 +135,6 @@ class ComicFetcher: ObservableObject {
         head += "<script type='text/javascript' src='reader.js'></script>"
         head += "<link rel='stylesheet' media='all' href='reader.css' />"
         head += "<style type='text/css'> "
-        head += " h2 { text-align: center; }"
         head += " .sidebyside { display: flex; justify-content: space-around; }"
         head += " .sidebyside > div { width: 45%; }"
         head += " .version { text-align: center; }"
@@ -158,7 +151,7 @@ class ComicFetcher: ObservableObject {
         reader += "  imageSrc: 'data:image/png;base64, \(data.base64EncodedString())',"
         reader += "  controls: true,"
         reader += "  num: '#\(comic.num)',"
-        reader += "  date: '\(dateToString(date: comic.date))',"
+        reader += "  date: '\(dateToString(date: comic.date))&nbsp;',"
         reader += "  altText: '\(altText)'"
         reader += " });"
         reader += " reader.start();"

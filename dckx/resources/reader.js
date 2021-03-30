@@ -229,10 +229,16 @@ class Reader {
 		if (i < 0) {
 			this.currpanel = 'last';
 			var prevpage = this.loadPrevPage();
-			if (!prevpage)
+			if (!prevpage) {
 				this.currpanel = 0;
+				var reader = document.getElementById('reader');
+				reader.style.display = "flex";
+			}	
 			return;
 		}
+		var reader = document.getElementById('reader');
+		reader.style.removeProperty("display");
+
 		var newPanel = $('.panel').eq(i);
 		if (newPanel.length > 0)
 			this.zoomOn(newPanel);
@@ -312,10 +318,6 @@ class Reader {
 			const array1 = ['leftText', 'rightText', 'altText'];
 
 			array1.forEach(function(item) {
-				// var mydiv = document.getElementById(item);
-				// while (mydiv.firstChild) {
-  				// 	mydiv.removeChild(mydiv.firstChild);
-				// }
 				var thingToRemove = document.querySelectorAll("."+item)[0];
 				thingToRemove.parentNode.removeChild(thingToRemove);
 			})
