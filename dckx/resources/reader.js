@@ -200,8 +200,10 @@ class Reader {
 		var newcss = {
 			width: size.w,
 			height: size.h,
-			left: 0,
-			top: 0
+			left: 0,//(this.container.parent().width() - size.w) / 2, // center horizontally,
+			top: (this.container.parent().height() - size.h) / 2,  // center vertically
+			color: 'var(--color)',
+    		'background-color': 'var(--background)'
 		};
 		this.container.removeClass('zoomed');
 		this.container.css(newcss);
@@ -231,13 +233,9 @@ class Reader {
 			var prevpage = this.loadPrevPage();
 			if (!prevpage) {
 				this.currpanel = 0;
-				var reader = document.getElementById('reader');
-				reader.style.display = "flex";
 			}	
 			return;
 		}
-		var reader = document.getElementById('reader');
-		reader.style.removeProperty("display");
 
 		var newPanel = $('.panel').eq(i);
 		if (newPanel.length > 0)
@@ -308,11 +306,11 @@ class Reader {
 		this.showInfo = !this.showInfo;
 
 		if (this.showInfo == true) {
-			var leftText = $('<i class="leftText" id="leftText"><div>'+this.num+'</div></i>');
+			var leftText = $('<i class="leftText"><div>'+this.num+'</div></i>');
 			this.gui.append(leftText);
-			var rightText = $('<i class="rightText" id="rightText"><div>'+this.date+'</div></i>');
+			var rightText = $('<i class="rightText"><div>'+this.date+'</div></i>');
 			this.gui.append(rightText);
-			var altText = $('<i class="altText" id="altText"><div>'+this.altText+'</div></i>');
+			var altText = $('<i class="altText"><div>'+this.altText+'</div></i>');
 			this.gui.append(altText);
 		} else {
 			const array1 = ['leftText', 'rightText', 'altText'];

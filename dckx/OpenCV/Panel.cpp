@@ -108,7 +108,7 @@ std::vector<Panel> Panel::split() {
             }
             index++;
         }
-        poly1len += this->polygons.size();
+//        poly1len += this->polygons.size();
         
         // A panel should have at least three edges
         if (min(poly1len, poly2len) <= 2) {
@@ -122,17 +122,8 @@ std::vector<Panel> Panel::split() {
         
         vector<cv::Point> poly2;
         poly2.resize(poly2len);
-//        vector<vector<vector<int> > >  poly2;
-//        poly1.resize(poly2len);
-//        poly1[0].resize(1);
-//        for(int i=0;i<1;i++) {
-//            poly1[0][i].resize(2);
-//            for(int j=0;j<2;j++) {
-//                poly1[0][i][j] = 0;
-//            }
-//        }
         
-        int x = 0, y = 0, z = 0;
+        int x = 0, y = 0;
         for (int i=0; i<this->polygons.size()-1; i++) {
             index = 0;
             
