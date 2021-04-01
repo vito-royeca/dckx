@@ -86,21 +86,18 @@ struct UITabBarWrapper_Previews: PreviewProvider {
 fileprivate struct UITabBarControllerWrapper: UIViewControllerRepresentable {
     var viewControllers: [UIViewController]
     
-    // 2
     func makeUIViewController(context: UIViewControllerRepresentableContext<UITabBarControllerWrapper>) -> UITabBarController {
         let tabBar = UITabBarController()
         
         // Configure Tab Bar here, if needed
-        
+        tabBar.hidesBottomBarWhenPushed = true
         return tabBar
     }
     
-    // 3
     func updateUIViewController(_ uiViewController: UITabBarController, context: UIViewControllerRepresentableContext<UITabBarControllerWrapper>) {
         uiViewController.setViewControllers(self.viewControllers, animated: true)
     }
     
-    // 4
     func makeCoordinator() -> Coordinator {
         return Coordinator(self)
     }

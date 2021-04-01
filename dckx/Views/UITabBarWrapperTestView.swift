@@ -1,5 +1,5 @@
 //
-//  UITabBarWrapperTextView.swift
+//  UITabBarWrapperTestView.swift
 //  dckx
 //
 //  Created by Vito Royeca on 3/31/21.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct UITabBarWrapperTextView: View {
+struct UITabBarWrapperTestView: View {
     var body: some View {
         UITabBarWrapper([
             TabBarElement(tabBarElementItem: .init(title: "First", systemImageName: "house.fill")) {
