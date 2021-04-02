@@ -21,7 +21,7 @@ struct MainView: View {
                     Image(systemName: "questionmark.folder")
                     Text("What If?")
                 })
-            HideScrollView()
+            SearchNavigationTestView()
                 .tabItem({
                     Text("Search Bar")
                 })

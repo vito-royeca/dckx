@@ -155,8 +155,6 @@ fileprivate struct NavigationSearchBar<SearchResultsContent>: UIViewControllerRe
                 searchBar.scopeButtonTitles = scopeButtonTitles
             }
             
-            searchBar.selectedScopeButtonIndex = scopeSelection
-            
             if let scopeBarButtonTitleTextAttributes = options[.scopeBarButtonTitleTextAttributes] as? [NSMutableAttributedString.Key: Any] {
                 searchBar.setScopeBarButtonTitleTextAttributes(scopeBarButtonTitleTextAttributes, for: .normal)
             }

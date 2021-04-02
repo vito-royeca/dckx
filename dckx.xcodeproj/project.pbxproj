@@ -115,6 +115,8 @@
 		8BA50E6D240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
 		8BA50E6E240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
 		8BA5921925FEBEC1001CD883 /* HideScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA5921825FEBEC1001CD883 /* HideScrollView.swift */; };
+		8BAC10B426169EBD00664335 /* SearchNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10B326169EBD00664335 /* SearchNavigation.swift */; };
+		8BAC10B926169EF100664335 /* SearchNavigationTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10B826169EF100664335 /* SearchNavigationTestView.swift */; };
 		8BACA212260A6ADC008B51C5 /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */; };
 		8BE8ECA3243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
 		8BE8ECA4243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
@@ -200,6 +202,8 @@
 		8BA50E67240A384400138D11 /* WhatIfFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfFetcher.swift; sourceTree = "<group>"; };
 		8BA50E6B240A425500138D11 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		8BA5921825FEBEC1001CD883 /* HideScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideScrollView.swift; sourceTree = "<group>"; };
+		8BAC10B326169EBD00664335 /* SearchNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigation.swift; sourceTree = "<group>"; };
+		8BAC10B826169EF100664335 /* SearchNavigationTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationTestView.swift; sourceTree = "<group>"; };
 		8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComicsPanelExtractor.cpp; sourceTree = "<group>"; };
 		8BACA211260A6ADC008B51C5 /* ComicsPanelExtractor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComicsPanelExtractor.hpp; sourceTree = "<group>"; };
 		8BE8ECA2243A9B1E0037036E /* dckx.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = dckx.sqlite; sourceTree = "<group>"; };
@@ -378,6 +382,8 @@
 			isa = PBXGroup;
 			children = (
 				8BA5921825FEBEC1001CD883 /* HideScrollView.swift */,
+				8BAC10B326169EBD00664335 /* SearchNavigation.swift */,
+				8BAC10B826169EF100664335 /* SearchNavigationTestView.swift */,
 			);
 			path = Experimental;
 			sourceTree = "<group>";
@@ -727,6 +733,7 @@
 				8B4F4B9923F5F444008446F4 /* AppDelegate.swift in Sources */,
 				8B33FE3625FD534F00CD0F35 /* dckx.xcdatamodeld in Sources */,
 				8B30499F2418263E00D549DE /* WhatIfListView.swift in Sources */,
+				8BAC10B426169EBD00664335 /* SearchNavigation.swift in Sources */,
 				8B6F711F261529410073C7A3 /* UITabBarWrapperTestView.swift in Sources */,
 				8BA5921925FEBEC1001CD883 /* HideScrollView.swift in Sources */,
 				8BA50E6C240A425500138D11 /* WebView.swift in Sources */,
@@ -747,6 +754,7 @@
 				8B626D6E23FFB5BE00972EED /* ComicListView.swift in Sources */,
 				8B3049A3241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
 				8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
+				8BAC10B926169EF100664335 /* SearchNavigationTestView.swift in Sources */,
 				8BA50E4D24097D0200138D11 /* WhatIfView.swift in Sources */,
 				8B658020240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
 				8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,

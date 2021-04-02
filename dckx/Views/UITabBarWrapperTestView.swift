@@ -38,6 +38,6 @@ struct UITabBarWrapperTestView: View {
 
 struct UITabBarWrapperTextView_Previews: PreviewProvider {
     static var previews: some View {
-        UITabBarWrapperTextView()
+        UITabBarWrapperTestView()
     }
 }
