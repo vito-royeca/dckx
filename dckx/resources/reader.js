@@ -47,7 +47,12 @@ class Reader {
 			margin: 'auto'
 		});
 		this.gui.append(this.container);
-		
+		var size = {
+			w: this.container.parent().width(),
+			h: this.container.parent().height()
+		};
+		console.log(size);
+
 		if (options['controls'])
 			this.add_controls();
 		
@@ -147,7 +152,6 @@ class Reader {
 		this.container.prepend(img);
 		
 		var was_zoomed = this.container.is('.zoomed');
-		
 		this.drawPanels(imginfo);
 		this.dezoom();
 		
@@ -216,7 +220,17 @@ class Reader {
 			h: this.container.parent().height()
 		};
 		
-		var imgsize = this.comic[this.currpage]['size'];
+		var imgsize = [0, 0]
+
+		if (!('size' in this.comic[this.currpage])) {
+			const img = new Image();
+			img.src = this.imageSrc
+			imgsize[0] = img.width
+			imgsize[1] = img.height
+		} else {
+			imgsize = this.comic[this.currpage]['size'];
+		}
+
 		var ratio = imgsize[0] / imgsize[1];
 		if (size.w > size.h * ratio)
 			size.w = size.h * ratio;
@@ -251,6 +265,21 @@ class Reader {
 	
 	drawPanels (imginfo)
 	{
+		if (!('size' in imginfo)) {
+			var panel = $('<div class="panel"><!-- --></div>');
+			panel.addClass('unknown');
+			var panelcss = {
+				top: '0',
+				left: '0',
+				height: '100%',
+				width: '100%'
+			};
+			panel.css(panelcss);
+			
+			this.container.append(panel);
+			return;
+		}
+
 		this.container.children('*:not(.pageimg)').remove();
 		
 		var [imgw,imgh] = imginfo['size'];
@@ -284,7 +313,7 @@ class Reader {
 		// TODO: don't add controls if we only have 1 panel
 		var imginfo = this.comic[this.comic.length-1];
 
-		if (imginfo['panels'].length > 1) {
+		if (!$.isEmptyObject(imginfo) && imginfo['panels'].length > 1) {
 
 			var btprev = $('<i class="prev"><div class="center">←</div></i>');
 			btprev.data('reader',this);
