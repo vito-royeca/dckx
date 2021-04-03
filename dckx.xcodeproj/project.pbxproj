@@ -79,6 +79,9 @@
 		8B658023240B218700A245DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */; };
 		8B6F711A261526140073C7A3 /* UITabBarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6F7119261526140073C7A3 /* UITabBarWrapper.swift */; };
 		8B6F711F261529410073C7A3 /* UITabBarWrapperTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6F711E261529410073C7A3 /* UITabBarWrapperTestView.swift */; };
+		8B82B2B42618C6AD008AD11D /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2B32618C6AD008AD11D /* ListRowView.swift */; };
+		8B82B2B52618C6AD008AD11D /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2B32618C6AD008AD11D /* ListRowView.swift */; };
+		8B82B2B62618C6AD008AD11D /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2B32618C6AD008AD11D /* ListRowView.swift */; };
 		8B8D9629260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */; };
 		8B8D962A260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */; };
 		8B8D962B260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */; };
@@ -191,6 +194,7 @@
 		8B65801F240B1C6E00A245DC /* NavigationToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationToolbar.swift; sourceTree = "<group>"; };
 		8B6F7119261526140073C7A3 /* UITabBarWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarWrapper.swift; sourceTree = "<group>"; };
 		8B6F711E261529410073C7A3 /* UITabBarWrapperTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarWrapperTestView.swift; sourceTree = "<group>"; };
+		8B82B2B32618C6AD008AD11D /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 		8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.2.1.min.js"; sourceTree = "<group>"; };
 		8B8D9632260C5DEF00A3C273 /* reader.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = reader.js; sourceTree = "<group>"; };
 		8B8D963C260C5DFF00A3C273 /* reader.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = reader.css; sourceTree = "<group>"; };
@@ -339,6 +343,7 @@
 			children = (
 				8B3049A2241830CC00D549DE /* ActivityIndicatorView.swift */,
 				8B626D862402122C00972EED /* BrowserView.swift */,
+				8B82B2B32618C6AD008AD11D /* ListRowView.swift */,
 				8B658016240AFED800A245DC /* MailView.swift */,
 				8BA50E4824097CF000138D11 /* MainView.swift */,
 				8B5307252602E6DF008BA7AB /* NavigationSearchBar.swift */,
@@ -764,6 +769,7 @@
 				8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8BAC10B926169EF100664335 /* SearchNavigationTestView.swift in Sources */,
 				8BA50E4D24097D0200138D11 /* WhatIfView.swift in Sources */,
+				8B82B2B42618C6AD008AD11D /* ListRowView.swift in Sources */,
 				8B658020240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
 				8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
 				8B658017240AFED800A245DC /* MailView.swift in Sources */,
@@ -794,6 +800,7 @@
 				8B23367F23F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8BA50E4E24097D0200138D11 /* WhatIfView.swift in Sources */,
 				8B4F4BE123F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
+				8B82B2B52618C6AD008AD11D /* ListRowView.swift in Sources */,
 				8B658021240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
 				8B9ADBF3260A8CC200B0DED8 /* ComicsPanelExtractor.cpp in Sources */,
 				8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
@@ -826,6 +833,7 @@
 				8B23368023F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8B4F4BE223F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8B658019240AFED800A245DC /* MailView.swift in Sources */,
+				8B82B2B62618C6AD008AD11D /* ListRowView.swift in Sources */,
 				8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
 				8B9ADBF7260A8CC300B0DED8 /* ComicsPanelExtractor.cpp in Sources */,
 				8BA50E4B24097CF000138D11 /* MainView.swift in Sources */,

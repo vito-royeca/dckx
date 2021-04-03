@@ -31,12 +31,12 @@ struct  ComicListView: View {
                                   action: selectComic(num:))
                 ActivityIndicatorView(shouldAnimate: $shouldAnimate)
             }
-            .navigationBarTitle(Text("Comics"), displayMode: .automatic)
-            .navigationBarItems(
-                trailing: closeButton
-            )
+                .navigationBarTitle(Text("Comics"), displayMode: .automatic)
+                .navigationBarItems(
+                    trailing: closeButton
+                )
         }
-        .edgesIgnoringSafeArea(.top)
+            .edgesIgnoringSafeArea(.top)
     }
     
     var closeButton: some View {
@@ -111,9 +111,12 @@ struct ComicTextListView: View {
     var body: some View {
         VStack {
             List(viewModel.comics) { comic in
-                ComicListRow(num: comic.num,
-                             title: comic.title ?? "",
-                             action: self.action)
+                ListRowView(num: comic.num,
+                            thumbnail: comic.img ?? "",
+                            title: comic.title ?? "",
+                            isFavorite: comic.isFavorite,
+                            isSeen: comic.isRead,
+                            action: self.action)
                     .onTapGesture {
                         self.action(comic.num)
                     }
@@ -128,27 +131,6 @@ struct ComicTextListView: View {
     }
 }
 
-// MARK: - ComicListRow
-
-struct ComicListRow: View {
-    var num: Int32
-    var title: String
-    var action: (Int32) -> Void
-    
-    var body: some View {
-        HStack {
-            Text("#\(String(num)): \(title)")
-                .font(.custom("xkcd-Script-Regular", size: 15))
-            Spacer()
-            Button(action: {
-                self.action(self.num)
-            }) {
-                Text(">")
-                    .font(.custom("xkcd-Script-Regular", size: 15))
-            }
-        }
-    }
-}
 
 // MARK: - ComicListViewModel
 

@@ -10,7 +10,6 @@ import SwiftUI
 import Combine
 import CoreData
 import PromiseKit
-import SDWebImageSwiftUI
 
 // MARK: - WhatIfListView
 
@@ -33,13 +32,13 @@ struct WhatIfListView: View {
                                    action: selectWhatIf(num:))
                 ActivityIndicatorView(shouldAnimate: $shouldAnimate)
             }
-            .navigationBarTitle(Text("What If?"), displayMode: .automatic)
-            .navigationBarItems(
-                trailing: closeButton
-            )
+                .navigationBarTitle(Text("What If?"), displayMode: .automatic)
+                .navigationBarItems(
+                    trailing: closeButton
+                )
             
         }
-        .edgesIgnoringSafeArea(.top)
+            .edgesIgnoringSafeArea(.top)
     }
     
     var closeButton: some View {
@@ -127,10 +126,12 @@ struct WhatIfTextListView: View {
     var body: some View {
         VStack {
             List(viewModel.whatIfs) { whatIf in
-                WhatIfListRow(num: whatIf.num,
-                              thumbnail: whatIf.thumbnail ?? "",
-                              title: whatIf.title ?? "",
-                              action: self.action)
+                ListRowView(num: whatIf.num,
+                            thumbnail: whatIf.thumbnail ?? "",
+                            title: whatIf.title ?? "",
+                            isFavorite: whatIf.isFavorite,
+                            isSeen: whatIf.isRead,
+                            action: self.action)
                     .onTapGesture {
                         self.action(whatIf.num)
                     }
@@ -141,50 +142,6 @@ struct WhatIfTextListView: View {
                     })
             }
             .resignKeyboardOnDragGesture()
-        }
-    }
-}
-
-// MARK: - WhatIfListRow
-
-struct WhatIfListRow: View {
-    var num: Int32
-    var thumbnail: String
-    var title: String
-    var action: (Int32) -> Void
-    @ObservedObject var imageManager: ImageManager
-    
-    init(num: Int32, thumbnail: String, title: String, action: @escaping (Int32) -> Void) {
-        self.num = num
-        self.thumbnail = thumbnail
-        self.title = title
-        self.action = action
-        imageManager = ImageManager(url: URL(string: thumbnail))
-    }
-    
-    var body: some View {
-        HStack {
-            VStack {
-                Image(uiImage: imageManager.image ?? UIImage(named: "logo")!)
-                .resizable()
-                .frame(width: 50, height: 50)
-            }
-                .background(Color.white)
-                .onAppear {
-                    self.imageManager.load()
-                }
-                .onDisappear {
-                    self.imageManager.cancel()
-                }
-            Text("#\(String(num)): \(title)")
-                .font(.custom("xkcd-Script-Regular", size: 15))
-            Spacer()
-            Button(action: {
-                self.action(self.num)
-            }) {
-                Text(">")
-                    .font(.custom("xkcd-Script-Regular", size: 15))
-            }
         }
     }
 }
