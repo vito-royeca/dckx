@@ -88,6 +88,7 @@ struct ComicToolBarView: View {
                     .imageScale(.large)
 //                    .foregroundColor(.dckxBlue)
             }
+            
 //            .safariView(isPresented: $showingBrowser) {
 //                SafariView(
 //                    url: URL(string: XkcdAPI.sharedInstance.explainURL(of: self.fetcher.currentComic!))!,

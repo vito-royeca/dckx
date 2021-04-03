@@ -373,7 +373,6 @@ $(document).delegate( 'input[name=viewmode]', 'change', function () {
 // Next panel on simple click
 $(document).delegate( '.kumiko-reader', 'click touch', function (e) {
 	if ($(e.target).is('.panel,.kumiko-reader'))
-		// $(this).data('reader').next();
 		$(this).data('reader').toggleShowInfo();
 });
 

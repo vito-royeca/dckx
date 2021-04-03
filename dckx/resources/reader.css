@@ -10,8 +10,8 @@
 }
 
 :root {
-	--background: #ffffff;
-	--color: #000000;
+  --background: #ffffff;
+  --color: #000000;
 }
   
 body {
@@ -20,7 +20,8 @@ body {
 	height: 96vh;
 	margin-top: 2vh;
 	margin-left: 2vw;
-	font-family: sans-serif;
+    font-family: xkcd;
+    line-height: 150%;
 	color: var(--color);
     background-color: var(--background);
 }
@@ -63,6 +64,8 @@ img {
 	top: 0;
 	left: 10;
 	font-family: xkcd-script;
+    line-height: 150%;
+/*    font-size: 60px;*/
     color: var(--color);
     background-color: var(--background);
 }
@@ -71,6 +74,8 @@ img {
 	top: 0;
 	right: 0;
 	font-family: xkcd-script;
+    line-height: 150%;
+/*    font-size: 60px;*/
     color: var(--color);
     background-color: var(--background);
 }
