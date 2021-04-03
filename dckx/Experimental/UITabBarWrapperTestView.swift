@@ -7,12 +7,21 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct UITabBarWrapperTestView: View {
     var body: some View {
         UITabBarWrapper([
             TabBarElement(tabBarElementItem: .init(title: "First", systemImageName: "house.fill")) {
-                Text("First View")
+                NavigationView {
+                    List {
+                        ForEach(["One", "Two"], id:\.self) { data in
+                            NavigationLink(data, destination: SomeView(text: data, title: data, uiTabarController: nil))
+                        }
+                    }
+                    
+                }
+                .navigationBarTitle(Text("First"), displayMode: .automatic)
             },
             TabBarElement(tabBarElementItem: .init(title: "Second", systemImageName: "pencil.circle.fill")) {
                 Text("Second View")
@@ -41,3 +50,6 @@ struct UITabBarWrapperTextView_Previews: PreviewProvider {
         UITabBarWrapperTestView()
     }
 }
+
+
+

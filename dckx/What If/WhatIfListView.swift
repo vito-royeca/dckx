@@ -25,7 +25,9 @@ struct WhatIfListView: View {
     @State var shouldAnimate: Bool = false
     
     var body: some View {
-        NavigationView {
+        SearchNavigation(query: $query,
+                         scopeSelection: $scopeSelection,
+                         delegate: self) {
             ZStack(alignment: .center) {
                 WhatIfTextListView(viewModel: $viewModel,
                                    action: selectWhatIf(num:))
@@ -35,41 +37,9 @@ struct WhatIfListView: View {
             .navigationBarItems(
                 trailing: closeButton
             )
-            .navigationSearchBar(text: $query,
-                                 scopeSelection: $scopeSelection,
-                                 options: [
-                                    .automaticallyShowsSearchBar: true,
-                                    .obscuresBackgroundDuringPresentation: true,
-                                    .hidesNavigationBarDuringPresentation: true,
-                                    .hidesSearchBarWhenScrolling: false,
-                                    .placeholder: "Search",
-                                    .showsBookmarkButton: false,
-                                    .scopeButtonTitles: ["All", "Bookmarked", "Read"],
-                                    .scopeBarButtonTitleTextAttributes: [NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 15)],
-                                    .searchTextFieldFont: UIFont(name: "xkcd Script", size: 15)!
-                                    
-                                 ],
-                                 actions: [
-                                    .onCancelButtonClicked: {
-                                        doSearch()
-                                    },
-                                    .onSearchButtonClicked: {
-                                        doSearch()
-                                    },
-                                    .onScopeButtonClicked: {
-                                        doSearch()
-                                    },
-                                    .onSearchTextChanged: {
-                                        doSearch()
-                                    }
-                                 ], searchResultsContent: {
-                                    ZStack(alignment: .center) {
-                                        WhatIfTextListView(viewModel: $viewModel,
-                                                           action: selectWhatIf(num:))
-                                        ActivityIndicatorView(shouldAnimate: $shouldAnimate)
-                                    }
-                                 })
+            
         }
+        .edgesIgnoringSafeArea(.top)
     }
     
     var closeButton: some View {
@@ -90,8 +60,6 @@ struct WhatIfListView: View {
     // MARK: - SearchBar methods
     
     func doSearch() {
-//        print("\(Date()): query=\(self.query), scope=\(self.scopeSelection)")
-
         DispatchQueue.global(qos: .background).async {
             self.shouldAnimate = true
             self.viewModel = WhatIfListViewModel(query: self.query,
@@ -109,6 +77,44 @@ struct WhatIfListView: View {
 struct WhatIfListView_Previews: PreviewProvider {
     static var previews: some View {
         WhatIfListView().environmentObject(WhatIfFetcher())
+    }
+}
+
+// MARK: - SearchNavigation
+
+extension WhatIfListView: SearchNavigationDelegate {
+    var options: [NavigationSearchBarOptionKey : Any]? {
+        return [
+            .automaticallyShowsSearchBar: true,
+            .obscuresBackgroundDuringPresentation: true,
+            .hidesNavigationBarDuringPresentation: true,
+            .hidesSearchBarWhenScrolling: false,
+            .placeholder: "Search",
+            .showsBookmarkButton: false,
+            .scopeButtonTitles: ["All", "Bookmarked", "Seen"],
+            .scopeBarButtonTitleTextAttributes: [NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 15)],
+            .searchTextFieldFont: UIFont(name: "xkcd Script", size: 15)!
+            
+         ]
+    }
+    
+    func search() {
+        DispatchQueue.global(qos: .background).async {
+            self.shouldAnimate = true
+            self.viewModel = WhatIfListViewModel(query: self.query,
+                                                scopeIndex: self.scopeSelection)
+            DispatchQueue.main.async {
+                self.shouldAnimate = false
+            }
+        }
+    }
+    
+    func scope() {
+        search()
+    }
+    
+    func cancel() {
+        search()
     }
 }
 

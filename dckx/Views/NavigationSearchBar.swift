@@ -171,7 +171,6 @@ fileprivate struct NavigationSearchBar<SearchResultsContent>: UIViewControllerRe
     
     class Coordinator: NSObject, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
         let representable: NavigationSearchBar
-        
         let searchController: UISearchController
         
         init(representable: NavigationSearchBar) {

@@ -162,7 +162,7 @@ class ComicItemSource: NSObject,  UIActivityItemSource {
     }
     
     func author() -> String {
-        return "via @dckx - xkcd comics reader"
+        return "via @dckx - an xkcd comics reader app"
     }
     
     func image() -> UIImage? {

@@ -117,6 +117,8 @@
 		8BA5921925FEBEC1001CD883 /* HideScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA5921825FEBEC1001CD883 /* HideScrollView.swift */; };
 		8BAC10B426169EBD00664335 /* SearchNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10B326169EBD00664335 /* SearchNavigation.swift */; };
 		8BAC10B926169EF100664335 /* SearchNavigationTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10B826169EF100664335 /* SearchNavigationTestView.swift */; };
+		8BAC10BF2616F51300664335 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8BAC10BE2616F51300664335 /* Introspect */; };
+		8BAC10C42617066800664335 /* HideTabBarTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10C32617066800664335 /* HideTabBarTestView.swift */; };
 		8BACA212260A6ADC008B51C5 /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */; };
 		8BE8ECA3243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
 		8BE8ECA4243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
@@ -204,6 +206,7 @@
 		8BA5921825FEBEC1001CD883 /* HideScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideScrollView.swift; sourceTree = "<group>"; };
 		8BAC10B326169EBD00664335 /* SearchNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigation.swift; sourceTree = "<group>"; };
 		8BAC10B826169EF100664335 /* SearchNavigationTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationTestView.swift; sourceTree = "<group>"; };
+		8BAC10C32617066800664335 /* HideTabBarTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTabBarTestView.swift; sourceTree = "<group>"; };
 		8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComicsPanelExtractor.cpp; sourceTree = "<group>"; };
 		8BACA211260A6ADC008B51C5 /* ComicsPanelExtractor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComicsPanelExtractor.hpp; sourceTree = "<group>"; };
 		8BE8ECA2243A9B1E0037036E /* dckx.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = dckx.sqlite; sourceTree = "<group>"; };
@@ -224,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B9ADC0F260AC46600B0DED8 /* Ji.framework in Frameworks */,
+				8BAC10BF2616F51300664335 /* Introspect in Frameworks */,
 				196558F998D4A92D13BEEB36 /* Pods_dckx.framework in Frameworks */,
 				8B2C04302606662C00AF58E0 /* BetterSafariView in Frameworks */,
 			);
@@ -335,15 +339,15 @@
 			children = (
 				8B3049A2241830CC00D549DE /* ActivityIndicatorView.swift */,
 				8B626D862402122C00972EED /* BrowserView.swift */,
+				8BAC10C32617066800664335 /* HideTabBarTestView.swift */,
 				8B658016240AFED800A245DC /* MailView.swift */,
 				8BA50E4824097CF000138D11 /* MainView.swift */,
 				8B5307252602E6DF008BA7AB /* NavigationSearchBar.swift */,
 				8B65801F240B1C6E00A245DC /* NavigationToolbar.swift */,
 				8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */,
+				8BAC10B326169EBD00664335 /* SearchNavigation.swift */,
 				8B65801B240B12E100A245DC /* ShareSheetView.swift */,
 				8BA50E6B240A425500138D11 /* WebView.swift */,
-				8B6F7119261526140073C7A3 /* UITabBarWrapper.swift */,
-				8B6F711E261529410073C7A3 /* UITabBarWrapperTestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -382,8 +386,9 @@
 			isa = PBXGroup;
 			children = (
 				8BA5921825FEBEC1001CD883 /* HideScrollView.swift */,
-				8BAC10B326169EBD00664335 /* SearchNavigation.swift */,
 				8BAC10B826169EF100664335 /* SearchNavigationTestView.swift */,
+				8B6F7119261526140073C7A3 /* UITabBarWrapper.swift */,
+				8B6F711E261529410073C7A3 /* UITabBarWrapperTestView.swift */,
 			);
 			path = Experimental;
 			sourceTree = "<group>";
@@ -453,6 +458,7 @@
 			name = dckx;
 			packageProductDependencies = (
 				8B2C042F2606662C00AF58E0 /* BetterSafariView */,
+				8BAC10BE2616F51300664335 /* Introspect */,
 			);
 			productName = dckx;
 			productReference = 8B4F4B9523F5F444008446F4 /* dckx.app */;
@@ -535,6 +541,7 @@
 			mainGroup = 8B4F4B8C23F5F444008446F4;
 			packageReferences = (
 				8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */,
+				8BAC10BD2616F51300664335 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 8B4F4B9623F5F444008446F4 /* Products */;
 			projectDirPath = "";
@@ -749,6 +756,7 @@
 				8B23367E23F646A700C88BA1 /* CoreData.swift in Sources */,
 				8BFDD2BF2609826000B7B5F9 /* OpenCVWrapper.mm in Sources */,
 				8BACA212260A6ADC008B51C5 /* ComicsPanelExtractor.cpp in Sources */,
+				8BAC10C42617066800664335 /* HideTabBarTestView.swift in Sources */,
 				8B23368223F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8B6F711A261526140073C7A3 /* UITabBarWrapper.swift in Sources */,
 				8B626D6E23FFB5BE00972EED /* ComicListView.swift in Sources */,
@@ -1159,6 +1167,14 @@
 				minimumVersion = 2.3.1;
 			};
 		};
+		8BAC10BD2616F51300664335 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1166,6 +1182,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */;
 			productName = BetterSafariView;
+		};
+		8BAC10BE2616F51300664335 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BAC10BD2616F51300664335 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -122,7 +122,7 @@ class ComicFetcher: ObservableObject {
                 comicsJson.append("\(v),")
             }
         }
-        comicsJson = String(comicsJson.dropLast())
+        comicsJson = comicsJson.hasSuffix(",") ? String(comicsJson.dropLast()) : comicsJson
         comicsJson += "}]"
         comicsJson = comicsJson.replacingOccurrences(of: "(", with: "[")
         comicsJson = comicsJson.replacingOccurrences(of: ")", with: "]")

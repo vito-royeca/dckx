@@ -90,7 +90,7 @@ fileprivate struct UITabBarControllerWrapper: UIViewControllerRepresentable {
         let tabBar = UITabBarController()
         
         // Configure Tab Bar here, if needed
-        tabBar.hidesBottomBarWhenPushed = true
+//        tabBar.hidesBottomBarWhenPushed = true
         return tabBar
     }
     
