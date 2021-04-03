@@ -33,8 +33,10 @@ struct ListRowView: View {
         HStack {
             Image(uiImage: imageManager.image ?? UIImage(named: "logo")!)
                 .resizable()
-                .frame(width: 50, height: 50)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 60, height: 60)
                 .background(Color.white)
+                
                 .onAppear {
                     self.imageManager.load()
                 }
@@ -48,13 +50,14 @@ struct ListRowView: View {
                         .font(.custom("xkcd-Script-Regular", size: 15))
                     Spacer()
                 }
-                Spacer()
                 HStack {
+                    Spacer()
                     Image(systemName: isFavorite ? "bookmark.fill" : "bookmark")
                         .imageScale(.small)
+                    
                     Image(systemName: isSeen ? "eye.fill" : "eye")
                         .imageScale(.small)
-                    Spacer()
+                    
                 }
             }
             Spacer()

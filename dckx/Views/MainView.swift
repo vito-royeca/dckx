@@ -21,10 +21,10 @@ struct MainView: View {
                     Image(systemName: "questionmark.folder")
                     Text("What If?")
                 })
-            SearchNavigationTestView()
-                .tabItem({
-                    Text("Search Bar")
-                })
+//            SearchNavigationTestView()
+//                .tabItem({
+//                    Text("Search Bar")
+//                })
         }
     }
 }
