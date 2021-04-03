@@ -339,7 +339,6 @@
 			children = (
 				8B3049A2241830CC00D549DE /* ActivityIndicatorView.swift */,
 				8B626D862402122C00972EED /* BrowserView.swift */,
-				8BAC10C32617066800664335 /* HideTabBarTestView.swift */,
 				8B658016240AFED800A245DC /* MailView.swift */,
 				8BA50E4824097CF000138D11 /* MainView.swift */,
 				8B5307252602E6DF008BA7AB /* NavigationSearchBar.swift */,
@@ -386,6 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				8BA5921825FEBEC1001CD883 /* HideScrollView.swift */,
+				8BAC10C32617066800664335 /* HideTabBarTestView.swift */,
 				8BAC10B826169EF100664335 /* SearchNavigationTestView.swift */,
 				8B6F7119261526140073C7A3 /* UITabBarWrapper.swift */,
 				8B6F711E261529410073C7A3 /* UITabBarWrapperTestView.swift */,
