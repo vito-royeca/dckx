@@ -19,23 +19,21 @@ struct WhatIfView: View {
             WebView(link: nil,
                     html: fetcher.composeHTML(),
                     baseURL: nil)
-            .navigationBarTitle(Text(fetcher.currentWhatIf?.title ?? ""), displayMode: .automatic)
-            .navigationBarItems(
-                leading: listButton,
-                trailing:
-                    WhatIfToolBarView(fetcher: fetcher)
-            )
-            .toolbar {
-                NavigationToolbar(loadFirst: fetcher.loadFirst,
-                                  loadPrevious: fetcher.loadPrevious,
-                                  loadRandom: fetcher.loadRandom,
-                                  loadNext: fetcher.loadNext,
-                                  loadLast: fetcher.loadLast,
-                                  canDoPrevious: fetcher.canDoPrevious,
-                                  canDoNext: fetcher.canDoNext)
-            }
+                .navigationBarTitle(Text(fetcher.currentWhatIf?.title ?? ""), displayMode: .automatic)
+                .navigationBarItems(
+                    leading: listButton,
+                    trailing: WhatIfToolBarView(fetcher: fetcher))
+                .toolbar {
+                    NavigationToolbar(loadFirst: fetcher.loadFirst,
+                                      loadPrevious: fetcher.loadPrevious,
+                                      loadRandom: fetcher.loadRandom,
+                                      loadNext: fetcher.loadNext,
+                                      loadLast: fetcher.loadLast,
+                                      canDoPrevious: fetcher.canDoPrevious,
+                                      canDoNext: fetcher.canDoNext)
+                }
         }
-        .environmentObject(fetcher)
+            .environmentObject(fetcher)
     }
     
     var listButton: some View {
@@ -46,9 +44,9 @@ struct WhatIfView: View {
                 .imageScale(.large)
 //                .foregroundColor(.dckxBlue)
         }
-        .sheet(isPresented: $showingList, content: {
-            WhatIfListView()
-        })
+            .sheet(isPresented: $showingList, content: {
+                WhatIfListView()
+            })
     }
 }
 

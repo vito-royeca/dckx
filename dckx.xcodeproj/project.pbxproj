@@ -80,6 +80,9 @@
 		8B82B2B42618C6AD008AD11D /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2B32618C6AD008AD11D /* ListRowView.swift */; };
 		8B82B2B52618C6AD008AD11D /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2B32618C6AD008AD11D /* ListRowView.swift */; };
 		8B82B2B62618C6AD008AD11D /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2B32618C6AD008AD11D /* ListRowView.swift */; };
+		8B82B2C426192A9C008AD11D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2C326192A9C008AD11D /* SettingsView.swift */; };
+		8B82B2C526192A9C008AD11D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2C326192A9C008AD11D /* SettingsView.swift */; };
+		8B82B2C626192A9C008AD11D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2C326192A9C008AD11D /* SettingsView.swift */; };
 		8B8D9629260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */; };
 		8B8D962A260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */; };
 		8B8D962B260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */; };
@@ -193,6 +196,7 @@
 		8B6F7119261526140073C7A3 /* UITabBarWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarWrapper.swift; sourceTree = "<group>"; };
 		8B6F711E261529410073C7A3 /* UITabBarWrapperTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarWrapperTestView.swift; sourceTree = "<group>"; };
 		8B82B2B32618C6AD008AD11D /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
+		8B82B2C326192A9C008AD11D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.2.1.min.js"; sourceTree = "<group>"; };
 		8B8D9632260C5DEF00A3C273 /* reader.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = reader.js; sourceTree = "<group>"; };
 		8B8D963C260C5DFF00A3C273 /* reader.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = reader.css; sourceTree = "<group>"; };
@@ -349,6 +353,7 @@
 				8BAC10B326169EBD00664335 /* SearchNavigation.swift */,
 				8B65801B240B12E100A245DC /* ShareSheetView.swift */,
 				8BA50E6B240A425500138D11 /* WebView.swift */,
+				8B82B2C326192A9C008AD11D /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -761,6 +766,7 @@
 				8BACA212260A6ADC008B51C5 /* ComicsPanelExtractor.cpp in Sources */,
 				8BAC10C42617066800664335 /* HideTabBarTestView.swift in Sources */,
 				8B23368223F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
+				8B82B2C426192A9C008AD11D /* SettingsView.swift in Sources */,
 				8B6F711A261526140073C7A3 /* UITabBarWrapper.swift in Sources */,
 				8B626D6E23FFB5BE00972EED /* ComicListView.swift in Sources */,
 				8B3049A3241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
@@ -804,6 +810,7 @@
 				8B658018240AFED800A245DC /* MailView.swift in Sources */,
 				8B626D712401B0A900972EED /* Constants.swift in Sources */,
 				8B658023240B218700A245DC /* SceneDelegate.swift in Sources */,
+				8B82B2C526192A9C008AD11D /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,6 +843,7 @@
 				8BA50E62240A2DA200138D11 /* Database.swift in Sources */,
 				8BA50E6A240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8B626D8A2402274A00972EED /* Constants.swift in Sources */,
+				8B82B2C626192A9C008AD11D /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

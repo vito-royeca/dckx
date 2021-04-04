@@ -20,25 +20,21 @@ struct ComicView: View {
             WebView(link: nil,
                     html: fetcher.composeHTML(),
                     baseURL: nil)
-            .navigationBarTitle(Text(fetcher.currentComic?.title ?? ""), displayMode: .automatic)
-            .navigationBarItems(
-                leading: listButton,
-                trailing:
-                    ComicToolBarView()
-            )
-            .toolbar() {
-                NavigationToolbar(loadFirst: fetcher.loadFirst,
-                                  loadPrevious: fetcher.loadPrevious,
-                                  loadRandom: fetcher.loadRandom,
-                                  loadNext: fetcher.loadNext,
-                                  loadLast: fetcher.loadLast,
-                                  canDoPrevious: fetcher.canDoPrevious,
-                                  canDoNext: fetcher.canDoNext)
-                    
-                
-            }
+                .navigationBarTitle(Text(fetcher.currentComic?.title ?? ""), displayMode: .automatic)
+                .navigationBarItems(
+                    leading: listButton,
+                    trailing: ComicToolBarView())
+                .toolbar() {
+                    NavigationToolbar(loadFirst: fetcher.loadFirst,
+                                      loadPrevious: fetcher.loadPrevious,
+                                      loadRandom: fetcher.loadRandom,
+                                      loadNext: fetcher.loadNext,
+                                      loadLast: fetcher.loadLast,
+                                      canDoPrevious: fetcher.canDoPrevious,
+                                      canDoNext: fetcher.canDoNext)
+                }
         }
-        .environmentObject(fetcher)
+            .environmentObject(fetcher)
     }
     
     var listButton: some View {
@@ -49,9 +45,9 @@ struct ComicView: View {
                 .imageScale(.large)
 //                .foregroundColor(.dckxBlue)
         }
-        .sheet(isPresented: $showingList, content: {
-            ComicListView()
-        })
+            .sheet(isPresented: $showingList, content: {
+                ComicListView()
+            })
     }
 }
 

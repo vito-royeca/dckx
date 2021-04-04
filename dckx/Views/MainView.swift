@@ -18,13 +18,14 @@ struct MainView: View {
                 })
             WhatIfView()
                 .tabItem({
-                    Image(systemName: "questionmark.folder")
+                    Image(systemName: "questionmark.diamond")
                     Text("What If?")
                 })
-//            SearchNavigationTestView()
-//                .tabItem({
-//                    Text("Search Bar")
-//                })
+            SettingsView()
+                .tabItem({
+                    Image(systemName: "gear")
+                    Text("Settings")
+                })
         }
     }
 }
