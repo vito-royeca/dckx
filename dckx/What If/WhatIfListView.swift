@@ -29,8 +29,13 @@ struct WhatIfListView: View {
                          scopeSelection: $scopeSelection,
                          delegate: self) {
             ZStack(alignment: .center) {
-                WhatIfTextListView(viewModel: $viewModel,
-                                   action: selectWhatIf(num:))
+                if viewModel.whatIfs.isEmpty {
+                    Text("No results found.")
+                        .font(.custom("xkcd-Script-Regular", size: 15))
+                } else {
+                    WhatIfTextListView(viewModel: $viewModel,
+                                       action: selectWhatIf(num:))
+                }
                 ActivityIndicatorView(shouldAnimate: $shouldAnimate)
             }
                 .navigationBarTitle(Text("What If?"), displayMode: .automatic)
@@ -151,6 +156,7 @@ struct WhatIfTextListView: View {
 class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
     @Published var query: String?
     @Published var scopeIndex: Int
+    @Published var whatIfs: [WhatIf] = []
     
     private var controller: NSFetchedResultsController<WhatIf>?
     var fetchBatchSize = 20
@@ -170,18 +176,15 @@ class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observa
  
     // MARK: - NSFetchedResultsControllerDelegate
     
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        objectWillChange.send()
-    }
-    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        objectWillChange.send()
+        guard let result = controller.fetchedObjects as? [WhatIf] else {
+            return
+        }
+
+        whatIfs = result
     }
     
-    // MARK: Custom methods
-    var whatIfs: [WhatIf] {
-        return controller?.fetchedObjects ?? []
-    }
+    // MARK: - Custom methods
     
     func createFetchRequest(query: String?, scopeIndex: Int) -> NSFetchRequest<WhatIf> {
         var predicate: NSPredicate?
@@ -246,6 +249,7 @@ class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observa
         do {
             NSFetchedResultsController<WhatIf>.deleteCache(withName: controller!.cacheName)
             try controller!.performFetch()
+            whatIfs = controller!.fetchedObjects ?? []
 //            fetchOffset += fetchBatchSize
 //            fetchLimit += fetchOffset
         } catch {

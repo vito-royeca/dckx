@@ -28,8 +28,13 @@ struct  ComicListView: View {
                          scopeSelection: $scopeSelection,
                          delegate: self) {
             ZStack(alignment: .center) {
-                ComicTextListView(viewModel: $viewModel,
-                                  action: selectComic(num:))
+                if viewModel.comics.isEmpty {
+                    Text("No results found.")
+                        .font(.custom("xkcd-Script-Regular", size: 15))
+                } else {
+                    ComicTextListView(viewModel: $viewModel,
+                                      action: selectComic(num:))
+                }
                 ActivityIndicatorView(shouldAnimate: $shouldAnimate)
             }
                 .navigationBarTitle(Text("Comics"), displayMode: .automatic)
@@ -137,6 +142,7 @@ struct ComicTextListView: View {
 class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
     @Published var query: String?
     @Published var scopeIndex: Int
+    @Published var comics: [Comic] = []
     
     private var controller: NSFetchedResultsController<Comic>?
     var fetchBatchSize = 20
@@ -156,20 +162,16 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
  
     // MARK: - NSFetchedResultsControllerDelegate
     
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        objectWillChange.send()
-    }
-    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        objectWillChange.send()
+        guard let result = controller.fetchedObjects as? [Comic] else {
+            return
+        }
+
+        comics = result
     }
     
     // MARK: - Custom methods
 
-    var comics: [Comic] {
-        return controller?.fetchedObjects ?? []
-    }
-    
     func createFetchRequest(query: String?, scopeIndex: Int) -> NSFetchRequest<Comic> {
         var predicate: NSPredicate?
         
@@ -233,6 +235,7 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
         do {
             NSFetchedResultsController<Comic>.deleteCache(withName: controller!.cacheName)
             try controller!.performFetch()
+            comics = controller!.fetchedObjects ?? []
 //            fetchOffset += fetchBatchSize
 //            fetchLimit += fetchOffset
         } catch {
