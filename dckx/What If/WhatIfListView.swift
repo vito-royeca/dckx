@@ -16,6 +16,7 @@ import PromiseKit
 struct WhatIfListView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var fetcher: WhatIfFetcher
+//    @EnvironmentObject var settings: Settings
     @State var query: String?
     @State var scopeSelection: Int = 0
     
@@ -47,7 +48,6 @@ struct WhatIfListView: View {
         }) {
             Image(systemName: "xmark")
                 .imageScale(.large)
-//                            .foregroundColor(.dckxBlue)
         }
     }
     
@@ -91,9 +91,8 @@ extension WhatIfListView: SearchNavigationDelegate {
             .placeholder: "Search",
             .showsBookmarkButton: false,
             .scopeButtonTitles: ["All", "Bookmarked", "Seen"],
-            .scopeBarButtonTitleTextAttributes: [NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 15)],
-            .searchTextFieldFont: UIFont(name: "xkcd Script", size: 15)!
-            
+            .scopeBarButtonTitleTextAttributes: [NSAttributedString.Key.font: UIFont(name: "xkcd-Script-Regular", size: 15)!],
+            .searchTextFieldFont: UIFont(name: "xkcd-Script-Regular", size: 15)!
          ]
     }
     
@@ -131,6 +130,7 @@ struct WhatIfTextListView: View {
                             title: whatIf.title ?? "",
                             isFavorite: whatIf.isFavorite,
                             isSeen: whatIf.isRead,
+                            font: .custom("xkcd-Script-Regular", size: 15),
                             action: self.action)
                     .onTapGesture {
                         self.action(whatIf.num)

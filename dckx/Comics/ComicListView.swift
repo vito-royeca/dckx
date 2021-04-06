@@ -15,11 +15,12 @@ import CoreData
 struct  ComicListView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var fetcher: ComicFetcher
+//    @EnvironmentObject var settings: Settings
     @State var query: String?
     @State var scopeSelection: Int = 0
     
     @State var viewModel: ComicListViewModel = ComicListViewModel(query: nil,
-                                                                        scopeIndex: 0)
+                                                                  scopeIndex: 0)
     @State var shouldAnimate: Bool = false
     
     var body: some View {
@@ -45,7 +46,6 @@ struct  ComicListView: View {
         }) {
             Image(systemName: "xmark")
                 .imageScale(.large)
-//                            .foregroundColor(.dckxBlue)
         }
     }
     
@@ -76,9 +76,8 @@ extension ComicListView: SearchNavigationDelegate {
             .placeholder: "Search",
             .showsBookmarkButton: false,
             .scopeButtonTitles: ["All", "Bookmarked", "Seen"],
-            .scopeBarButtonTitleTextAttributes: [NSAttributedString.Key.font: UIFont(name: "xkcd Script", size: 15)],
-            .searchTextFieldFont: UIFont(name: "xkcd Script", size: 15)!
-            
+            .scopeBarButtonTitleTextAttributes: [NSAttributedString.Key.font: UIFont(name: "xkcd-Script-Regular", size: 15)!],
+            .searchTextFieldFont: UIFont(name: "xkcd-Script-Regular", size: 15)!
          ]
     }
     
@@ -116,6 +115,7 @@ struct ComicTextListView: View {
                             title: comic.title ?? "",
                             isFavorite: comic.isFavorite,
                             isSeen: comic.isRead,
+                            font: .custom("xkcd-Script-Regular", size: 15),
                             action: self.action)
                     .onTapGesture {
                         self.action(comic.num)

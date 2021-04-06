@@ -9,24 +9,24 @@
 import SwiftUI
 
 struct MainView: View {
+    @StateObject var settings = Settings()
+    
     var body: some View {
         TabView{
             ComicView()
                 .tabItem({
                     Image(systemName: "photo.on.rectangle.angled")
-                    Text("Comics")
                 })
             WhatIfView()
                 .tabItem({
                     Image(systemName: "questionmark.diamond")
-                    Text("What If?")
                 })
-            SettingsView()
-                .tabItem({
-                    Image(systemName: "gear")
-                    Text("Settings")
-                })
+//            SettingsView()
+//                .tabItem({
+//                    Image(systemName: "gear")
+//                })
         }
+        .environmentObject(settings)
     }
 }
 
