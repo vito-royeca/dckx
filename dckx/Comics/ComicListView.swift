@@ -49,7 +49,7 @@ struct  ComicListView: View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            Image(systemName: "xmark")
+            Image(systemName: "xmark.circle.fill")
                 .imageScale(.large)
         }
     }

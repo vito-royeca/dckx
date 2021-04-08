@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		127137FE46AA5737FBCBA183 /* Pods_dckxUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56149F6DEDDF1BA8A1D64427 /* Pods_dckxUITests.framework */; };
 		196558F998D4A92D13BEEB36 /* Pods_dckx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A442C4117396A55D840D6677 /* Pods_dckx.framework */; };
+		8B1A4B06261E4F4500DBCD7B /* dckx.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B33FE3125FD534F00CD0F35 /* dckx.xcdatamodeld */; };
+		8B1A4B0A261E4F4B00DBCD7B /* dckx.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B33FE3125FD534F00CD0F35 /* dckx.xcdatamodeld */; };
 		8B23367E23F646A700C88BA1 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23367D23F646A700C88BA1 /* CoreData.swift */; };
 		8B23367F23F646AC00C88BA1 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23367D23F646A700C88BA1 /* CoreData.swift */; };
 		8B23368023F646AC00C88BA1 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23367D23F646A700C88BA1 /* CoreData.swift */; };
@@ -788,6 +790,7 @@
 				8B23368323F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8BA50E6D240A425500138D11 /* WebView.swift in Sources */,
 				8BA50E69240A384400138D11 /* WhatIfFetcher.swift in Sources */,
+				8B1A4B0A261E4F4B00DBCD7B /* dckx.xcdatamodeld in Sources */,
 				8B9ADBEE260A78F900B0DED8 /* Panel.cpp in Sources */,
 				8BA50E4A24097CF000138D11 /* MainView.swift in Sources */,
 				8B3049A4241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
@@ -821,6 +824,7 @@
 				8B626D8B2402291A00972EED /* ComicView.swift in Sources */,
 				8B658022240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
 				8B65801E240B12E100A245DC /* ShareSheetView.swift in Sources */,
+				8B1A4B06261E4F4500DBCD7B /* dckx.xcdatamodeld in Sources */,
 				8B9ADBEF260A78F900B0DED8 /* Panel.cpp in Sources */,
 				8B3049A5241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
 				8B23368423F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
