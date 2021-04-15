@@ -20,13 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Database.sharedInstance.createDatabase()
         Database.sharedInstance.copyDatabase()
         
-//        UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont(name: "xkcd Script", size: 12)!/*,
-//                                                          .foregroundColor: UIColor(red: 0.43, green: 0.48, blue: 0.57, alpha: 1)*/],
-//                                                         for: .selected)
-//        UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont(name: "xkcd Script", size: 12)!/*,
-//                                                          .foregroundColor: UIColor(named: "BackgroundColor") ?? UIColor.blue*/],
-//                                                         for: .normal)
-        
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.font : UIFont(name: "xkcd-Script-Regular",
                                                                                                                           size: 15)!],
                                                                                                           for: .normal)
