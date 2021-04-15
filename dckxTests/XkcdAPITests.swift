@@ -9,6 +9,7 @@
 import XCTest
 import CoreData
 import PromiseKit
+@testable import dckx
 
 class XkcdAPITests: XCTestCase {
 

@@ -45,7 +45,7 @@ struct ComicView: View {
                 .imageScale(.large)
 //                .foregroundColor(.dckxBlue)
         }
-            .sheet(isPresented: $showingList, content: {
+            .fullScreenCover(isPresented: $showingList, content: {
                 ComicListView()
             })
     }

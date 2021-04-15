@@ -72,7 +72,7 @@ struct ComicListView_Previews: PreviewProvider {
 // MARK: - SearchNavigation
 
 extension ComicListView: SearchNavigationDelegate {
-    var options: [NavigationSearchBarOptionKey : Any]? {
+    var options: [SearchNavigationOptionKey : Any]? {
         return [
             .automaticallyShowsSearchBar: true,
             .obscuresBackgroundDuringPresentation: true,

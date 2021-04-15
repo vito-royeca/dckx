@@ -40,7 +40,8 @@ struct SearchNavigationTestView_Previews: PreviewProvider {
 }
 
 extension SearchNavigationTestView: SearchNavigationDelegate {
-    var options: [NavigationSearchBarOptionKey : Any]? {
+    
+    var options: [SearchNavigationOptionKey : Any]? {
         return [
             .automaticallyShowsSearchBar: true,
             .obscuresBackgroundDuringPresentation: true,

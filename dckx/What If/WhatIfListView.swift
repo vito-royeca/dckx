@@ -87,7 +87,7 @@ struct WhatIfListView_Previews: PreviewProvider {
 // MARK: - SearchNavigation
 
 extension WhatIfListView: SearchNavigationDelegate {
-    var options: [NavigationSearchBarOptionKey : Any]? {
+    var options: [SearchNavigationOptionKey : Any]? {
         return [
             .automaticallyShowsSearchBar: true,
             .obscuresBackgroundDuringPresentation: true,

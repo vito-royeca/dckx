@@ -29,4 +29,6 @@ end
 target 'dckxUITests' do
     inherit! :search_paths
     shared_pods
+    pod 'SimulatorStatusMagic', :configurations => ['Debug']
 end
+

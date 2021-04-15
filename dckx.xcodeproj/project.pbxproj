@@ -11,13 +11,20 @@
 		196558F998D4A92D13BEEB36 /* Pods_dckx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A442C4117396A55D840D6677 /* Pods_dckx.framework */; };
 		8B1A4B06261E4F4500DBCD7B /* dckx.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B33FE3125FD534F00CD0F35 /* dckx.xcdatamodeld */; };
 		8B1A4B0A261E4F4B00DBCD7B /* dckx.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B33FE3125FD534F00CD0F35 /* dckx.xcdatamodeld */; };
+		8B1A4B29261EF51A00DBCD7B /* SearchNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10B326169EBD00664335 /* SearchNavigation.swift */; };
+		8B1A4B2D261EF51B00DBCD7B /* SearchNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10B326169EBD00664335 /* SearchNavigation.swift */; };
+		8B1A4C0F2624701200DBCD7B /* OpenCVWrapper.h in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDD2C62609828A00B7B5F9 /* OpenCVWrapper.h */; };
+		8B1A4C162624708700DBCD7B /* OpenCVWrapper.h in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDD2C62609828A00B7B5F9 /* OpenCVWrapper.h */; };
+		8B1A4C1A2624712000DBCD7B /* OpenCVWrapper.h in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDD2C62609828A00B7B5F9 /* OpenCVWrapper.h */; };
+		8B1A4C3726253CC000DBCD7B /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */; };
+		8B1A4C3B26253CC100DBCD7B /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */; };
 		8B23367E23F646A700C88BA1 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23367D23F646A700C88BA1 /* CoreData.swift */; };
 		8B23367F23F646AC00C88BA1 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23367D23F646A700C88BA1 /* CoreData.swift */; };
 		8B23368023F646AC00C88BA1 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23367D23F646A700C88BA1 /* CoreData.swift */; };
 		8B23368223F6683C00C88BA1 /* ComicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23368123F6683C00C88BA1 /* ComicFetcher.swift */; };
 		8B23368323F6683C00C88BA1 /* ComicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23368123F6683C00C88BA1 /* ComicFetcher.swift */; };
 		8B23368423F6683C00C88BA1 /* ComicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23368123F6683C00C88BA1 /* ComicFetcher.swift */; };
-		8B2C04302606662C00AF58E0 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 8B2C042F2606662C00AF58E0 /* BetterSafariView */; };
+		8B2C04302606662C00AF58E0 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8B2C042F2606662C00AF58E0 /* SwiftPackageProductDependency */; };
 		8B30499F2418263E00D549DE /* WhatIfListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B30499E2418263E00D549DE /* WhatIfListView.swift */; };
 		8B3049A02418263E00D549DE /* WhatIfListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B30499E2418263E00D549DE /* WhatIfListView.swift */; };
 		8B3049A12418263E00D549DE /* WhatIfListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B30499E2418263E00D549DE /* WhatIfListView.swift */; };
@@ -102,8 +109,6 @@
 		8B9ADBEF260A78F900B0DED8 /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B9ADBEB260A78F900B0DED8 /* Panel.cpp */; };
 		8B9ADBF3260A8CC200B0DED8 /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */; };
 		8B9ADBF7260A8CC300B0DED8 /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */; };
-		8B9ADBFB260A8CC700B0DED8 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */; };
-		8B9ADBFF260A8CC800B0DED8 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */; };
 		8B9ADC0F260AC46600B0DED8 /* Ji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9ADC0E260AC46600B0DED8 /* Ji.framework */; };
 		8BA50E4924097CF000138D11 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4824097CF000138D11 /* MainView.swift */; };
 		8BA50E4A24097CF000138D11 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4824097CF000138D11 /* MainView.swift */; };
@@ -123,7 +128,7 @@
 		8BA5921925FEBEC1001CD883 /* HideScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA5921825FEBEC1001CD883 /* HideScrollView.swift */; };
 		8BAC10B426169EBD00664335 /* SearchNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10B326169EBD00664335 /* SearchNavigation.swift */; };
 		8BAC10B926169EF100664335 /* SearchNavigationTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10B826169EF100664335 /* SearchNavigationTestView.swift */; };
-		8BAC10BF2616F51300664335 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8BAC10BE2616F51300664335 /* Introspect */; };
+		8BAC10BF2616F51300664335 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8BAC10BE2616F51300664335 /* SwiftPackageProductDependency */; };
 		8BAC10C42617066800664335 /* HideTabBarTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10C32617066800664335 /* HideTabBarTestView.swift */; };
 		8BACA212260A6ADC008B51C5 /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */; };
 		8BE8ECA3243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
@@ -133,6 +138,7 @@
 		8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
+		8E095EBDA1D1C4D670C1A6A0 /* Pods_dckx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1A4C3F26253D5D00DBCD7B /* Pods_dckx.framework */; };
 		A37EE27DDBDDD50B84BE7CDB /* Pods_dckxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209EA98A58DB01C4F3387409 /* Pods_dckxTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -158,6 +164,9 @@
 		209EA98A58DB01C4F3387409 /* Pods_dckxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dckxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C292E1723D1FD184D138819 /* Pods-dckxUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dckxUITests.release.xcconfig"; path = "Target Support Files/Pods-dckxUITests/Pods-dckxUITests.release.xcconfig"; sourceTree = "<group>"; };
 		56149F6DEDDF1BA8A1D64427 /* Pods_dckxUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dckxUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B1A4BF32624430F00DBCD7B /* dckx-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dckx-Bridging-Header.h"; sourceTree = "<group>"; };
+		8B1A4C3F26253D5D00DBCD7B /* Pods_dckx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_dckx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B1A4C4426253E2700DBCD7B /* Ji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B23367D23F646A700C88BA1 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		8B23368123F6683C00C88BA1 /* ComicFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicFetcher.swift; sourceTree = "<group>"; };
 		8B30499E2418263E00D549DE /* WhatIfListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfListView.swift; sourceTree = "<group>"; };
@@ -218,7 +227,6 @@
 		8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComicsPanelExtractor.cpp; sourceTree = "<group>"; };
 		8BACA211260A6ADC008B51C5 /* ComicsPanelExtractor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComicsPanelExtractor.hpp; sourceTree = "<group>"; };
 		8BE8ECA2243A9B1E0037036E /* dckx.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = dckx.sqlite; sourceTree = "<group>"; };
-		8BFDD2BD2609826000B7B5F9 /* dckx-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dckx-Bridging-Header.h"; sourceTree = "<group>"; };
 		8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
 		8BFDD2C62609828A00B7B5F9 /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 		8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ResignKeyboardOnDragGesture.swift"; sourceTree = "<group>"; };
@@ -235,9 +243,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B9ADC0F260AC46600B0DED8 /* Ji.framework in Frameworks */,
-				8BAC10BF2616F51300664335 /* Introspect in Frameworks */,
+				8BAC10BF2616F51300664335 /* BuildFile in Frameworks */,
 				196558F998D4A92D13BEEB36 /* Pods_dckx.framework in Frameworks */,
-				8B2C04302606662C00AF58E0 /* BetterSafariView in Frameworks */,
+				8B2C04302606662C00AF58E0 /* BuildFile in Frameworks */,
+				8E095EBDA1D1C4D670C1A6A0 /* Pods_dckx.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +319,7 @@
 				8B4F4BA623F5F445008446F4 /* Info.plist */,
 				8B4F4BA023F5F445008446F4 /* Preview Content */,
 				8B626D722401BB1D00972EED /* resources */,
+				8B1A4BF32624430F00DBCD7B /* dckx-Bridging-Header.h */,
 			);
 			path = dckx;
 			sourceTree = "<group>";
@@ -426,11 +436,10 @@
 		8BFDD2A826097E2800B7B5F9 /* OpenCV */ = {
 			isa = PBXGroup;
 			children = (
-				8BFDD2BD2609826000B7B5F9 /* dckx-Bridging-Header.h */,
-				8BFDD2C62609828A00B7B5F9 /* OpenCVWrapper.h */,
-				8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */,
 				8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */,
 				8BACA211260A6ADC008B51C5 /* ComicsPanelExtractor.hpp */,
+				8BFDD2C62609828A00B7B5F9 /* OpenCVWrapper.h */,
+				8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */,
 				8B9ADBEB260A78F900B0DED8 /* Panel.cpp */,
 				8B9ADBEC260A78F900B0DED8 /* Panel.hpp */,
 			);
@@ -440,6 +449,8 @@
 		921AF9F2F90CBC7F2736030E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8B1A4C4426253E2700DBCD7B /* Ji.framework */,
+				8B1A4C3F26253D5D00DBCD7B /* Pods_dckx.framework */,
 				8B9ADC0E260AC46600B0DED8 /* Ji.framework */,
 				A442C4117396A55D840D6677 /* Pods_dckx.framework */,
 				209EA98A58DB01C4F3387409 /* Pods_dckxTests.framework */,
@@ -467,8 +478,8 @@
 			);
 			name = dckx;
 			packageProductDependencies = (
-				8B2C042F2606662C00AF58E0 /* BetterSafariView */,
-				8BAC10BE2616F51300664335 /* Introspect */,
+				8B2C042F2606662C00AF58E0 /* SwiftPackageProductDependency */,
+				8BAC10BE2616F51300664335 /* SwiftPackageProductDependency */,
 			);
 			productName = dckx;
 			productReference = 8B4F4B9523F5F444008446F4 /* dckx.app */;
@@ -550,8 +561,8 @@
 			);
 			mainGroup = 8B4F4B8C23F5F444008446F4;
 			packageReferences = (
-				8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */,
-				8BAC10BD2616F51300664335 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				8B2C042E2606662C00AF58E0 /* RemoteSwiftPackageReference */,
+				8BAC10BD2616F51300664335 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 8B4F4B9623F5F444008446F4 /* Products */;
 			projectDirPath = "";
@@ -747,6 +758,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B1A4C162624708700DBCD7B /* OpenCVWrapper.h in Sources */,
 				8B4F4B9923F5F444008446F4 /* AppDelegate.swift in Sources */,
 				8B33FE3625FD534F00CD0F35 /* dckx.xcdatamodeld in Sources */,
 				8B30499F2418263E00D549DE /* WhatIfListView.swift in Sources */,
@@ -787,6 +799,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B1A4C1A2624712000DBCD7B /* OpenCVWrapper.h in Sources */,
 				8B23368323F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8BA50E6D240A425500138D11 /* WebView.swift in Sources */,
 				8BA50E69240A384400138D11 /* WhatIfFetcher.swift in Sources */,
@@ -802,18 +815,19 @@
 				8B626D792401EB1200972EED /* XkcdAPITests.swift in Sources */,
 				8B3049A02418263E00D549DE /* WhatIfListView.swift in Sources */,
 				8B626DD72403BBCB00972EED /* ComicListView.swift in Sources */,
-				8B9ADBFB260A8CC700B0DED8 /* OpenCVWrapper.mm in Sources */,
 				8B23367F23F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8BA50E4E24097D0200138D11 /* WhatIfView.swift in Sources */,
 				8B4F4BE123F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8B82B2B52618C6AD008AD11D /* ListRowView.swift in Sources */,
 				8B658021240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
 				8B9ADBF3260A8CC200B0DED8 /* ComicsPanelExtractor.cpp in Sources */,
+				8B1A4C3726253CC000DBCD7B /* OpenCVWrapper.mm in Sources */,
 				8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
 				8B658018240AFED800A245DC /* MailView.swift in Sources */,
 				8B626D712401B0A900972EED /* Constants.swift in Sources */,
 				8B658023240B218700A245DC /* SceneDelegate.swift in Sources */,
 				8B82B2C526192A9C008AD11D /* SettingsView.swift in Sources */,
+				8B1A4B29261EF51A00DBCD7B /* SearchNavigation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -821,6 +835,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B1A4C0F2624701200DBCD7B /* OpenCVWrapper.h in Sources */,
 				8B626D8B2402291A00972EED /* ComicView.swift in Sources */,
 				8B658022240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
 				8B65801E240B12E100A245DC /* ShareSheetView.swift in Sources */,
@@ -836,18 +851,19 @@
 				8BA50E4F24097D0200138D11 /* WhatIfView.swift in Sources */,
 				8B3049A12418263E00D549DE /* WhatIfListView.swift in Sources */,
 				8B4A1285240828FD00D4F8B2 /* SnapshotHelper.swift in Sources */,
-				8B9ADBFF260A8CC800B0DED8 /* OpenCVWrapper.mm in Sources */,
 				8B23368023F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8B4F4BE223F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8B658019240AFED800A245DC /* MailView.swift in Sources */,
 				8B82B2B62618C6AD008AD11D /* ListRowView.swift in Sources */,
 				8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
 				8B9ADBF7260A8CC300B0DED8 /* ComicsPanelExtractor.cpp in Sources */,
+				8B1A4C3B26253CC100DBCD7B /* OpenCVWrapper.mm in Sources */,
 				8BA50E4B24097CF000138D11 /* MainView.swift in Sources */,
 				8BA50E62240A2DA200138D11 /* Database.swift in Sources */,
 				8BA50E6A240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8B626D8A2402274A00972EED /* Constants.swift in Sources */,
 				8B82B2C626192A9C008AD11D /* SettingsView.swift in Sources */,
+				8B1A4B2D261EF51B00DBCD7B /* SearchNavigation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,7 +897,7 @@
 		8B4F4BBD23F5F445008446F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -942,7 +958,7 @@
 		8B4F4BBE23F5F445008446F4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -976,6 +992,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1012,7 +1029,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckx;
 				PRODUCT_NAME = dckx;
-				SWIFT_OBJC_BRIDGING_HEADER = "dckx/OpenCV/dckx-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1037,7 +1054,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckx;
 				PRODUCT_NAME = dckx;
-				SWIFT_OBJC_BRIDGING_HEADER = "dckx/OpenCV/dckx-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1052,7 +1069,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = dckxTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1076,7 +1093,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = dckxTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1098,6 +1115,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = dckxUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1120,6 +1138,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = dckxUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1175,7 +1194,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */ = {
+		8B2C042E2606662C00AF58E0 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stleamist/BetterSafariView.git";
 			requirement = {
@@ -1183,7 +1202,7 @@
 				minimumVersion = 2.3.1;
 			};
 		};
-		8BAC10BD2616F51300664335 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+		8BAC10BD2616F51300664335 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
 			requirement = {
@@ -1194,14 +1213,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8B2C042F2606662C00AF58E0 /* BetterSafariView */ = {
+		8B2C042F2606662C00AF58E0 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */;
+			package = 8B2C042E2606662C00AF58E0 /* RemoteSwiftPackageReference */;
 			productName = BetterSafariView;
 		};
-		8BAC10BE2616F51300664335 /* Introspect */ = {
+		8BAC10BE2616F51300664335 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8BAC10BD2616F51300664335 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			package = 8BAC10BD2616F51300664335 /* RemoteSwiftPackageReference */;
 			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */

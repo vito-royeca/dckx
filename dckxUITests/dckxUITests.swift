@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import dckx
 
 class dckxUITests: XCTestCase {
 
@@ -39,5 +40,32 @@ class dckxUITests: XCTestCase {
                 XCUIApplication().launch()
             }
         }
+    }
+    
+    func testScreenshots() {
+        let app = XCUIApplication()
+        setupSnapshot(app)
+        app.launch()
+
+        // comics
+        snapshot("0Comics")
+
+        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 1).tap()
+        snapshot("1Comics")
+
+        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 1).tap()
+        snapshot("2Comics")
+
+        // comics list
+//        app.buttons["list.dash"].tap()
+//        snapshot("1ComicsList")
+//        app.navigationBars["Comics"].buttons["xmark.circle.fill"].tap()
+
+        // what if 1
+        app.tabBars["Tab Bar"].buttons["questionmark.diamond"].tap()
+        snapshot("3What If")
+
+        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 1).tap()
+        snapshot("4What If")
     }
 }

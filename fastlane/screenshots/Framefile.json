@@ -1,0 +1,32 @@
+{
+    "device_frame_version": "latest",
+    "default": {
+        "keyword": {
+            "font": "../../dckx/resources/xkcd-Regular.otf",
+            "color": "#6E7B91"
+        },
+        "title": {
+            "font": "../../dckx/resources/xkcd-Regular.otf",
+            "color": "#FFFFFF"
+        },
+        "background": "./background.png",
+        "padding": 50,
+        "show_complete_frame": true,
+        "stack_title": true,
+        "use_platform": "IOS"
+    },
+    "data": [ 
+        {
+            "filter": "Comics",
+            "keyword": {
+              "color": "#FFFFFF"
+            }
+        },
+        {
+            "filter": "What If",
+            "keyword": {
+              "color": "#FFFFFF"
+            }
+        }
+    ]
+}

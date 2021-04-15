@@ -22,7 +22,7 @@ platform :ios do
   lane :screenshots do
     #fastlane deliver download_metadata
       capture_screenshots(workspace: "dckx.xcworkspace", scheme: "dckxUITests")
-      frameit(rose_gold: true)
+      frameit(white: true)
     deliver
   end
   

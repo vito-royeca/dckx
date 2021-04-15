@@ -109,11 +109,13 @@ class ComicFetcher: ObservableObject {
             let cachePath = SDImageCache.shared.cachePath(forKey: img),
             let image = SDImageCache.shared.imageFromCache(forKey: img),
             let data = image.pngData(),
-            let splitComics = OpenCVWrapper.splitComics(cachePath/*"/Users/vito.royeca/workspace/OSS/kumiko/1616602243-20210324.png"*/, minimumPanelSizeRatio: 1/15) else {
+            // comment out if running in XCTests
+            let splitComics = OpenCVWrapper.splitComics(cachePath, minimumPanelSizeRatio: 1/15) else {
             return ""
         }
         
         var comicsJson = "[{"
+        // comment out if running in XCTests
         for (k,v) in splitComics {
             comicsJson.append("\"\(k)\": ")
             if let _ = v as? String {

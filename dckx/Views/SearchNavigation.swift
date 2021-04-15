@@ -35,7 +35,7 @@ public struct SearchNavigationOptionKey: Hashable, Equatable, RawRepresentable {
 }
 
 protocol SearchNavigationDelegate {
-    var options: [NavigationSearchBarOptionKey : Any]? { get }
+    var options: [SearchNavigationOptionKey : Any]? { get }
     func search()
     func scope()
     func cancel()
