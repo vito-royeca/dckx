@@ -11,17 +11,17 @@ import CoreData
 import PromiseKit
 
 class XkcdAPI {
-    // MArk: Variables
+    // MARK: - Variables
     private var coreData: CoreData!
     
-    // MARK: Singleton
+    // MARK: - Singleton
     static let sharedInstance = XkcdAPI(coreData: CoreData.sharedInstance)
     static let mockInstance = XkcdAPI(coreData: CoreData.mockInstance)
     private init(coreData: CoreData) {
         self.coreData = coreData
     }
     
-    // MARK: Comic API methods
+    // MARK: - Comic API methods
     func fetchLastComic() -> Promise<Comic> {
         return Promise { seal in
             let url = "http://xkcd.com/info.0.json"
@@ -86,7 +86,7 @@ class XkcdAPI {
         }
     }
     
-    // MARK: Whatif API methods
+    // MARK: - Whatif API methods
     func fetchLastWhatIf() -> Promise<WhatIf> {
         return Promise { seal in
             let url = "https://what-if.xkcd.com"

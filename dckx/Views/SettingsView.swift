@@ -9,89 +9,47 @@
 import Combine
 import SwiftUI
 
-//struct ComicsViewerUseSystemFontKey: EnvironmentKey {
-//    static var defaultValue: Binding<Bool> = .constant(UserDefaults.standard.bool(forKey: "comicsViewerUseSystemFont"))
-//}
-//struct ComicsListUseSystemFontKey: EnvironmentKey {
-//    static var defaultValue: Binding<Bool> = .constant(UserDefaults.standard.bool(forKey: "comicsListUseSystemFont"))
-//}
-//struct ComicsExplanationUseSystemFontKey: EnvironmentKey {
-//    static var defaultValue: Binding<Bool> = .constant(UserDefaults.standard.bool(forKey: "comicsExplanationUseSystemFont"))
-//}
-//struct WhatIfViewerUseSystemFontKey: EnvironmentKey {
-//    static var defaultValue: Binding<Bool> = .constant(UserDefaults.standard.bool(forKey: "whatIfViewerUseSystemFont"))
-//}
-//struct WhatIfListUseSystemFontKey: EnvironmentKey {
-//    static var defaultValue: Binding<Bool> = .constant(UserDefaults.standard.bool(forKey: "whatIfListUseSystemFont"))
-//}
-//
-//extension EnvironmentValues {
-//    var comicsViewerUseSystemFont: Binding<Bool> {
-//        get { self[ComicsViewerUseSystemFontKey.self] }
-//        set {
-//            self[ComicsViewerUseSystemFontKey.self] = newValue
-//        }
-//    }
-//
-//    var comicsListUseSystemFont: Binding<Bool> {
-//        get { self[ComicsListUseSystemFontKey.self] }
-//        set {
-//            self[ComicsListUseSystemFontKey.self] = newValue
-//        }
-//    }
-//
-//    var comicsExplanationUseSystemFont: Binding<Bool> {
-//        get { self[ComicsExplanationUseSystemFontKey.self] }
-//        set {
-//            self[ComicsExplanationUseSystemFontKey.self] = newValue
-//        }
-//    }
-//
-//    var whatIfViewerUseSystemFont: Binding<Bool> {
-//        get { self[WhatIfViewerUseSystemFontKey.self] }
-//        set {
-//            self[WhatIfViewerUseSystemFontKey.self] = newValue
-//        }
-//    }
-//
-//    var whatIfListUseSystemFont: Binding<Bool> {
-//        get { self[WhatIfListUseSystemFontKey.self] }
-//        set {
-//            self[WhatIfListUseSystemFontKey.self] = newValue
-//        }
-//    }
-//}
-
 struct SettingsView: View {
     @EnvironmentObject var settings: Settings
     
     var body: some View {
-        List {
-            Section(header: Text("Comics")) {
-                Toggle("Use System Font in Viewer", isOn: $settings.comicsViewerUseSystemFont)
-                    .onChange(of: settings.comicsViewerUseSystemFont) { value in
-                        settings.comicsViewerUseSystemFont = value
-                    }
-                Toggle("Use System Font in List", isOn: $settings.comicsListUseSystemFont)
-                    .onChange(of: settings.comicsListUseSystemFont) { value in
-                        settings.comicsListUseSystemFont = value
-                    }
-                Toggle("Use System Font in Explanation", isOn: $settings.comicsExplanationUseSystemFont)
-                    .onChange(of: settings.comicsExplanationUseSystemFont) { value in
-                        settings.comicsExplanationUseSystemFont = value
-                    }
-            }
+        NavigationView {
+            List {
+                Section(header: Text("General"),
+                        footer: Text("Advance topics may include references to sensitive or health-related issues.")) {
+                    Toggle("Show Advance Topics", isOn: $settings.showSensitiveContent)
+                        .onChange(of: settings.showSensitiveContent) { value in
+                            settings.showSensitiveContent = value
+                        }
+                }
+                
+                Section(header: Text("Comics")) {
+                    Toggle("Use System Font in Viewer", isOn: $settings.comicsViewerUseSystemFont)
+                        .onChange(of: settings.comicsViewerUseSystemFont) { value in
+                            settings.comicsViewerUseSystemFont = value
+                        }
+                    Toggle("Use System Font in List", isOn: $settings.comicsListUseSystemFont)
+                        .onChange(of: settings.comicsListUseSystemFont) { value in
+                            settings.comicsListUseSystemFont = value
+                        }
+                    Toggle("Use System Font in Explanation", isOn: $settings.comicsExplanationUseSystemFont)
+                        .onChange(of: settings.comicsExplanationUseSystemFont) { value in
+                            settings.comicsExplanationUseSystemFont = value
+                        }
+                }
 
-            Section(header: Text("What If?")) {
-                Toggle("Use System Font in Viewer", isOn: $settings.whatIfViewerUseSystemFont)
-                    .onChange(of: settings.whatIfViewerUseSystemFont) { value in
-                        settings.whatIfViewerUseSystemFont = value
-                    }
-                Toggle("Use System Font in List", isOn: $settings.whatIfListUseSystemFont)
-                    .onChange(of: settings.whatIfListUseSystemFont) { value in
-                        settings.whatIfListUseSystemFont = value
-                    }
+                Section(header: Text("What If?")) {
+                    Toggle("Use System Font in Viewer", isOn: $settings.whatIfViewerUseSystemFont)
+                        .onChange(of: settings.whatIfViewerUseSystemFont) { value in
+                            settings.whatIfViewerUseSystemFont = value
+                        }
+                    Toggle("Use System Font in List", isOn: $settings.whatIfListUseSystemFont)
+                        .onChange(of: settings.whatIfListUseSystemFont) { value in
+                            settings.whatIfListUseSystemFont = value
+                        }
+                }
             }
+                .navigationBarTitle(Text("Settings"), displayMode: .large)
         }
     }
 }
@@ -105,6 +63,12 @@ struct SettingsView_Previews: PreviewProvider {
 // MARK: - Settings
 
 class Settings: ObservableObject {
+    @Published var showSensitiveContent: Bool {
+        didSet {
+            UserDefaults.standard.set(showSensitiveContent, forKey: "showSensitiveContent")
+            UserDefaults.standard.synchronize()
+        }
+    }
     
     @Published var comicsViewerUseSystemFont: Bool {
         didSet {
@@ -142,6 +106,7 @@ class Settings: ObservableObject {
     }
     
     init() {
+        showSensitiveContent           = UserDefaults.standard.bool(forKey: "showSensitiveContent")
         comicsViewerUseSystemFont      = UserDefaults.standard.bool(forKey: "comicsViewerUseSystemFont")
         comicsListUseSystemFont        = UserDefaults.standard.bool(forKey: "comicsListUseSystemFont")
         comicsExplanationUseSystemFont = UserDefaults.standard.bool(forKey: "comicsExplanationUseSystemFont")

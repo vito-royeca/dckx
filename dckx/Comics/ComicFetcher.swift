@@ -63,8 +63,15 @@ class ComicFetcher: ObservableObject {
         }.then { comic in
             self.fetchImage(comic: comic)
         }.done { comic in
-            self.currentComic = comic
-            self.toggleIsRead()
+            let sensitiveData = SensitiveData()
+            
+            if !sensitiveData.showSensitiveContent && sensitiveData.comicContainsSensitiveData(comic) {
+                let newNum = (num > self.currentComic?.num ?? 0) ? num + 1 : num - 1
+                self.load(num: newNum)
+            } else {
+                self.currentComic = comic
+                self.toggleIsRead()
+            }
         }.catch { error in
             print(error)
         }
@@ -229,8 +236,14 @@ extension ComicFetcher: NavigationToolbarDelegate {
         }.then { comic in
             self.fetchImage(comic: comic)
         }.done { comic in
-            self.currentComic = comic
-            self.toggleIsRead()
+            let sensitiveData = SensitiveData()
+            
+            if !sensitiveData.showSensitiveContent && sensitiveData.comicContainsSensitiveData(comic) {
+                self.loadRandom()
+            } else {
+                self.currentComic = comic
+                self.toggleIsRead()
+            }
         }.catch { error in
             print(error)
         }
@@ -249,10 +262,22 @@ extension ComicFetcher: NavigationToolbarDelegate {
         }.then { comic in
             self.fetchImage(comic: comic)
         }.done { comic in
-            self.currentComic = comic
-            self.lastComic = comic
-            self.toggleIsRead()
-            print("ComicFetcher loadLast")
+            let sensitiveData = SensitiveData()
+            
+            if !sensitiveData.showSensitiveContent && sensitiveData.comicContainsSensitiveData(comic) {
+                let newNum = comic.num - 1
+                self.load(num: newNum)
+            } else {
+                self.currentComic = comic
+                self.lastComic = comic
+                self.toggleIsRead()
+                print("ComicFetcher loadLast")
+            }
+            
+//            self.currentComic = comic
+//            self.lastComic = comic
+//            self.toggleIsRead()
+//            print("ComicFetcher loadLast")
         }.catch { error in
             print(error)
         }

@@ -173,6 +173,7 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
     // MARK: - Custom methods
 
     func createFetchRequest(query: String?, scopeIndex: Int) -> NSFetchRequest<Comic> {
+        let sensitiveData = SensitiveData()
         var predicate: NSPredicate?
         
         if let query = query {
@@ -205,6 +206,8 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
         default:
             ()
         }
+        
+        predicate = sensitiveData.createComicsPredicate(basePredicate: predicate)
         
         let fetchRequest: NSFetchRequest<Comic> = Comic.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]

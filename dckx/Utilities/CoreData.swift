@@ -103,9 +103,11 @@ class CoreData {
     func loadLastComic() -> Promise<Comic> {
         return Promise { seal in
             do {
+                let sensitiveData = SensitiveData()
                 let request: NSFetchRequest<NSFetchRequestResult> = Comic.fetchRequest()
                 request.fetchLimit = 1
                 request.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
+                request.predicate = sensitiveData.createComicsPredicate(basePredicate: nil)
                 
                 guard let array = try dataStack.execute(request, with: dataStack.mainContext) as? [NSManagedObject],
                     let comic = array.first as? Comic else {

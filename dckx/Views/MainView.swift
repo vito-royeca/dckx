@@ -21,10 +21,10 @@ struct MainView: View {
                 .tabItem({
                     Image(systemName: "questionmark.diamond")
                 })
-//            SettingsView()
-//                .tabItem({
-//                    Image(systemName: "gear")
-//                })
+            SettingsView()
+                .tabItem({
+                    Image(systemName: "gear")
+                })
         }
         .environmentObject(settings)
     }
