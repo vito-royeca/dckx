@@ -61,8 +61,15 @@ class WhatIfFetcher: ObservableObject {
         firstly {
             XkcdAPI.sharedInstance.fetchWhatIf(num: num)
         }.done { whatIf in
-            self.currentWhatIf = whatIf
-            self.toggleIsRead()
+            let sensitiveData = SensitiveData()
+            
+            if !sensitiveData.showSensitiveContent && sensitiveData.whatIfContainsSensitiveData(whatIf) {
+                let newNum = (num > self.currentWhatIf?.num ?? 0) ? num + 1 : num - 1
+                self.load(num: newNum)
+            } else {
+                self.currentWhatIf = whatIf
+                self.toggleIsRead()
+            }
         }.catch { error in
             print(error)
         }
@@ -154,8 +161,14 @@ extension WhatIfFetcher: NavigationToolbarDelegate {
         firstly {
             XkcdAPI.sharedInstance.fetchRandomWhatIf()
         }.done { whatIf in
-            self.currentWhatIf = whatIf
-            self.toggleIsRead()
+            let sensitiveData = SensitiveData()
+            
+            if !sensitiveData.showSensitiveContent && sensitiveData.whatIfContainsSensitiveData(whatIf) {
+                self.loadRandom()
+            } else {
+                self.currentWhatIf = whatIf
+                self.toggleIsRead()
+            }
         }.catch { error in
             print(error)
         }
@@ -172,10 +185,17 @@ extension WhatIfFetcher: NavigationToolbarDelegate {
         firstly {
             XkcdAPI.sharedInstance.fetchLastWhatIf()
         }.done { whatIf in
-            self.currentWhatIf = whatIf
-            self.lastWhatIf = whatIf
-            self.toggleIsRead()
-            print("WhatIfFetcher loadLast")
+            let sensitiveData = SensitiveData()
+            
+            if !sensitiveData.showSensitiveContent && sensitiveData.whatIfContainsSensitiveData(whatIf) {
+                let newNum = whatIf.num - 1
+                self.load(num: newNum)
+            } else {
+                self.currentWhatIf = whatIf
+                self.lastWhatIf = whatIf
+                self.toggleIsRead()
+                print("WhatIfFetcher loadLast")
+            }
         }.catch { error in
             print(error)
         }

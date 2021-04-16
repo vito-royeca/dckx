@@ -168,9 +168,11 @@ class CoreData {
     func loadLastWhatIf() -> Promise<WhatIf> {
         return Promise { seal in
             do {
+                let sensitiveData = SensitiveData()
                 let request: NSFetchRequest<NSFetchRequestResult> = WhatIf.fetchRequest()
                 request.fetchLimit = 1
                 request.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
+                request.predicate = sensitiveData.createWhatIfPredicate(basePredicate: nil)
                 
                 guard let array = try dataStack.execute(request, with: dataStack.mainContext) as? [NSManagedObject],
                     let whatIf = array.first as? WhatIf else {

@@ -273,11 +273,6 @@ extension ComicFetcher: NavigationToolbarDelegate {
                 self.toggleIsRead()
                 print("ComicFetcher loadLast")
             }
-            
-//            self.currentComic = comic
-//            self.lastComic = comic
-//            self.toggleIsRead()
-//            print("ComicFetcher loadLast")
         }.catch { error in
             print(error)
         }
