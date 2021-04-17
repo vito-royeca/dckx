@@ -137,12 +137,13 @@ class ComicFetcher: ObservableObject {
         comicsJson = comicsJson.replacingOccurrences(of: ")", with: "]")
         comicsJson = comicsJson.replacingOccurrences(of: "\n", with: "")
 
+        let css = UserDefaults.standard.bool(forKey: "comicsViewerUseSystemFont") ? "system.css" : "dckx.css"
         var head = "<head><title>\(title)</title>"
         head += "<meta charset='utf-8'>"
         head += "<meta name='viewport' content='width=device-width, initial-scale=1'>"
         head += "<script type='text/javascript' src='jquery-3.2.1.min.js'></script>"
         head += "<script type='text/javascript' src='reader.js'></script>"
-        head += "<link rel='stylesheet' media='all' href='reader.css' />"
+        head += "<link rel='stylesheet' media='all' href='\(css)' />"
         head += "<style type='text/css'> "
         head += " .sidebyside { display: flex; justify-content: space-around; }"
         head += " .sidebyside > div { width: 45%; }"

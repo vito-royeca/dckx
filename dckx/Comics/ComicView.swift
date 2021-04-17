@@ -20,7 +20,7 @@ struct ComicView: View {
             WebView(link: nil,
                     html: fetcher.composeHTML(),
                     baseURL: nil)
-                .navigationBarTitle(Text(fetcher.currentComic?.title ?? ""), displayMode: .automatic)
+                .navigationBarTitle(Text((fetcher.currentComic?.title ?? "").uppercased()), displayMode: .automatic)
                 .navigationBarItems(
                     leading: listButton,
                     trailing: ComicToolBarView())

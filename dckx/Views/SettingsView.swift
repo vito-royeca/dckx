@@ -17,7 +17,7 @@ struct SettingsView: View {
             List {
                 Section(header: Text("General")
                                     .font(.custom("xkcd-Script-Regular", size: 15)),
-                        footer: Text("Advance content may include references to sensitive or health-related issues.")
+                        footer: Text("Advance content may include references to sensitive or health-related topics.")
                                     .font(.custom("xkcd-Script-Regular", size: 12))
                                     .foregroundColor(Color.gray)) {
                     Toggle("Show Advance Content", isOn: $settings.showSensitiveContent)
@@ -52,9 +52,9 @@ struct SettingsView: View {
                 
                 Section(header: Text("About")
                                     .font(.custom("xkcd-Script-Regular", size: 15))) {
-                    Text("xkcd is created by Randall Munroe")
+                    Text("xkcd is created by Randall Munroe.")
                         .font(.custom("xkcd-Script-Regular", size: 15))
-                    Text("dckx is an xkcd reader created by Vito Royeca")
+                    Text("dckx is an xkcd reader created by Vito Royeca.")
                         .font(.custom("xkcd-Script-Regular", size: 15))
                 }
             }

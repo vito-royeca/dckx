@@ -335,11 +335,11 @@ class Reader {
 		this.showInfo = !this.showInfo;
 
 		if (this.showInfo == true) {
-			var leftText = $('<i class="leftText"><div>'+this.num+'</div></i>');
+			var leftText = $('<div class="leftText">'+this.num+'</div>');
 			this.gui.append(leftText);
-			var rightText = $('<i class="rightText"><div>'+this.date+'</div></i>');
+			var rightText = $('<div class="rightText">'+this.date+'</div>');
 			this.gui.append(rightText);
-			var altText = $('<i class="altText"><div>'+this.altText+'</div></i>');
+			var altText = $('<div class="altText">'+this.altText+'</div>');
 			this.gui.append(altText);
 		} else {
 			const array1 = ['leftText', 'rightText', 'altText'];

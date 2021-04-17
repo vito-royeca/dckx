@@ -28,6 +28,21 @@ struct WebView: UIViewRepresentable {
         init(_ control: WebView) {
             self.control = control
         }
+        
+        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            if navigationAction.navigationType == .linkActivated  {
+                if let url = navigationAction.request.url,
+//                    let host = url.host, !host.hasPrefix("www.google.com"),
+                    UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url)
+                    decisionHandler(.cancel)
+                } else {
+                    decisionHandler(.allow)
+                }
+            } else {
+                decisionHandler(.allow)
+            }
+        }
     }
     
     func makeUIView(context: UIViewRepresentableContext<WebView>) -> WKWebView {
