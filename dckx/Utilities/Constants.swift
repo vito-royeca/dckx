@@ -9,6 +9,28 @@
 import SwiftUI
 import CoreData
 
+extension UIFont {
+    static let dckxLargeTitleText = UIFont(name: "xkcd-Script-Regular",
+                                           size: 28)!
+    static let dckxTitleText      = UIFont(name: "xkcd-Script-Regular",
+                                           size: 22)!
+    static let dckxRegularText    = UIFont(name: "xkcd-Script-Regular",
+                                           size: 17)!
+    static let dckxSmallText    = UIFont(name: "xkcd-Script-Regular",
+                                           size: 15)!
+}
+
+extension Font {
+    static let dckxLargeTitleText = Font.custom("xkcd-Script-Regular",
+                                                size: 28)
+    static let dckxTitleText      = Font.custom("xkcd-Script-Regular",
+                                                size: 22)
+    static let dckxRegularText    = Font.custom("xkcd-Script-Regular",
+                                                size: 17)
+    static let dckxSmallText      = Font.custom("xkcd-Script-Regular",
+                                                size: 15)
+}
+
 extension Color {
     static let buttonColor     = Color("ButtonColor")
     static let backgroundColor = Color("BackgroundColor")
@@ -45,7 +67,7 @@ struct SensitiveData {
                           "vaccine",
                           "virus",
                           "viral"]
-    let showSensitiveContent = UserDefaults.standard.bool(forKey: "showSensitiveContent")
+    let showSensitiveContent = UserDefaults.standard.bool(forKey: SettingsKey.showSensitiveContent)
     
     func createComicsPredicate(basePredicate: NSPredicate?) -> NSPredicate? {
         if !showSensitiveContent {

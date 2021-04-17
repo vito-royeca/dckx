@@ -67,7 +67,7 @@ struct WebView: UIViewRepresentable {
                 let title = (data?.title ?? "")
                 let text = (data?.text ?? "").replacingOccurrences(of: "\n", with: "<p class='answer'>").replacingOccurrences(of: "|<>|", with: "")
                 
-                let css = UserDefaults.standard.bool(forKey: "comicsExplanationUseSystemFont") ? "system.css" : "dckx.css"
+                let css = UserDefaults.standard.bool(forKey: SettingsKey.comicsExplanationUseSystemFont) ? "system.css" : "dckx.css"
                 let head = "<head><link href='\(css)' rel='stylesheet'></head>"
                 
                 var html = "<html>\(head)<body>"

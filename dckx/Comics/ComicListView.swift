@@ -30,7 +30,7 @@ struct  ComicListView: View {
             ZStack(alignment: .center) {
                 if viewModel.comics.isEmpty {
                     Text("No results found.")
-                        .font(.custom("xkcd-Script-Regular", size: 15))
+                        .font(Font.dckxRegularText)
                 } else {
                     ComicTextListView(viewModel: $viewModel,
                                       action: selectComic(num:))
@@ -81,8 +81,8 @@ extension ComicListView: SearchNavigationDelegate {
             .placeholder: "Search",
             .showsBookmarkButton: false,
             .scopeButtonTitles: ["All", "Bookmarked", "Seen"],
-            .scopeBarButtonTitleTextAttributes: [NSAttributedString.Key.font: UIFont(name: "xkcd-Script-Regular", size: 15)!],
-            .searchTextFieldFont: UIFont(name: "xkcd-Script-Regular", size: 15)!
+            .scopeBarButtonTitleTextAttributes: [NSAttributedString.Key.font: UIFont.dckxRegularText],
+            .searchTextFieldFont: UIFont.dckxRegularText
          ]
     }
     
@@ -120,7 +120,7 @@ struct ComicTextListView: View {
                             title: comic.title ?? "",
                             isFavorite: comic.isFavorite,
                             isSeen: comic.isRead,
-                            font: .custom("xkcd-Script-Regular", size: 15),
+                            font: Font.dckxRegularText,
                             action: self.action)
                     .onTapGesture {
                         self.action(comic.num)

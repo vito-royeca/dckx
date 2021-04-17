@@ -20,14 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("docsPath = \(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])")
         
         // UI custumization
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.font : UIFont(name: "xkcd-Script-Regular",
-                                                                                                                          size: 15)!],
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.font : UIFont.dckxRegularText],
                                                                                                           for: .normal)
         
-        UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "xkcd-Script-Regular",
-                                                                                size: 25)!,]
-        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "xkcd-Script-Regular",
-                                                                           size: 20)!,]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont.dckxLargeTitleText]
+        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont.dckxTitleText]
         
         // Firebase
         FirebaseApp.configure()
@@ -36,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Database.sharedInstance.createDatabase()
         Database.sharedInstance.copyDatabase()
         
+//        fatalError("Test error only.")
         return true
     }
 

@@ -115,7 +115,7 @@ class WhatIfFetcher: ObservableObject {
             let answer = whatIf.answer else {
             return ""
         }
-        let css = UserDefaults.standard.bool(forKey: "whatIfViewerUseSystemFont") ? "system.css" : "dckx.css"
+        let css = UserDefaults.standard.bool(forKey: SettingsKey.whatIfViewerUseSystemFont) ? "system.css" : "dckx.css"
         var head = "<head><title>\(title)</title>"
         head += "<script type='text/javascript' src='jquery-3.2.1.min.js'></script>"
         head += "<link href='\(css)' rel='stylesheet'>"

@@ -75,7 +75,7 @@ struct ComicToolBarView: View {
             }
             Spacer()
             
-            if UserDefaults.standard.bool(forKey: "comicsExplanationUseSafariBrowser") {
+            if UserDefaults.standard.bool(forKey: SettingsKey.comicsExplanationUseSafariBrowser) {
                 Button(action: {
                     self.showingBrowser.toggle()
                 }) {

@@ -74,7 +74,7 @@ struct ListRowView_Previews: PreviewProvider {
                     title: "Test",
                     isFavorite: false,
                     isSeen: false,
-                    font: .custom("xkcd-Script-Regular", size: 15),
+                    font: Font.dckxRegularText,
                     action: {_ in })
     }
 }

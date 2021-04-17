@@ -31,7 +31,7 @@ struct WhatIfListView: View {
             ZStack(alignment: .center) {
                 if viewModel.whatIfs.isEmpty {
                     Text("No results found.")
-                        .font(.custom("xkcd-Script-Regular", size: 15))
+                        .font(Font.dckxRegularText)
                 } else {
                     WhatIfTextListView(viewModel: $viewModel,
                                        action: selectWhatIf(num:))
@@ -96,8 +96,8 @@ extension WhatIfListView: SearchNavigationDelegate {
             .placeholder: "Search",
             .showsBookmarkButton: false,
             .scopeButtonTitles: ["All", "Bookmarked", "Seen"],
-            .scopeBarButtonTitleTextAttributes: [NSAttributedString.Key.font: UIFont(name: "xkcd-Script-Regular", size: 15)!],
-            .searchTextFieldFont: UIFont(name: "xkcd-Script-Regular", size: 15)!
+            .scopeBarButtonTitleTextAttributes: [NSAttributedString.Key.font: UIFont.dckxRegularText],
+            .searchTextFieldFont: UIFont.dckxRegularText
          ]
     }
     
@@ -135,7 +135,7 @@ struct WhatIfTextListView: View {
                             title: whatIf.title ?? "",
                             isFavorite: whatIf.isFavorite,
                             isSeen: whatIf.isRead,
-                            font: .custom("xkcd-Script-Regular", size: 15),
+                            font: Font.dckxRegularText,
                             action: self.action)
                     .onTapGesture {
                         self.action(whatIf.num)

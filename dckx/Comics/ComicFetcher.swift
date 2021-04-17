@@ -137,7 +137,7 @@ class ComicFetcher: ObservableObject {
         comicsJson = comicsJson.replacingOccurrences(of: ")", with: "]")
         comicsJson = comicsJson.replacingOccurrences(of: "\n", with: "")
 
-        let css = UserDefaults.standard.bool(forKey: "comicsViewerUseSystemFont") ? "system.css" : "dckx.css"
+        let css = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ? "system.css" : "dckx.css"
         var head = "<head><title>\(title)</title>"
         head += "<meta charset='utf-8'>"
         head += "<meta name='viewport' content='width=device-width, initial-scale=1'>"
