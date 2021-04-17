@@ -23,7 +23,7 @@ struct BrowserView: View {
                     baseURL: baseURL)
             .navigationBarTitle(Text(title), displayMode: .automatic)
             .navigationBarItems(
-                trailing: closeButton
+                leading: closeButton
             )
         }
     }
@@ -32,7 +32,7 @@ struct BrowserView: View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            Image(systemName: "xmark")
+            Image(systemName: "xmark.circle.fill")
                 .imageScale(.large)
         }
     }
