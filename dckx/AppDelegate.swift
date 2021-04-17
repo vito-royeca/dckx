@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,9 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         print("docsPath = \(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])")
-//        Database.sharedInstance.createDatabase()
-        Database.sharedInstance.copyDatabase()
         
+        // UI custumization
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.font : UIFont(name: "xkcd-Script-Regular",
                                                                                                                           size: 15)!],
                                                                                                           for: .normal)
@@ -28,6 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                                 size: 25)!,]
         UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "xkcd-Script-Regular",
                                                                            size: 20)!,]
+        
+        // Firebase
+        FirebaseApp.configure()
+        
+        // Database setup
+//        Database.sharedInstance.createDatabase()
+        Database.sharedInstance.copyDatabase()
         
         return true
     }

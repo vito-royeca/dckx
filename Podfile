@@ -3,6 +3,11 @@ use_frameworks!
 
 def shared_pods
     use_frameworks!
+    pod 'Firebase/Analytics'
+    pod 'Firebase/Crashlytics'
+    # Recommended: Add the Firebase pod for Google Analytics
+    pod 'Firebase/Analytics'
+
     pod 'FontAwesome.swift'
     pod 'Kanna'
     #pod 'LegoCV'

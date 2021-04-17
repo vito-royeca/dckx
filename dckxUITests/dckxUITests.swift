@@ -48,12 +48,13 @@ class dckxUITests: XCTestCase {
         app.launch()
 
         // comics
+        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 2).tap()
         snapshot("0Comics")
 
-        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 1).tap()
+        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 2).tap()
         snapshot("1Comics")
-
-        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 1).tap()
+        
+        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 2).tap()
         snapshot("2Comics")
 
         // comics list
@@ -63,9 +64,11 @@ class dckxUITests: XCTestCase {
 
         // what if 1
         app.tabBars["Tab Bar"].buttons["questionmark.diamond"].tap()
+        
+        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 2).tap()
         snapshot("3What If")
-
-        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 1).tap()
+        
+        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 2).tap()
         snapshot("4What If")
     }
 }
