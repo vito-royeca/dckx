@@ -15,6 +15,7 @@ import SDWebImage
 class ComicFetcher: ObservableObject {
     @Published var currentComic: Comic?
     @Published var lastComic: Comic?
+    @Published var isBusy = false
     
     // MARK: - Initializer
     
@@ -58,6 +59,8 @@ class ComicFetcher: ObservableObject {
     // MARK: - Helper methods
     
     func load(num: Int32) {
+        isBusy = true
+        
         firstly {
             XkcdAPI.sharedInstance.fetchComic(num: num)
         }.then { comic in
@@ -71,8 +74,10 @@ class ComicFetcher: ObservableObject {
             } else {
                 self.currentComic = comic
                 self.toggleIsRead()
+                self.isBusy = false
             }
         }.catch { error in
+            self.isBusy = false
             print(error)
         }
     }
@@ -174,32 +179,6 @@ class ComicFetcher: ObservableObject {
         
         return html
     }
-    
-    func composeHTML2(showingAltText: Bool) -> String {
-        guard let comic = currentComic,
-            let img = comic.img,
-            let title = comic.title,
-            let image = SDImageCache.shared.imageFromCache(forKey: img),
-            let data = image.pngData() else {
-            return ""
-        }
-        let head = "<head><link href=\"xkcd.css\" rel=\"stylesheet\"></head>"
-        let style = image.size.width > image.size.height ? "width:100%; height:auto;" :
-            "width:auto; height:100%;"
-        
-        var html = "<html>\(head)<body>"
-        html += "<table id='wrapper' width='100%'>"
-        html += "<tr><td width='50%'><p class='subtitle' align='left'>#\(comic.num)</p></td><td width='50%'><p class='subtitle' align='right'>\(dateToString(date: comic.date))</p></td></tr>"
-        if showingAltText {
-            html += "<tr><td colspan='2'><p class='altText'>\(comic.alt ?? "&nbsp;")</p></td></tr>"
-        }
-        html += "<tr><td colspan='2'><img src='data:image/png;base64, \(data.base64EncodedString())' alt='\(title)' style='\(style)'/></td></tr>"
-        html += "<tr><td>&nbsp;</td></tr>"
-        html += "</table>"
-        html += "</body></html>"
-        
-        return html
-    }
 }
 
 // MARK: - NavigationBarViewDelegate
@@ -232,6 +211,8 @@ extension ComicFetcher: NavigationToolbarDelegate {
     }
     
     func loadRandom() {
+        isBusy = true
+        
         firstly {
             XkcdAPI.sharedInstance.fetchRandomComic()
         }.then { comic in
@@ -244,6 +225,7 @@ extension ComicFetcher: NavigationToolbarDelegate {
             } else {
                 self.currentComic = comic
                 self.toggleIsRead()
+                self.isBusy = false
             }
         }.catch { error in
             print(error)
@@ -258,6 +240,8 @@ extension ComicFetcher: NavigationToolbarDelegate {
     }
     
     func loadLast() {
+        isBusy = true
+        
         firstly {
             XkcdAPI.sharedInstance.fetchLastComic()
         }.then { comic in
@@ -272,10 +256,11 @@ extension ComicFetcher: NavigationToolbarDelegate {
                 self.currentComic = comic
                 self.lastComic = comic
                 self.toggleIsRead()
-                print("ComicFetcher loadLast")
+                self.isBusy = false
             }
         }.catch { error in
             print(error)
+            self.isBusy = false
         }
     }
 }

@@ -17,10 +17,13 @@ struct ComicView: View {
     
     var body: some View {
         NavigationView {
-            WebView(link: nil,
-                    html: fetcher.composeHTML(),
-                    baseURL: nil)
-                .navigationBarTitle(Text((fetcher.currentComic?.title ?? "").uppercased()), displayMode: .automatic)
+            ZStack(alignment: .center) {
+                WebView(link: nil,
+                        html: fetcher.composeHTML(),
+                        baseURL: nil)
+                ActivityIndicatorView(shouldAnimate: $fetcher.isBusy)
+            }
+                .navigationBarTitle(Text((fetcher.currentComic?.title ?? "").uppercased()), displayMode: .large)
                 .navigationBarItems(
                     leading: listButton,
                     trailing: ComicToolBarView())
@@ -31,7 +34,8 @@ struct ComicView: View {
                                       loadNext: fetcher.loadNext,
                                       loadLast: fetcher.loadLast,
                                       canDoPrevious: fetcher.canDoPrevious,
-                                      canDoNext: fetcher.canDoNext)
+                                      canDoNext: fetcher.canDoNext,
+                                      isBusy: fetcher.isBusy)
                 }
         }
             .environmentObject(fetcher)
@@ -44,6 +48,7 @@ struct ComicView: View {
             Image(systemName: "list.dash")
                 .imageScale(.large)
         }
+            .disabled(fetcher.isBusy)
             .fullScreenCover(isPresented: $showingList, content: {
                 ComicListView()
             })
@@ -73,6 +78,7 @@ struct ComicToolBarView: View {
                 Image(systemName: fetcher.currentComic?.isFavorite ?? false ? "bookmark.fill" : "bookmark")
                     .imageScale(.large)
             }
+                .disabled(fetcher.isBusy)
             Spacer()
             
             if UserDefaults.standard.bool(forKey: SettingsKey.comicsExplanationUseSafariBrowser) {
@@ -82,6 +88,7 @@ struct ComicToolBarView: View {
                     Image(systemName: "questionmark.circle")
                         .imageScale(.large)
                 }
+                    .disabled(fetcher.isBusy)
                     .safariView(isPresented: $showingBrowser) {
                         SafariView(
                             url: URL(string: XkcdAPI.sharedInstance.explainURL(of: self.fetcher.currentComic!))!,
@@ -101,6 +108,7 @@ struct ComicToolBarView: View {
                     Image(systemName: "questionmark.circle")
                         .imageScale(.large)
                 }
+                    .disabled(fetcher.isBusy)
                     .sheet(isPresented: $showingBrowser, content: {
                         self.fetcher.currentComic.map({
                             BrowserView(title: "Explanation",
@@ -117,6 +125,7 @@ struct ComicToolBarView: View {
                 Image(systemName: "square.and.arrow.up")
                     .imageScale(.large)
             }
+                .disabled(fetcher.isBusy)
                 .sheet(isPresented: $showingShare) {
                     ShareSheetView(activityItems: self.activityItems(),
                                    applicationActivities: [])

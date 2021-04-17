@@ -146,7 +146,7 @@ struct WhatIfTextListView: View {
                         }
                     })
             }
-            .resignKeyboardOnDragGesture()
+                .resignKeyboardOnDragGesture()
         }
     }
 }

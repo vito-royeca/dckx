@@ -16,10 +16,13 @@ struct WhatIfView: View {
     
     var body: some View {
         NavigationView {
-            WebView(link: nil,
-                    html: fetcher.composeHTML(),
-                    baseURL: nil)
-                .navigationBarTitle(Text(fetcher.currentWhatIf?.title ?? ""), displayMode: .automatic)
+            ZStack(alignment: .center) {
+                WebView(link: nil,
+                        html: fetcher.composeHTML(),
+                        baseURL: nil)
+                ActivityIndicatorView(shouldAnimate: $fetcher.isBusy)
+            }
+                .navigationBarTitle(Text(fetcher.currentWhatIf?.title ?? ""), displayMode: .large)
                 .navigationBarItems(
                     leading: listButton,
                     trailing: WhatIfToolBarView(fetcher: fetcher))
@@ -30,7 +33,8 @@ struct WhatIfView: View {
                                       loadNext: fetcher.loadNext,
                                       loadLast: fetcher.loadLast,
                                       canDoPrevious: fetcher.canDoPrevious,
-                                      canDoNext: fetcher.canDoNext)
+                                      canDoNext: fetcher.canDoNext,
+                                      isBusy: fetcher.isBusy)
                 }
         }
             .environmentObject(fetcher)
@@ -43,6 +47,7 @@ struct WhatIfView: View {
             Image(systemName: "list.dash")
                 .imageScale(.large)
         }
+            .disabled(fetcher.isBusy)
             .fullScreenCover(isPresented: $showingList, content: {
                 WhatIfListView()
             })
@@ -71,6 +76,7 @@ struct WhatIfToolBarView: View {
                 Image(systemName: fetcher.currentWhatIf?.isFavorite ?? false ? "bookmark.fill" : "bookmark")
                     .imageScale(.large)
             }
+                .disabled(fetcher.isBusy)
             Spacer()
             
             Button(action: {
@@ -79,6 +85,7 @@ struct WhatIfToolBarView: View {
                 Image(systemName: "square.and.arrow.up")
                     .imageScale(.large)
             }
+                .disabled(fetcher.isBusy)
                 .sheet(isPresented: $showingShare) {
                     ShareSheetView(activityItems: self.activityItems(),
                                    applicationActivities: nil)

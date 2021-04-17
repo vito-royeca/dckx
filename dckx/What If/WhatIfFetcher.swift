@@ -15,6 +15,7 @@ import SDWebImage
 class WhatIfFetcher: ObservableObject {
     @Published var currentWhatIf: WhatIf?
     @Published var lastWhatIf: WhatIf?
+    @Published var isBusy = false
     
     // MARK: - Initializer
     
@@ -58,6 +59,8 @@ class WhatIfFetcher: ObservableObject {
     // MARK: - Helper methods
     
     func load(num: Int32) {
+        isBusy = true
+        
         firstly {
             XkcdAPI.sharedInstance.fetchWhatIf(num: num)
         }.done { whatIf in
@@ -69,8 +72,10 @@ class WhatIfFetcher: ObservableObject {
             } else {
                 self.currentWhatIf = whatIf
                 self.toggleIsRead()
+                self.isBusy = false
             }
         }.catch { error in
+            self.isBusy = false
             print(error)
         }
     }
@@ -179,6 +184,8 @@ extension WhatIfFetcher: NavigationToolbarDelegate {
     }
     
     func loadRandom() {
+        isBusy = true
+        
         firstly {
             XkcdAPI.sharedInstance.fetchRandomWhatIf()
         }.done { whatIf in
@@ -189,8 +196,10 @@ extension WhatIfFetcher: NavigationToolbarDelegate {
             } else {
                 self.currentWhatIf = whatIf
                 self.toggleIsRead()
+                self.isBusy = false
             }
         }.catch { error in
+            self.isBusy = false
             print(error)
         }
     }
@@ -203,6 +212,8 @@ extension WhatIfFetcher: NavigationToolbarDelegate {
     }
     
     func loadLast() {
+        isBusy = true
+        
         firstly {
             XkcdAPI.sharedInstance.fetchLastWhatIf()
         }.done { whatIf in
@@ -215,9 +226,10 @@ extension WhatIfFetcher: NavigationToolbarDelegate {
                 self.currentWhatIf = whatIf
                 self.lastWhatIf = whatIf
                 self.toggleIsRead()
-                print("WhatIfFetcher loadLast")
+                self.isBusy = false
             }
         }.catch { error in
+            self.isBusy = false
             print(error)
         }
     }

@@ -41,6 +41,7 @@ struct NavigationToolbar: ToolbarContent  {
     var loadLast: () -> Void
     @State var canDoPrevious: Bool
     @State var canDoNext: Bool
+    @State var isBusy: Bool
     
     var body: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
@@ -50,7 +51,7 @@ struct NavigationToolbar: ToolbarContent  {
                 Image(systemName: "backward.end")
                     .imageScale(.large)
             }
-            .disabled(!self.canDoPrevious)
+                .disabled(!self.canDoPrevious || isBusy)
         }
         ToolbarItem(placement: .bottomBar) {
             Spacer()
@@ -63,7 +64,7 @@ struct NavigationToolbar: ToolbarContent  {
                 Image(systemName: "arrowtriangle.backward")
                     .imageScale(.large)
             }
-            .disabled(!self.canDoPrevious)
+                .disabled(!self.canDoPrevious || isBusy)
         }
         ToolbarItem(placement: .bottomBar) {
             Spacer()
@@ -76,6 +77,7 @@ struct NavigationToolbar: ToolbarContent  {
                 Image(systemName: "shuffle")
                     .imageScale(.large)
             }
+            .disabled(isBusy)
         }
         ToolbarItem(placement: .bottomBar) {
             Spacer()
@@ -88,7 +90,7 @@ struct NavigationToolbar: ToolbarContent  {
                 Image(systemName: "arrowtriangle.forward")
                     .imageScale(.large)
             }
-            .disabled(!self.canDoNext)
+                .disabled(!self.canDoNext || isBusy)
         }
         ToolbarItem(placement: .bottomBar) {
             Spacer()
@@ -101,7 +103,7 @@ struct NavigationToolbar: ToolbarContent  {
                 Image(systemName: "forward.end")
                     .imageScale(.large)
             }
-            .disabled(!self.canDoNext)
+                .disabled(!self.canDoNext || isBusy)
         }
     }
 }

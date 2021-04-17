@@ -80,6 +80,7 @@ Dependencies/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
+fastlane/screenshots/**/*.mp4
 fastlane/test_output
 
 # Code Injection

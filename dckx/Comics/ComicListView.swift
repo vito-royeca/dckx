@@ -131,7 +131,7 @@ struct ComicTextListView: View {
                         }
                     })
             }
-            .resignKeyboardOnDragGesture()
+                .resignKeyboardOnDragGesture()
         }
     }
 }
