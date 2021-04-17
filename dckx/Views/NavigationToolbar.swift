@@ -49,7 +49,6 @@ struct NavigationToolbar: ToolbarContent  {
             }) {
                 Image(systemName: "backward.end")
                     .imageScale(.large)
-//                    .foregroundColor(.dckxBlue)
             }
             .disabled(!self.canDoPrevious)
         }
@@ -63,7 +62,6 @@ struct NavigationToolbar: ToolbarContent  {
             }) {
                 Image(systemName: "arrowtriangle.backward")
                     .imageScale(.large)
-//                    .foregroundColor(.dckxBlue)
             }
             .disabled(!self.canDoPrevious)
         }
@@ -77,7 +75,6 @@ struct NavigationToolbar: ToolbarContent  {
             }) {
                 Image(systemName: "shuffle")
                     .imageScale(.large)
-//                    .foregroundColor(.dckxBlue)
             }
         }
         ToolbarItem(placement: .bottomBar) {
@@ -90,7 +87,6 @@ struct NavigationToolbar: ToolbarContent  {
             }) {
                 Image(systemName: "arrowtriangle.forward")
                     .imageScale(.large)
-//                    .foregroundColor(.dckxBlue)
             }
             .disabled(!self.canDoNext)
         }
@@ -104,7 +100,6 @@ struct NavigationToolbar: ToolbarContent  {
             }) {
                 Image(systemName: "forward.end")
                     .imageScale(.large)
-//                    .foregroundColor(.dckxBlue)
             }
             .disabled(!self.canDoNext)
         }

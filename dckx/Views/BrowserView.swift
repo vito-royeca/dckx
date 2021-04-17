@@ -34,7 +34,6 @@ struct BrowserView: View {
         }) {
             Image(systemName: "xmark")
                 .imageScale(.large)
-//                            .foregroundColor(.dckxBlue)
         }
     }
 }

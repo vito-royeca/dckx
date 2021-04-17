@@ -42,7 +42,6 @@ struct WhatIfView: View {
         }) {
             Image(systemName: "list.dash")
                 .imageScale(.large)
-//                .foregroundColor(.dckxBlue)
         }
             .fullScreenCover(isPresented: $showingList, content: {
                 WhatIfListView()
@@ -71,7 +70,6 @@ struct WhatIfToolBarView: View {
             }) {
                 Image(systemName: fetcher.currentWhatIf?.isFavorite ?? false ? "bookmark.fill" : "bookmark")
                     .imageScale(.large)
-//                    .foregroundColor(.dckxBlue)
             }
             Spacer()
             
@@ -80,7 +78,6 @@ struct WhatIfToolBarView: View {
             }) {
                 Image(systemName: "square.and.arrow.up")
                     .imageScale(.large)
-//                    .foregroundColor(.dckxBlue)
             }
                 .sheet(isPresented: $showingShare) {
                     ShareSheetView(activityItems: self.activityItems(),

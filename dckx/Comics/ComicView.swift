@@ -43,7 +43,6 @@ struct ComicView: View {
         }) {
             Image(systemName: "list.dash")
                 .imageScale(.large)
-//                .foregroundColor(.dckxBlue)
         }
             .fullScreenCover(isPresented: $showingList, content: {
                 ComicListView()
@@ -73,37 +72,43 @@ struct ComicToolBarView: View {
             }) {
                 Image(systemName: fetcher.currentComic?.isFavorite ?? false ? "bookmark.fill" : "bookmark")
                     .imageScale(.large)
-//                    .foregroundColor(.dckxBlue)
             }
             Spacer()
             
-            Button(action: {
-                self.showingBrowser.toggle()
-            }) {
-                Image(systemName: "questionmark.circle")
-                    .imageScale(.large)
-//                    .foregroundColor(.dckxBlue)
-            }
-            
-//            .safariView(isPresented: $showingBrowser) {
-//                SafariView(
-//                    url: URL(string: XkcdAPI.sharedInstance.explainURL(of: self.fetcher.currentComic!))!,
-//                    configuration: SafariView.Configuration(
-//                        entersReaderIfAvailable: true,
-//                        barCollapsingEnabled: true
-//                    )
-//                )
-//                .preferredBarAccentColor(.clear)
-//                .preferredControlAccentColor(.dckxBlue)
-//                .dismissButtonStyle(.close)
-//            }
-                .sheet(isPresented: $showingBrowser, content: {
-                    self.fetcher.currentComic.map({
-                        BrowserView(title: "Explanation",
-                                    link: XkcdAPI.sharedInstance.explainURL(of: $0),
-                                    baseURL: nil/*URL(string: "https://xkcd.com/")*/)
+            if UserDefaults.standard.bool(forKey: "comicsExplanationUseSafariBrowser") {
+                Button(action: {
+                    self.showingBrowser.toggle()
+                }) {
+                    Image(systemName: "questionmark.circle")
+                        .imageScale(.large)
+                }
+                    .safariView(isPresented: $showingBrowser) {
+                        SafariView(
+                            url: URL(string: XkcdAPI.sharedInstance.explainURL(of: self.fetcher.currentComic!))!,
+                            configuration: SafariView.Configuration(
+                                entersReaderIfAvailable: true,
+                                barCollapsingEnabled: true
+                            )
+                        )
+                        .preferredBarAccentColor(.clear)
+                        .preferredControlAccentColor(.dckxBlue)
+                        .dismissButtonStyle(.close)
+                    }
+            } else {
+                Button(action: {
+                    self.showingBrowser.toggle()
+                }) {
+                    Image(systemName: "questionmark.circle")
+                        .imageScale(.large)
+                }
+                    .sheet(isPresented: $showingBrowser, content: {
+                        self.fetcher.currentComic.map({
+                            BrowserView(title: "Explanation",
+                                        link: XkcdAPI.sharedInstance.explainURL(of: $0),
+                                        baseURL: nil/*URL(string: "https://xkcd.com/")*/)
+                        })
                     })
-                })
+            }
             Spacer()
             
             Button(action: {
@@ -111,7 +116,6 @@ struct ComicToolBarView: View {
             }) {
                 Image(systemName: "square.and.arrow.up")
                     .imageScale(.large)
-//                    .foregroundColor(.dckxBlue)
             }
                 .sheet(isPresented: $showingShare) {
                     ShareSheetView(activityItems: self.activityItems(),

@@ -83,7 +83,7 @@ img {
     background-color: var(--background);
 }
 
-/ * What If */
+/* What If */
 .numdate {
     font-family: xkcd-script;
     font-size: 60px;
@@ -99,7 +99,7 @@ img {
     background-color: var(--background);
     
 }
-.questioner, answer {
+.questioner, .answer {
     font-family: xkcd-script;
     font-size: 40px;
     color: var(--color);

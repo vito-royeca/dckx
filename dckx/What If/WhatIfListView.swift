@@ -40,7 +40,7 @@ struct WhatIfListView: View {
             }
                 .navigationBarTitle(Text("What If?"), displayMode: .automatic)
                 .navigationBarItems(
-                    trailing: closeButton
+                    leading: closeButton
                 )
             
         }

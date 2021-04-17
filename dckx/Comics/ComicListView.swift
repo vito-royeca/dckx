@@ -39,7 +39,7 @@ struct  ComicListView: View {
             }
                 .navigationBarTitle(Text("Comics"), displayMode: .automatic)
                 .navigationBarItems(
-                    trailing: closeButton
+                    leading: closeButton
                 )
         }
             .edgesIgnoringSafeArea(.top)

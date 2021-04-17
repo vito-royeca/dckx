@@ -39,6 +39,11 @@ struct SettingsView: View {
                             settings.comicsExplanationUseSystemFont = value
                         }
                         .font(.custom("xkcd-Script-Regular", size: 15))
+                    Toggle("Use Safari Browser in Explanation", isOn: $settings.comicsExplanationUseSafariBrowser)
+                        .onChange(of: settings.comicsExplanationUseSafariBrowser) { value in
+                            settings.comicsExplanationUseSafariBrowser = value
+                        }
+                        .font(.custom("xkcd-Script-Regular", size: 15))
                 }
 
                 Section(header: Text("What If?")
@@ -54,8 +59,13 @@ struct SettingsView: View {
                                     .font(.custom("xkcd-Script-Regular", size: 15))) {
                     Text("xkcd is created by Randall Munroe.")
                         .font(.custom("xkcd-Script-Regular", size: 15))
-                    Text("dckx is an xkcd reader created by Vito Royeca.")
-                        .font(.custom("xkcd-Script-Regular", size: 15))
+                    VStack {
+                        Text("dckx is an xkcd reader created by Vito Royeca.")
+                            .font(.custom("xkcd-Script-Regular", size: 15))
+                        Link("vitoroyeca.com", destination: URL(string: "https://www.vitoroyeca.com")!)
+                            .font(.custom("xkcd-Script-Regular", size: 15))
+                            .foregroundColor(.blue)
+                    }
                 }
             }
                 .navigationBarTitle(Text("Settings"), displayMode: .large)
@@ -86,16 +96,16 @@ class Settings: ObservableObject {
         }
     }
     
-//    @Published var comicsListUseSystemFont: Bool{
-//        didSet {
-//            UserDefaults.standard.set(comicsListUseSystemFont, forKey: "comicsListUseSystemFont")
-//            UserDefaults.standard.synchronize()
-//        }
-//    }
-    
     @Published var comicsExplanationUseSystemFont: Bool{
         didSet {
             UserDefaults.standard.set(comicsExplanationUseSystemFont, forKey: "comicsExplanationUseSystemFont")
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    @Published var comicsExplanationUseSafariBrowser: Bool{
+        didSet {
+            UserDefaults.standard.set(comicsExplanationUseSafariBrowser, forKey: "comicsExplanationUseSafariBrowser")
             UserDefaults.standard.synchronize()
         }
     }
@@ -107,19 +117,11 @@ class Settings: ObservableObject {
         }
     }
     
-//    @Published var whatIfListUseSystemFont: Bool{
-//        didSet {
-//            UserDefaults.standard.set(whatIfListUseSystemFont, forKey: "whatIfListUseSystemFont")
-//            UserDefaults.standard.synchronize()
-//        }
-//    }
-    
     init() {
-        showSensitiveContent           = UserDefaults.standard.bool(forKey: "showSensitiveContent")
-        comicsViewerUseSystemFont      = UserDefaults.standard.bool(forKey: "comicsViewerUseSystemFont")
-//        comicsListUseSystemFont        = UserDefaults.standard.bool(forKey: "comicsListUseSystemFont")
-        comicsExplanationUseSystemFont = UserDefaults.standard.bool(forKey: "comicsExplanationUseSystemFont")
-        whatIfViewerUseSystemFont      = UserDefaults.standard.bool(forKey: "whatIfViewerUseSystemFont")
-//        whatIfListUseSystemFont        = UserDefaults.standard.bool(forKey: "whatIfListUseSystemFont")
+        showSensitiveContent              = UserDefaults.standard.bool(forKey: "showSensitiveContent")
+        comicsViewerUseSystemFont         = UserDefaults.standard.bool(forKey: "comicsViewerUseSystemFont")
+        comicsExplanationUseSystemFont    = UserDefaults.standard.bool(forKey: "comicsExplanationUseSystemFont")
+        comicsExplanationUseSafariBrowser = UserDefaults.standard.bool(forKey: "comicsExplanationUseSafariBrowser")
+        whatIfViewerUseSystemFont         = UserDefaults.standard.bool(forKey: "whatIfViewerUseSystemFont")
     }
 }
