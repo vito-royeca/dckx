@@ -1,10 +1,37 @@
 # TODO
 
-- (001) Handle swipe left/right to navigate
+## LEGEND
 
-- (002) Enhance OpenCV.splitComics accuracy
+- New = New Feature
 
-- (003) Push Notifucations when new Comics are available
+- Bug = Error/Bug
 
-- (004) Push Notifications when new What Ifs are available
+- Ref = Refactor
+
+- Enh = Enhancement
+
+## TODO List
+
+- (000) New: Handle swipe left/right to navigate
+
+- (001) Enh: OpenCV.splitComics accuracy
+
+- (002) New: Push Notifications when new Comics are available
+
+- (003) New: Push Notifications when new What Ifs are available
+
+- (004) New: Apple Watch
+
+- (005) Enh: Fetch Comics in between the latest and the last from dckx.sqlite
+
+- (006) Enh: Fetch What Ifs in between the latest and the last from dckx.sqlite
+
+- (007) Enh: Display errors in WebView instead of print()
+
+- (008) Ref: Replace the main tabbar with a side menu
+
+
+
+
+
 
