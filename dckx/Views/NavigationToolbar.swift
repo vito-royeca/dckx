@@ -37,6 +37,7 @@ struct NavigationToolbar: ToolbarContent  {
     var loadFirst: () -> Void
     var loadPrevious: () -> Void
     var loadRandom: () -> Void
+    var search: () -> Void
     var loadNext: () -> Void
     var loadLast: () -> Void
     @State var canDoPrevious: Bool
@@ -49,7 +50,7 @@ struct NavigationToolbar: ToolbarContent  {
                 self.loadFirst()
             }) {
                 Image(systemName: "backward.end")
-                    .imageScale(.large)
+//                    .imageScale(.large)
             }
                 .disabled(!self.canDoPrevious || isBusy)
         }
@@ -79,10 +80,20 @@ struct NavigationToolbar: ToolbarContent  {
             }
             .disabled(isBusy)
         }
+
+        ToolbarItem(placement: .bottomBar) {
+            Button(action: {
+                self.search()
+            }) {
+                Image(systemName: "magnifyingglass")
+                    .imageScale(.large)
+            }
+                .disabled(isBusy)
+        }
         ToolbarItem(placement: .bottomBar) {
             Spacer()
         }
-
+        
         ToolbarItem(placement: .bottomBar) {
             Button(action: {
                 self.loadNext()

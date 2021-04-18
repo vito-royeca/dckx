@@ -15,7 +15,6 @@ import CoreData
 struct  ComicListView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var fetcher: ComicFetcher
-//    @EnvironmentObject var settings: Settings
     @State var query: String?
     @State var scopeSelection: Int = 0
     

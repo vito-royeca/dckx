@@ -12,21 +12,22 @@ struct MainView: View {
     @StateObject var settings = Settings()
     
     var body: some View {
-        TabView{
-            ComicView()
-                .tabItem({
-                    Image(systemName: "photo.on.rectangle.angled")
-                })
-            WhatIfView()
-                .tabItem({
-                    Image(systemName: "questionmark.diamond")
-                })
-            SettingsView()
-                .tabItem({
-                    Image(systemName: "gear")
-                })
-        }
-        .environmentObject(settings)
+//        TabView{
+//            ComicView()
+//                .tabItem({
+//                    Image(systemName: "photo.on.rectangle.angled")
+//                })
+//            WhatIfView()
+//                .tabItem({
+//                    Image(systemName: "questionmark.diamond")
+//                })
+//            SettingsView()
+//                .tabItem({
+//                    Image(systemName: "gear")
+//                })
+//        }
+//        .environmentObject(settings)
+        HamburgerView()
     }
 }
 

@@ -11,6 +11,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var settings: Settings
+    @Binding var showingMenu: Bool
     
     var body: some View {
         NavigationView {
@@ -69,13 +70,27 @@ struct SettingsView: View {
                 }
             }
                 .navigationBarTitle(Text("Settings"), displayMode: .large)
+                .navigationBarItems(leading: menuButton)
+        }
+    }
+    
+    var menuButton: some View {
+        Button(action: {
+            withAnimation {
+                self.showingMenu.toggle()
+            }
+        }) {
+            Image(systemName: "line.horizontal.3")
+                .imageScale(.large)
         }
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
+    @State static private var showingMenu = false
+    
     static var previews: some View {
-        SettingsView()
+        SettingsView(showingMenu: $showingMenu)
     }
 }
 

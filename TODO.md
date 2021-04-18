@@ -28,7 +28,7 @@
 
 - (007) Enh: Display errors in WebView instead of print()
 
-- (008) Ref: Replace the main tabbar with a side menu
+- ~~(008) Ref: Replace the main tabbar with a side menu~~
 
 
 

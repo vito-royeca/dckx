@@ -13,6 +13,7 @@ import SDWebImage
 
 struct ComicView: View {
     @StateObject var fetcher = ComicFetcher()
+    @Binding var showingMenu: Bool
     @State private var showingList = false
     
     var body: some View {
@@ -25,40 +26,51 @@ struct ComicView: View {
             }
                 .navigationBarTitle(Text((fetcher.currentComic?.title ?? "").uppercased()), displayMode: .large)
                 .navigationBarItems(
-                    leading: listButton,
+                    leading: menuButton,
                     trailing: ComicToolBarView())
                 .toolbar() {
                     NavigationToolbar(loadFirst: fetcher.loadFirst,
                                       loadPrevious: fetcher.loadPrevious,
                                       loadRandom: fetcher.loadRandom,
+                                      search: {
+                                          self.showingList.toggle()
+                                      },
                                       loadNext: fetcher.loadNext,
                                       loadLast: fetcher.loadLast,
                                       canDoPrevious: fetcher.canDoPrevious,
                                       canDoNext: fetcher.canDoNext,
                                       isBusy: fetcher.isBusy)
                 }
+                .fullScreenCover(isPresented: $showingList, content: {
+                    ComicListView()
+                })
         }
             .environmentObject(fetcher)
     }
     
-    var listButton: some View {
+    var menuButton: some View {
         Button(action: {
-            self.showingList.toggle()
+//            self.showingList.toggle()
+            withAnimation {
+                self.showingMenu.toggle()
+            }
         }) {
-            Image(systemName: "list.dash")
+            Image(systemName: "line.horizontal.3")
                 .imageScale(.large)
         }
-            .disabled(fetcher.isBusy)
-            .fullScreenCover(isPresented: $showingList, content: {
-                ComicListView()
-            })
+//            .disabled(fetcher.isBusy)
+//            .fullScreenCover(isPresented: $showingList, content: {
+//                ComicListView()
+//            })
     }
 }
 
 struct ComicView_Previews: PreviewProvider {
+    @State static private var showingMenu = false
+    
     static var previews: some View {
         ForEach(["iPhone SE", "iPhone XS Max"], id: \.self) { deviceName in
-            ComicView()
+            ComicView(showingMenu: $showingMenu)
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
         }

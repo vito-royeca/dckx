@@ -84,6 +84,8 @@
 		8B658021240B1C6E00A245DC /* NavigationToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B65801F240B1C6E00A245DC /* NavigationToolbar.swift */; };
 		8B658022240B1C6E00A245DC /* NavigationToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B65801F240B1C6E00A245DC /* NavigationToolbar.swift */; };
 		8B658023240B218700A245DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */; };
+		8B7B2C2F262C8F0900B35825 /* SideMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B2C2E262C8F0900B35825 /* SideMainView.swift */; };
+		8B7B2C34262C930500B35825 /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B2C33262C930500B35825 /* HamburgerView.swift */; };
 		8B82B2B42618C6AD008AD11D /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2B32618C6AD008AD11D /* ListRowView.swift */; };
 		8B82B2B52618C6AD008AD11D /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2B32618C6AD008AD11D /* ListRowView.swift */; };
 		8B82B2B62618C6AD008AD11D /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2B32618C6AD008AD11D /* ListRowView.swift */; };
@@ -203,6 +205,8 @@
 		8B658016240AFED800A245DC /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		8B65801B240B12E100A245DC /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		8B65801F240B1C6E00A245DC /* NavigationToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationToolbar.swift; sourceTree = "<group>"; };
+		8B7B2C2E262C8F0900B35825 /* SideMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMainView.swift; sourceTree = "<group>"; };
+		8B7B2C33262C930500B35825 /* HamburgerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerView.swift; sourceTree = "<group>"; };
 		8B82B2B32618C6AD008AD11D /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 		8B82B2C326192A9C008AD11D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.2.1.min.js"; sourceTree = "<group>"; };
@@ -354,15 +358,16 @@
 			children = (
 				8B3049A2241830CC00D549DE /* ActivityIndicatorView.swift */,
 				8B626D862402122C00972EED /* BrowserView.swift */,
+				8B7B2C33262C930500B35825 /* HamburgerView.swift */,
 				8B82B2B32618C6AD008AD11D /* ListRowView.swift */,
 				8B658016240AFED800A245DC /* MailView.swift */,
 				8BA50E4824097CF000138D11 /* MainView.swift */,
 				8B65801F240B1C6E00A245DC /* NavigationToolbar.swift */,
 				8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */,
 				8BAC10B326169EBD00664335 /* SearchNavigation.swift */,
+				8B82B2C326192A9C008AD11D /* SettingsView.swift */,
 				8B65801B240B12E100A245DC /* ShareSheetView.swift */,
 				8BA50E6B240A425500138D11 /* WebView.swift */,
-				8B82B2C326192A9C008AD11D /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -403,6 +408,7 @@
 			children = (
 				8BA5921825FEBEC1001CD883 /* HideScrollView.swift */,
 				8B5307252602E6DF008BA7AB /* NavigationSearchBar.swift */,
+				8B7B2C2E262C8F0900B35825 /* SideMainView.swift */,
 			);
 			path = Experimental;
 			sourceTree = "<group>";
@@ -800,6 +806,7 @@
 				8B30499F2418263E00D549DE /* WhatIfListView.swift in Sources */,
 				8BAC10B426169EBD00664335 /* SearchNavigation.swift in Sources */,
 				8BA5921925FEBEC1001CD883 /* HideScrollView.swift in Sources */,
+				8B7B2C34262C930500B35825 /* HamburgerView.swift in Sources */,
 				8BA50E6C240A425500138D11 /* WebView.swift in Sources */,
 				8BA50E68240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8BA50E4924097CF000138D11 /* MainView.swift in Sources */,
@@ -819,6 +826,7 @@
 				8B3049A3241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
 				8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8BA50E4D24097D0200138D11 /* WhatIfView.swift in Sources */,
+				8B7B2C2F262C8F0900B35825 /* SideMainView.swift in Sources */,
 				8B82B2B42618C6AD008AD11D /* ListRowView.swift in Sources */,
 				8B658020240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
 				8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,

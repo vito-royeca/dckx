@@ -40,6 +40,7 @@ struct ListRowView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 70, height: 70)
                 .background(colorScheme == .dark ? Color.init(UIColor.lightGray) : Color.clear)
+                .cornerRadius(5)
                 .onAppear {
                     self.imageManager.load()
                 }
