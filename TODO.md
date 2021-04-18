@@ -10,9 +10,9 @@
 
 - Enh = Enhancement
 
-## TODO List
+## TODOs
 
-- (000) New: Handle swipe left/right to navigate
+- ~~(000) New: Handle swipe left/right to navigate~~
 
 - (001) Enh: OpenCV.splitComics accuracy
 
@@ -29,6 +29,10 @@
 - (007) Enh: Display errors in WebView instead of print()
 
 - ~~(008) Ref: Replace the main tabbar with a side menu~~
+
+- (009) Enh: Add Swipe to close in SideMenu
+
+- (010) New: Add app review dialog
 
 
 

@@ -21,6 +21,21 @@ struct WhatIfView: View {
                 WebView(link: nil,
                         html: fetcher.composeHTML(),
                         baseURL: nil)
+                    .gesture(DragGesture(minimumDistance: 30, coordinateSpace: .local)
+                        .onEnded({ value in
+                            if value.translation.width < 0 {
+                                if fetcher.canDoNext {
+                                    fetcher.loadNext()
+                                }
+                                
+                            }
+
+                            if value.translation.width > 0 {
+                                if fetcher.canDoPrevious {
+                                    fetcher.loadPrevious()
+                                }
+                            }
+                        }))
                 ActivityIndicatorView(shouldAnimate: $fetcher.isBusy)
             }
                 .navigationBarTitle(Text(fetcher.currentWhatIf?.title ?? ""), displayMode: .large)
