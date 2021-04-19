@@ -129,6 +129,10 @@ struct HMenuView: View {
                 .padding(.top, 30)
             
             Spacer()
+            
+            Text("Version \(AppDelegate.getVersion()), Build \(AppDelegate.getBuild())")
+                .foregroundColor(.gray)
+                .font(Font.dckxSmallText)
         }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)

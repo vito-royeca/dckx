@@ -36,6 +36,8 @@
 
 - ~~(011) Bug: What If List does not filter sensitive data~~
 
+- ~~(012) Enh: Add version and build number in SideMenu~~
+
 
 
 

@@ -149,3 +149,17 @@ struct SensitiveData {
         return result
     }
 }
+
+extension AppDelegate {
+    static func getVersion() -> String {
+        let nsObject: AnyObject? = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as AnyObject
+
+        return nsObject as! String
+    }
+    
+    static func getBuild() -> String {
+        let nsObject: AnyObject? = Bundle.main.infoDictionary?["CFBundleVersion"] as AnyObject
+
+        return nsObject as! String
+    }
+}
