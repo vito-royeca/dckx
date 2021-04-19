@@ -187,6 +187,7 @@ class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observa
     // MARK: - Custom methods
     
     func createFetchRequest(query: String?, scopeIndex: Int) -> NSFetchRequest<WhatIf> {
+        let sensitiveData = SensitiveData()
         var predicate: NSPredicate?
         
         if let query = query {
@@ -219,6 +220,8 @@ class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observa
         default:
             ()
         }
+        
+        predicate = sensitiveData.createWhatIfPredicate(basePredicate: predicate)
         
         let fetchRequest: NSFetchRequest<WhatIf> = WhatIf.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
