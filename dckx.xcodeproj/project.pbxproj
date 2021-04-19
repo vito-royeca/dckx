@@ -1064,7 +1064,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckx;
 				PRODUCT_NAME = dckx;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
@@ -1091,7 +1091,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckx;
 				PRODUCT_NAME = dckx;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";

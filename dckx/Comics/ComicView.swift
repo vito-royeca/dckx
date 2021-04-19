@@ -28,7 +28,6 @@ struct ComicView: View {
                                 if fetcher.canDoNext {
                                     fetcher.loadNext()
                                 }
-                                
                             }
 
                             if value.translation.width > 0 {
