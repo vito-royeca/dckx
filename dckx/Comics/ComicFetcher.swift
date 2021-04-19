@@ -120,22 +120,22 @@ class ComicFetcher: ObservableObject {
             let title = comic.title,
             let cachePath = SDImageCache.shared.cachePath(forKey: img),
             let image = SDImageCache.shared.imageFromCache(forKey: img),
-            let data = image.pngData(),
+            let data = image.pngData()/*,
             // comment out if running in XCTests
-            let splitComics = OpenCVWrapper.splitComics(cachePath, minimumPanelSizeRatio: 1/15) else {
+            let splitComics = OpenCVWrapper.splitComics(cachePath, minimumPanelSizeRatio: 1/15)*/ else {
             return ""
         }
         
         var comicsJson = "[{"
         // comment out if running in XCTests
-        for (k,v) in splitComics {
-            comicsJson.append("\"\(k)\": ")
-            if let _ = v as? String {
-                comicsJson.append("\"\(v)\",")
-            } else {
-                comicsJson.append("\(v),")
-            }
-        }
+//        for (k,v) in splitComics {
+//            comicsJson.append("\"\(k)\": ")
+//            if let _ = v as? String {
+//                comicsJson.append("\"\(v)\",")
+//            } else {
+//                comicsJson.append("\(v),")
+//            }
+//        }
         comicsJson = comicsJson.hasSuffix(",") ? String(comicsJson.dropLast()) : comicsJson
         comicsJson += "}]"
         comicsJson = comicsJson.replacingOccurrences(of: "(", with: "[")

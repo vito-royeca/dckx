@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		127137FE46AA5737FBCBA183 /* Pods_dckxUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56149F6DEDDF1BA8A1D64427 /* Pods_dckxUITests.framework */; };
 		196558F998D4A92D13BEEB36 /* Pods_dckx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A442C4117396A55D840D6677 /* Pods_dckx.framework */; };
+		8B0DBDF5262DFB02004FA0DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9823F5F444008446F4 /* AppDelegate.swift */; };
+		8B0DBDF9262DFB03004FA0DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9823F5F444008446F4 /* AppDelegate.swift */; };
+		8B0DBE00262DFB81004FA0DB /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B2C33262C930500B35825 /* HamburgerView.swift */; };
+		8B0DBE01262DFB82004FA0DB /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B2C33262C930500B35825 /* HamburgerView.swift */; };
 		8B1A4B06261E4F4500DBCD7B /* dckx.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B33FE3125FD534F00CD0F35 /* dckx.xcdatamodeld */; };
 		8B1A4B0A261E4F4B00DBCD7B /* dckx.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B33FE3125FD534F00CD0F35 /* dckx.xcdatamodeld */; };
 		8B1A4B29261EF51A00DBCD7B /* SearchNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10B326169EBD00664335 /* SearchNavigation.swift */; };
@@ -109,9 +113,6 @@
 		8B9ADBF3260A8CC200B0DED8 /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */; };
 		8B9ADBF7260A8CC300B0DED8 /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */; };
 		8B9ADC0F260AC46600B0DED8 /* Ji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9ADC0E260AC46600B0DED8 /* Ji.framework */; };
-		8BA50E4924097CF000138D11 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4824097CF000138D11 /* MainView.swift */; };
-		8BA50E4A24097CF000138D11 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4824097CF000138D11 /* MainView.swift */; };
-		8BA50E4B24097CF000138D11 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4824097CF000138D11 /* MainView.swift */; };
 		8BA50E4D24097D0200138D11 /* WhatIfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4C24097D0200138D11 /* WhatIfView.swift */; };
 		8BA50E4E24097D0200138D11 /* WhatIfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4C24097D0200138D11 /* WhatIfView.swift */; };
 		8BA50E4F24097D0200138D11 /* WhatIfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4C24097D0200138D11 /* WhatIfView.swift */; };
@@ -214,7 +215,6 @@
 		8B9ADBEB260A78F900B0DED8 /* Panel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Panel.cpp; sourceTree = "<group>"; };
 		8B9ADBEC260A78F900B0DED8 /* Panel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Panel.hpp; sourceTree = "<group>"; };
 		8B9ADC0E260AC46600B0DED8 /* Ji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BA50E4824097CF000138D11 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8BA50E4C24097D0200138D11 /* WhatIfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfView.swift; sourceTree = "<group>"; };
 		8BA50E5F240A2DA200138D11 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		8BA50E67240A384400138D11 /* WhatIfFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfFetcher.swift; sourceTree = "<group>"; };
@@ -359,7 +359,6 @@
 				8B7B2C33262C930500B35825 /* HamburgerView.swift */,
 				8B82B2B32618C6AD008AD11D /* ListRowView.swift */,
 				8B658016240AFED800A245DC /* MailView.swift */,
-				8BA50E4824097CF000138D11 /* MainView.swift */,
 				8B65801F240B1C6E00A245DC /* NavigationToolbar.swift */,
 				8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */,
 				8BAC10B326169EBD00664335 /* SearchNavigation.swift */,
@@ -806,7 +805,6 @@
 				8B7B2C34262C930500B35825 /* HamburgerView.swift in Sources */,
 				8BA50E6C240A425500138D11 /* WebView.swift in Sources */,
 				8BA50E68240A384400138D11 /* WhatIfFetcher.swift in Sources */,
-				8BA50E4924097CF000138D11 /* MainView.swift in Sources */,
 				8B5307262602E6DF008BA7AB /* NavigationSearchBar.swift in Sources */,
 				8B9ADBED260A78F900B0DED8 /* Panel.cpp in Sources */,
 				8B626D702401B0A900972EED /* Constants.swift in Sources */,
@@ -841,9 +839,9 @@
 				8BA50E69240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8B1A4B0A261E4F4B00DBCD7B /* dckx.xcdatamodeld in Sources */,
 				8B9ADBEE260A78F900B0DED8 /* Panel.cpp in Sources */,
-				8BA50E4A24097CF000138D11 /* MainView.swift in Sources */,
 				8B3049A4241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
 				8B4F4BB023F5F445008446F4 /* dckxTests.swift in Sources */,
+				8B0DBE00262DFB81004FA0DB /* HamburgerView.swift in Sources */,
 				8B65801D240B12E100A245DC /* ShareSheetView.swift in Sources */,
 				8B626D882402122C00972EED /* BrowserView.swift in Sources */,
 				8BA50E61240A2DA200138D11 /* Database.swift in Sources */,
@@ -853,6 +851,7 @@
 				8B626DD72403BBCB00972EED /* ComicListView.swift in Sources */,
 				8B23367F23F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8BA50E4E24097D0200138D11 /* WhatIfView.swift in Sources */,
+				8B0DBDF5262DFB02004FA0DB /* AppDelegate.swift in Sources */,
 				8B4F4BE123F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8B82B2B52618C6AD008AD11D /* ListRowView.swift in Sources */,
 				8B658021240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
@@ -879,6 +878,7 @@
 				8B9ADBEF260A78F900B0DED8 /* Panel.cpp in Sources */,
 				8B3049A5241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
 				8B23368423F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
+				8B0DBE01262DFB82004FA0DB /* HamburgerView.swift in Sources */,
 				8B4F4BBB23F5F445008446F4 /* dckxUITests.swift in Sources */,
 				8B626D892402122C00972EED /* BrowserView.swift in Sources */,
 				8BA50E6E240A425500138D11 /* WebView.swift in Sources */,
@@ -889,12 +889,12 @@
 				8B4A1285240828FD00D4F8B2 /* SnapshotHelper.swift in Sources */,
 				8B23368023F646AC00C88BA1 /* CoreData.swift in Sources */,
 				8B4F4BE223F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
+				8B0DBDF9262DFB03004FA0DB /* AppDelegate.swift in Sources */,
 				8B658019240AFED800A245DC /* MailView.swift in Sources */,
 				8B82B2B62618C6AD008AD11D /* ListRowView.swift in Sources */,
 				8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
 				8B9ADBF7260A8CC300B0DED8 /* ComicsPanelExtractor.cpp in Sources */,
 				8B1A4C3B26253CC100DBCD7B /* OpenCVWrapper.mm in Sources */,
-				8BA50E4B24097CF000138D11 /* MainView.swift in Sources */,
 				8BA50E62240A2DA200138D11 /* Database.swift in Sources */,
 				8BA50E6A240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8B626D8A2402274A00972EED /* Constants.swift in Sources */,
