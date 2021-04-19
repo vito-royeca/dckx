@@ -134,5 +134,9 @@ struct HMenuView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Color(red: 32/255, green: 32/255, blue: 32/255))
             .edgesIgnoringSafeArea(.all)
+            .gesture(DragGesture(minimumDistance: 30, coordinateSpace: .local)
+                .onEnded({ value in
+                    showingMenu.toggle()
+                }))
     }
 }

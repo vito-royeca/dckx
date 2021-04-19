@@ -30,7 +30,7 @@
 
 - ~~(008) Ref: Replace the main tabbar with a side menu~~
 
-- (009) Enh: Add Swipe to close in SideMenu
+- ~~(009) Enh: Add Swipe to close in SideMenu~~
 
 - (010) New: Add app review dialog
 
