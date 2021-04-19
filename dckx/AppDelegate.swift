@@ -8,11 +8,10 @@
 
 import UIKit
 import Firebase
+import SwiftRater
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -33,7 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Database.sharedInstance.createDatabase()
         Database.sharedInstance.copyDatabase()
         
-//        fatalError("Test error only.")
+
+        // SwiftRater
+        SwiftRater.daysUntilPrompt = 7
+        SwiftRater.daysBeforeReminding = 7
+        SwiftRater.appLaunched()
+        
         return true
     }
 

@@ -18,6 +18,7 @@ def shared_pods
     pod 'ReadabilityKit'
     pod 'SDWebImage'
     pod 'SDWebImageSwiftUI'
+    pod "SwiftRater"
     pod 'Sync'
 end
 

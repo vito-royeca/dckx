@@ -32,7 +32,7 @@
 
 - ~~(009) Enh: Add Swipe to close in SideMenu~~
 
-- (010) New: Add app review dialog
+- ~~(010) New: Add app review dialog~~
 
 - ~~(011) Bug: What If List does not filter sensitive data~~
 

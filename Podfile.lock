@@ -96,6 +96,7 @@ PODS:
   - SDWebImageSwiftUI (2.0.2):
     - SDWebImage (~> 5.10)
   - SimulatorStatusMagic (2.5)
+  - SwiftRater (1.8.0)
   - Sync (6.5.0)
 
 DEPENDENCIES:
@@ -111,6 +112,7 @@ DEPENDENCIES:
   - SDWebImage
   - SDWebImageSwiftUI
   - SimulatorStatusMagic
+  - SwiftRater
   - Sync
 
 SPEC REPOS:
@@ -137,6 +139,7 @@ SPEC REPOS:
     - SDWebImage
     - SDWebImageSwiftUI
     - SimulatorStatusMagic
+    - SwiftRater
     - Sync
 
 SPEC CHECKSUMS:
@@ -162,8 +165,9 @@ SPEC CHECKSUMS:
   SDWebImage: 7acbb57630ac7db4a495547fb73916ff3e432f6b
   SDWebImageSwiftUI: 8a3923c95108312b03a599ec1498754af55a6819
   SimulatorStatusMagic: 71cfcea1df017e8f0fa8e48bc182d86976376f84
+  SwiftRater: 6094fa6e9b3866ff8beca0a871b4b5f9ab896a6d
   Sync: 86bb8aa0ea2f955ea5ac97b7b73129f86591c39e
 
-PODFILE CHECKSUM: 5f002709beeba1d4e4f915bd5abedc7e986ab8c5
+PODFILE CHECKSUM: fce09139ee57e68cc326da95899aca86755a73a5
 
 COCOAPODS: 1.10.1
