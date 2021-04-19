@@ -38,6 +38,8 @@
 
 - ~~(012) Enh: Add version and build number in SideMenu~~
 
+- ~~(013) Enh: Change the screenshot background color to dckxBlue (150,168,200)~~
+
 
 
 
