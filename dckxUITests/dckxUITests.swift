@@ -46,29 +46,25 @@ class dckxUITests: XCTestCase {
         let app = XCUIApplication()
         setupSnapshot(app)
         app.launch()
-
-        // comics
-        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 2).tap()
+        
+        var randomButton = app.toolbars["Toolbar"].buttons["repeat"]
+        randomButton.tap()
         snapshot("0Comics")
-
-        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 2).tap()
+        
+        randomButton.tap()
         snapshot("1Comics")
         
-        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 2).tap()
+        randomButton.tap()
         snapshot("2Comics")
-
-        // comics list
-//        app.buttons["list.dash"].tap()
-//        snapshot("1ComicsList")
-//        app.navigationBars["Comics"].buttons["xmark.circle.fill"].tap()
-
-        // what if 1
-        app.tabBars["Tab Bar"].buttons["questionmark.diamond"].tap()
         
-        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 2).tap()
+        app.buttons["line.horizontal.3"].tap()
+        app.buttons["What Ifs"].tap()
+        
+        randomButton = app.toolbars["Toolbar"].buttons["repeat"]
+        randomButton.tap()
         snapshot("3What If")
         
-        XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 2).tap()
+        randomButton.tap()
         snapshot("4What If")
     }
 }
