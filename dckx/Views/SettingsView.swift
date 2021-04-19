@@ -57,7 +57,7 @@ struct SettingsView: View {
                 }
                 
                 Section(header: Text("About")
-                                    .font(Font.dckxRegularText)) {
+                            .font(Font.dckxRegularText)) {
                     Text("xkcd is created by Randall Munroe.")
                         .font(Font.dckxRegularText)
                     VStack {
@@ -67,6 +67,8 @@ struct SettingsView: View {
                             .font(Font.dckxRegularText)
                             .foregroundColor(.blue)
                     }
+                    Text("Version \(AppDelegate.getVersion()) Build \(AppDelegate.getBuild())")
+                        .font(Font.dckxRegularText)
                 }
             }
                 .navigationBarTitle(Text("Settings"), displayMode: .large)

@@ -40,6 +40,8 @@
 
 - ~~(013) Enh: Change the screenshot background color to dckxBlue (150,168,200)~~
 
+- ~~(014) Ref: Move version/build from SideMenu to Settings|About ~~
+
 
 
 
