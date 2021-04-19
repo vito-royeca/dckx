@@ -13,7 +13,7 @@ import WebKit
 struct WhatIfView: View {
     @ObservedObject var fetcher = WhatIfFetcher()
     @Binding var showingMenu: Bool
-    @State private var showingList = false
+    @State private var showingSearch = false
     
     var body: some View {
         NavigationView {
@@ -47,7 +47,7 @@ struct WhatIfView: View {
                                       loadPrevious: fetcher.loadPrevious,
                                       loadRandom: fetcher.loadRandom,
                                       search: {
-                                          self.showingList.toggle()
+                                          self.showingSearch.toggle()
                                       },
                                       loadNext: fetcher.loadNext,
                                       loadLast: fetcher.loadLast,
@@ -55,7 +55,7 @@ struct WhatIfView: View {
                                       canDoNext: fetcher.canDoNext,
                                       isBusy: fetcher.isBusy)
                 }
-                .fullScreenCover(isPresented: $showingList, content: {
+                .fullScreenCover(isPresented: $showingSearch, content: {
                     WhatIfListView()
                 })
         }
@@ -64,7 +64,6 @@ struct WhatIfView: View {
     
     var menuButton: some View {
         Button(action: {
-//            self.showingList.toggle()
             withAnimation {
                 self.showingMenu.toggle()
             }
@@ -72,10 +71,7 @@ struct WhatIfView: View {
             Image(systemName: "line.horizontal.3")
                 .imageScale(.large)
         }
-//            .disabled(fetcher.isBusy)
-//            .fullScreenCover(isPresented: $showingList, content: {
-//                WhatIfListView()
-//            })
+            .disabled(fetcher.isBusy)
     }
 }
 

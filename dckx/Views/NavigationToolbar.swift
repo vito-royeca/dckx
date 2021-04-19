@@ -50,7 +50,7 @@ struct NavigationToolbar: ToolbarContent  {
                 self.loadFirst()
             }) {
                 Image(systemName: "backward.end")
-//                    .imageScale(.large)
+                    .imageScale(.large)
             }
                 .disabled(!self.canDoPrevious || isBusy)
         }

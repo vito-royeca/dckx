@@ -14,7 +14,7 @@ import SDWebImage
 struct ComicView: View {
     @StateObject var fetcher = ComicFetcher()
     @Binding var showingMenu: Bool
-    @State private var showingList = false
+    @State private var showingSearch = false
     
     var body: some View {
         NavigationView {
@@ -48,7 +48,7 @@ struct ComicView: View {
                                       loadPrevious: fetcher.loadPrevious,
                                       loadRandom: fetcher.loadRandom,
                                       search: {
-                                          self.showingList.toggle()
+                                          self.showingSearch.toggle()
                                       },
                                       loadNext: fetcher.loadNext,
                                       loadLast: fetcher.loadLast,
@@ -56,7 +56,7 @@ struct ComicView: View {
                                       canDoNext: fetcher.canDoNext,
                                       isBusy: fetcher.isBusy)
                 }
-                .fullScreenCover(isPresented: $showingList, content: {
+                .fullScreenCover(isPresented: $showingSearch, content: {
                     ComicListView()
                 })
         }
@@ -65,7 +65,6 @@ struct ComicView: View {
     
     var menuButton: some View {
         Button(action: {
-//            self.showingList.toggle()
             withAnimation {
                 self.showingMenu.toggle()
             }
@@ -73,10 +72,7 @@ struct ComicView: View {
             Image(systemName: "line.horizontal.3")
                 .imageScale(.large)
         }
-//            .disabled(fetcher.isBusy)
-//            .fullScreenCover(isPresented: $showingList, content: {
-//                ComicListView()
-//            })
+            .disabled(fetcher.isBusy)
     }
 }
 

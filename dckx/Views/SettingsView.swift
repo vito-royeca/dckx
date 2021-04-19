@@ -73,6 +73,7 @@ struct SettingsView: View {
             }
                 .navigationBarTitle(Text("Settings"), displayMode: .large)
                 .navigationBarItems(leading: menuButton)
+                .listStyle(PlainListStyle.init())
         }
     }
     
