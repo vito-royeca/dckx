@@ -18,30 +18,33 @@ struct ComicView: View {
     
     var body: some View {
         NavigationView {
-            ZStack(alignment: .center) {
-                WebView(link: nil,
-                        html: fetcher.composeHTML(),
-                        baseURL: nil)
-                    .gesture(DragGesture(minimumDistance: 30, coordinateSpace: .local)
-                        .onEnded({ value in
-                            if value.translation.width < 0 {
-                                if fetcher.canDoNext {
-                                    fetcher.loadNext()
+            VStack(alignment: .center) {
+                if !fetcher.isBusy {
+                    WebView(link: nil,
+                            html: fetcher.composeHTML(),
+                            baseURL: nil)
+                        .gesture(DragGesture(minimumDistance: 30, coordinateSpace: .local)
+                            .onEnded({ value in
+                                if value.translation.width < 0 {
+                                    if fetcher.canDoNext {
+                                        fetcher.loadNext()
+                                    }
                                 }
-                            }
 
-                            if value.translation.width > 0 {
-                                if fetcher.canDoPrevious {
-                                    fetcher.loadPrevious()
+                                if value.translation.width > 0 {
+                                    if fetcher.canDoPrevious {
+                                        fetcher.loadPrevious()
+                                    }
                                 }
-                            }
-                        }))
-                ActivityIndicatorView(shouldAnimate: $fetcher.isBusy)
+                            }))
+                } else {
+                    ActivityIndicatorView(shouldAnimate: $fetcher.isBusy)
+                }
             }
-                .navigationBarTitle(Text((fetcher.currentComic?.title ?? "").uppercased()), displayMode: .large)
-                .navigationBarItems(
-                    leading: menuButton,
-                    trailing: ComicToolBarView())
+            .navigationBarTitle(Text((fetcher.isBusy ? "" : (fetcher.currentComic?.title ?? "")).uppercased()),
+                                displayMode: .large)
+                .navigationBarItems( leading: menuButton,
+                                     trailing: ComicToolBarView())
                 .toolbar() {
                     NavigationToolbar(loadFirst: fetcher.loadFirst,
                                       loadPrevious: fetcher.loadPrevious,
@@ -55,9 +58,9 @@ struct ComicView: View {
                                       canDoNext: fetcher.canDoNext,
                                       isBusy: fetcher.isBusy)
                 }
-                .fullScreenCover(isPresented: $showingSearch, content: {
+                .sheet(isPresented: $showingSearch) {
                     ComicListView()
-                })
+                }
         }
             .environmentObject(fetcher)
     }
@@ -112,18 +115,18 @@ struct ComicToolBarView: View {
                 }
                     .disabled(fetcher.isBusy)
                     // comment out if running in XCTests
-//                    .safariView(isPresented: $showingBrowser) {
-//                        SafariView(
-//                            url: URL(string: XkcdAPI.sharedInstance.explainURL(of: self.fetcher.currentComic!))!,
-//                            configuration: SafariView.Configuration(
-//                                entersReaderIfAvailable: true,
-//                                barCollapsingEnabled: true
-//                            )
-//                        )                        
-//                        .preferredBarAccentColor(.clear)
-//                        .preferredControlAccentColor(.dckxBlue)
-//                        .dismissButtonStyle(.close)
-//                    }
+                    .safariView(isPresented: $showingBrowser) {
+                        SafariView(
+                            url: URL(string: XkcdAPI.sharedInstance.explainURL(of: self.fetcher.currentComic!))!,
+                            configuration: SafariView.Configuration(
+                                entersReaderIfAvailable: true,
+                                barCollapsingEnabled: true
+                            )
+                        )                        
+                        .preferredBarAccentColor(.clear)
+                        .preferredControlAccentColor(.dckxBlue)
+                        .dismissButtonStyle(.close)
+                    }
             } else {
                 Button(action: {
                     self.showingBrowser.toggle()

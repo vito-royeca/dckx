@@ -17,30 +17,33 @@ struct WhatIfView: View {
     
     var body: some View {
         NavigationView {
-            ZStack(alignment: .center) {
-                WebView(link: nil,
-                        html: fetcher.composeHTML(),
-                        baseURL: nil)
-                    .gesture(DragGesture(minimumDistance: 30, coordinateSpace: .local)
-                        .onEnded({ value in
-                            if value.translation.width < 0 {
-                                if fetcher.canDoNext {
-                                    fetcher.loadNext()
+            VStack(alignment: .center) {
+                if !fetcher.isBusy {
+                    WebView(link: nil,
+                            html: fetcher.composeHTML(),
+                            baseURL: nil)
+                        .gesture(DragGesture(minimumDistance: 30, coordinateSpace: .local)
+                            .onEnded({ value in
+                                if value.translation.width < 0 {
+                                    if fetcher.canDoNext {
+                                        fetcher.loadNext()
+                                    }
                                 }
-                            }
 
-                            if value.translation.width > 0 {
-                                if fetcher.canDoPrevious {
-                                    fetcher.loadPrevious()
+                                if value.translation.width > 0 {
+                                    if fetcher.canDoPrevious {
+                                        fetcher.loadPrevious()
+                                    }
                                 }
-                            }
-                        }))
-                ActivityIndicatorView(shouldAnimate: $fetcher.isBusy)
+                            }))
+                } else {
+                    ActivityIndicatorView(shouldAnimate: $fetcher.isBusy)
+                }
             }
-                .navigationBarTitle(Text(fetcher.currentWhatIf?.title ?? ""), displayMode: .large)
-                .navigationBarItems(
-                    leading: menuButton,
-                    trailing: WhatIfToolBarView(fetcher: fetcher))
+                .navigationBarTitle(Text((fetcher.isBusy ? "" : (fetcher.currentWhatIf?.title ?? "")).uppercased()),
+                                    displayMode: .large)
+                .navigationBarItems(leading: menuButton,
+                                    trailing: WhatIfToolBarView(fetcher: fetcher))
                 .toolbar {
                     NavigationToolbar(loadFirst: fetcher.loadFirst,
                                       loadPrevious: fetcher.loadPrevious,
@@ -54,9 +57,9 @@ struct WhatIfView: View {
                                       canDoNext: fetcher.canDoNext,
                                       isBusy: fetcher.isBusy)
                 }
-                .fullScreenCover(isPresented: $showingSearch, content: {
+                .sheet(isPresented: $showingSearch) {
                     WhatIfListView()
-                })
+                }
         }
             .environmentObject(fetcher)
     }
