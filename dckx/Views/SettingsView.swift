@@ -99,14 +99,6 @@ struct SettingsView_Previews: PreviewProvider {
 
 // MARK: - Settings
 
-enum SettingsKey {
-    static let showSensitiveContent              = "showSensitiveContent"
-    static let comicsViewerUseSystemFont         = "comicsViewerUseSystemFont"
-    static let comicsExplanationUseSystemFont    = "comicsExplanationUseSystemFont"
-    static let comicsExplanationUseSafariBrowser = "comicsExplanationUseSafariBrowser"
-    static let whatIfViewerUseSystemFont         = "whatIfViewerUseSystemFont"
-}
-
 class Settings: ObservableObject {
     @Published var showSensitiveContent: Bool {
         didSet {

@@ -26,6 +26,8 @@
 
 - (007) Enh: Display errors in WebView instead of print()
 
+- (015) New: Widget for Comics
+
 ## Done
 
 - ~~(000) New: Handle swipe left/right to navigate~~

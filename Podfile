@@ -8,10 +8,7 @@ def shared_pods
     # Recommended: Add the Firebase pod for Google Analytics
     pod 'Firebase/Analytics'
 
-    pod 'FontAwesome.swift'
     pod 'Kanna'
-    #pod 'LegoCV'
-    pod 'MBProgressHUD'
     pod 'nlohmann_json', '~>3.1.2'
     pod 'OpenCV', '~> 3.1.0.1'
     pod 'PromiseKit'
@@ -30,6 +27,16 @@ end
 target 'dckxTests' do
     inherit! :search_paths
     shared_pods
+end
+
+target 'dckx WidgetExtension' do
+    inherit! :search_paths
+    use_frameworks!
+    pod 'Kanna'
+    pod 'PromiseKit'
+    pod 'SDWebImage'
+    pod 'SDWebImageSwiftUI'
+    pod 'Sync'
 end
 
 target 'dckxUITests' do
