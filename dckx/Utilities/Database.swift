@@ -20,14 +20,13 @@ class Database {
     
     // MARK: Custom methods
     func copyDatabase() {
-        guard let sourceUrl = Bundle.main.url(forResource: "dckx", withExtension: "sqlite")/*,
-            let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first*/ else {
+        guard let sourceUrl = Bundle.main.url(forResource: "dckx", withExtension: "sqlite"),
+            let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else {
             return
         }
-//        let targetURL = URL(fileURLWithPath: "\(docsPath)/dckx.sqlite")
-        let targetURL = AppGroup.facts.containerURL.appendingPathComponent("dckx.sqlite")
+        let targetURL = URL(fileURLWithPath: "\(docsPath)/dckx.sqlite")
 
-        if !FileManager.default.fileExists(atPath: targetURL.path/*"\(docsPath)/dckx.sqlite"*/) {
+        if !FileManager.default.fileExists(atPath: "\(docsPath)/dckx.sqlite") {
             do {
                 try FileManager.default.copyItem(at: sourceUrl, to: targetURL)
             } catch {

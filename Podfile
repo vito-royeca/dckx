@@ -1,4 +1,4 @@
-platform :ios, '14.0'
+platform :ios, '15.5'
 use_frameworks!
 
 def shared_pods
@@ -32,11 +32,9 @@ end
 target 'dckx WidgetExtension' do
     inherit! :search_paths
     use_frameworks!
-    pod 'Kanna'
     pod 'PromiseKit'
     pod 'SDWebImage'
     pod 'SDWebImageSwiftUI'
-    pod 'Sync'
 end
 
 target 'dckxUITests' do

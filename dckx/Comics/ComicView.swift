@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Combine
-import BetterSafariView
+//import BetterSafariView
 import SDWebImage
 
 struct ComicView: View {
@@ -115,18 +115,18 @@ struct ComicToolBarView: View {
                 }
                     .disabled(fetcher.isBusy)
                     // comment out if running in XCTests
-                    .safariView(isPresented: $showingBrowser) {
-                        SafariView(
-                            url: URL(string: XkcdAPI.sharedInstance.explainURL(of: self.fetcher.currentComic!))!,
-                            configuration: SafariView.Configuration(
-                                entersReaderIfAvailable: true,
-                                barCollapsingEnabled: true
-                            )
-                        )                        
-                        .preferredBarAccentColor(.clear)
-                        .preferredControlAccentColor(.dckxBlue)
-                        .dismissButtonStyle(.close)
-                    }
+//                    .safariView(isPresented: $showingBrowser) {
+//                        SafariView(
+//                            url: URL(string: XkcdAPI.sharedInstance.explainURL(of: self.fetcher.currentComic!))!,
+//                            configuration: SafariView.Configuration(
+//                                entersReaderIfAvailable: true,
+//                                barCollapsingEnabled: true
+//                            )
+//                        )                        
+//                        .preferredBarAccentColor(.clear)
+//                        .preferredControlAccentColor(.dckxBlue)
+//                        .dismissButtonStyle(.close)
+//                    }
             } else {
                 Button(action: {
                     self.showingBrowser.toggle()

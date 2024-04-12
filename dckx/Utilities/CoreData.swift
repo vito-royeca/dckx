@@ -21,41 +21,36 @@ class CoreData {
     private init(storeType: DataStackStoreType) {
         if let bundleURL = Bundle(for: CoreData.self).url(forResource: "dckx", withExtension: "momd"),
             let objectModel = NSManagedObjectModel(contentsOf: bundleURL.appendingPathComponent("2020-04-05.mom")) {
-//            dataStack = DataStack(model: objectModel, storeType: storeType)
-            dataStack = DataStack(modelName: "dckx",
-                                  bundle: Bundle(for: CoreData.self),
-                                  storeType: storeType,
-                                  storeName: "dckx",
-                                  containerURL: AppGroup.facts.containerURL)
             
+            dataStack = DataStack(model: objectModel, storeType: storeType)
         } else {
             dataStack = DataStack(modelName: "dckx", storeType: storeType)
         }
     }
     
-    func fetchLastComic() -> Comic {
-        do {
-            let sensitiveData = SensitiveData()
-            let request: NSFetchRequest<NSFetchRequestResult> = Comic.fetchRequest()
-            request.fetchLimit = 1
-            request.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
-            request.predicate = sensitiveData.createComicsPredicate(basePredicate: nil)
-            
-            guard let array = try dataStack.execute(request, with: dataStack.mainContext) as? [NSManagedObject],
-                let comic = array.first as? Comic else {
-                
-                let error = NSError(domain: "",
-                                    code: 404,
-                                    userInfo: [NSLocalizedDescriptionKey: "Last Comic not found."])
-                throw(error)
-            }
-            
-            return comic
-        }
-        catch {
-            fatalError()
-        }
-    }
+//    func fetchLastComic() -> Comic {
+//        do {
+//            let sensitiveData = SensitiveData()
+//            let request: NSFetchRequest<NSFetchRequestResult> = Comic.fetchRequest()
+//            request.fetchLimit = 1
+//            request.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
+//            request.predicate = sensitiveData.createComicsPredicate(basePredicate: nil)
+//
+//            guard let array = try dataStack.execute(request, with: dataStack.mainContext) as? [NSManagedObject],
+//                let comic = array.first as? Comic else {
+//
+//                let error = NSError(domain: "",
+//                                    code: 404,
+//                                    userInfo: [NSLocalizedDescriptionKey: "Last Comic not found."])
+//                throw(error)
+//            }
+//
+//            return comic
+//        }
+//        catch {
+//            fatalError()
+//        }
+//    }
     
     // MARK: Comic Database methods
     func saveComic(data: [String: Any]) -> Promise<Void> {

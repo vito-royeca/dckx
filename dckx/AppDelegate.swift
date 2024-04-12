@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-import SwiftRater
+//import SwiftRater
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,9 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 
         // SwiftRater
-        SwiftRater.daysUntilPrompt = 7
-        SwiftRater.daysBeforeReminding = 7
-        SwiftRater.appLaunched()
+//        SwiftRater.daysUntilPrompt = 7
+//        SwiftRater.daysBeforeReminding = 7
+//        SwiftRater.appLaunched()
         
         return true
     }

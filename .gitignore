@@ -92,3 +92,4 @@ iOSInjectionProject/
 
 #my additions
 tmp
+*.DS_Store

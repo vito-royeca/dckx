@@ -12,76 +12,23 @@ import CoreData
 import PromiseKit
 
 struct Provider: TimelineProvider {
-//    init () {
-//        Database.sharedInstance.copyDatabase()
-//    }
-
-    func fetchLastComic() -> Comic {
-        do {
-            let sensitiveData = SensitiveData()
-            let request: NSFetchRequest<NSFetchRequestResult> = Comic.fetchRequest()
-            request.fetchLimit = 1
-            request.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
-            request.predicate = sensitiveData.createComicsPredicate(basePredicate: nil)
-            
-            let dataStack = CoreData.sharedInstance.dataStack
-            
-            guard let array = try dataStack.execute(request, with: dataStack.mainContext) as? [NSManagedObject],
-                let comic = array.first as? Comic else {
-                
-                let error = NSError(domain: "",
-                                    code: 404,
-                                    userInfo: [NSLocalizedDescriptionKey: "Last Comic not found."])
-                throw(error)
-            }
-            
-            return comic
-        }
-        catch {
-            fatalError()
-        }
-    }
-    
-    func fetchComic(num: Int32) -> Comic {
-        do {
-            let dataStack = CoreData.sharedInstance.dataStack
-            
-            if let comic = try dataStack.fetch(num, inEntityNamed: String(describing: Comic.self)) as? Comic {
-                return comic
-            } else {
-                let error = NSError(domain: "",
-                                    code: 404,
-                                    userInfo: [NSLocalizedDescriptionKey: "Comic with ID \(num) not found."])
-                throw(error)
-            }
-        } catch {
-            fatalError()
-        }
-    }
-    
-//    func fetchRandomComic() -> Comic {
-//        let comic = fetchLastComic()
-//        let random = Int.random(in: 0 ... Int(comic.num))
-//        return fetchComic(num: Int32(random))
-//    }
-    
     func placeholder(in context: Context) -> SimpleEntry {
-        return SimpleEntry(date: Date(), comic: fetchLastComic())
+        return SimpleEntry(date: Date()/*, comic: fetchLastComic()*/)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), comic: fetchLastComic())
+        let entry = SimpleEntry(date: Date()/*, comic: fetchLastComic()*/)
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let comic = fetchLastComic()
-        let currentDate = Date()
+//        let comic = fetchLastComic()
         var entries: [SimpleEntry] = []
 
         for _ in 0 ..< 5 {
-            let random = Int.random(in: 0 ... Int(comic.num))
-            let entry = SimpleEntry(date: currentDate, comic: fetchComic(num: Int32(random)))
+//            let random = Int.random(in: 0 ... Int(comic.num))
+            let currentDate = Date()
+            let entry = SimpleEntry(date: currentDate/*, comic: fetchComic(num: Int32(random))*/)
             entries.append(entry)
         }
 
@@ -92,7 +39,7 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     var date: Date
-    let comic: Comic?
+//    let comic: Comic?
 }
 
 struct PlaceholderView : View {
@@ -105,7 +52,7 @@ struct dckx_WidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        dckxWidgetView(urlString: entry.comic?.img ?? "")
+        dckxWidgetView(urlString: /*entry.comic?.img ??*/ "")
     }
 }
 

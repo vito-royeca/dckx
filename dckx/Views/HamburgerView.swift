@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import SwiftRater
+//import SwiftRater
 
 enum HMainView {
     case comics, whatIfs, settings
@@ -140,7 +140,7 @@ struct HMenuView: View {
                     showingMenu.toggle()
                 }))
         .onAppear {
-            SwiftRater.check()
+//            SwiftRater.check()
         }
     }
 }
