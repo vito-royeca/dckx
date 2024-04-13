@@ -15,6 +15,12 @@
 		7649C8842BCA63EE00A54E5F /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8802BCA63EE00A54E5F /* Panel.cpp */; };
 		7649C8882BCA63EE00A54E5F /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8832BCA63EE00A54E5F /* ComicsPanelExtractor.cpp */; };
 		765579712BCB19EE009EB2E0 /* opencv2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765579702BCB19EE009EB2E0 /* opencv2.xcframework */; };
+		76A0FD812BCB26A200C0002E /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 76A0FD802BCB26A200C0002E /* BetterSafariView */; };
+		76A0FD832BCB27C200C0002E /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 76A0FD822BCB27C200C0002E /* BetterSafariView */; };
+		76A0FD852BCB286C00C0002E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 76A0FD842BCB286C00C0002E /* FirebaseAnalytics */; };
+		76A0FD872BCB286C00C0002E /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 76A0FD862BCB286C00C0002E /* FirebaseAnalyticsSwift */; };
+		76A0FD882BCB288F00C0002E /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E5F240A2DA200138D11 /* Database.swift */; };
+		76A0FD892BCB28C000C0002E /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E5F240A2DA200138D11 /* Database.swift */; };
 		8B0DBDF5262DFB02004FA0DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9823F5F444008446F4 /* AppDelegate.swift */; };
 		8B0DBDF9262DFB03004FA0DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9823F5F444008446F4 /* AppDelegate.swift */; };
 		8B0DBE00262DFB81004FA0DB /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B2C33262C930500B35825 /* HamburgerView.swift */; };
@@ -300,6 +306,7 @@
 				580566AA2BC9E2E900187556 /* FirebaseAnalytics in Frameworks */,
 				580566AF2BC9E38100187556 /* Kanna in Frameworks */,
 				765579712BCB19EE009EB2E0 /* opencv2.xcframework in Frameworks */,
+				76A0FD812BCB26A200C0002E /* BetterSafariView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +321,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76A0FD872BCB286C00C0002E /* FirebaseAnalyticsSwift in Frameworks */,
+				76A0FD852BCB286C00C0002E /* FirebaseAnalytics in Frameworks */,
+				76A0FD832BCB27C200C0002E /* BetterSafariView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +568,7 @@
 				580566A92BC9E2E900187556 /* FirebaseAnalytics */,
 				580566AB2BC9E2E900187556 /* FirebaseAnalyticsSwift */,
 				580566AE2BC9E38100187556 /* Kanna */,
+				76A0FD802BCB26A200C0002E /* BetterSafariView */,
 			);
 			productName = dckx;
 			productReference = 8B4F4B9523F5F444008446F4 /* dckx.app */;
@@ -596,6 +607,9 @@
 			);
 			name = dckxUITests;
 			packageProductDependencies = (
+				76A0FD822BCB27C200C0002E /* BetterSafariView */,
+				76A0FD842BCB286C00C0002E /* FirebaseAnalytics */,
+				76A0FD862BCB286C00C0002E /* FirebaseAnalyticsSwift */,
 			);
 			productName = dckxUITests;
 			productReference = 8B4F4BB623F5F445008446F4 /* dckxUITests.xctest */;
@@ -816,6 +830,7 @@
 				8B658021240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
 				8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
 				8B658018240AFED800A245DC /* MailView.swift in Sources */,
+				76A0FD892BCB28C000C0002E /* Database.swift in Sources */,
 				8B626D712401B0A900972EED /* Constants.swift in Sources */,
 				8B658023240B218700A245DC /* SceneDelegate.swift in Sources */,
 				8B82B2C526192A9C008AD11D /* SettingsView.swift in Sources */,
@@ -853,6 +868,7 @@
 				8B658019240AFED800A245DC /* MailView.swift in Sources */,
 				8B82B2B62618C6AD008AD11D /* ListRowView.swift in Sources */,
 				8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
+				76A0FD882BCB288F00C0002E /* Database.swift in Sources */,
 				8BA50E6A240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8B626D8A2402274A00972EED /* Constants.swift in Sources */,
 				8B82B2C626192A9C008AD11D /* SettingsView.swift in Sources */,
@@ -1361,6 +1377,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 580566AD2BC9E38100187556 /* XCRemoteSwiftPackageReference "kanna" */;
 			productName = Kanna;
+		};
+		76A0FD802BCB26A200C0002E /* BetterSafariView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */;
+			productName = BetterSafariView;
+		};
+		76A0FD822BCB27C200C0002E /* BetterSafariView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */;
+			productName = BetterSafariView;
+		};
+		76A0FD842BCB286C00C0002E /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 580566A82BC9E2E900187556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		76A0FD862BCB286C00C0002E /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 580566A82BC9E2E900187556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -17,8 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // UI custumization
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.font : UIFont.dckxRegularText],
-                                                                                                          for: .normal)
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self])
+            .setTitleTextAttributes([.font : UIFont.dckxRegularText],
+                                    for: .normal)
         
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont.dckxLargeTitleText]
         UINavigationBar.appearance().titleTextAttributes = [.font : UIFont.dckxTitleText]

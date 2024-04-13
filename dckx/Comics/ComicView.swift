@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Combine
-//import BetterSafariView
+import BetterSafariView
 //import SDWebImage
 
 struct ComicView: View {
