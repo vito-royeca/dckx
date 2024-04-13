@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
+//import SDWebImageSwiftUI
 
 struct ListRowView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -19,7 +19,7 @@ struct ListRowView: View {
     var isSeen: Bool
     var action: (Int32) -> Void
     var font: Font
-    @ObservedObject var imageManager: ImageManager
+//    @ObservedObject var imageManager: ImageManager
     
     init(num: Int32, thumbnail: String, title: String, isFavorite: Bool,
          isSeen: Bool, font: Font, action: @escaping (Int32) -> Void) {
@@ -30,23 +30,23 @@ struct ListRowView: View {
         self.isSeen = isSeen
         self.font = font
         self.action = action
-        imageManager = ImageManager(url: URL(string: thumbnail))
+//        imageManager = ImageManager(url: URL(string: thumbnail))
     }
     
     var body: some View {
         HStack {
-            Image(uiImage: imageManager.image ?? UIImage(named: "logo")!)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 70, height: 70)
-                .background(colorScheme == .dark ? Color.init(UIColor.lightGray) : Color.clear)
-                .cornerRadius(5)
-                .onAppear {
-                    self.imageManager.load()
-                }
-                .onDisappear {
-                    self.imageManager.cancel()
-                }
+//            Image(uiImage: imageManager.image ?? UIImage(named: "logo")!)
+//                .resizable()
+//                .aspectRatio(contentMode: .fit)
+//                .frame(width: 70, height: 70)
+//                .background(colorScheme == .dark ? Color.init(UIColor.lightGray) : Color.clear)
+//                .cornerRadius(5)
+//                .onAppear {
+//                    self.imageManager.load()
+//                }
+//                .onDisappear {
+//                    self.imageManager.cancel()
+//                }
             Spacer()
             VStack {
                 Spacer()

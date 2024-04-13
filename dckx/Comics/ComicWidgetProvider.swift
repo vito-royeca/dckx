@@ -10,11 +10,11 @@ import Foundation
 
 class ComicWidgetProvider {
     func reloadData() {
-        let dataStack = CoreData.sharedInstance.dataStack
-        
-        dataStack.newBackgroundContext().perform({
-            
-        })
+//        let dataStack = CoreData.sharedInstance.dataStack
+//        
+//        dataStack.newBackgroundContext().perform({
+//            
+//        })
     }
     
 //    private func fetchLastComic() -> Comic {

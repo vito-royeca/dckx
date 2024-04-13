@@ -9,7 +9,7 @@
 import SwiftUI
 import Combine
 //import BetterSafariView
-import SDWebImage
+//import SDWebImage
 
 struct ComicView: View {
     @StateObject var fetcher = ComicFetcher()
@@ -202,11 +202,11 @@ class ComicItemSource: NSObject,  UIActivityItemSource {
     }
     
     func image() -> UIImage? {
-        if let comic = comic,
-            let img = comic.img,
-            let image = SDImageCache.shared.imageFromCache(forKey: img) {
-            return image
-        }
+//        if let comic = comic,
+//            let img = comic.img,
+//            let image = SDImageCache.shared.imageFromCache(forKey: img) {
+//            return image
+//        }
         
         return nil
     }

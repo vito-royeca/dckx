@@ -8,7 +8,7 @@
 
 import SwiftUI
 import WebKit
-import ReadabilityKit
+//import ReadabilityKit
 
 struct WebView: UIViewRepresentable {
     private let webView = WKWebView()
@@ -63,22 +63,22 @@ struct WebView: UIViewRepresentable {
     func updateUIView(_ uiView: WKWebView, context: UIViewRepresentableContext<WebView>) {
         if let link = link,
             let url = URL(string: link) {
-            Readability.parse(url: url, completion: { data in
-                let title = (data?.title ?? "")
-                let text = (data?.text ?? "").replacingOccurrences(of: "\n", with: "<p class='answer'>").replacingOccurrences(of: "|<>|", with: "")
-                
-                let css = UserDefaults.standard.bool(forKey: SettingsKey.comicsExplanationUseSystemFont) ? "system.css" : "dckx.css"
-                let head = "<head><link href='\(css)' rel='stylesheet'></head>"
-                
-                var html = "<html>\(head)<body>"
-                html += "<h1>\(title)</h1>"
-                html += text
-                html += "</body></html>"
-
-                uiView.loadHTMLString(html, baseURL: baseURL)
-            })
+//            Readability.parse(url: url, completion: { data in
+//                let title = (data?.title ?? "")
+//                let text = (data?.text ?? "").replacingOccurrences(of: "\n", with: "<p class='answer'>").replacingOccurrences(of: "|<>|", with: "")
+//                
+//                let css = UserDefaults.standard.bool(forKey: SettingsKey.comicsExplanationUseSystemFont) ? "system.css" : "dckx.css"
+//                let head = "<head><link href='\(css)' rel='stylesheet'></head>"
+//                
+//                var html = "<html>\(head)<body>"
+//                html += "<h1>\(title)</h1>"
+//                html += text
+//                html += "</body></html>"
+//
+//                uiView.loadHTMLString(html, baseURL: baseURL)
+//            })
             
-//                uiView.load(URLRequest(url: url))
+                uiView.load(URLRequest(url: url))
             
         } else if let html = html {
             uiView.loadHTMLString(html, baseURL: baseURL)

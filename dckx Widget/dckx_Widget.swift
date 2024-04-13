@@ -9,7 +9,7 @@
 import WidgetKit
 import SwiftUI
 import CoreData
-import PromiseKit
+//import PromiseKit
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {

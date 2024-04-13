@@ -228,10 +228,10 @@ class ComicListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observab
         let fetchRequest = createFetchRequest(query: query,
                                               scopeIndex: scopeIndex)
         
-        controller = NSFetchedResultsController<Comic>(fetchRequest: fetchRequest,
-                                                       managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
-                                                       sectionNameKeyPath: nil,
-                                                       cacheName: "ComicCache")
+//        controller = NSFetchedResultsController<Comic>(fetchRequest: fetchRequest,
+//                                                       managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
+//                                                       sectionNameKeyPath: nil,
+//                                                       cacheName: "ComicCache")
         controller!.delegate = self
         
         do {

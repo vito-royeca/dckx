@@ -9,8 +9,8 @@
 import Foundation
 import Combine
 import SwiftUI
-import PromiseKit
-import SDWebImage
+//import PromiseKit
+//import SDWebImage
 
 class ComicFetcher: ObservableObject {
     @Published var currentComic: Comic?
@@ -33,7 +33,7 @@ class ComicFetcher: ObservableObject {
         do {
             currentComic.isFavorite = !currentComic.isFavorite
             
-            try CoreData.sharedInstance.dataStack.mainContext.save()
+//            try CoreData.sharedInstance.dataStack.mainContext.save()
             self.load(num: currentComic.num)
         } catch {
             print(error)
@@ -49,7 +49,7 @@ class ComicFetcher: ObservableObject {
             currentComic.isRead = true
             
             do {
-                try CoreData.sharedInstance.dataStack.mainContext.save()
+//                try CoreData.sharedInstance.dataStack.mainContext.save()
             } catch {
                 print(error)
             }
@@ -61,58 +61,58 @@ class ComicFetcher: ObservableObject {
     func load(num: Int32) {
         isBusy = true
         
-        firstly {
-            XkcdAPI.sharedInstance.fetchComic(num: num)
-        }.then { comic in
-            self.fetchImage(comic: comic)
-        }.done { comic in
-            let sensitiveData = SensitiveData()
-            
-            if !sensitiveData.showSensitiveContent && sensitiveData.comicContainsSensitiveData(comic) {
-                let newNum = (num > self.currentComic?.num ?? 0) ? num + 1 : num - 1
-                self.load(num: newNum)
-            } else {
-                self.currentComic = comic
-                self.toggleIsRead()
-                self.isBusy = false
-            }
-        }.catch { error in
-            self.isBusy = false
-            print(error)
-        }
+//        firstly {
+//            XkcdAPI.sharedInstance.fetchComic(num: num)
+//        }.then { comic in
+//            self.fetchImage(comic: comic)
+//        }.done { comic in
+//            let sensitiveData = SensitiveData()
+//            
+//            if !sensitiveData.showSensitiveContent && sensitiveData.comicContainsSensitiveData(comic) {
+//                let newNum = (num > self.currentComic?.num ?? 0) ? num + 1 : num - 1
+//                self.load(num: newNum)
+//            } else {
+//                self.currentComic = comic
+//                self.toggleIsRead()
+//                self.isBusy = false
+//            }
+//        }.catch { error in
+//            self.isBusy = false
+//            print(error)
+//        }
     }
     
-    func fetchImage(comic: Comic) -> Promise<Comic> {
-        return Promise { seal in
-            guard let urlString = comic.img,
-                let url = URL(string: urlString) else {
-                fatalError("Malformed URL")
-            }
-            
-            if let _ = SDImageCache.shared.imageFromCache(forKey: urlString) {
-                seal.fulfill(comic)
-            } else {
-                let callback = { (image: UIImage?, data: Data?, error: Error?, finished: Bool) in
-                    if let error = error {
-                        seal.reject(error)
-                    } else {
-                        SDWebImageManager.shared.imageCache.store(image,
-                                                                  imageData: data,
-                                                                  forKey: urlString,
-                                                                  cacheType: .disk,
-                                                                  completion: {
-                                                                    seal.fulfill(comic)
-                        })
-                    }
-                }
-                SDWebImageManager.shared.imageLoader.requestImage(with: url,
-                                                                  options: .highPriority,
-                                                                  context: nil,
-                                                                  progress: nil,
-                                                                  completed: callback)
-            }
-        }
-    }
+//    func fetchImage(comic: Comic) -> Promise<Comic> {
+//        return Promise { seal in
+//            guard let urlString = comic.img,
+//                let url = URL(string: urlString) else {
+//                fatalError("Malformed URL")
+//            }
+//            
+//            if let _ = SDImageCache.shared.imageFromCache(forKey: urlString) {
+//                seal.fulfill(comic)
+//            } else {
+//                let callback = { (image: UIImage?, data: Data?, error: Error?, finished: Bool) in
+//                    if let error = error {
+//                        seal.reject(error)
+//                    } else {
+//                        SDWebImageManager.shared.imageCache.store(image,
+//                                                                  imageData: data,
+//                                                                  forKey: urlString,
+//                                                                  cacheType: .disk,
+//                                                                  completion: {
+//                                                                    seal.fulfill(comic)
+//                        })
+//                    }
+//                }
+//                SDWebImageManager.shared.imageLoader.requestImage(with: url,
+//                                                                  options: .highPriority,
+//                                                                  context: nil,
+//                                                                  progress: nil,
+//                                                                  completed: callback)
+//            }
+//        }
+//    }
 }
 
 // MARK: - NavigationBarViewDelegate
@@ -147,23 +147,23 @@ extension ComicFetcher: NavigationToolbarDelegate {
     func loadRandom() {
         isBusy = true
         
-        firstly {
-            XkcdAPI.sharedInstance.fetchRandomComic()
-        }.then { comic in
-            self.fetchImage(comic: comic)
-        }.done { comic in
-            let sensitiveData = SensitiveData()
-            
-            if !sensitiveData.showSensitiveContent && sensitiveData.comicContainsSensitiveData(comic) {
-                self.loadRandom()
-            } else {
-                self.currentComic = comic
-                self.toggleIsRead()
-                self.isBusy = false
-            }
-        }.catch { error in
-            print(error)
-        }
+//        firstly {
+//            XkcdAPI.sharedInstance.fetchRandomComic()
+//        }.then { comic in
+//            self.fetchImage(comic: comic)
+//        }.done { comic in
+//            let sensitiveData = SensitiveData()
+//            
+//            if !sensitiveData.showSensitiveContent && sensitiveData.comicContainsSensitiveData(comic) {
+//                self.loadRandom()
+//            } else {
+//                self.currentComic = comic
+//                self.toggleIsRead()
+//                self.isBusy = false
+//            }
+//        }.catch { error in
+//            print(error)
+//        }
     }
     
     func loadNext() {
@@ -176,25 +176,25 @@ extension ComicFetcher: NavigationToolbarDelegate {
     func loadLast() {
         isBusy = true
         
-        firstly {
-            XkcdAPI.sharedInstance.fetchLastComic()
-        }.then { comic in
-            self.fetchImage(comic: comic)
-        }.done { comic in
-            let sensitiveData = SensitiveData()
-            
-            if !sensitiveData.showSensitiveContent && sensitiveData.comicContainsSensitiveData(comic) {
-                let newNum = comic.num - 1
-                self.load(num: newNum)
-            } else {
-                self.currentComic = comic
-                self.lastComic = comic
-                self.toggleIsRead()
-                self.isBusy = false
-            }
-        }.catch { error in
-            print(error)
-            self.isBusy = false
-        }
+//        firstly {
+//            XkcdAPI.sharedInstance.fetchLastComic()
+//        }.then { comic in
+//            self.fetchImage(comic: comic)
+//        }.done { comic in
+//            let sensitiveData = SensitiveData()
+//            
+//            if !sensitiveData.showSensitiveContent && sensitiveData.comicContainsSensitiveData(comic) {
+//                let newNum = comic.num - 1
+//                self.load(num: newNum)
+//            } else {
+//                self.currentComic = comic
+//                self.lastComic = comic
+//                self.toggleIsRead()
+//                self.isBusy = false
+//            }
+//        }.catch { error in
+//            print(error)
+//            self.isBusy = false
+//        }
     }
 }

@@ -1,5 +1,5 @@
 {
-  "originHash" : "e261f38bb6c2e49503864fc72d6970c5ff7a22a51f7af4cb41c2a76233967592",
+  "originHash" : "557f43fa6e15de9cc657fea573f797a7cecb7141ec694d039beb6690a01580a2",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -134,6 +134,15 @@
       "state" : {
         "revision" : "9f0c76544701845ad98716f3f6a774a892152bcb",
         "version" : "1.26.0"
+      }
+    },
+    {
+      "identity" : "swiftrater",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/takecian/SwiftRater.git",
+      "state" : {
+        "revision" : "df9874fe285ef342c2972c3bc456fef439ceac66",
+        "version" : "2.1.2"
       }
     }
   ],

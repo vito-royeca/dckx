@@ -9,7 +9,7 @@
 import SwiftUI
 import Combine
 import CoreData
-import PromiseKit
+//import PromiseKit
 
 // MARK: - WhatIfListView
 
@@ -243,11 +243,11 @@ class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, Observa
         let fetchRequest = createFetchRequest(query: query,
                                               scopeIndex: scopeIndex)
         
-        controller = NSFetchedResultsController<WhatIf>(fetchRequest: fetchRequest,
-                                                        managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
-                                                        sectionNameKeyPath: nil,
-                                                        cacheName: "WhatIfCache")
-        controller!.delegate = self
+//        controller = NSFetchedResultsController<WhatIf>(fetchRequest: fetchRequest,
+//                                                        managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
+//                                                        sectionNameKeyPath: nil,
+//                                                        cacheName: "WhatIfCache")
+//        controller!.delegate = self
         
         do {
             NSFetchedResultsController<WhatIf>.deleteCache(withName: controller!.cacheName)

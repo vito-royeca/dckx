@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		580566A02BC9DD4300187556 /* Ji.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9ADC0E260AC46600B0DED8 /* Ji.framework */; };
 		580566AA2BC9E2E900187556 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 580566A92BC9E2E900187556 /* FirebaseAnalytics */; };
 		580566AC2BC9E2E900187556 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 580566AB2BC9E2E900187556 /* FirebaseAnalyticsSwift */; };
 		580566AF2BC9E38100187556 /* Kanna in Frameworks */ = {isa = PBXBuildFile; productRef = 580566AE2BC9E38100187556 /* Kanna */; };
+		7649C8782BCA50C100A54E5F /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */; };
+		7649C87C2BCA5E5B00A54E5F /* ComicsData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C87A2BCA5E5B00A54E5F /* ComicsData.cpp */; };
+		7649C8842BCA63EE00A54E5F /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8802BCA63EE00A54E5F /* Panel.cpp */; };
+		7649C8882BCA63EE00A54E5F /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8832BCA63EE00A54E5F /* ComicsPanelExtractor.cpp */; };
+		765579712BCB19EE009EB2E0 /* opencv2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765579702BCB19EE009EB2E0 /* opencv2.xcframework */; };
 		8B0DBDF5262DFB02004FA0DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9823F5F444008446F4 /* AppDelegate.swift */; };
 		8B0DBDF9262DFB03004FA0DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9823F5F444008446F4 /* AppDelegate.swift */; };
 		8B0DBE00262DFB81004FA0DB /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B2C33262C930500B35825 /* HamburgerView.swift */; };
@@ -19,11 +23,6 @@
 		8B1A4B0A261E4F4B00DBCD7B /* dckx.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B33FE3125FD534F00CD0F35 /* dckx.xcdatamodeld */; };
 		8B1A4B29261EF51A00DBCD7B /* SearchNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10B326169EBD00664335 /* SearchNavigation.swift */; };
 		8B1A4B2D261EF51B00DBCD7B /* SearchNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10B326169EBD00664335 /* SearchNavigation.swift */; };
-		8B1A4C0F2624701200DBCD7B /* OpenCVWrapper.h in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDD2C62609828A00B7B5F9 /* OpenCVWrapper.h */; };
-		8B1A4C162624708700DBCD7B /* OpenCVWrapper.h in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDD2C62609828A00B7B5F9 /* OpenCVWrapper.h */; };
-		8B1A4C1A2624712000DBCD7B /* OpenCVWrapper.h in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDD2C62609828A00B7B5F9 /* OpenCVWrapper.h */; };
-		8B1A4C3726253CC000DBCD7B /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */; };
-		8B1A4C3B26253CC100DBCD7B /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */; };
 		8B23367E23F646A700C88BA1 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23367D23F646A700C88BA1 /* CoreData.swift */; };
 		8B23367F23F646AC00C88BA1 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23367D23F646A700C88BA1 /* CoreData.swift */; };
 		8B23368023F646AC00C88BA1 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23367D23F646A700C88BA1 /* CoreData.swift */; };
@@ -34,7 +33,7 @@
 		8B27AE42262FB9AB00351106 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B27AE41262FB9AB00351106 /* SwiftUI.framework */; };
 		8B27AE45262FB9AB00351106 /* dckx_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B27AE44262FB9AB00351106 /* dckx_Widget.swift */; };
 		8B27AE47262FB9AD00351106 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B27AE46262FB9AD00351106 /* Assets.xcassets */; };
-		8B27AE4B262FB9AD00351106 /* dckx WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8B27AE3E262FB9AB00351106 /* dckx WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8B27AE4B262FB9AD00351106 /* dckx WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8B27AE3E262FB9AB00351106 /* dckx WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8B27AE55262FBA3C00351106 /* dckxWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B27AE54262FBA3C00351106 /* dckxWidgetView.swift */; };
 		8B27AE5A262FBAB100351106 /* dckx.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B33FE3125FD534F00CD0F35 /* dckx.xcdatamodeld */; };
 		8B30499F2418263E00D549DE /* WhatIfListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B30499E2418263E00D549DE /* WhatIfListView.swift */; };
@@ -45,7 +44,6 @@
 		8B3049A5241830CC00D549DE /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3049A2241830CC00D549DE /* ActivityIndicatorView.swift */; };
 		8B33FE3625FD534F00CD0F35 /* dckx.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B33FE3125FD534F00CD0F35 /* dckx.xcdatamodeld */; };
 		8B3569182631D74700719BB8 /* ComicWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3569172631D74700719BB8 /* ComicWidgetProvider.swift */; };
-		8B45FAB4263072ED00221AE0 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 8B45FAB3263072ED00221AE0 /* BetterSafariView */; };
 		8B4A1285240828FD00D4F8B2 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A1284240828FC00D4F8B2 /* SnapshotHelper.swift */; };
 		8B4F4B9923F5F444008446F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9823F5F444008446F4 /* AppDelegate.swift */; };
 		8B4F4B9B23F5F444008446F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F4B9A23F5F444008446F4 /* SceneDelegate.swift */; };
@@ -135,17 +133,10 @@
 		8B8D9657260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */; };
 		8B8D9658260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */; };
 		8B8D9659260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */; };
-		8B9ADBED260A78F900B0DED8 /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B9ADBEB260A78F900B0DED8 /* Panel.cpp */; };
-		8B9ADBEE260A78F900B0DED8 /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B9ADBEB260A78F900B0DED8 /* Panel.cpp */; };
-		8B9ADBEF260A78F900B0DED8 /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B9ADBEB260A78F900B0DED8 /* Panel.cpp */; };
-		8B9ADBF3260A8CC200B0DED8 /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */; };
-		8B9ADBF7260A8CC300B0DED8 /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */; };
 		8BA50E4D24097D0200138D11 /* WhatIfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4C24097D0200138D11 /* WhatIfView.swift */; };
 		8BA50E4E24097D0200138D11 /* WhatIfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4C24097D0200138D11 /* WhatIfView.swift */; };
 		8BA50E4F24097D0200138D11 /* WhatIfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E4C24097D0200138D11 /* WhatIfView.swift */; };
 		8BA50E60240A2DA200138D11 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E5F240A2DA200138D11 /* Database.swift */; };
-		8BA50E61240A2DA200138D11 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E5F240A2DA200138D11 /* Database.swift */; };
-		8BA50E62240A2DA200138D11 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E5F240A2DA200138D11 /* Database.swift */; };
 		8BA50E68240A384400138D11 /* WhatIfFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E67240A384400138D11 /* WhatIfFetcher.swift */; };
 		8BA50E69240A384400138D11 /* WhatIfFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E67240A384400138D11 /* WhatIfFetcher.swift */; };
 		8BA50E6A240A384400138D11 /* WhatIfFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E67240A384400138D11 /* WhatIfFetcher.swift */; };
@@ -154,7 +145,6 @@
 		8BA50E6E240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
 		8BA5921925FEBEC1001CD883 /* HideScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA5921825FEBEC1001CD883 /* HideScrollView.swift */; };
 		8BAC10B426169EBD00664335 /* SearchNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10B326169EBD00664335 /* SearchNavigation.swift */; };
-		8BACA212260A6ADC008B51C5 /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */; };
 		8BBA24E3262B7E86000483DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BBA24E2262B7E86000483DE /* GoogleService-Info.plist */; };
 		8BBA24E4262B7E86000483DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BBA24E2262B7E86000483DE /* GoogleService-Info.plist */; };
 		8BBA24E5262B7E86000483DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BBA24E2262B7E86000483DE /* GoogleService-Info.plist */; };
@@ -162,7 +152,6 @@
 		8BE8ECA4243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
 		8BE8ECA5243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
 		8BFA14B5262A4E0000BAD359 /* whatif.css in Resources */ = {isa = PBXBuildFile; fileRef = 8BFA14B4262A4E0000BAD359 /* whatif.css */; };
-		8BFDD2BF2609826000B7B5F9 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */; };
 		8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
@@ -193,20 +182,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		8B27AE4C262FB9AD00351106 /* Embed App Extensions */ = {
+		8B27AE4C262FB9AD00351106 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				8B27AE4B262FB9AD00351106 /* dckx WidgetExtension.appex in Embed App Extensions */,
+				8B27AE4B262FB9AD00351106 /* dckx WidgetExtension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7649C7D72BCA026200A54E5F /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../Downloads/opencv2.framework; sourceTree = "<group>"; };
+		7649C7DD2BCA0BF600A54E5F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		7649C8762BCA50C100A54E5F /* OpenCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCV.h; sourceTree = "<group>"; };
+		7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
+		7649C87A2BCA5E5B00A54E5F /* ComicsData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComicsData.cpp; sourceTree = "<group>"; };
+		7649C87B2BCA5E5B00A54E5F /* ComicsData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComicsData.hpp; sourceTree = "<group>"; };
+		7649C8802BCA63EE00A54E5F /* Panel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Panel.cpp; sourceTree = "<group>"; };
+		7649C8812BCA63EE00A54E5F /* Panel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Panel.hpp; sourceTree = "<group>"; };
+		7649C8822BCA63EE00A54E5F /* ComicsPanelExtractor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ComicsPanelExtractor.hpp; sourceTree = "<group>"; };
+		7649C8832BCA63EE00A54E5F /* ComicsPanelExtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ComicsPanelExtractor.cpp; sourceTree = "<group>"; };
+		765579702BCB19EE009EB2E0 /* opencv2.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = opencv2.xcframework; sourceTree = "<group>"; };
 		8B1A4BF32624430F00DBCD7B /* dckx-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dckx-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B1A4C4426253E2700DBCD7B /* Ji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B23367D23F646A700C88BA1 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
@@ -269,8 +269,6 @@
 		8B8D9632260C5DEF00A3C273 /* reader.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = reader.js; sourceTree = "<group>"; };
 		8B8D963C260C5DFF00A3C273 /* dckx.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = dckx.css; sourceTree = "<group>"; };
 		8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = epistemic_uncertainty.png; sourceTree = "<group>"; };
-		8B9ADBEB260A78F900B0DED8 /* Panel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Panel.cpp; sourceTree = "<group>"; };
-		8B9ADBEC260A78F900B0DED8 /* Panel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Panel.hpp; sourceTree = "<group>"; };
 		8B9ADC0E260AC46600B0DED8 /* Ji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BA50E4C24097D0200138D11 /* WhatIfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfView.swift; sourceTree = "<group>"; };
 		8BA50E5F240A2DA200138D11 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
@@ -278,13 +276,9 @@
 		8BA50E6B240A425500138D11 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		8BA5921825FEBEC1001CD883 /* HideScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideScrollView.swift; sourceTree = "<group>"; };
 		8BAC10B326169EBD00664335 /* SearchNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigation.swift; sourceTree = "<group>"; };
-		8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComicsPanelExtractor.cpp; sourceTree = "<group>"; };
-		8BACA211260A6ADC008B51C5 /* ComicsPanelExtractor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComicsPanelExtractor.hpp; sourceTree = "<group>"; };
 		8BBA24E2262B7E86000483DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8BE8ECA2243A9B1E0037036E /* dckx.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = dckx.sqlite; sourceTree = "<group>"; };
 		8BFA14B4262A4E0000BAD359 /* whatif.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = whatif.css; sourceTree = "<group>"; };
-		8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
-		8BFDD2C62609828A00B7B5F9 /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 		8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ResignKeyboardOnDragGesture.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -305,7 +299,7 @@
 				580566AC2BC9E2E900187556 /* FirebaseAnalyticsSwift in Frameworks */,
 				580566AA2BC9E2E900187556 /* FirebaseAnalytics in Frameworks */,
 				580566AF2BC9E38100187556 /* Kanna in Frameworks */,
-				580566A02BC9DD4300187556 /* Ji.framework in Frameworks */,
+				765579712BCB19EE009EB2E0 /* opencv2.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,7 +314,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B45FAB4263072ED00221AE0 /* BetterSafariView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +335,8 @@
 			isa = PBXGroup;
 			children = (
 				8B7E51D4262FEC80002A094E /* dckx WidgetExtension.entitlements */,
+				8B7E51CF262FEAC7002A094E /* dckx.entitlements */,
+				765579702BCB19EE009EB2E0 /* opencv2.xcframework */,
 				8B4F4B9723F5F444008446F4 /* dckx */,
 				8B4F4BAE23F5F445008446F4 /* dckxTests */,
 				8B4F4BB923F5F445008446F4 /* dckxUITests */,
@@ -365,7 +360,6 @@
 		8B4F4B9723F5F444008446F4 /* dckx */ = {
 			isa = PBXGroup;
 			children = (
-				8B7E51CF262FEAC7002A094E /* dckx.entitlements */,
 				8B73671D2601121300B06575 /* Experimental */,
 				8BE1EC152416C2F0008B2D8C /* Comics */,
 				8BE1EC162416C2F9008B2D8C /* What If */,
@@ -380,6 +374,7 @@
 				8B4F4BA023F5F445008446F4 /* Preview Content */,
 				8B626D722401BB1D00972EED /* resources */,
 				8B1A4BF32624430F00DBCD7B /* dckx-Bridging-Header.h */,
+				7649C7DD2BCA0BF600A54E5F /* PrefixHeader.pch */,
 			);
 			path = dckx;
 			sourceTree = "<group>";
@@ -499,12 +494,14 @@
 		8BFDD2A826097E2800B7B5F9 /* OpenCV */ = {
 			isa = PBXGroup;
 			children = (
-				8BACA210260A6ADC008B51C5 /* ComicsPanelExtractor.cpp */,
-				8BACA211260A6ADC008B51C5 /* ComicsPanelExtractor.hpp */,
-				8BFDD2C62609828A00B7B5F9 /* OpenCVWrapper.h */,
-				8BFDD2BE2609826000B7B5F9 /* OpenCVWrapper.mm */,
-				8B9ADBEB260A78F900B0DED8 /* Panel.cpp */,
-				8B9ADBEC260A78F900B0DED8 /* Panel.hpp */,
+				7649C87A2BCA5E5B00A54E5F /* ComicsData.cpp */,
+				7649C87B2BCA5E5B00A54E5F /* ComicsData.hpp */,
+				7649C8832BCA63EE00A54E5F /* ComicsPanelExtractor.cpp */,
+				7649C8822BCA63EE00A54E5F /* ComicsPanelExtractor.hpp */,
+				7649C8762BCA50C100A54E5F /* OpenCV.h */,
+				7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */,
+				7649C8802BCA63EE00A54E5F /* Panel.cpp */,
+				7649C8812BCA63EE00A54E5F /* Panel.hpp */,
 			);
 			path = OpenCV;
 			sourceTree = "<group>";
@@ -512,6 +509,7 @@
 		921AF9F2F90CBC7F2736030E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7649C7D72BCA026200A54E5F /* opencv2.framework */,
 				8B45FAB5263072F600221AE0 /* Ji.framework */,
 				8B1A4C4426253E2700DBCD7B /* Ji.framework */,
 				8B9ADC0E260AC46600B0DED8 /* Ji.framework */,
@@ -548,9 +546,7 @@
 				8B4F4B9123F5F444008446F4 /* Sources */,
 				8B4F4B9223F5F444008446F4 /* Frameworks */,
 				8B4F4B9323F5F444008446F4 /* Resources */,
-				8B69F90D2627D188005FD0B3 /* Run Script - Update Build Number */,
-				8B78FA7B262B819C00DC9FCE /* Run Script - Crashlytics */,
-				8B27AE4C262FB9AD00351106 /* Embed App Extensions */,
+				8B27AE4C262FB9AD00351106 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -600,7 +596,6 @@
 			);
 			name = dckxUITests;
 			packageProductDependencies = (
-				8B45FAB3263072ED00221AE0 /* BetterSafariView */,
 			);
 			productName = dckxUITests;
 			productReference = 8B4F4BB623F5F445008446F4 /* dckxUITests.xctest */;
@@ -612,12 +607,14 @@
 		8B4F4B8D23F5F444008446F4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1530;
 				ORGANIZATIONNAME = "Vito Royeca";
 				TargetAttributes = {
 					8B27AE3D262FB9AB00351106 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1530;
 					};
 					8B4F4B9423F5F444008446F4 = {
 						CreatedOnToolsVersion = 11.3.1;
@@ -648,7 +645,6 @@
 				8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */,
 				580566A82BC9E2E900187556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				580566AD2BC9E38100187556 /* XCRemoteSwiftPackageReference "kanna" */,
-				580566B02BC9E60000187556 /* XCRemoteSwiftPackageReference "opencv" */,
 				580566B12BC9E66900187556 /* XCRemoteSwiftPackageReference "SwiftRater" */,
 			);
 			productRefGroup = 8B4F4B9623F5F444008446F4 /* Products */;
@@ -734,47 +730,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		8B69F90D2627D188005FD0B3 /* Run Script - Update Build Number */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script - Update Build Number";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
-		};
-		8B78FA7B262B819C00DC9FCE /* Run Script - Crashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
-				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			name = "Run Script - Crashlytics";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n\n\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		8B27AE3A262FB9AB00351106 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -792,19 +747,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B1A4C162624708700DBCD7B /* OpenCVWrapper.h in Sources */,
 				8B7E50A6262FBFAF002A094E /* AppDelegate+Version.swift in Sources */,
 				8B4F4B9923F5F444008446F4 /* AppDelegate.swift in Sources */,
 				8B33FE3625FD534F00CD0F35 /* dckx.xcdatamodeld in Sources */,
 				8B30499F2418263E00D549DE /* WhatIfListView.swift in Sources */,
 				8BAC10B426169EBD00664335 /* SearchNavigation.swift in Sources */,
+				7649C87C2BCA5E5B00A54E5F /* ComicsData.cpp in Sources */,
 				8BA5921925FEBEC1001CD883 /* HideScrollView.swift in Sources */,
 				8B7B2C34262C930500B35825 /* HamburgerView.swift in Sources */,
 				8BA50E6C240A425500138D11 /* WebView.swift in Sources */,
 				8BA50E68240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8B7E51DA262FECF9002A094E /* AppGroup.swift in Sources */,
 				8B5307262602E6DF008BA7AB /* NavigationSearchBar.swift in Sources */,
-				8B9ADBED260A78F900B0DED8 /* Panel.cpp in Sources */,
 				8B7E509D262FBF62002A094E /* SensitiveData.swift in Sources */,
 				8B626D702401B0A900972EED /* Constants.swift in Sources */,
 				8B4F4B9B23F5F444008446F4 /* SceneDelegate.swift in Sources */,
@@ -813,9 +767,7 @@
 				8B7E5167262FC972002A094E /* ComicFetcher+HTML.swift in Sources */,
 				8B4F4B9D23F5F444008446F4 /* ComicView.swift in Sources */,
 				8B23367E23F646A700C88BA1 /* CoreData.swift in Sources */,
-				8BFDD2BF2609826000B7B5F9 /* OpenCVWrapper.mm in Sources */,
 				8B7E51B7262FCE5F002A094E /* WhatIfFetcher+HTML.swift in Sources */,
-				8BACA212260A6ADC008B51C5 /* ComicsPanelExtractor.cpp in Sources */,
 				8B23368223F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8B82B2C426192A9C008AD11D /* SettingsView.swift in Sources */,
 				8B3569182631D74700719BB8 /* ComicWidgetProvider.swift in Sources */,
@@ -823,10 +775,13 @@
 				8B3049A3241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
 				8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8BA50E4D24097D0200138D11 /* WhatIfView.swift in Sources */,
+				7649C8882BCA63EE00A54E5F /* ComicsPanelExtractor.cpp in Sources */,
 				8B82B2B42618C6AD008AD11D /* ListRowView.swift in Sources */,
 				8B658020240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
+				7649C8842BCA63EE00A54E5F /* Panel.cpp in Sources */,
 				8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
 				8B658017240AFED800A245DC /* MailView.swift in Sources */,
+				7649C8782BCA50C100A54E5F /* OpenCVWrapper.mm in Sources */,
 				8B626D872402122C00972EED /* BrowserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -835,13 +790,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B1A4C1A2624712000DBCD7B /* OpenCVWrapper.h in Sources */,
 				8B7E50A7262FBFAF002A094E /* AppDelegate+Version.swift in Sources */,
 				8B23368323F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8BA50E6D240A425500138D11 /* WebView.swift in Sources */,
 				8BA50E69240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8B1A4B0A261E4F4B00DBCD7B /* dckx.xcdatamodeld in Sources */,
-				8B9ADBEE260A78F900B0DED8 /* Panel.cpp in Sources */,
 				8B3049A4241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
 				8B4F4BB023F5F445008446F4 /* dckxTests.swift in Sources */,
 				8B0DBE00262DFB81004FA0DB /* HamburgerView.swift in Sources */,
@@ -849,7 +802,6 @@
 				8B65801D240B12E100A245DC /* ShareSheetView.swift in Sources */,
 				8B626D882402122C00972EED /* BrowserView.swift in Sources */,
 				8B7E509E262FBF62002A094E /* SensitiveData.swift in Sources */,
-				8BA50E61240A2DA200138D11 /* Database.swift in Sources */,
 				8B626D8C2402291B00972EED /* ComicView.swift in Sources */,
 				8B626D792401EB1200972EED /* XkcdAPITests.swift in Sources */,
 				8B3049A02418263E00D549DE /* WhatIfListView.swift in Sources */,
@@ -862,8 +814,6 @@
 				8B4F4BE123F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8B82B2B52618C6AD008AD11D /* ListRowView.swift in Sources */,
 				8B658021240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
-				8B9ADBF3260A8CC200B0DED8 /* ComicsPanelExtractor.cpp in Sources */,
-				8B1A4C3726253CC000DBCD7B /* OpenCVWrapper.mm in Sources */,
 				8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
 				8B658018240AFED800A245DC /* MailView.swift in Sources */,
 				8B626D712401B0A900972EED /* Constants.swift in Sources */,
@@ -877,13 +827,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B1A4C0F2624701200DBCD7B /* OpenCVWrapper.h in Sources */,
 				8B7E50A8262FBFAF002A094E /* AppDelegate+Version.swift in Sources */,
 				8B626D8B2402291A00972EED /* ComicView.swift in Sources */,
 				8B658022240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
 				8B65801E240B12E100A245DC /* ShareSheetView.swift in Sources */,
 				8B1A4B06261E4F4500DBCD7B /* dckx.xcdatamodeld in Sources */,
-				8B9ADBEF260A78F900B0DED8 /* Panel.cpp in Sources */,
 				8B3049A5241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
 				8B23368423F6683C00C88BA1 /* ComicFetcher.swift in Sources */,
 				8B0DBE01262DFB82004FA0DB /* HamburgerView.swift in Sources */,
@@ -905,9 +853,6 @@
 				8B658019240AFED800A245DC /* MailView.swift in Sources */,
 				8B82B2B62618C6AD008AD11D /* ListRowView.swift in Sources */,
 				8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
-				8B9ADBF7260A8CC300B0DED8 /* ComicsPanelExtractor.cpp in Sources */,
-				8B1A4C3B26253CC100DBCD7B /* OpenCVWrapper.mm in Sources */,
-				8BA50E62240A2DA200138D11 /* Database.swift in Sources */,
 				8BA50E6A240A384400138D11 /* WhatIfFetcher.swift in Sources */,
 				8B626D8A2402274A00972EED /* Constants.swift in Sources */,
 				8B82B2C626192A9C008AD11D /* SettingsView.swift in Sources */,
@@ -953,10 +898,14 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "dckx WidgetExtension.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 43CD66539H;
+				DEVELOPMENT_TEAM = "";
+				EXCLUDED_ARCHS = "";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "dckx Widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -966,9 +915,12 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vitoroyeca.dckx.dckx-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(inherited) $(SRCROOT)/Ji/Sources/Clibxml2";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -980,9 +932,13 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "dckx WidgetExtension.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 43CD66539H;
+				DEVELOPMENT_TEAM = "";
+				EXCLUDED_ARCHS = "";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "dckx Widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -990,11 +946,14 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vitoroyeca.dckx.dckx-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(inherited) $(SRCROOT)/Ji/Sources/Clibxml2";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1004,6 +963,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1037,10 +997,14 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = "${PROJECT_DIR}/${PRODUCT_NAME}/PrefixHeader.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1065,6 +1029,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1099,8 +1064,12 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "${PROJECT_DIR}/${PRODUCT_NAME}/PrefixHeader.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1123,12 +1092,19 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = dckx/dckx.entitlements;
+				CODE_SIGN_ENTITLEMENTS = dckx.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_ASSET_PATHS = "\"dckx/Preview Content\"";
-				DEVELOPMENT_TEAM = 43CD66539H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/.",
+					"$(PROJECT_DIR)/dckx",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = dckx/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1136,6 +1112,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckx;
 				PRODUCT_NAME = dckx;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
@@ -1151,12 +1128,19 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = dckx/dckx.entitlements;
+				CODE_SIGN_ENTITLEMENTS = dckx.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_ASSET_PATHS = "\"dckx/Preview Content\"";
-				DEVELOPMENT_TEAM = 43CD66539H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/.",
+					"$(PROJECT_DIR)/dckx",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = dckx/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1164,6 +1148,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckx;
 				PRODUCT_NAME = dckx;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
@@ -1179,6 +1164,8 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = "";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = dckxTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1186,6 +1173,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckxTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
@@ -1203,6 +1191,8 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = "";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = dckxTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1210,6 +1200,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckxTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
@@ -1225,6 +1216,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = "";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = dckxUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1232,6 +1225,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckxUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
@@ -1248,6 +1242,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = "";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = dckxUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1255,6 +1251,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckxUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
@@ -1331,14 +1328,6 @@
 				minimumVersion = 5.3.0;
 			};
 		};
-		580566B02BC9E60000187556 /* XCRemoteSwiftPackageReference "opencv" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/opencv/opencv.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.9.0;
-			};
-		};
 		580566B12BC9E66900187556 /* XCRemoteSwiftPackageReference "SwiftRater" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/takecian/SwiftRater.git";
@@ -1372,11 +1361,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 580566AD2BC9E38100187556 /* XCRemoteSwiftPackageReference "kanna" */;
 			productName = Kanna;
-		};
-		8B45FAB3263072ED00221AE0 /* BetterSafariView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */;
-			productName = BetterSafariView;
 		};
 /* End XCSwiftPackageProductDependency section */
 
