@@ -62,43 +62,34 @@ struct SensitiveData {
         }
     }
     
-    func comicContainsSensitiveData(_ comics: Comic) -> Bool {
+    func containsSensitiveData(_ comic: ComicModel) -> Bool {
         var result = false
         
-        guard let title = comics.title,
-              let alt = comics.alt else {
-            return result
-        }
-        
         for word in sensitiveWords {
-            result = title.lowercased().contains(word) ||
-                     alt.lowercased().contains(word)
+            result = comic.title.lowercased().contains(word) ||
+                comic.alt.lowercased().contains(word)
             
             if result {
                 break
             }
         }
+
         return result
     }
     
-    func whatIfContainsSensitiveData(_ whatIf: WhatIf) -> Bool {
+    func containsSensitiveData(_ whatIf: WhatIfModel) -> Bool {
         var result = false
         
-        guard let title = whatIf.title,
-              let question = whatIf.question,
-              let answer = whatIf.answer else {
-            return result
-        }
-        
         for word in sensitiveWords {
-            result = title.lowercased().contains(word) ||
-                     question.lowercased().contains(word) ||
-                     answer.lowercased().contains(word)
+            result = whatIf.title.lowercased().contains(word) ||
+                whatIf.question.lowercased().contains(word) ||
+                whatIf.answer.lowercased().contains(word)
             
             if result {
                 break
             }
         }
+
         return result
     }
 }

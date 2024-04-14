@@ -7,62 +7,79 @@
 //
 
 import SwiftUI
-import Combine
+import SwiftData
 import BetterSafariView
-//import SDWebImage
 
 struct ComicView: View {
-    @StateObject var fetcher = ComicFetcher()
+    @State var viewModel: ComicViewModel
     @Binding var showingMenu: Bool
     @State private var showingSearch = false
+    
+    init(modelContext: ModelContext, showingMenu: Binding<Bool>) {
+        let model = ComicViewModel(modelContext: modelContext)
+        _viewModel = State(initialValue: model)
+        _showingMenu = showingMenu
+    }
     
     var body: some View {
         NavigationView {
             VStack(alignment: .center) {
-                if !fetcher.isBusy {
+                if !viewModel.isBusy {
                     WebView(link: nil,
-                            html: fetcher.composeHTML(),
+                            html: viewModel.composeHTML(),
                             baseURL: nil)
                         .gesture(DragGesture(minimumDistance: 30, coordinateSpace: .local)
                             .onEnded({ value in
                                 if value.translation.width < 0 {
-                                    if fetcher.canDoNext {
-                                        fetcher.loadNext()
+                                    if viewModel.canDoNext {
+                                        Task {
+                                            do {
+                                                try await viewModel.loadNext()
+                                            } catch {
+                                                print(error)
+                                            }
+                                        }
                                     }
                                 }
 
                                 if value.translation.width > 0 {
-                                    if fetcher.canDoPrevious {
-                                        fetcher.loadPrevious()
+                                    if viewModel.canDoPrevious {
+                                        Task {
+                                            do {
+                                                try await viewModel.loadPrevious()
+                                            } catch {
+                                                print(error)
+                                            }
+                                        }
                                     }
                                 }
                             }))
                 } else {
-                    ActivityIndicatorView(shouldAnimate: $fetcher.isBusy)
+                    ActivityIndicatorView(shouldAnimate: $viewModel.isBusy)
                 }
             }
-            .navigationBarTitle(Text((fetcher.isBusy ? "" : (fetcher.currentComic?.title ?? "")).uppercased()),
+            .navigationBarTitle(Text(viewModel.comicTitle),
                                 displayMode: .large)
-                .navigationBarItems( leading: menuButton,
-                                     trailing: ComicToolBarView())
+                .navigationBarItems(leading: menuButton,
+                                    trailing: ComicToolBarView())
                 .toolbar() {
-                    NavigationToolbar(loadFirst: fetcher.loadFirst,
-                                      loadPrevious: fetcher.loadPrevious,
-                                      loadRandom: fetcher.loadRandom,
+                    NavigationToolbar(loadFirst: viewModel.loadFirst,
+                                      loadPrevious: viewModel.loadPrevious,
+                                      loadRandom: viewModel.loadRandom,
                                       search: {
                                           self.showingSearch.toggle()
                                       },
-                                      loadNext: fetcher.loadNext,
-                                      loadLast: fetcher.loadLast,
-                                      canDoPrevious: fetcher.canDoPrevious,
-                                      canDoNext: fetcher.canDoNext,
-                                      isBusy: fetcher.isBusy)
+                                      loadNext: viewModel.loadNext,
+                                      loadLast: viewModel.loadLast,
+                                      canDoPrevious: viewModel.canDoPrevious,
+                                      canDoNext: viewModel.canDoNext,
+                                      isBusy: viewModel.isBusy)
                 }
                 .sheet(isPresented: $showingSearch) {
-                    ComicListView()
+//                    ComicListView()
                 }
         }
-            .environmentObject(fetcher)
+            .environmentObject(viewModel)
     }
     
     var menuButton: some View {
@@ -74,7 +91,7 @@ struct ComicView: View {
             Image(systemName: "line.horizontal.3")
                 .imageScale(.large)
         }
-            .disabled(fetcher.isBusy)
+            .disabled(viewModel.isBusy)
     }
 }
 
@@ -83,131 +100,11 @@ struct ComicView_Previews: PreviewProvider {
     
     static var previews: some View {
         ForEach(["iPhone SE", "iPhone XS Max"], id: \.self) { deviceName in
-            ComicView(showingMenu: $showingMenu)
+            ComicView(modelContext: try! ModelContainer(for: ComicModel.self).mainContext,
+                      showingMenu: $showingMenu)
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
         }
     }
 }
 
-struct ComicToolBarView: View {
-    @EnvironmentObject var fetcher: ComicFetcher
-    @State private var showingBrowser = false
-    @State private var showingShare = false
-    
-    var body: some View {
-        HStack {
-            Button(action: {
-                self.fetcher.toggleIsFavorite()
-            }) {
-                Image(systemName: fetcher.currentComic?.isFavorite ?? false ? "bookmark.fill" : "bookmark")
-                    .imageScale(.large)
-            }
-                .disabled(fetcher.isBusy)
-            Spacer()
-            
-            if UserDefaults.standard.bool(forKey: SettingsKey.comicsExplanationUseSafariBrowser) {
-                Button(action: {
-                    self.showingBrowser.toggle()
-                }) {
-                    Image(systemName: "questionmark.circle")
-                        .imageScale(.large)
-                }
-                    .disabled(fetcher.isBusy)
-                    // comment out if running in XCTests
-//                    .safariView(isPresented: $showingBrowser) {
-//                        SafariView(
-//                            url: URL(string: XkcdAPI.sharedInstance.explainURL(of: self.fetcher.currentComic!))!,
-//                            configuration: SafariView.Configuration(
-//                                entersReaderIfAvailable: true,
-//                                barCollapsingEnabled: true
-//                            )
-//                        )                        
-//                        .preferredBarAccentColor(.clear)
-//                        .preferredControlAccentColor(.dckxBlue)
-//                        .dismissButtonStyle(.close)
-//                    }
-            } else {
-                Button(action: {
-                    self.showingBrowser.toggle()
-                }) {
-                    Image(systemName: "questionmark.circle")
-                        .imageScale(.large)
-                }
-                    .disabled(fetcher.isBusy)
-                    .sheet(isPresented: $showingBrowser, content: {
-                        self.fetcher.currentComic.map({
-                            BrowserView(title: "Explanation",
-                                        link: XkcdAPI.sharedInstance.explainURL(of: $0),
-                                        baseURL: nil/*URL(string: "https://xkcd.com/")*/)
-                        })
-                    })
-            }
-            Spacer()
-            
-            Button(action: {
-                self.showingShare.toggle()
-            }) {
-                Image(systemName: "square.and.arrow.up")
-                    .imageScale(.large)
-            }
-                .disabled(fetcher.isBusy)
-                .sheet(isPresented: $showingShare) {
-                    ShareSheetView(activityItems: self.activityItems(),
-                                   applicationActivities: [])
-                }
-        }
-    }
-    
-    func activityItems() -> [Any] {
-        let item = ComicItemSource(comic: fetcher.currentComic)
-        
-        return [item, "\(item.title())\n\(item.author())"]
-    }
-}
-
-class ComicItemSource: NSObject,  UIActivityItemSource {
-    var comic: Comic?
-    
-    init(comic: Comic?) {
-        self.comic = comic
-    }
-
-    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return "\(title())\n\(author())"
-    }
-
-    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-        return image()
-    }
-
-    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
-        return title()
-    }
-    
-    func activityViewController(_ activityViewController: UIActivityViewController, thumbnailImageForActivityType activityType: UIActivity.ActivityType?, suggestedSize size: CGSize) -> UIImage? {
-        return image()
-    }
-    
-    func title() -> String {
-        if let comic = comic {
-            return "#\(comic.num): \(comic.title ?? "")"
-        } else {
-            return author()
-        }
-    }
-    
-    func author() -> String {
-        return "via @dckx - an xkcd comics reader app"
-    }
-    
-    func image() -> UIImage? {
-//        if let comic = comic,
-//            let img = comic.img,
-//            let image = SDImageCache.shared.imageFromCache(forKey: img) {
-//            return image
-//        }
-        
-        return nil
-    }
-}

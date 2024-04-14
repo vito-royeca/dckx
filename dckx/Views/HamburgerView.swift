@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftData
 //import SwiftRater
 
 enum HMainView {
@@ -17,18 +18,21 @@ struct HamburgerView: View {
     @StateObject var settings = Settings()
     @State var mainView: HMainView = .comics
     @State var showingMenu = false
+    var modelContext: ModelContext
     
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 switch mainView {
                 case .comics:
-                    ComicView(showingMenu: $showingMenu)
+                    ComicView(modelContext: modelContext,
+                              showingMenu: $showingMenu)
                         .frame(width: geometry.size.width,
                                height: geometry.size.height)
                         .offset(x: self.showingMenu ? geometry.size.width - geometry.size.width/3 : 0)
                 case .whatIfs:
-                    WhatIfView(showingMenu: $showingMenu)
+//                    WhatIfView(showingMenu: $showingMenu)
+                    Text("What Ifs")
                         .frame(width: geometry.size.width,
                                height: geometry.size.height)
                         .offset(x: self.showingMenu ? geometry.size.width - geometry.size.width/3 : 0)
@@ -54,7 +58,7 @@ struct HamburgerView: View {
 
 struct HamburgerView_Previews: PreviewProvider {
     static var previews: some View {
-        HamburgerView()
+        HamburgerView(modelContext: try! ModelContainer(for: ComicModel.self).mainContext)
     }
 }
 

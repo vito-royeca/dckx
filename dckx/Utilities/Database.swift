@@ -64,45 +64,45 @@ class Database {
     }
     
     // MARK: Helper methods
-    func scrapeWhatIf(link: String) -> [String: Any] {
-        do {
-            guard let url = URL(string: link) else {
-                fatalError("Malformed url")
-            }
-            
-            var data = [String: Any]()
-//            let document = try HTML(url: url, encoding: .utf8)
-//            
-//            for div in document.xpath("//article[@class='entry']") {
-//                if let title = div.xpath("a").first,
-//                    let titleContent = title.content,
-//                    let question = div.xpath("p[@id='question']").first,
-//                    let questionContent = question.content,
-//                    let questioner = div.xpath("p[@id='attribute']").first,
-//                    let questionerContent = questioner.content {
-//                    
-//                    div.removeChild(title)
-//                    div.removeChild(question)
-//                    div.removeChild(questioner)
-//                    
-//                    data["title"] = titleContent
-//                    data["question"] = questionContent
-//                    data["questioner"] = questionerContent.replacingOccurrences(of: "—", with: "").trimmingCharacters(in: CharacterSet.whitespaces)
-//                    
-//                    if let innerHTML = div.innerHTML {
-//                        let answer = innerHTML.replacingOccurrences(of: "\n", with: "")
-//                                           .replacingOccurrences(of: "/imgs", with: "https://what-if.xkcd.com/imgs")
-//                                           .trimmingCharacters(in: CharacterSet.whitespaces)
-//                        data["answer"] = answer
-//                    }
-//                }
+//    func scrapeWhatIf(link: String) -> [String: Any] {
+//        do {
+//            guard let url = URL(string: link) else {
+//                fatalError("Malformed url")
 //            }
-            
-            return data
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-    }
+//            
+//            var data = [String: Any]()
+////            let document = try HTML(url: url, encoding: .utf8)
+////            
+////            for div in document.xpath("//article[@class='entry']") {
+////                if let title = div.xpath("a").first,
+////                    let titleContent = title.content,
+////                    let question = div.xpath("p[@id='question']").first,
+////                    let questionContent = question.content,
+////                    let questioner = div.xpath("p[@id='attribute']").first,
+////                    let questionerContent = questioner.content {
+////                    
+////                    div.removeChild(title)
+////                    div.removeChild(question)
+////                    div.removeChild(questioner)
+////                    
+////                    data["title"] = titleContent
+////                    data["question"] = questionContent
+////                    data["questioner"] = questionerContent.replacingOccurrences(of: "—", with: "").trimmingCharacters(in: CharacterSet.whitespaces)
+////                    
+////                    if let innerHTML = div.innerHTML {
+////                        let answer = innerHTML.replacingOccurrences(of: "\n", with: "")
+////                                           .replacingOccurrences(of: "/imgs", with: "https://what-if.xkcd.com/imgs")
+////                                           .trimmingCharacters(in: CharacterSet.whitespaces)
+////                        data["answer"] = answer
+////                    }
+////                }
+////            }
+//            
+//            return data
+//        } catch {
+//            fatalError(error.localizedDescription)
+//        }
+//    }
 
 //    private func fetchAllComics(from num: Int32) -> Promise<Void> {
 //        return Promise { seal in

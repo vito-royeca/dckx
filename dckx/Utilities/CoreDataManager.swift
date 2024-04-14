@@ -1,5 +1,5 @@
 //
-//  CoreData.swift
+//  CoreDataManager.swift
 //  dckx
 //
 //  Created by Vito Royeca on 2/13/20.
@@ -8,26 +8,40 @@
 
 import Foundation
 import CoreData
-//import PromiseKit
-//import Sync
 
-class CoreData {
-    // MARK: Variables
-//    let dataStack: DataStack
+enum CoreDataManagerError: Error {
+    case saveError
+    case findError
+}
+
+class CoreDataManager: NSObject {
+    // MARK: - Variables
     
-    // MARK: Singleton
-    static let sharedInstance = CoreData()
-//    static let sharedInstance = CoreData(storeType: .sqLite)
-//    static let mockInstance = CoreData(storeType: .inMemory)
-//    private init(storeType: DataStackStoreType) {
-//        if let bundleURL = Bundle(for: CoreData.self).url(forResource: "dckx", withExtension: "momd"),
+    fileprivate var viewContext: NSManagedObjectContext
+    fileprivate var privateContext: NSManagedObjectContext
+    
+    // MARK: - Singleton
+    
+    static let sharedInstance = CoreDataManager()
+//    static let sharedInstance = CoreDataManager(storeType: .sqLite)
+//    static let mockInstance = CoreDataManager(storeType: .inMemory)
+
+    private override init(/*storeType: DataStackStoreType*/) {
+//        if let bundleURL = Bundle(for: CoreDataManager.self).url(forResource: "dckx",
+//                                                                 withExtension: "momd"),
 //            let objectModel = NSManagedObjectModel(contentsOf: bundleURL.appendingPathComponent("2020-04-05.mom")) {
 //            
 //            dataStack = DataStack(model: objectModel, storeType: storeType)
 //        } else {
 //            dataStack = DataStack(modelName: "dckx", storeType: storeType)
 //        }
-//    }
+        let persistentStore = PersistentStore(inMemory: false)
+        
+        self.viewContext = persistentStore.viewContext
+        self.privateContext = persistentStore.privateContext
+        
+        super.init()
+    }
     
 //    func fetchLastComic() -> Comic {
 //        do {
@@ -53,8 +67,20 @@ class CoreData {
 //        }
 //    }
     
-    // MARK: Comic Database methods
-//    func saveComic(data: [String: Any]) -> Promise<Void> {
+    // MARK: - Comic Database methods
+
+    func save(comic: ComicJSON) throws {
+        do {
+            // let us find an existing school object first, else we create
+            // a new one if there is none
+            let comicModel = try findComic(num: comic.num, in: privateContext) ??
+                ComicModel(context: privateContext)
+            
+        } catch {
+            print(error)
+            throw CoreDataManagerError.saveError
+        }
+
 //        return Promise { seal in
 //            guard let num = data["num"] as? Int32 else {
 //                seal.fulfill(())
@@ -107,7 +133,7 @@ class CoreData {
 //                           operations: .all,
 //                           completion: completion)
 //        }
-//    }
+    }
 //    
 //    func loadComic(num: Int32) -> Promise<Comic> {
 //        return Promise { seal in

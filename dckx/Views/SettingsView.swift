@@ -67,7 +67,7 @@ struct SettingsView: View {
                             .font(Font.dckxRegularText)
                             .foregroundColor(.blue)
                     }
-                    Text("Version \(AppDelegate.getVersion()) Build \(AppDelegate.getBuild())")
+                    Text("Version \(dckxApp.getVersion()) Build \(dckxApp.getBuild())")
                         .font(Font.dckxRegularText)
                 }
             }

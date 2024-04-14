@@ -11,11 +11,11 @@ import SwiftUI
 protocol NavigationToolbarDelegate: ObservableObject {
     var canDoPrevious: Bool { get }
     var canDoNext: Bool { get }
-    func loadFirst()
-    func loadPrevious()
-    func loadRandom()
-    func loadNext()
-    func loadLast()
+    func loadFirst() async throws
+    func loadPrevious() async throws
+    func loadRandom() async throws
+    func loadNext() async throws
+    func loadLast() async throws
     
     func dateToString(date: Date?) -> String
 }
@@ -34,12 +34,13 @@ extension NavigationToolbarDelegate {
 }
 
 struct NavigationToolbar: ToolbarContent  {
-    var loadFirst: () -> Void
-    var loadPrevious: () -> Void
-    var loadRandom: () -> Void
+    var loadFirst: () async throws -> Void
+    var loadPrevious: () async throws -> Void
+    var loadRandom: () async throws -> Void
     var search: () -> Void
-    var loadNext: () -> Void
-    var loadLast: () -> Void
+    var loadNext: () async throws -> Void
+    var loadLast: () async throws -> Void
+
     @State var canDoPrevious: Bool
     @State var canDoNext: Bool
     @State var isBusy: Bool
@@ -47,7 +48,13 @@ struct NavigationToolbar: ToolbarContent  {
     var body: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
             Button(action: {
-                self.loadFirst()
+                Task {
+                    do {
+                        try await loadFirst()
+                    } catch {
+                        print(error)
+                    }
+                }
             }) {
                 Image(systemName: "backward.end")
                     .imageScale(.large)
@@ -60,7 +67,13 @@ struct NavigationToolbar: ToolbarContent  {
 
         ToolbarItem(placement: .bottomBar) {
             Button(action: {
-                self.loadPrevious()
+                Task {
+                    do {
+                        try await loadPrevious()
+                    } catch {
+                        print(error)
+                    }
+                }
             }) {
                 Image(systemName: "arrowtriangle.backward")
                     .imageScale(.large)
@@ -73,7 +86,13 @@ struct NavigationToolbar: ToolbarContent  {
 
         ToolbarItem(placement: .bottomBar) {
             Button(action: {
-                self.loadRandom()
+                Task {
+                    do {
+                        try await loadRandom()
+                    } catch {
+                        print(error)
+                    }
+                }
             }) {
                 Image(systemName: "shuffle")
                     .imageScale(.large)
@@ -96,7 +115,13 @@ struct NavigationToolbar: ToolbarContent  {
         
         ToolbarItem(placement: .bottomBar) {
             Button(action: {
-                self.loadNext()
+                Task {
+                    do {
+                        try await loadNext()
+                    } catch {
+                        print(error)
+                    }
+                }
             }) {
                 Image(systemName: "arrowtriangle.forward")
                     .imageScale(.large)
@@ -109,7 +134,13 @@ struct NavigationToolbar: ToolbarContent  {
 
         ToolbarItem(placement: .bottomBar) {
             Button(action: {
-                self.loadLast()
+                Task {
+                    do {
+                        try await loadLast()
+                    } catch {
+                        print(error)
+                    }
+                }
             }) {
                 Image(systemName: "forward.end")
                     .imageScale(.large)
