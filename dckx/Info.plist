@@ -44,6 +44,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>xkcd-script.ttf</string>
+		<string>xkcd-Regular.otf</string>
+		<string>xkcd.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

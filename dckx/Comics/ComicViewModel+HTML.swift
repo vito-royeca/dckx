@@ -12,9 +12,7 @@ import SDWebImage
 extension ComicViewModel {
     func composeHTML() -> String {
         guard let comic = currentComic,
-            let cachePath = SDImageCache.shared.cachePath(forKey: comic.img),
-            let image = SDImageCache.shared.imageFromCache(forKey: comic.img),
-            let data = image.pngData()
+            let cachePath = SDImageCache.shared.cachePath(forKey: comic.img)
             // comment out if running in XCTests
             /*let splitComics = OpenCVWrapper.splitComics(cachePath, minimumPanelSizeRatio: 1/15)*/ else {
             return "composeHTML failed"
@@ -60,7 +58,7 @@ extension ComicViewModel {
         reader += " var reader = new Reader({"
         reader += "  container: $('#reader'),"
         reader += "  comicsJson: \(comicsJson),"
-        reader += "  imageSrc: 'data:image/png;base64, \(data.base64EncodedString())',"
+        reader += "  imageSrc: '\(cachePath)',"
         reader += "  controls: true,"
         reader += "  num: '#\(comic.num)',"
         reader += "  date: '\(dateToString(date: comic.date))&nbsp;',"

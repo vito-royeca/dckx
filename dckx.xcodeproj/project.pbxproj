@@ -104,7 +104,6 @@
 		8B7E5167262FC972002A094E /* ComicViewModel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E5166262FC972002A094E /* ComicViewModel+HTML.swift */; };
 		8B7E5168262FC972002A094E /* ComicViewModel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E5166262FC972002A094E /* ComicViewModel+HTML.swift */; };
 		8B7E5169262FC972002A094E /* ComicViewModel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E5166262FC972002A094E /* ComicViewModel+HTML.swift */; };
-		8B7E51CA262FE91D002A094E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
 		8B7E51DA262FECF9002A094E /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E51D9262FECF9002A094E /* AppGroup.swift */; };
 		8B7E51DB262FECF9002A094E /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E51D9262FECF9002A094E /* AppGroup.swift */; };
 		8B7E51DC262FECF9002A094E /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E51D9262FECF9002A094E /* AppGroup.swift */; };
@@ -135,9 +134,6 @@
 		8BBA24E3262B7E86000483DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BBA24E2262B7E86000483DE /* GoogleService-Info.plist */; };
 		8BBA24E4262B7E86000483DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BBA24E2262B7E86000483DE /* GoogleService-Info.plist */; };
 		8BBA24E5262B7E86000483DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BBA24E2262B7E86000483DE /* GoogleService-Info.plist */; };
-		8BE8ECA3243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
-		8BE8ECA4243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
-		8BE8ECA5243A9B1E0037036E /* dckx.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8BE8ECA2243A9B1E0037036E /* dckx.sqlite */; };
 		8BFA14B5262A4E0000BAD359 /* whatif.css in Resources */ = {isa = PBXBuildFile; fileRef = 8BFA14B4262A4E0000BAD359 /* whatif.css */; };
 		8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
 		8BFEFFFE24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */; };
@@ -256,7 +252,6 @@
 		8BA5921825FEBEC1001CD883 /* HideScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideScrollView.swift; sourceTree = "<group>"; };
 		8BAC10B326169EBD00664335 /* SearchNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigation.swift; sourceTree = "<group>"; };
 		8BBA24E2262B7E86000483DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8BE8ECA2243A9B1E0037036E /* dckx.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = dckx.sqlite; sourceTree = "<group>"; };
 		8BFA14B4262A4E0000BAD359 /* whatif.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = whatif.css; sourceTree = "<group>"; };
 		8BFEFFFC24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ResignKeyboardOnDragGesture.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -307,7 +302,6 @@
 		76A0FD8A2BCB2E6700C0002E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8BE8ECA2243A9B1E0037036E /* dckx.sqlite */,
 				76A0FD982BCB44D100C0002E /* ComicModel.swift */,
 				76A0FD992BCB44D100C0002E /* WhatIfModel.swift */,
 			);
@@ -658,7 +652,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B27AE47262FB9AD00351106 /* Assets.xcassets in Resources */,
-				8B7E51CA262FE91D002A094E /* dckx.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,7 +659,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BE8ECA3243A9B1E0037036E /* dckx.sqlite in Resources */,
 				8B8D963D260C5DFF00A3C273 /* dckx.css in Resources */,
 				8BBA24E3262B7E86000483DE /* GoogleService-Info.plist in Resources */,
 				8B8D9633260C5DEF00A3C273 /* reader.js in Resources */,
@@ -692,7 +684,6 @@
 				8B8D963E260C5DFF00A3C273 /* dckx.css in Resources */,
 				8B658005240AD42600A245DC /* xkcd.otf in Resources */,
 				8B626DD82403C6C700972EED /* xkcd-script.ttf in Resources */,
-				8BE8ECA4243A9B1E0037036E /* dckx.sqlite in Resources */,
 				8B658008240AD42600A245DC /* xkcd-Regular.otf in Resources */,
 				8B658014240AE94400A245DC /* system.css in Resources */,
 				8B8D9658260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */,
@@ -713,7 +704,6 @@
 				8B658009240AD42600A245DC /* xkcd-Regular.otf in Resources */,
 				8BBA24E5262B7E86000483DE /* GoogleService-Info.plist in Resources */,
 				8B626D762401C74600972EED /* Assets.xcassets in Resources */,
-				8BE8ECA5243A9B1E0037036E /* dckx.sqlite in Resources */,
 				8B8D9659260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */,
 				8B8D963F260C5DFF00A3C273 /* dckx.css in Resources */,
 				8B626D752401BB6800972EED /* xkcd-script.ttf in Resources */,

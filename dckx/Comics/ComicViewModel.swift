@@ -29,8 +29,7 @@ class ComicViewModel {
         Task {
             do {
                 try await loadLast()
-                try await loadPrevious()
-                try await loadLast()
+                canDoPrevious = true
             } catch {
                 print(error)
             }
@@ -73,6 +72,15 @@ class ComicViewModel {
         }
     }
 
+    var comicImageURL: URL? {
+        guard let comic = currentComic,
+              let cachePath = SDImageCache.shared.cachePath(forKey: comic.img) else {
+            return nil
+        }
+        
+        return URL(filePath: cachePath)
+    }
+    
     // MARK: - Helper methods
     
     func load(num: Int) async throws {
@@ -112,73 +120,45 @@ class ComicViewModel {
                 toggle(isReadEnabled: true)
             }
 
-            try await fetchImage(comic: comicModel)
-            toggle(isNavigationEnabled: true)
+            fetchImage(comic: comicModel, callback: fetchImageCallback)
         } catch {
             print(error)
             toggle(isNavigationEnabled: true)
         }
     }
     
-    func fetchImage(comic: ComicModel) async throws {
-            guard let url = URL(string: comic.img) else {
-                fatalError("Malformed URL")
-            }
+    func fetchImage(comic: ComicModel, callback: @escaping SDImageLoaderCompletedBlock) {
+            
             
             if let _ = SDImageCache.shared.imageFromCache(forKey: comic.img) {
+                toggle(isNavigationEnabled: true)
                 return
             } else {
-
+                guard let url = URL(string: comic.img) else {
+                    fatalError("Malformed URL")
+                }
                 
-//                let callback = { (image: UIImage?, data: Data?, error: Error?, finished: Bool) in
-//                    if error != nil {
-//                        SDWebImageManager.shared.imageCache.store(image,
-//                                                                  imageData: data,
-//                                                                  forKey: comic.img,
-//                                                                  cacheType: .disk)
-//                    }
-//                }
-//                SDWebImageManager.shared.imageLoader.requestImage(with: url,
-//                                                                  options: .highPriority,
-//                                                                  context: nil,
-//                                                                  progress: nil,
-//                                                                  completed: callback)
-                let callback = try await SDWebImageManager.shared.imageLoader.requestImage(with: url,
-                                                                                           options: .highPriority,
-                                                                                           context: nil,
-                                                                                           progress: nil)
-//                callback(<#UIImage?#>, <#Data?#>, <#(any Error)?#>, <#Bool#>)
+                SDWebImageManager.shared.imageLoader.requestImage(with: url,
+                                                                  options: .highPriority,
+                                                                  context: nil,
+                                                                  progress: nil,
+                                                                  completed: callback)
             }
     }
     
-    func testAsync(param1: String, param2: Int, completion: @escaping (String, String) -> Void) {
-        print("test")
-        completion("1", "2")
-    }
-    
-    func fetchData(_ completionHandler: @escaping (Result<Data, Error>) -> Void) {
-        print("test 2")
-    }
-}
-
-// MARK: - SDImageLoader
-//requestImageWithURL:(nullable NSURL *)url
-//                                                options:(SDWebImageOptions)options
-//                                                context:(nullable SDWebImageContext *)context
-//                                               progress:(nullable SDImageLoaderProgressBlock)progressBlock
-//                                              completed:(nullable SDImageLoaderCompletedBlock)completedBlock;
-extension SDImageLoader {
-    func requestImage(with url: URL?, options: SDWebImageOptions, context: [SDWebImageContextOption: Any]?, progress: SDImageLoaderProgressBlock?) async throws -> SDImageLoaderCompletedBlock? {
-        return await withCheckedContinuation { continuation in
-            requestImage(with: url,
-                         options: options,
-                         context: context,
-                         progress: progress) { (image,data,error,finished) in
-                continuation.resume(returning: { image,data,error,finished in
-                    print("we are here...")
-                })
-            }
+    private func fetchImageCallback(image: UIImage?, data: Data?, error: Error?, finished: Bool) {
+        toggle(isNavigationEnabled: true)
+        
+        guard let currentComic = currentComic,
+              let image = image,
+              let data = data else {
+            return
         }
+
+        SDWebImageManager.shared.imageCache.store(image,
+                                                  imageData: data,
+                                                  forKey: currentComic.img,
+                                                  cacheType: .disk)
     }
 }
 
@@ -213,8 +193,7 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 toggle(isReadEnabled: true)
             }
             
-            try await fetchImage(comic: comicModel)
-            toggle(isNavigationEnabled: true)
+            fetchImage(comic: comicModel, callback: fetchImageCallback)
         } catch {
             print(error)
             toggle(isNavigationEnabled: true)
@@ -266,8 +245,7 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 toggle(isReadEnabled: true)
             }
             
-            try await fetchImage(comic: comicModel)
-            toggle(isNavigationEnabled: true)
+            fetchImage(comic: comicModel, callback: fetchImageCallback)
         } catch {
             print(error)
             toggle(isNavigationEnabled: true)

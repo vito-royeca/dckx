@@ -115,6 +115,14 @@ import SwiftData
         }
     }
     
+    var displayDate: String {
+        get {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+        
+            return formatter.string(from: date)
+        }
+    }
     var description: String {
         get {
             """

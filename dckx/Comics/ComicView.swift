@@ -25,51 +25,89 @@ struct ComicView: View {
         NavigationView {
             VStack(alignment: .center) {
                 if !viewModel.isBusy {
-                    WebView(link: nil,
-                            html: viewModel.composeHTML(),
-                            baseURL: nil)
-                        .gesture(DragGesture(minimumDistance: 30, coordinateSpace: .local)
-                            .onEnded({ value in
-                                if value.translation.width < 0 {
-                                    if viewModel.canDoNext {
-                                        Task {
-                                            do {
-                                                try await viewModel.loadNext()
-                                            } catch {
-                                                print(error)
-                                            }
-                                        }
-                                    }
-                                }
-
-                                if value.translation.width > 0 {
-                                    if viewModel.canDoPrevious {
-                                        Task {
-                                            do {
-                                                try await viewModel.loadPrevious()
-                                            } catch {
-                                                print(error)
-                                            }
-                                        }
-                                    }
-                                }
-                            }))
+                    displayView
+                        .padding()
                 } else {
                     ActivityIndicatorView(shouldAnimate: $viewModel.isBusy)
                 }
             }
-            .navigationBarTitle(Text(viewModel.comicTitle),
-                                displayMode: .large)
-                .navigationBarItems(leading: menuButton,
-                                    trailing: ComicToolbarView())
-                .toolbar() {
-                    NavigationToolbar(delegate: viewModel)
-                }
-                .sheet(isPresented: $showingSearch) {
+            .navigationBarItems(leading: menuButton,
+                                trailing: ComicToolbarView())
+            .toolbar() {
+                NavigationToolbar(delegate: viewModel)
+            }
+            .sheet(isPresented: $showingSearch) {
 //                    ComicListView()
-                }
+            }
         }
             .environmentObject(viewModel)
+    }
+    
+    var webView: some View {
+        WebView(link: nil,
+                html: viewModel.composeHTML(),
+                baseURL: nil)
+            .gesture(DragGesture(minimumDistance: 30, coordinateSpace: .local)
+                .onEnded({ value in
+                    if value.translation.width < 0 {
+                        if viewModel.canDoNext {
+                            Task {
+                                do {
+                                    try await viewModel.loadNext()
+                                } catch {
+                                    print(error)
+                                }
+                            }
+                        }
+                    }
+
+                    if value.translation.width > 0 {
+                        if viewModel.canDoPrevious {
+                            Task {
+                                do {
+                                    try await viewModel.loadPrevious()
+                                } catch {
+                                    print(error)
+                                }
+                            }
+                        }
+                    }
+                }))
+    }
+
+    var displayView: some View {
+        VStack {
+            Text("\(viewModel.comicTitle)")
+                .font(.custom("xkcd", size: 24))
+            HStack {
+                Text("#\(viewModel.currentComic?.num ?? 0)")
+                    .font(.custom("xkcd", size: 16))
+                Spacer()
+                Text(viewModel.currentComic?.displayDate ?? "")
+                    .font(.custom("xkcd", size: 16))
+            }
+            Spacer()
+            AsyncImage(url: viewModel.comicImageURL) { phase in
+                switch phase {
+                    case .empty:
+                        ZStack {
+                            Color.gray
+                            ProgressView()
+                        }
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    case .failure(let error):
+                        Text(error.localizedDescription)
+                    @unknown default:
+                        EmptyView()
+                }
+            }
+            Spacer()
+            Text(viewModel.currentComic?.alt ?? "")
+                .font(.custom("xkcd", size: 16))
+        }
     }
     
     var menuButton: some View {
