@@ -43,7 +43,7 @@
 	<string>dckx needs permission to save images to your Photo Library.</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>xkcd-script.ttf</string>
+		<string>xkcd-script.woff</string>
 		<string>xkcd-Regular.otf</string>
 		<string>xkcd.otf</string>
 	</array>

@@ -31,9 +31,17 @@ struct ComicView: View {
                     ActivityIndicatorView(shouldAnimate: $viewModel.isBusy)
                 }
             }
-            .navigationBarItems(leading: menuButton,
-                                trailing: ComicToolbarView())
             .toolbar() {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    menuButton
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    searchButton
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ComicToolbarView()
+                }
+                
                 NavigationToolbar(delegate: viewModel)
             }
             .sheet(isPresented: $showingSearch) {
@@ -77,14 +85,19 @@ struct ComicView: View {
 
     var displayView: some View {
         VStack {
+            let titleFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
+                Font.system(size: 24) : Font.custom("xkcd-Regular", size: 24)
+            let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
+                Font.system(size: 16) : Font.custom("xkcd-Regular", size: 16)
+            
             Text("\(viewModel.comicTitle)")
-                .font(.custom("xkcd", size: 24))
+                .font(titleFont)
             HStack {
                 Text("#\(viewModel.currentComic?.num ?? 0)")
-                    .font(.custom("xkcd", size: 16))
+                    .font(textFont)
                 Spacer()
                 Text(viewModel.currentComic?.displayDate ?? "")
-                    .font(.custom("xkcd", size: 16))
+                    .font(textFont)
             }
             Spacer()
             AsyncImage(url: viewModel.comicImageURL) { phase in
@@ -106,17 +119,29 @@ struct ComicView: View {
             }
             Spacer()
             Text(viewModel.currentComic?.alt ?? "")
-                .font(.custom("xkcd", size: 16))
+                .font(textFont)
         }
     }
     
     var menuButton: some View {
         Button(action: {
             withAnimation {
-                self.showingMenu.toggle()
+                showingMenu.toggle()
             }
         }) {
             Image(systemName: "line.horizontal.3")
+                .imageScale(.large)
+        }
+            .disabled(viewModel.isBusy)
+    }
+    
+    var searchButton: some View {
+        Button(action: {
+            withAnimation {
+                showingSearch.toggle()
+            }
+        }) {
+            Image(systemName: "magnifyingglass")
                 .imageScale(.large)
         }
             .disabled(viewModel.isBusy)
