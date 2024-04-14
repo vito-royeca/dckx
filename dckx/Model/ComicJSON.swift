@@ -39,18 +39,18 @@ final class ComicJSON: Codable {
     init(from decoder : Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        self.month = try container.decode(String.self, forKey: .month)
-        self.day = try container.decode(String.self, forKey: .day)
-        self.year = try container.decode(String.self, forKey: .year)
+        month = try container.decode(String.self, forKey: .month)
+        day = try container.decode(String.self, forKey: .day)
+        year = try container.decode(String.self, forKey: .year)
         
-        self.num = try container.decode(Int.self, forKey: .num)
-        self.link = try container.decode(String.self, forKey: .link)
-        self.news = try container.decode(String.self, forKey: .news)
-        self.safeTitle = try container.decode(String.self, forKey: .safeTitle)
-        self.transcript = try container.decode(String.self, forKey: .transcript)
-        self.alt = try container.decode(String.self, forKey: .alt)
-        self.img = try container.decode(String.self, forKey: .img)
-        self.title = try container.decode(String.self, forKey: .title)
+        num = try container.decode(Int.self, forKey: .num)
+        link = try container.decode(String.self, forKey: .link)
+        news = try container.decode(String.self, forKey: .news)
+        safeTitle = try container.decode(String.self, forKey: .safeTitle)
+        transcript = try container.decode(String.self, forKey: .transcript)
+        alt = try container.decode(String.self, forKey: .alt)
+        img = try container.decode(String.self, forKey: .img)
+        title = try container.decode(String.self, forKey: .title)
     }
     
     func date() -> Date {

@@ -11,6 +11,7 @@ import SwiftUI
 protocol NavigationToolbarDelegate: ObservableObject {
     var canDoPrevious: Bool { get }
     var canDoNext: Bool { get }
+    var isBusy: Bool { get }
     func loadFirst() async throws
     func loadPrevious() async throws
     func loadRandom() async throws
@@ -34,23 +35,14 @@ extension NavigationToolbarDelegate {
 }
 
 struct NavigationToolbar: ToolbarContent  {
-    var loadFirst: () async throws -> Void
-    var loadPrevious: () async throws -> Void
-    var loadRandom: () async throws -> Void
-    var search: () -> Void
-    var loadNext: () async throws -> Void
-    var loadLast: () async throws -> Void
-
-    @State var canDoPrevious: Bool
-    @State var canDoNext: Bool
-    @State var isBusy: Bool
+    var delegate: any NavigationToolbarDelegate
     
     var body: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
             Button(action: {
                 Task {
                     do {
-                        try await loadFirst()
+                        try await delegate.loadFirst()
                     } catch {
                         print(error)
                     }
@@ -59,7 +51,7 @@ struct NavigationToolbar: ToolbarContent  {
                 Image(systemName: "backward.end")
                     .imageScale(.large)
             }
-                .disabled(!self.canDoPrevious || isBusy)
+            .disabled(!delegate.canDoPrevious || delegate.isBusy)
         }
         ToolbarItem(placement: .bottomBar) {
             Spacer()
@@ -69,7 +61,7 @@ struct NavigationToolbar: ToolbarContent  {
             Button(action: {
                 Task {
                     do {
-                        try await loadPrevious()
+                        try await delegate.loadPrevious()
                     } catch {
                         print(error)
                     }
@@ -78,7 +70,7 @@ struct NavigationToolbar: ToolbarContent  {
                 Image(systemName: "arrowtriangle.backward")
                     .imageScale(.large)
             }
-                .disabled(!self.canDoPrevious || isBusy)
+            .disabled(!delegate.canDoPrevious || delegate.isBusy)
         }
         ToolbarItem(placement: .bottomBar) {
             Spacer()
@@ -88,7 +80,7 @@ struct NavigationToolbar: ToolbarContent  {
             Button(action: {
                 Task {
                     do {
-                        try await loadRandom()
+                        try await delegate.loadRandom()
                     } catch {
                         print(error)
                     }
@@ -97,18 +89,9 @@ struct NavigationToolbar: ToolbarContent  {
                 Image(systemName: "shuffle")
                     .imageScale(.large)
             }
-            .disabled(isBusy)
+            .disabled(delegate.isBusy)
         }
 
-        ToolbarItem(placement: .bottomBar) {
-            Button(action: {
-                self.search()
-            }) {
-                Image(systemName: "magnifyingglass")
-                    .imageScale(.large)
-            }
-                .disabled(isBusy)
-        }
         ToolbarItem(placement: .bottomBar) {
             Spacer()
         }
@@ -117,7 +100,7 @@ struct NavigationToolbar: ToolbarContent  {
             Button(action: {
                 Task {
                     do {
-                        try await loadNext()
+                        try await delegate.loadNext()
                     } catch {
                         print(error)
                     }
@@ -126,7 +109,7 @@ struct NavigationToolbar: ToolbarContent  {
                 Image(systemName: "arrowtriangle.forward")
                     .imageScale(.large)
             }
-                .disabled(!self.canDoNext || isBusy)
+            .disabled(!delegate.canDoNext || delegate.isBusy)
         }
         ToolbarItem(placement: .bottomBar) {
             Spacer()
@@ -136,7 +119,7 @@ struct NavigationToolbar: ToolbarContent  {
             Button(action: {
                 Task {
                     do {
-                        try await loadLast()
+                        try await delegate.loadLast()
                     } catch {
                         print(error)
                     }
@@ -145,7 +128,7 @@ struct NavigationToolbar: ToolbarContent  {
                 Image(systemName: "forward.end")
                     .imageScale(.large)
             }
-                .disabled(!self.canDoNext || isBusy)
+            .disabled(!delegate.canDoNext || delegate.isBusy)
         }
     }
 }

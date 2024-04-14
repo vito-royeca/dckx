@@ -63,17 +63,7 @@ struct ComicView: View {
                 .navigationBarItems(leading: menuButton,
                                     trailing: ComicToolBarView())
                 .toolbar() {
-                    NavigationToolbar(loadFirst: viewModel.loadFirst,
-                                      loadPrevious: viewModel.loadPrevious,
-                                      loadRandom: viewModel.loadRandom,
-                                      search: {
-                                          self.showingSearch.toggle()
-                                      },
-                                      loadNext: viewModel.loadNext,
-                                      loadLast: viewModel.loadLast,
-                                      canDoPrevious: viewModel.canDoPrevious,
-                                      canDoNext: viewModel.canDoNext,
-                                      isBusy: viewModel.isBusy)
+                    NavigationToolbar(delegate: viewModel)
                 }
                 .sheet(isPresented: $showingSearch) {
 //                    ComicListView()

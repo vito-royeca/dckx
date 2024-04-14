@@ -46,12 +46,12 @@ final class WhatIfJSON: Codable {
     init(from decoder : Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        self.answer = try container.decode(String.self, forKey: .answer)
-        self.link = try container.decode(String.self, forKey: .link)
-        self.num = try container.decode(Int.self, forKey: .num)
-        self.question = try container.decode(String.self, forKey: .question)
-        self.questioner = try container.decode(String.self, forKey: .questioner)
-        self.thumbnail = try container.decode(String.self, forKey: .thumbnail)
-        self.title = try container.decode(String.self, forKey: .title)
+        answer = try container.decode(String.self, forKey: .answer)
+        link = try container.decode(String.self, forKey: .link)
+        num = try container.decode(Int.self, forKey: .num)
+        question = try container.decode(String.self, forKey: .question)
+        questioner = try container.decode(String.self, forKey: .questioner)
+        thumbnail = try container.decode(String.self, forKey: .thumbnail)
+        title = try container.decode(String.self, forKey: .title)
     }
 }

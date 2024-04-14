@@ -16,7 +16,7 @@ struct ComicToolBarView: View {
     var body: some View {
         HStack {
             Button(action: {
-                viewModel.toggle(isFavorite: viewModel.currentComic?.isFavorite ?? false)
+                viewModel.toggle(isFavoriteEnabled: viewModel.currentComic?.isFavorite ?? false)
             }) {
                 Image(systemName: viewModel.currentComic?.isFavorite ?? false ? "bookmark.fill" : "bookmark")
                     .imageScale(.large)

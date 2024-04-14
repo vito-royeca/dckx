@@ -18,6 +18,8 @@ class ComicViewModel {
     var lastComic: ComicModel?
     var isBusy = false
     var isError = false
+    var canDoPrevious = false
+    var canDoNext = false
     
     // MARK: - Initializer
     
@@ -27,6 +29,8 @@ class ComicViewModel {
         Task {
             do {
                 try await loadLast()
+                try await loadPrevious()
+                try await loadLast()
             } catch {
                 print(error)
             }
@@ -35,26 +39,26 @@ class ComicViewModel {
     
     // MARK: - Toolbar methods
     
-    func toggle(isFavorite: Bool) {
+    func toggle(isFavoriteEnabled: Bool) {
         guard let currentComic = currentComic else {
             return
         }
         
         do {
-            currentComic.isFavorite = isFavorite
+            currentComic.isFavorite = isFavoriteEnabled
             try modelContext.save()
         } catch {
             print(error)
         }
     }
     
-    func toggle(isRead: Bool) {
+    func toggle(isReadEnabled: Bool) {
         guard let currentComic = currentComic else {
             return
         }
 
         do {
-            currentComic.isRead = isRead
+            currentComic.isRead = isReadEnabled
             try modelContext.save()
         } catch {
             print(error)
@@ -72,8 +76,8 @@ class ComicViewModel {
     // MARK: - Helper methods
     
     func load(num: Int) async throws {
-        isBusy = true
-        
+        toggle(isNavigationEnabled: false)
+
         let descriptor = FetchDescriptor<ComicModel>(predicate: #Predicate { comic in
             comic.num == num
         })
@@ -90,12 +94,12 @@ class ComicViewModel {
                     comicModel = try modelContext.fetch(descriptor).first
                 } catch {
                     print(error)
-                    isBusy = false
+                    toggle(isNavigationEnabled: true)
                 }
             }
             
             guard let comicModel = comicModel else {
-                isBusy = false
+                toggle(isNavigationEnabled: true)
                 return
             }
 
@@ -106,14 +110,14 @@ class ComicViewModel {
                 try await load(num: newNum)
             } else {
                 currentComic = comicModel
-                toggle(isRead: true)
+                toggle(isReadEnabled: true)
             }
 
             try await fetchImage(comic: comicModel)
-            isBusy = false
+            toggle(isNavigationEnabled: true)
         } catch {
             print(error)
-            isBusy = false
+            toggle(isNavigationEnabled: true)
         }
     }
     
@@ -182,23 +186,6 @@ extension SDImageLoader {
 // MARK: - NavigationBarViewDelegate
 
 extension ComicViewModel: NavigationToolbarDelegate {
-    var canDoPrevious: Bool {
-        guard let currentComic = currentComic else {
-            return false
-        }
-
-        return currentComic.num > 1
-    }
-    
-    var canDoNext: Bool {
-        guard let currentComic = currentComic,
-            let lastComic = lastComic else {
-            return false
-        }
-
-        return currentComic.num < lastComic.num
-    }
-    
     func loadFirst() async throws {
         try await load(num: 1)
     }
@@ -212,7 +199,7 @@ extension ComicViewModel: NavigationToolbarDelegate {
     }
     
     func loadRandom() async throws {
-        isBusy = true
+        toggle(isNavigationEnabled: false)
         
         do {
             let comicJson = try await XkcdAPI.sharedInstance.fetchRandomComic()
@@ -225,14 +212,14 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 try await loadRandom()
             } else {
                 currentComic = comicModel
-                toggle(isRead: true)
+                toggle(isReadEnabled: true)
             }
             
             try await fetchImage(comic: comicModel)
-            isBusy = false
+            toggle(isNavigationEnabled: true)
         } catch {
             print(error)
-            isBusy = false
+            toggle(isNavigationEnabled: true)
         }
     }
     
@@ -245,7 +232,7 @@ extension ComicViewModel: NavigationToolbarDelegate {
     }
     
     func loadLast() async throws {
-        isBusy = true
+        toggle(isNavigationEnabled: false)
         
         var descriptor = FetchDescriptor<ComicModel>(sortBy: [SortDescriptor(\.num, order: .reverse)])
         descriptor.fetchLimit = 1
@@ -262,12 +249,12 @@ extension ComicViewModel: NavigationToolbarDelegate {
                     comicModel = try modelContext.fetch(descriptor).first
                 } catch {
                     print(error)
-                    isBusy = false
+                    toggle(isNavigationEnabled: true)
                 }
             }
             
             guard let comicModel = comicModel else {
-                isBusy = false
+                toggle(isNavigationEnabled: true)
                 return
             }
             
@@ -278,14 +265,33 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 try await load(num: newNum)
             } else {
                 currentComic = comicModel
-                toggle(isRead: true)
+                lastComic = comicModel
+                toggle(isReadEnabled: true)
             }
             
             try await fetchImage(comic: comicModel)
-            isBusy = false
+            toggle(isNavigationEnabled: true)
         } catch {
             print(error)
+            toggle(isNavigationEnabled: true)
+        }
+    }
+    
+    private func toggle(isNavigationEnabled: Bool) {
+        if isNavigationEnabled {
+            canDoPrevious = currentComic?.num ?? 0 > 1
+            
+            if let currentComic = currentComic,
+                let lastComic = lastComic {
+                canDoNext = currentComic.num < lastComic.num
+            } else {
+                canDoNext = false
+            }
             isBusy = false
+        } else {
+            canDoPrevious = false
+            canDoNext = false
+            isBusy = true
         }
     }
 }
