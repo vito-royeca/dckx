@@ -1,5 +1,5 @@
 //
-//  ComicToolBarView.swift
+//  ComicToolbarView.swift
 //  dckx
 //
 //  Created by Vito Royeca on 4/14/24.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ComicToolBarView: View {
+struct ComicToolbarView: View {
     @EnvironmentObject var viewModel: ComicViewModel
     @State private var showingBrowser = false
     @State private var showingShare = false

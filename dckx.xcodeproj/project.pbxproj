@@ -38,9 +38,9 @@
 		76A0FDDD2BCB51CE00C0002E /* WhatIfJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDDC2BCB51CE00C0002E /* WhatIfJSON.swift */; };
 		76A0FDDE2BCB51CE00C0002E /* WhatIfJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDDC2BCB51CE00C0002E /* WhatIfJSON.swift */; };
 		76A0FDDF2BCB51CE00C0002E /* WhatIfJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDDC2BCB51CE00C0002E /* WhatIfJSON.swift */; };
-		76A0FDE12BCB92C600C0002E /* ComicToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE02BCB92C600C0002E /* ComicToolBarView.swift */; };
-		76A0FDE22BCB92C600C0002E /* ComicToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE02BCB92C600C0002E /* ComicToolBarView.swift */; };
-		76A0FDE32BCB92C600C0002E /* ComicToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE02BCB92C600C0002E /* ComicToolBarView.swift */; };
+		76A0FDE12BCB92C600C0002E /* ComicToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE02BCB92C600C0002E /* ComicToolbarView.swift */; };
+		76A0FDE22BCB92C600C0002E /* ComicToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE02BCB92C600C0002E /* ComicToolbarView.swift */; };
+		76A0FDE32BCB92C600C0002E /* ComicToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE02BCB92C600C0002E /* ComicToolbarView.swift */; };
 		76A0FDE52BCB931200C0002E /* ComicItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE42BCB931200C0002E /* ComicItemSource.swift */; };
 		76A0FDE62BCB931200C0002E /* ComicItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE42BCB931200C0002E /* ComicItemSource.swift */; };
 		76A0FDE72BCB931200C0002E /* ComicItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE42BCB931200C0002E /* ComicItemSource.swift */; };
@@ -218,7 +218,7 @@
 		76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dckxApp.swift; sourceTree = "<group>"; };
 		76A0FDA22BCB4B3300C0002E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		76A0FDDC2BCB51CE00C0002E /* WhatIfJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfJSON.swift; sourceTree = "<group>"; };
-		76A0FDE02BCB92C600C0002E /* ComicToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicToolBarView.swift; sourceTree = "<group>"; };
+		76A0FDE02BCB92C600C0002E /* ComicToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicToolbarView.swift; sourceTree = "<group>"; };
 		76A0FDE42BCB931200C0002E /* ComicItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicItemSource.swift; sourceTree = "<group>"; };
 		8B1A4BF32624430F00DBCD7B /* dckx-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dckx-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B1A4C4426253E2700DBCD7B /* Ji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -492,7 +492,7 @@
 			isa = PBXGroup;
 			children = (
 				76A0FDE42BCB931200C0002E /* ComicItemSource.swift */,
-				76A0FDE02BCB92C600C0002E /* ComicToolBarView.swift */,
+				76A0FDE02BCB92C600C0002E /* ComicToolbarView.swift */,
 				8B4F4B9C23F5F444008446F4 /* ComicView.swift */,
 				8B23368123F6683C00C88BA1 /* ComicViewModel.swift */,
 				8B7E5166262FC972002A094E /* ComicViewModel+HTML.swift */,
@@ -788,7 +788,7 @@
 				8B65801C240B12E100A245DC /* ShareSheetView.swift in Sources */,
 				8BA50E60240A2DA200138D11 /* Database.swift in Sources */,
 				8B7E5167262FC972002A094E /* ComicViewModel+HTML.swift in Sources */,
-				76A0FDE12BCB92C600C0002E /* ComicToolBarView.swift in Sources */,
+				76A0FDE12BCB92C600C0002E /* ComicToolbarView.swift in Sources */,
 				76A0FD8C2BCB2EF500C0002E /* ComicJSON.swift in Sources */,
 				8B4F4B9D23F5F444008446F4 /* ComicView.swift in Sources */,
 				8B23368223F6683C00C88BA1 /* ComicViewModel.swift in Sources */,
@@ -831,7 +831,7 @@
 				76A0FD8D2BCB2EF500C0002E /* ComicJSON.swift in Sources */,
 				8B7E5168262FC972002A094E /* ComicViewModel+HTML.swift in Sources */,
 				8B4F4BE123F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
-				76A0FDE22BCB92C600C0002E /* ComicToolBarView.swift in Sources */,
+				76A0FDE22BCB92C600C0002E /* ComicToolbarView.swift in Sources */,
 				76A0FDE62BCB931200C0002E /* ComicItemSource.swift in Sources */,
 				8B82B2B52618C6AD008AD11D /* ListRowView.swift in Sources */,
 				8B658021240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
@@ -867,7 +867,7 @@
 				76A0FD8E2BCB2EF500C0002E /* ComicJSON.swift in Sources */,
 				8B7E5169262FC972002A094E /* ComicViewModel+HTML.swift in Sources */,
 				8B4A1285240828FD00D4F8B2 /* SnapshotHelper.swift in Sources */,
-				76A0FDE32BCB92C600C0002E /* ComicToolBarView.swift in Sources */,
+				76A0FDE32BCB92C600C0002E /* ComicToolbarView.swift in Sources */,
 				76A0FDE72BCB931200C0002E /* ComicItemSource.swift in Sources */,
 				8B4F4BE223F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				8B658019240AFED800A245DC /* MailView.swift in Sources */,

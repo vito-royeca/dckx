@@ -61,7 +61,7 @@ struct ComicView: View {
             .navigationBarTitle(Text(viewModel.comicTitle),
                                 displayMode: .large)
                 .navigationBarItems(leading: menuButton,
-                                    trailing: ComicToolBarView())
+                                    trailing: ComicToolbarView())
                 .toolbar() {
                     NavigationToolbar(delegate: viewModel)
                 }
