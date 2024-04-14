@@ -88,8 +88,7 @@ class ComicViewModel {
                 comicModel = comic
             } else {
                 do {
-                    let comicJson = try await XkcdAPI.sharedInstance.fetchComic(num: num)
-                    let model = ComicModel(from: comicJson)
+                    let model = try await XkcdAPI.sharedInstance.fetchComic(num: num)
                     modelContext.insert(model)
                     comicModel = try modelContext.fetch(descriptor).first
                 } catch {
@@ -202,8 +201,7 @@ extension ComicViewModel: NavigationToolbarDelegate {
         toggle(isNavigationEnabled: false)
         
         do {
-            let comicJson = try await XkcdAPI.sharedInstance.fetchRandomComic()
-            let comicModel = ComicModel(from: comicJson)
+            let comicModel = try await XkcdAPI.sharedInstance.fetchRandomComic()
             modelContext.insert(comicModel)
             
             let sensitiveData = SensitiveData()
@@ -243,8 +241,7 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 comicModel = comic
             } else {
                 do {
-                    let comicJson = try await XkcdAPI.sharedInstance.fetchLastComic()
-                    let model = ComicModel(from: comicJson)
+                    let model = try await XkcdAPI.sharedInstance.fetchLastComic()
                     modelContext.insert(model)
                     comicModel = try modelContext.fetch(descriptor).first
                 } catch {

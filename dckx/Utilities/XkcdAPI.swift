@@ -23,7 +23,7 @@ class XkcdAPI {
     
     // MARK: - Comic API methods
 
-    func fetchLastComic() async throws -> ComicJSON {
+    func fetchLastComic() async throws -> ComicModel {
         do {
             let urlString = "http://xkcd.com/info.0.json"
             
@@ -37,7 +37,7 @@ class XkcdAPI {
                 throw XkcdAPIError.httpError
             }
             
-            let result = try JSONDecoder().decode(ComicJSON.self,
+            let result = try JSONDecoder().decode(ComicModel.self,
                                                   from: data)
             return result
         } catch {
@@ -45,7 +45,7 @@ class XkcdAPI {
         }
     }
     
-    func fetchComic(num: Int) async throws -> ComicJSON {
+    func fetchComic(num: Int) async throws -> ComicModel {
         do {
             let urlString = "http://xkcd.com/\(num)/info.0.json"
             
@@ -59,7 +59,7 @@ class XkcdAPI {
                 throw XkcdAPIError.httpError
             }
             
-            let result = try JSONDecoder().decode(ComicJSON.self,
+            let result = try JSONDecoder().decode(ComicModel.self,
                                                   from: data)
             return result
         } catch {
@@ -67,15 +67,15 @@ class XkcdAPI {
         }
     }
     
-    func fetchRandomComic() async throws -> ComicJSON {
+    func fetchRandomComic() async throws -> ComicModel {
         do {
-            var comicJson = try await fetchLastComic()
-            let random = Int.random(in: 1 ... comicJson.num)
+            var comicModel = try await fetchLastComic()
+            let random = Int.random(in: 1 ... comicModel.num)
             
-            if random != comicJson.num {
-                comicJson = try await fetchComic(num: random)
+            if random != comicModel.num {
+                comicModel = try await fetchComic(num: random)
             }
-            return comicJson
+            return comicModel
         } catch {
             throw XkcdAPIError.unknownError
         }
@@ -83,12 +83,11 @@ class XkcdAPI {
     
     // MARK: - Whatif API methods
 
-    func scrapeWhatIf(link: String) -> WhatIfJSON {
+    func scrapeWhatIf(link: String) -> WhatIfModel {
         do {
             guard let url = URL(string: link) else {
                 fatalError("Malformed url")
             }
-            
             
             let document = try HTML(url: url, encoding: .utf8)
             var dict = [String: Any]()
@@ -127,13 +126,13 @@ class XkcdAPI {
                 }
             }
             
-            return WhatIfJSON(answer: dict["answer"] as? String ?? "",
-                              link: link,
-                              num: dict["num"] as? Int ?? 0,
-                              question: dict["question"] as? String ?? "",
-                              questioner: dict["questioner"] as? String ?? "",
-                              thumbnail: dict["thumbnail"] as? String ?? "",
-                              title: dict["title"] as? String ?? "")
+            return WhatIfModel(answer: dict["answer"] as? String ?? "",
+                               link: link,
+                               num: dict["num"] as? Int ?? 0,
+                               question: dict["question"] as? String ?? "",
+                               questioner: dict["questioner"] as? String ?? "",
+                               thumbnail: dict["thumbnail"] as? String ?? "",
+                               title: dict["title"] as? String ?? "")
         } catch {
             fatalError(error.localizedDescription)
         }
