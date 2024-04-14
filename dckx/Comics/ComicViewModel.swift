@@ -84,18 +84,19 @@ class ComicViewModel {
     // MARK: - Helper methods
     
     func load(num: Int) async throws {
-        toggle(isNavigationEnabled: false)
-
         let descriptor = FetchDescriptor<ComicModel>(predicate: #Predicate { comic in
             comic.num == num
         })
 
         do {
             var comicModel: ComicModel?
+
             if let comic = try modelContext.fetch(descriptor).first {
                 comicModel = comic
             } else {
                 do {
+                    toggle(isNavigationEnabled: false)
+
                     let model = try await XkcdAPI.sharedInstance.fetchComic(num: num)
                     modelContext.insert(model)
                     comicModel = try modelContext.fetch(descriptor).first
@@ -128,8 +129,6 @@ class ComicViewModel {
     }
     
     func fetchImage(comic: ComicModel, callback: @escaping SDImageLoaderCompletedBlock) {
-            
-            
             if let _ = SDImageCache.shared.imageFromCache(forKey: comic.img) {
                 toggle(isNavigationEnabled: true)
                 return
@@ -178,11 +177,20 @@ extension ComicViewModel: NavigationToolbarDelegate {
     }
     
     func loadRandom() async throws {
-        toggle(isNavigationEnabled: false)
-        
         do {
-            let comicModel = try await XkcdAPI.sharedInstance.fetchRandomComic()
-            modelContext.insert(comicModel)
+            toggle(isNavigationEnabled: false)
+
+            var comicModel = try await XkcdAPI.sharedInstance.fetchRandomComic()
+            let num = comicModel.num
+            let descriptor = FetchDescriptor<ComicModel>(predicate: #Predicate { comic in
+                comic.num == num
+            })
+
+            if let comic = try modelContext.fetch(descriptor).first {
+               comicModel = comic
+            } else {
+                modelContext.insert(comicModel)
+            }
             
             let sensitiveData = SensitiveData()
             if !sensitiveData.showSensitiveContent &&
@@ -209,17 +217,18 @@ extension ComicViewModel: NavigationToolbarDelegate {
     }
     
     func loadLast() async throws {
-        toggle(isNavigationEnabled: false)
-        
         var descriptor = FetchDescriptor<ComicModel>(sortBy: [SortDescriptor(\.num, order: .reverse)])
         descriptor.fetchLimit = 1
         
         do {
             var comicModel: ComicModel?
+
             if let comic = try modelContext.fetch(descriptor).first {
                 comicModel = comic
             } else {
                 do {
+                    toggle(isNavigationEnabled: false)
+                    
                     let model = try await XkcdAPI.sharedInstance.fetchLastComic()
                     modelContext.insert(model)
                     comicModel = try modelContext.fetch(descriptor).first
