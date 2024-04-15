@@ -31,7 +31,7 @@ struct ComicView: View {
                     ActivityIndicatorView(shouldAnimate: $viewModel.isBusy)
                 }
             }
-            .toolbar() {
+            .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     menuButton
                 }
@@ -45,7 +45,10 @@ struct ComicView: View {
                 NavigationToolbar(delegate: viewModel)
             }
             .sheet(isPresented: $showingSearch) {
-//                    ComicListView()
+                NavigationView {
+                    ComicListView(modelContext: viewModel.modelContext,
+                                  selectedComic: $viewModel.currentComic)
+                }
             }
         }
             .environmentObject(viewModel)
@@ -86,9 +89,9 @@ struct ComicView: View {
     var displayView: some View {
         VStack {
             let titleFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-            Font.system(size: 24) : Font.custom("xkcd-Regular", size: 24)
+            Font.system(size: 24) : Font.dckxLargeTitleText
             let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-            Font.system(size: 16) : Font.custom("xkcd-Regular", size: 16)
+            Font.system(size: 16) : Font.dckxRegularText
             
             Text("\(viewModel.comicTitle)")
                 .font(titleFont)

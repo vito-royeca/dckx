@@ -21,45 +21,38 @@ struct HamburgerView: View {
     var modelContext: ModelContext
     
     var body: some View {
+        contentView
+            .environmentObject(settings)
+    }
+    
+    var contentView: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 switch mainView {
                 case .comics:
                     ComicView(modelContext: modelContext,
                               showingMenu: $showingMenu)
-                        .frame(width: geometry.size.width,
-                               height: geometry.size.height)
-                        .offset(x: self.showingMenu ? geometry.size.width - geometry.size.width/3 : 0)
                 case .whatIfs:
-//                    WhatIfView(showingMenu: $showingMenu)
+                    //                    WhatIfView(showingMenu: $showingMenu)
                     Text("What Ifs")
-                        .frame(width: geometry.size.width,
-                               height: geometry.size.height)
-                        .offset(x: self.showingMenu ? geometry.size.width - geometry.size.width/3 : 0)
                 case .settings:
                     SettingsView(showingMenu: $showingMenu)
-                        .frame(width: geometry.size.width,
-                               height: geometry.size.height)
-                        .offset(x: self.showingMenu ? geometry.size.width - geometry.size.width/3 : 0)
                 }
-                    
+                
                 if self.showingMenu {
                     HMenuView(mainView: $mainView,
                               showingMenu: $showingMenu)
-                        .frame(width: geometry.size.width - geometry.size.width/3)
-                        .transition(.move(edge: .leading))
+                    .frame(width: geometry.size.width - geometry.size.width/3)
+                    .transition(.move(edge: .leading))
                 }
             }
         }
-            .environmentObject(settings)
-
     }
+
 }
 
-struct HamburgerView_Previews: PreviewProvider {
-    static var previews: some View {
-        HamburgerView(modelContext: try! ModelContainer(for: ComicModel.self).mainContext)
-    }
+#Preview {
+    HamburgerView(modelContext: try! ModelContainer(for: ComicModel.self).mainContext)
 }
 
 // MARK: - HMenuView

@@ -23,6 +23,12 @@
 		7633F8302BCCBA4F00B2F1A4 /* InteractiveImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7633F82F2BCCBA4F00B2F1A4 /* InteractiveImageView.swift */; };
 		7633F8312BCCBA4F00B2F1A4 /* InteractiveImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7633F82F2BCCBA4F00B2F1A4 /* InteractiveImageView.swift */; };
 		7633F8322BCCC53000B2F1A4 /* InteractiveImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7633F82F2BCCBA4F00B2F1A4 /* InteractiveImageView.swift */; };
+		7633F8352BCCC90700B2F1A4 /* ComicListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7633F8332BCCC90700B2F1A4 /* ComicListViewModel.swift */; };
+		7633F8362BCCC90700B2F1A4 /* ComicListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7633F8332BCCC90700B2F1A4 /* ComicListViewModel.swift */; };
+		7633F8372BCCC90700B2F1A4 /* ComicListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7633F8332BCCC90700B2F1A4 /* ComicListViewModel.swift */; };
+		7633F8382BCCC90700B2F1A4 /* ComicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7633F8342BCCC90700B2F1A4 /* ComicListView.swift */; };
+		7633F8392BCCC90700B2F1A4 /* ComicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7633F8342BCCC90700B2F1A4 /* ComicListView.swift */; };
+		7633F83A2BCCC90700B2F1A4 /* ComicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7633F8342BCCC90700B2F1A4 /* ComicListView.swift */; };
 		7649C8782BCA50C100A54E5F /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */; };
 		7649C87C2BCA5E5B00A54E5F /* ComicsData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C87A2BCA5E5B00A54E5F /* ComicsData.cpp */; };
 		7649C8842BCA63EE00A54E5F /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8802BCA63EE00A54E5F /* Panel.cpp */; };
@@ -192,6 +198,8 @@
 
 /* Begin PBXFileReference section */
 		7633F82F2BCCBA4F00B2F1A4 /* InteractiveImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveImageView.swift; sourceTree = "<group>"; };
+		7633F8332BCCC90700B2F1A4 /* ComicListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicListViewModel.swift; sourceTree = "<group>"; };
+		7633F8342BCCC90700B2F1A4 /* ComicListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicListView.swift; sourceTree = "<group>"; };
 		7649C7D72BCA026200A54E5F /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../Downloads/opencv2.framework; sourceTree = "<group>"; };
 		7649C7DD2BCA0BF600A54E5F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		7649C8762BCA50C100A54E5F /* OpenCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCV.h; sourceTree = "<group>"; };
@@ -486,6 +494,8 @@
 			isa = PBXGroup;
 			children = (
 				7633F82E2BCCBA1800B2F1A4 /* Subviews */,
+				7633F8342BCCC90700B2F1A4 /* ComicListView.swift */,
+				7633F8332BCCC90700B2F1A4 /* ComicListViewModel.swift */,
 				8B4F4B9C23F5F444008446F4 /* ComicView.swift */,
 				8B23368123F6683C00C88BA1 /* ComicViewModel.swift */,
 				8B7E5166262FC972002A094E /* ComicViewModel+HTML.swift */,
@@ -771,12 +781,14 @@
 				76A0FD9B2BCB44D100C0002E /* WhatIfModel.swift in Sources */,
 				76A0FDA12BCB4AEA00C0002E /* dckxApp.swift in Sources */,
 				8BAC10B426169EBD00664335 /* SearchNavigation.swift in Sources */,
+				7633F8382BCCC90700B2F1A4 /* ComicListView.swift in Sources */,
 				7649C87C2BCA5E5B00A54E5F /* ComicsData.cpp in Sources */,
 				8BA5921925FEBEC1001CD883 /* HideScrollView.swift in Sources */,
 				8B7B2C34262C930500B35825 /* HamburgerView.swift in Sources */,
 				8BA50E6C240A425500138D11 /* WebView.swift in Sources */,
 				8B7E51DA262FECF9002A094E /* AppGroup.swift in Sources */,
 				8B5307262602E6DF008BA7AB /* NavigationSearchBar.swift in Sources */,
+				7633F8352BCCC90700B2F1A4 /* ComicListViewModel.swift in Sources */,
 				8B7E509D262FBF62002A094E /* SensitiveData.swift in Sources */,
 				8B626D702401B0A900972EED /* Constants.swift in Sources */,
 				8B65801C240B12E100A245DC /* ShareSheetView.swift in Sources */,
@@ -818,6 +830,7 @@
 				8B65801D240B12E100A245DC /* ShareSheetView.swift in Sources */,
 				8B626D882402122C00972EED /* BrowserView.swift in Sources */,
 				8B7E509E262FBF62002A094E /* SensitiveData.swift in Sources */,
+				7633F8392BCCC90700B2F1A4 /* ComicListView.swift in Sources */,
 				8B626D8C2402291B00972EED /* ComicView.swift in Sources */,
 				8B626D792401EB1200972EED /* XkcdAPITests.swift in Sources */,
 				7633F81B2BCC9D9800B2F1A4 /* dckxApp.swift in Sources */,
@@ -831,6 +844,7 @@
 				8B658018240AFED800A245DC /* MailView.swift in Sources */,
 				8B626D712401B0A900972EED /* Constants.swift in Sources */,
 				8B82B2C526192A9C008AD11D /* SettingsView.swift in Sources */,
+				7633F8362BCCC90700B2F1A4 /* ComicListViewModel.swift in Sources */,
 				8B1A4B29261EF51A00DBCD7B /* SearchNavigation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -851,6 +865,7 @@
 				8B7E51DC262FECF9002A094E /* AppGroup.swift in Sources */,
 				8B4F4BBB23F5F445008446F4 /* dckxUITests.swift in Sources */,
 				8B626D892402122C00972EED /* BrowserView.swift in Sources */,
+				7633F83A2BCCC90700B2F1A4 /* ComicListView.swift in Sources */,
 				8B7E509F262FBF62002A094E /* SensitiveData.swift in Sources */,
 				8BA50E6E240A425500138D11 /* WebView.swift in Sources */,
 				7633F81C2BCC9D9900B2F1A4 /* dckxApp.swift in Sources */,
@@ -864,6 +879,7 @@
 				8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
 				8B626D8A2402274A00972EED /* Constants.swift in Sources */,
 				8B82B2C626192A9C008AD11D /* SettingsView.swift in Sources */,
+				7633F8372BCCC90700B2F1A4 /* ComicListViewModel.swift in Sources */,
 				8B1A4B2D261EF51B00DBCD7B /* SearchNavigation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
