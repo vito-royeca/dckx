@@ -77,14 +77,14 @@ class ComicListViewModel {
 //        return fetchRequest
 //    }
     
-    func setRead(comic: ComicModel) {
-        do {
-            comic.isRead = true
-            try modelContext.save()
-        } catch {
-            print(error)
-        }
-    }
+//    func setRead(comic: ComicModel) {
+//        do {
+//            comic.isRead = true
+//            try modelContext.save()
+//        } catch {
+//            print(error)
+//        }
+//    }
 
     func loadComics() async throws{
         do {

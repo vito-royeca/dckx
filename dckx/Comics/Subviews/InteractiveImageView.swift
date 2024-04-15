@@ -19,12 +19,11 @@ struct InteractiveImageView: View {
 
     var body: some View {
         GeometryReader { proxy in
-            AsyncImage(url: url) { phase in
+            AsyncImage(url: url,
+                       transaction: .init(animation: .bouncy(duration: 1))) { phase in
                 switch phase {
                 case .empty:
-                    ZStack {
-                        ProgressView()
-                    }
+                    EmptyView()
 
                 case .success(let image):
                     ScrollView([.vertical, .horizontal],
@@ -49,16 +48,20 @@ struct InteractiveImageView: View {
     
     var errorView: some View {
         VStack(alignment: .center) {
+            let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
+            Font.system(size: 16) : Font.dckxRegularText
+            
             Spacer()
             
             HStack {
                 Spacer(minLength: 0)
                 VStack {
                     Text("Ooops... the image can't be loaded.")
-                    Button(action: reloadAction,
-                           label: {
+                        .font(textFont)
+                    Button(action: reloadAction) {
                         Text("Try again")
-                    })
+                            .font(textFont)
+                    }
                 }
                 Spacer(minLength: 0)
             }

@@ -47,7 +47,7 @@ struct ComicView: View {
             .sheet(isPresented: $showingSearch) {
                 NavigationView {
                     ComicListView(modelContext: viewModel.modelContext,
-                                  selectedComic: $viewModel.currentComic)
+                                  selectComicAction: select(comic:))
                 }
             }
         }
@@ -137,6 +137,16 @@ struct ComicView: View {
                 .imageScale(.large)
         }
             .disabled(viewModel.isBusy)
+    }
+    
+    func select(comic: ComicModel) {
+        Task {
+            do {
+                try await viewModel.load(num: comic.num)
+            } catch {
+                print(error)
+            }
+        }
     }
 }
 

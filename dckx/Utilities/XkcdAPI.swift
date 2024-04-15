@@ -30,17 +30,12 @@ class XkcdAPI {
                 throw XkcdAPIError.invalidURL
             }
             
-            let (data, response) = try await URLSession.shared.data(from: url)
-            guard let response = response as? HTTPURLResponse,
-                  response.statusCode == 200 else {
-                throw XkcdAPIError.httpError
-            }
-            
+            let (data, _) = try await URLSession.shared.data(from: url)
             let result = try JSONDecoder().decode(ComicModel.self,
                                                   from: data)
             return result
         } catch {
-            throw XkcdAPIError.unknownError
+            throw XkcdAPIError.httpError
         }
     }
     
@@ -52,31 +47,12 @@ class XkcdAPI {
                 throw XkcdAPIError.invalidURL
             }
             
-            let (data, response) = try await URLSession.shared.data(from: url)
-            guard let response = response as? HTTPURLResponse,
-                  response.statusCode == 200 else {
-                throw XkcdAPIError.httpError
-            }
-            
+            let (data, _) = try await URLSession.shared.data(from: url)
             let result = try JSONDecoder().decode(ComicModel.self,
                                                   from: data)
             return result
         } catch {
-            throw XkcdAPIError.unknownError
-        }
-    }
-    
-    func fetchRandomComic() async throws -> ComicModel {
-        do {
-            var comicModel = try await fetchLastComic()
-            let random = Int.random(in: 1 ... comicModel.num)
-            
-            if random != comicModel.num {
-                comicModel = try await fetchComic(num: random)
-            }
-            return comicModel
-        } catch {
-            throw XkcdAPIError.unknownError
+            throw XkcdAPIError.httpError
         }
     }
     

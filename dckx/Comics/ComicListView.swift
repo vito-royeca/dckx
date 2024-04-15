@@ -14,12 +14,12 @@ import SwiftData
 struct  ComicListView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var viewModel: ComicListViewModel
-    @Binding var selectedComic: ComicModel?
+    var selectComicAction: (ComicModel) -> Void
     
-    init(modelContext: ModelContext, selectedComic: Binding<ComicModel?>) {
+    init(modelContext: ModelContext, selectComicAction: @escaping (ComicModel) -> Void) {
         let model = ComicListViewModel(modelContext: modelContext)
         _viewModel = State(initialValue: model)
-        _selectedComic = selectedComic
+        self.selectComicAction = selectComicAction
     }
 
     var body: some View {
@@ -52,8 +52,8 @@ struct  ComicListView: View {
     }
     
     func select(comic: ComicModel) {
-        selectedComic = comic
-        viewModel.setRead(comic: comic)
+        selectComicAction(comic)
+//        viewModel.setRead(comic: comic)
         presentationMode.wrappedValue.dismiss()
     }
     
@@ -67,7 +67,7 @@ struct  ComicListView: View {
         let container = try ModelContainer(for: ComicModel.self,
                                            configurations: config)
         return ComicListView(modelContext: container.mainContext,
-                             selectedComic: .constant(nil))
+                             selectComicAction: { comic in } )
     } catch {
         return EmptyView()
     }

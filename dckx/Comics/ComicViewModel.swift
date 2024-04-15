@@ -15,12 +15,13 @@ import SDWebImage
 class ComicViewModel {
     var modelContext: ModelContext
     var currentComic: ComicModel?
-    var lastComic: ComicModel?
+    private var lastComic: ComicModel?
     var isBusy = false
     var isError = false
     var canDoPrevious = false
     var canDoNext = false
-    
+    var comicImageURL: URL?
+
     // MARK: - Initializer
     
     init(modelContext: ModelContext) {
@@ -72,15 +73,6 @@ class ComicViewModel {
         }
     }
 
-    var comicImageURL: URL? {
-        guard let comic = currentComic,
-              let cachePath = SDImageCache.shared.cachePath(forKey: comic.img) else {
-            return nil
-        }
-        
-        return URL(filePath: cachePath)
-    }
-    
     // MARK: - Helper methods
     
     func reloadComic() {
@@ -104,17 +96,20 @@ class ComicViewModel {
     }
     
     private func fetchImage(callback: @escaping SDImageLoaderCompletedBlock) {
+        comicImageURL = nil
+        
         guard let currentComic = currentComic,
             let url = URL(string: currentComic.img) else {
             return
         }
         
-        if let _ = SDImageCache.shared.imageFromCache(forKey: currentComic.img) {
-            toggle(isNavigationEnabled: true)
-            return
+        toggle(isNavigationEnabled: true)
+        if let cachePath = SDImageCache.shared.cachePath(forKey: currentComic.img),
+           FileManager.default.fileExists(atPath: cachePath) {
+            comicImageURL = URL(filePath: cachePath)
         } else {
             SDWebImageManager.shared.imageLoader.requestImage(with: url,
-                                                              options: .lowPriority,
+                                                              options: .highPriority,
                                                               context: nil,
                                                               progress: nil,
                                                               completed: callback)
@@ -122,8 +117,6 @@ class ComicViewModel {
     }
     
     private func fetchImageCallback(image: UIImage?, data: Data?, error: Error?, finished: Bool) {
-        toggle(isNavigationEnabled: true)
-        
         guard let currentComic = currentComic,
               let image = image,
               let data = data else {
@@ -134,6 +127,12 @@ class ComicViewModel {
                                                   imageData: data,
                                                   forKey: currentComic.img,
                                                   cacheType: .disk)
+        
+        guard let cachePath = SDImageCache.shared.cachePath(forKey: currentComic.img) else {
+            return
+        }
+        
+        comicImageURL = URL(filePath: cachePath)
     }
 }
 
@@ -153,19 +152,30 @@ extension ComicViewModel: NavigationToolbarDelegate {
     }
     
     func loadRandom() async throws {
+        guard let lastComic = lastComic else {
+            return
+        }
+
+        let random = Int.random(in: 1 ... lastComic.num)
+        let descriptor = FetchDescriptor<ComicModel>(predicate: #Predicate { comic in
+            comic.num == random
+        })
+        var comicModel: ComicModel?
+        
         do {
             toggle(isNavigationEnabled: false)
-
-            var comicModel = try await XkcdAPI.sharedInstance.fetchRandomComic()
-            let num = comicModel.num
-            let descriptor = FetchDescriptor<ComicModel>(predicate: #Predicate { comic in
-                comic.num == num
-            })
-
+            
             if let comic = try modelContext.fetch(descriptor).first {
                comicModel = comic
             } else {
-                modelContext.insert(comicModel)
+                let model = try await XkcdAPI.sharedInstance.fetchComic(num: random)
+                modelContext.insert(model)
+                comicModel = try modelContext.fetch(descriptor).first
+            }
+            toggle(isNavigationEnabled: true)
+
+            guard let comicModel = comicModel else {
+                return
             }
 
             let sensitiveData = SensitiveData()
@@ -193,25 +203,21 @@ extension ComicViewModel: NavigationToolbarDelegate {
     }
     
     func loadLast() async throws {
-        toggle(isNavigationEnabled: false)
-
         var descriptor = FetchDescriptor<ComicModel>(sortBy: [SortDescriptor(\.num, order: .reverse)])
         descriptor.fetchLimit = 1
+        var comicModel: ComicModel?
         
         do {
-            var comicModel: ComicModel?
+            toggle(isNavigationEnabled: false)
 
             if let comic = try modelContext.fetch(descriptor).first {
                 comicModel = comic
             } else {
-                do {
-                    let model = try await XkcdAPI.sharedInstance.fetchLastComic()
-                    modelContext.insert(model)
-                    comicModel = try modelContext.fetch(descriptor).first
-                } catch {
-                    print(error)
-                }
+                let model = try await XkcdAPI.sharedInstance.fetchLastComic()
+                modelContext.insert(model)
+                comicModel = try modelContext.fetch(descriptor).first
             }
+            toggle(isNavigationEnabled: true)
             
             guard let comicModel = comicModel else {
                 return
@@ -236,26 +242,22 @@ extension ComicViewModel: NavigationToolbarDelegate {
     }
     
     func load(num: Int) async throws {
-        toggle(isNavigationEnabled: false)
-
         let descriptor = FetchDescriptor<ComicModel>(predicate: #Predicate { comic in
             comic.num == num
         })
-
+        var comicModel: ComicModel?
+        
         do {
-            var comicModel: ComicModel?
+            toggle(isNavigationEnabled: false)
 
             if let comic = try modelContext.fetch(descriptor).first {
                 comicModel = comic
             } else {
-                do {
-                    let model = try await XkcdAPI.sharedInstance.fetchComic(num: num)
-                    modelContext.insert(model)
-                    comicModel = try modelContext.fetch(descriptor).first
-                } catch {
-                    print(error)
-                }
+                let model = try await XkcdAPI.sharedInstance.fetchComic(num: num)
+                modelContext.insert(model)
+                comicModel = try modelContext.fetch(descriptor).first
             }
+            toggle(isNavigationEnabled: true)
 
             guard let comicModel = comicModel else {
                 return
