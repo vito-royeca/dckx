@@ -102,7 +102,8 @@ struct ComicView: View {
             
             Spacer()
             
-            InteractiveImageView(url: viewModel.comicImageURL)
+            InteractiveImageView(url: viewModel.comicImageURL,
+                                 reloadAction: viewModel.reloadComic)
             
             Spacer()
             

@@ -15,6 +15,7 @@ struct InteractiveImageView: View {
     private let maxZoomScale: CGFloat = 5
     
     var url: URL?
+    var reloadAction: () -> Void
 
     var body: some View {
         GeometryReader { proxy in
@@ -24,6 +25,7 @@ struct InteractiveImageView: View {
                     ZStack {
                         ProgressView()
                     }
+
                 case .success(let image):
                     ScrollView([.vertical, .horizontal],
                                showsIndicators: false) {
@@ -35,10 +37,9 @@ struct InteractiveImageView: View {
                             .frame(width: proxy.size.width * max(minZoomScale, zoomScale))
                             .frame(maxHeight: .infinity)
                     }
-                    
-                    
-                case .failure(let error):
-                    Text(error.localizedDescription)
+
+                case .failure:
+                    errorView
                 @unknown default:
                     EmptyView()
                 }
@@ -46,6 +47,26 @@ struct InteractiveImageView: View {
         }
     }
     
+    var errorView: some View {
+        VStack(alignment: .center) {
+            Spacer()
+            
+            HStack {
+                Spacer(minLength: 0)
+                VStack {
+                    Text("Ooops... the image can't be loaded.")
+                    Button(action: reloadAction,
+                           label: {
+                        Text("Try again")
+                    })
+                }
+                Spacer(minLength: 0)
+            }
+
+            Spacer()
+        }
+    }
+
     var zoomGesture: some Gesture {
         MagnifyGesture()
             .onChanged(onZoomGestureStarted)
@@ -91,5 +112,5 @@ struct InteractiveImageView: View {
 }
 
 #Preview {
-    InteractiveImageView()
+    InteractiveImageView(reloadAction: {})
 }

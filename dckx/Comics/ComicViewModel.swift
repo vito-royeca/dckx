@@ -83,21 +83,42 @@ class ComicViewModel {
     
     // MARK: - Helper methods
     
-    func fetchImage(comic: ComicModel, callback: @escaping SDImageLoaderCompletedBlock) {
-            if let _ = SDImageCache.shared.imageFromCache(forKey: comic.img) {
-                toggle(isNavigationEnabled: true)
-                return
-            } else {
-                guard let url = URL(string: comic.img) else {
-                    fatalError("Malformed URL")
-                }
-                
-                SDWebImageManager.shared.imageLoader.requestImage(with: url,
-                                                                  options: .highPriority,
-                                                                  context: nil,
-                                                                  progress: nil,
-                                                                  completed: callback)
+    func reloadComic() {
+        guard let currentComic = currentComic else {
+            return
+        }
+        
+        Task {
+            do {
+                isError = false
+                try await load(num: currentComic.num)
+            } catch {
+                print(error)
+                isError = true
             }
+        }
+    }
+    
+    private func loadImage() {
+        fetchImage(callback: fetchImageCallback)
+    }
+    
+    private func fetchImage(callback: @escaping SDImageLoaderCompletedBlock) {
+        guard let currentComic = currentComic,
+            let url = URL(string: currentComic.img) else {
+            return
+        }
+        
+        if let _ = SDImageCache.shared.imageFromCache(forKey: currentComic.img) {
+            toggle(isNavigationEnabled: true)
+            return
+        } else {
+            SDWebImageManager.shared.imageLoader.requestImage(with: url,
+                                                              options: .lowPriority,
+                                                              context: nil,
+                                                              progress: nil,
+                                                              completed: callback)
+        }
     }
     
     private func fetchImageCallback(image: UIImage?, data: Data?, error: Error?, finished: Bool) {
@@ -157,7 +178,7 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 currentComic = comicModel
             }
             
-            fetchImage(comic: comicModel, callback: fetchImageCallback)
+            loadImage()
         } catch {
             print(error)
             toggle(isNavigationEnabled: true)
@@ -209,7 +230,7 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 lastComic = comicModel
             }
             
-            fetchImage(comic: comicModel, callback: fetchImageCallback)
+            loadImage()
         } catch {
             print(error)
             toggle(isNavigationEnabled: true)
@@ -253,7 +274,7 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 currentComic = comicModel
             }
 
-            fetchImage(comic: comicModel, callback: fetchImageCallback)
+            loadImage()
         } catch {
             print(error)
             toggle(isNavigationEnabled: true)
