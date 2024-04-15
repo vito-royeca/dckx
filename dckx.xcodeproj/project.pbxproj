@@ -10,6 +10,18 @@
 		580566AA2BC9E2E900187556 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 580566A92BC9E2E900187556 /* FirebaseAnalytics */; };
 		580566AC2BC9E2E900187556 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 580566AB2BC9E2E900187556 /* FirebaseAnalyticsSwift */; };
 		580566AF2BC9E38100187556 /* Kanna in Frameworks */ = {isa = PBXBuildFile; productRef = 580566AE2BC9E38100187556 /* Kanna */; };
+		7633F81B2BCC9D9800B2F1A4 /* dckxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */; };
+		7633F81C2BCC9D9900B2F1A4 /* dckxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */; };
+		7633F81F2BCC9EE300B2F1A4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 7633F81E2BCC9EE300B2F1A4 /* SDWebImage */; };
+		7633F8212BCC9F0E00B2F1A4 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 7633F8202BCC9F0E00B2F1A4 /* BetterSafariView */; };
+		7633F8232BCC9F0E00B2F1A4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7633F8222BCC9F0E00B2F1A4 /* FirebaseAnalytics */; };
+		7633F8252BCC9F0E00B2F1A4 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7633F8242BCC9F0E00B2F1A4 /* FirebaseAnalyticsSwift */; };
+		7633F8272BCC9F0E00B2F1A4 /* Kanna in Frameworks */ = {isa = PBXBuildFile; productRef = 7633F8262BCC9F0E00B2F1A4 /* Kanna */; };
+		7633F8292BCC9F0E00B2F1A4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 7633F8282BCC9F0E00B2F1A4 /* SDWebImage */; };
+		7633F82B2BCC9F2100B2F1A4 /* Kanna in Frameworks */ = {isa = PBXBuildFile; productRef = 7633F82A2BCC9F2100B2F1A4 /* Kanna */; };
+		7633F82D2BCC9F2100B2F1A4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 7633F82C2BCC9F2100B2F1A4 /* SDWebImage */; };
+		7633F8302BCCBA4F00B2F1A4 /* InteractiveImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7633F82F2BCCBA4F00B2F1A4 /* InteractiveImageView.swift */; };
+		7633F8312BCCBA4F00B2F1A4 /* InteractiveImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7633F82F2BCCBA4F00B2F1A4 /* InteractiveImageView.swift */; };
 		7649C8782BCA50C100A54E5F /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */; };
 		7649C87C2BCA5E5B00A54E5F /* ComicsData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C87A2BCA5E5B00A54E5F /* ComicsData.cpp */; };
 		7649C8842BCA63EE00A54E5F /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8802BCA63EE00A54E5F /* Panel.cpp */; };
@@ -33,7 +45,6 @@
 		76A0FDE52BCB931200C0002E /* ComicItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE42BCB931200C0002E /* ComicItemSource.swift */; };
 		76A0FDE62BCB931200C0002E /* ComicItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE42BCB931200C0002E /* ComicItemSource.swift */; };
 		76A0FDE72BCB931200C0002E /* ComicItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE42BCB931200C0002E /* ComicItemSource.swift */; };
-		76A0FDF02BCBC32200C0002E /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 76A0FDEF2BCBC32200C0002E /* SDWebImage */; };
 		8B0DBE00262DFB81004FA0DB /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B2C33262C930500B35825 /* HamburgerView.swift */; };
 		8B0DBE01262DFB82004FA0DB /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B2C33262C930500B35825 /* HamburgerView.swift */; };
 		8B1A4B29261EF51A00DBCD7B /* SearchNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC10B326169EBD00664335 /* SearchNavigation.swift */; };
@@ -179,6 +190,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7633F82F2BCCBA4F00B2F1A4 /* InteractiveImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveImageView.swift; sourceTree = "<group>"; };
 		7649C7D72BCA026200A54E5F /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../Downloads/opencv2.framework; sourceTree = "<group>"; };
 		7649C7DD2BCA0BF600A54E5F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		7649C8762BCA50C100A54E5F /* OpenCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCV.h; sourceTree = "<group>"; };
@@ -270,7 +282,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76A0FDF02BCBC32200C0002E /* SDWebImage in Frameworks */,
+				7633F81F2BCC9EE300B2F1A4 /* SDWebImage in Frameworks */,
 				580566AC2BC9E2E900187556 /* FirebaseAnalyticsSwift in Frameworks */,
 				580566AA2BC9E2E900187556 /* FirebaseAnalytics in Frameworks */,
 				580566AF2BC9E38100187556 /* Kanna in Frameworks */,
@@ -283,6 +295,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7633F8252BCC9F0E00B2F1A4 /* FirebaseAnalyticsSwift in Frameworks */,
+				7633F8232BCC9F0E00B2F1A4 /* FirebaseAnalytics in Frameworks */,
+				7633F8272BCC9F0E00B2F1A4 /* Kanna in Frameworks */,
+				7633F8212BCC9F0E00B2F1A4 /* BetterSafariView in Frameworks */,
+				7633F8292BCC9F0E00B2F1A4 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,13 +309,25 @@
 			files = (
 				76A0FD872BCB286C00C0002E /* FirebaseAnalyticsSwift in Frameworks */,
 				76A0FD852BCB286C00C0002E /* FirebaseAnalytics in Frameworks */,
+				7633F82B2BCC9F2100B2F1A4 /* Kanna in Frameworks */,
 				76A0FD832BCB27C200C0002E /* BetterSafariView in Frameworks */,
+				7633F82D2BCC9F2100B2F1A4 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7633F82E2BCCBA1800B2F1A4 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				76A0FDE42BCB931200C0002E /* ComicItemSource.swift */,
+				76A0FDE02BCB92C600C0002E /* ComicToolbarView.swift */,
+				7633F82F2BCCBA4F00B2F1A4 /* InteractiveImageView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		76A0FD8A2BCB2E6700C0002E /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -455,8 +484,7 @@
 		8BE1EC152416C2F0008B2D8C /* Comics */ = {
 			isa = PBXGroup;
 			children = (
-				76A0FDE42BCB931200C0002E /* ComicItemSource.swift */,
-				76A0FDE02BCB92C600C0002E /* ComicToolbarView.swift */,
+				7633F82E2BCCBA1800B2F1A4 /* Subviews */,
 				8B4F4B9C23F5F444008446F4 /* ComicView.swift */,
 				8B23368123F6683C00C88BA1 /* ComicViewModel.swift */,
 				8B7E5166262FC972002A094E /* ComicViewModel+HTML.swift */,
@@ -540,7 +568,7 @@
 				580566AB2BC9E2E900187556 /* FirebaseAnalyticsSwift */,
 				580566AE2BC9E38100187556 /* Kanna */,
 				76A0FD802BCB26A200C0002E /* BetterSafariView */,
-				76A0FDEF2BCBC32200C0002E /* SDWebImage */,
+				7633F81E2BCC9EE300B2F1A4 /* SDWebImage */,
 			);
 			productName = dckx;
 			productReference = 8B4F4B9523F5F444008446F4 /* dckx.app */;
@@ -560,6 +588,13 @@
 				8B4F4BAD23F5F445008446F4 /* PBXTargetDependency */,
 			);
 			name = dckxTests;
+			packageProductDependencies = (
+				7633F8202BCC9F0E00B2F1A4 /* BetterSafariView */,
+				7633F8222BCC9F0E00B2F1A4 /* FirebaseAnalytics */,
+				7633F8242BCC9F0E00B2F1A4 /* FirebaseAnalyticsSwift */,
+				7633F8262BCC9F0E00B2F1A4 /* Kanna */,
+				7633F8282BCC9F0E00B2F1A4 /* SDWebImage */,
+			);
 			productName = dckxTests;
 			productReference = 8B4F4BAB23F5F445008446F4 /* dckxTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -582,6 +617,8 @@
 				76A0FD822BCB27C200C0002E /* BetterSafariView */,
 				76A0FD842BCB286C00C0002E /* FirebaseAnalytics */,
 				76A0FD862BCB286C00C0002E /* FirebaseAnalyticsSwift */,
+				7633F82A2BCC9F2100B2F1A4 /* Kanna */,
+				7633F82C2BCC9F2100B2F1A4 /* SDWebImage */,
 			);
 			productName = dckxUITests;
 			productReference = 8B4F4BB623F5F445008446F4 /* dckxUITests.xctest */;
@@ -632,7 +669,7 @@
 				580566A82BC9E2E900187556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				580566AD2BC9E38100187556 /* XCRemoteSwiftPackageReference "kanna" */,
 				580566B12BC9E66900187556 /* XCRemoteSwiftPackageReference "SwiftRater" */,
-				76A0FDEE2BCBC32200C0002E /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				7633F81D2BCC9EE300B2F1A4 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 8B4F4B9623F5F444008446F4 /* Products */;
 			projectDirPath = "";
@@ -746,6 +783,7 @@
 				76A0FDE12BCB92C600C0002E /* ComicToolbarView.swift in Sources */,
 				8B4F4B9D23F5F444008446F4 /* ComicView.swift in Sources */,
 				8B23368223F6683C00C88BA1 /* ComicViewModel.swift in Sources */,
+				7633F8302BCCBA4F00B2F1A4 /* InteractiveImageView.swift in Sources */,
 				76A0FDA32BCB4B3300C0002E /* ContentView.swift in Sources */,
 				8B82B2C426192A9C008AD11D /* SettingsView.swift in Sources */,
 				8B3569182631D74700719BB8 /* ComicWidgetProvider.swift in Sources */,
@@ -780,6 +818,7 @@
 				8B7E509E262FBF62002A094E /* SensitiveData.swift in Sources */,
 				8B626D8C2402291B00972EED /* ComicView.swift in Sources */,
 				8B626D792401EB1200972EED /* XkcdAPITests.swift in Sources */,
+				7633F81B2BCC9D9800B2F1A4 /* dckxApp.swift in Sources */,
 				8B7E5168262FC972002A094E /* ComicViewModel+HTML.swift in Sources */,
 				8B4F4BE123F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				76A0FDE22BCB92C600C0002E /* ComicToolbarView.swift in Sources */,
@@ -799,6 +838,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B626D8B2402291A00972EED /* ComicView.swift in Sources */,
+				7633F8312BCCBA4F00B2F1A4 /* InteractiveImageView.swift in Sources */,
 				8B658022240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
 				8B65801E240B12E100A245DC /* ShareSheetView.swift in Sources */,
 				76A0FD9E2BCB44D100C0002E /* ComicModel.swift in Sources */,
@@ -811,6 +851,7 @@
 				8B626D892402122C00972EED /* BrowserView.swift in Sources */,
 				8B7E509F262FBF62002A094E /* SensitiveData.swift in Sources */,
 				8BA50E6E240A425500138D11 /* WebView.swift in Sources */,
+				7633F81C2BCC9D9900B2F1A4 /* dckxApp.swift in Sources */,
 				8B7E5169262FC972002A094E /* ComicViewModel+HTML.swift in Sources */,
 				8B4A1285240828FD00D4F8B2 /* SnapshotHelper.swift in Sources */,
 				76A0FDE32BCB92C600C0002E /* ComicToolbarView.swift in Sources */,
@@ -868,7 +909,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 43CD66539H;
 				EXCLUDED_ARCHS = "";
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "dckx Widget/Info.plist";
@@ -901,7 +942,7 @@
 				CODE_SIGN_ENTITLEMENTS = "dckx WidgetExtension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 43CD66539H;
 				EXCLUDED_ARCHS = "";
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "dckx Widget/Info.plist";
@@ -1061,7 +1102,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_ASSET_PATHS = "\"dckx/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 43CD66539H;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1097,7 +1138,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_ASSET_PATHS = "\"dckx/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 43CD66539H;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1301,9 +1342,9 @@
 				minimumVersion = 2.1.2;
 			};
 		};
-		76A0FDEE2BCBC32200C0002E /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+		7633F81D2BCC9EE300B2F1A4 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:SDWebImage/SDWebImage.git";
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.19.1;
@@ -1335,6 +1376,46 @@
 			package = 580566AD2BC9E38100187556 /* XCRemoteSwiftPackageReference "kanna" */;
 			productName = Kanna;
 		};
+		7633F81E2BCC9EE300B2F1A4 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7633F81D2BCC9EE300B2F1A4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		7633F8202BCC9F0E00B2F1A4 /* BetterSafariView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */;
+			productName = BetterSafariView;
+		};
+		7633F8222BCC9F0E00B2F1A4 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 580566A82BC9E2E900187556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		7633F8242BCC9F0E00B2F1A4 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 580566A82BC9E2E900187556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		7633F8262BCC9F0E00B2F1A4 /* Kanna */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 580566AD2BC9E38100187556 /* XCRemoteSwiftPackageReference "kanna" */;
+			productName = Kanna;
+		};
+		7633F8282BCC9F0E00B2F1A4 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7633F81D2BCC9EE300B2F1A4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		7633F82A2BCC9F2100B2F1A4 /* Kanna */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 580566AD2BC9E38100187556 /* XCRemoteSwiftPackageReference "kanna" */;
+			productName = Kanna;
+		};
+		7633F82C2BCC9F2100B2F1A4 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7633F81D2BCC9EE300B2F1A4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
 		76A0FD802BCB26A200C0002E /* BetterSafariView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */;
@@ -1354,11 +1435,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 580566A82BC9E2E900187556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsSwift;
-		};
-		76A0FDEF2BCBC32200C0002E /* SDWebImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 76A0FDEE2BCBC32200C0002E /* XCRemoteSwiftPackageReference "SDWebImage" */;
-			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

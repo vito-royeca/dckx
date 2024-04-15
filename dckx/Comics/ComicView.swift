@@ -14,7 +14,7 @@ struct ComicView: View {
     @State var viewModel: ComicViewModel
     @Binding var showingMenu: Bool
     @State private var showingSearch = false
-    
+
     init(modelContext: ModelContext, showingMenu: Binding<Bool>) {
         let model = ComicViewModel(modelContext: modelContext)
         _viewModel = State(initialValue: model)
@@ -86,9 +86,9 @@ struct ComicView: View {
     var displayView: some View {
         VStack {
             let titleFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-                Font.system(size: 24) : Font.custom("xkcd-Regular", size: 24)
+            Font.system(size: 24) : Font.custom("xkcd-Regular", size: 24)
             let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-                Font.system(size: 16) : Font.custom("xkcd-Regular", size: 16)
+            Font.system(size: 16) : Font.custom("xkcd-Regular", size: 16)
             
             Text("\(viewModel.comicTitle)")
                 .font(titleFont)
@@ -99,25 +99,13 @@ struct ComicView: View {
                 Text(viewModel.currentComic?.displayDate ?? "")
                     .font(textFont)
             }
+            
             Spacer()
-            AsyncImage(url: viewModel.comicImageURL) { phase in
-                switch phase {
-                    case .empty:
-                        ZStack {
-                            Color.gray
-                            ProgressView()
-                        }
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFit()
-                    case .failure(let error):
-                        Text(error.localizedDescription)
-                    @unknown default:
-                        EmptyView()
-                }
-            }
+            
+            InteractiveImageView(url: viewModel.comicImageURL)
+            
             Spacer()
+            
             Text(viewModel.currentComic?.alt ?? "")
                 .font(textFont)
         }

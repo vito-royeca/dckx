@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SDWebImage
 
 class ComicItemSource: NSObject,  UIActivityItemSource {
     var comic: ComicModel?
@@ -44,13 +45,12 @@ class ComicItemSource: NSObject,  UIActivityItemSource {
     }
     
     func image() -> UIImage? {
-//        if let comic = comic,
-//            let img = comic.img,
-//            let image = SDImageCache.shared.imageFromCache(forKey: img) {
-//            return image
-//        }
-        
-        return nil
+        guard let comic = comic,
+            let image = SDImageCache.shared.imageFromCache(forKey: comic.img) else {
+            return nil
+        }
+
+        return image
     }
 }
 

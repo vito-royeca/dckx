@@ -83,51 +83,6 @@ class ComicViewModel {
     
     // MARK: - Helper methods
     
-    func load(num: Int) async throws {
-        let descriptor = FetchDescriptor<ComicModel>(predicate: #Predicate { comic in
-            comic.num == num
-        })
-
-        do {
-            var comicModel: ComicModel?
-
-            if let comic = try modelContext.fetch(descriptor).first {
-                comicModel = comic
-            } else {
-                do {
-                    toggle(isNavigationEnabled: false)
-
-                    let model = try await XkcdAPI.sharedInstance.fetchComic(num: num)
-                    modelContext.insert(model)
-                    comicModel = try modelContext.fetch(descriptor).first
-                } catch {
-                    print(error)
-                    toggle(isNavigationEnabled: true)
-                }
-            }
-            
-            guard let comicModel = comicModel else {
-                toggle(isNavigationEnabled: true)
-                return
-            }
-
-            let sensitiveData = SensitiveData()
-            if !sensitiveData.showSensitiveContent &&
-                sensitiveData.containsSensitiveData(comicModel) {
-                let newNum = (num > comicModel.num) ? num + 1 : num - 1
-                try await load(num: newNum)
-            } else {
-                currentComic = comicModel
-                toggle(isReadEnabled: true)
-            }
-
-            fetchImage(comic: comicModel, callback: fetchImageCallback)
-        } catch {
-            print(error)
-            toggle(isNavigationEnabled: true)
-        }
-    }
-    
     func fetchImage(comic: ComicModel, callback: @escaping SDImageLoaderCompletedBlock) {
             if let _ = SDImageCache.shared.imageFromCache(forKey: comic.img) {
                 toggle(isNavigationEnabled: true)
@@ -191,14 +146,15 @@ extension ComicViewModel: NavigationToolbarDelegate {
             } else {
                 modelContext.insert(comicModel)
             }
-            
+
+            toggle(isReadEnabled: true)
+
             let sensitiveData = SensitiveData()
             if !sensitiveData.showSensitiveContent &&
                 sensitiveData.containsSensitiveData(comicModel) {
                 try await loadRandom()
             } else {
                 currentComic = comicModel
-                toggle(isReadEnabled: true)
             }
             
             fetchImage(comic: comicModel, callback: fetchImageCallback)
@@ -217,6 +173,8 @@ extension ComicViewModel: NavigationToolbarDelegate {
     }
     
     func loadLast() async throws {
+        toggle(isNavigationEnabled: false)
+
         var descriptor = FetchDescriptor<ComicModel>(sortBy: [SortDescriptor(\.num, order: .reverse)])
         descriptor.fetchLimit = 1
         
@@ -227,19 +185,17 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 comicModel = comic
             } else {
                 do {
-                    toggle(isNavigationEnabled: false)
-                    
                     let model = try await XkcdAPI.sharedInstance.fetchLastComic()
                     modelContext.insert(model)
                     comicModel = try modelContext.fetch(descriptor).first
                 } catch {
                     print(error)
-                    toggle(isNavigationEnabled: true)
                 }
             }
             
+            toggle(isNavigationEnabled: true)
+
             guard let comicModel = comicModel else {
-                toggle(isNavigationEnabled: true)
                 return
             }
             
@@ -251,7 +207,6 @@ extension ComicViewModel: NavigationToolbarDelegate {
             } else {
                 currentComic = comicModel
                 lastComic = comicModel
-                toggle(isReadEnabled: true)
             }
             
             fetchImage(comic: comicModel, callback: fetchImageCallback)
@@ -261,6 +216,50 @@ extension ComicViewModel: NavigationToolbarDelegate {
         }
     }
     
+    func load(num: Int) async throws {
+        toggle(isNavigationEnabled: false)
+
+        let descriptor = FetchDescriptor<ComicModel>(predicate: #Predicate { comic in
+            comic.num == num
+        })
+
+        do {
+            var comicModel: ComicModel?
+
+            if let comic = try modelContext.fetch(descriptor).first {
+                comicModel = comic
+            } else {
+                do {
+                    let model = try await XkcdAPI.sharedInstance.fetchComic(num: num)
+                    modelContext.insert(model)
+                    comicModel = try modelContext.fetch(descriptor).first
+                } catch {
+                    print(error)
+                }
+            }
+
+            toggle(isNavigationEnabled: true)
+            
+            guard let comicModel = comicModel else {
+                return
+            }
+
+            let sensitiveData = SensitiveData()
+            if !sensitiveData.showSensitiveContent &&
+                sensitiveData.containsSensitiveData(comicModel) {
+                let newNum = (num > comicModel.num) ? num + 1 : num - 1
+                try await load(num: newNum)
+            } else {
+                currentComic = comicModel
+            }
+
+            fetchImage(comic: comicModel, callback: fetchImageCallback)
+        } catch {
+            print(error)
+            toggle(isNavigationEnabled: true)
+        }
+    }
+
     private func toggle(isNavigationEnabled: Bool) {
         if isNavigationEnabled {
             canDoPrevious = currentComic?.num ?? 0 > 1
