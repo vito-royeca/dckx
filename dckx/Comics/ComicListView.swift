@@ -53,6 +53,7 @@ struct  ComicListView: View {
     
     func select(comic: ComicModel) {
         selectedComic = comic
+        viewModel.setRead(comic: comic)
         presentationMode.wrappedValue.dismiss()
     }
     

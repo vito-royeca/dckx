@@ -168,8 +168,6 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 modelContext.insert(comicModel)
             }
 
-            toggle(isReadEnabled: true)
-
             let sensitiveData = SensitiveData()
             if !sensitiveData.showSensitiveContent &&
                 sensitiveData.containsSensitiveData(comicModel) {
@@ -177,7 +175,8 @@ extension ComicViewModel: NavigationToolbarDelegate {
             } else {
                 currentComic = comicModel
             }
-            
+
+            toggle(isReadEnabled: true)
             loadImage()
         } catch {
             print(error)
@@ -214,8 +213,6 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 }
             }
             
-            toggle(isNavigationEnabled: true)
-
             guard let comicModel = comicModel else {
                 return
             }
@@ -229,7 +226,8 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 currentComic = comicModel
                 lastComic = comicModel
             }
-            
+
+            toggle(isReadEnabled: true)
             loadImage()
         } catch {
             print(error)
@@ -259,8 +257,6 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 }
             }
 
-            toggle(isNavigationEnabled: true)
-            
             guard let comicModel = comicModel else {
                 return
             }
@@ -274,6 +270,7 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 currentComic = comicModel
             }
 
+            toggle(isReadEnabled: true)
             loadImage()
         } catch {
             print(error)
