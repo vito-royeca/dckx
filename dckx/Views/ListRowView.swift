@@ -43,12 +43,12 @@ struct ListRowView: View {
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 80, height: 60)
+                            .frame(width: 90, height: 90)
                             .background(Color.backgroundColor)
                             .cornerRadius(5)
                     } placeholder: {
                         ProgressView()
-                            .frame(width: 80, height: 60)
+                            .frame(width: 90, height: 90)
                     }
                     
                     Text(title)

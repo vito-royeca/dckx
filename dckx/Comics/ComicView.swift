@@ -14,6 +14,11 @@ struct ComicView: View {
     @State var viewModel: ComicViewModel
     @Binding var showingMenu: Bool
     @State private var showingSearch = false
+    
+    private let titleFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
+    Font.system(.largeTitle) : Font.dckxLargeTitleText
+    private let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
+    Font.system(.body) : Font.dckxRegularText
 
     init(modelContext: ModelContext, showingMenu: Binding<Bool>) {
         let model = ComicViewModel(modelContext: modelContext)
@@ -53,45 +58,8 @@ struct ComicView: View {
             .environmentObject(viewModel)
     }
     
-    var webView: some View {
-        WebView(link: nil,
-                html: viewModel.composeHTML(),
-                baseURL: nil)
-            .gesture(DragGesture(minimumDistance: 30, coordinateSpace: .local)
-                .onEnded({ value in
-                    if value.translation.width < 0 {
-                        if viewModel.canDoNext {
-                            Task {
-                                do {
-                                    try await viewModel.loadNext()
-                                } catch {
-                                    print(error)
-                                }
-                            }
-                        }
-                    }
-
-                    if value.translation.width > 0 {
-                        if viewModel.canDoPrevious {
-                            Task {
-                                do {
-                                    try await viewModel.loadPrevious()
-                                } catch {
-                                    print(error)
-                                }
-                            }
-                        }
-                    }
-                }))
-    }
-
     var displayView: some View {
         VStack {
-            let titleFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-            Font.system(.largeTitle) : Font.dckxLargeTitleText
-            let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-            Font.system(.body) : Font.dckxRegularText
-            
             Text("\(viewModel.comicTitle)")
                 .font(titleFont)
                 .fixedSize(horizontal: false, vertical: true)

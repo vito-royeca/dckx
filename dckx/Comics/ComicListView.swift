@@ -27,7 +27,7 @@ struct  ComicListView: View {
     var body: some View {
         ComicListDisplayView(predicate: predicate,
                              sorter: [numSorter],
-                             selectComicAction: selectComicAction)
+                             selectComicAction: select(comic:))
         .listStyle(.plain)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -67,14 +67,18 @@ struct  ComicListView: View {
             }
         }
     }
+    
+    func select(comic: ComicModel) {
+        presentationMode.wrappedValue.dismiss()
+        selectComicAction(comic)
+    }
 }
 
 struct ComicListDisplayView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @Query private var comics: [ComicModel]
-
     var selectComicAction: (ComicModel) -> Void
     
+    @Query private var comics: [ComicModel]
+
     init(predicate: Predicate<ComicModel>?,
          sorter: [SortDescriptor<ComicModel>],
          selectComicAction: @escaping (ComicModel) -> Void) {
@@ -102,18 +106,14 @@ struct ComicListDisplayView: View {
                             title: comic.title,
                             isFavorite: comic.isFavorite,
                             date: comic.displayDate)
-                    .listRowSeparator(.hidden)
-                    .onTapGesture {
-                        select(comic: comic)
-                    }
+                .listRowSeparator(.hidden)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    selectComicAction(comic)
+                }
             }
         }
         .listStyle(.plain)
-    }
-    
-    func select(comic: ComicModel) {
-        selectComicAction(comic)
-        presentationMode.wrappedValue.dismiss()
     }
 }
 

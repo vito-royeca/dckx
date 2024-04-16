@@ -923,7 +923,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 43CD66539H;
+				DEVELOPMENT_TEAM = "";
 				EXCLUDED_ARCHS = "";
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "dckx Widget/Info.plist";
@@ -956,7 +956,7 @@
 				CODE_SIGN_ENTITLEMENTS = "dckx WidgetExtension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 43CD66539H;
+				DEVELOPMENT_TEAM = "";
 				EXCLUDED_ARCHS = "";
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "dckx Widget/Info.plist";
@@ -1117,7 +1117,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_ASSET_PATHS = "\"dckx/Preview Content\"";
-				DEVELOPMENT_TEAM = 43CD66539H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1154,7 +1154,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_ASSET_PATHS = "\"dckx/Preview Content\"";
-				DEVELOPMENT_TEAM = 43CD66539H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
