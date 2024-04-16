@@ -46,8 +46,7 @@ struct ComicView: View {
             }
             .sheet(isPresented: $showingSearch) {
                 NavigationView {
-                    ComicListView(modelContext: viewModel.modelContext,
-                                  selectComicAction: select(comic:))
+                    ComicListView(selectComicAction: select(comic:))
                 }
             }
         }
@@ -95,6 +94,7 @@ struct ComicView: View {
             
             Text("\(viewModel.comicTitle)")
                 .font(titleFont)
+                .fixedSize(horizontal: false, vertical: true)
             HStack {
                 Text("#\(viewModel.currentComic?.num ?? 0)")
                     .font(textFont)
@@ -112,6 +112,7 @@ struct ComicView: View {
             
             Text(viewModel.currentComic?.alt ?? "")
                 .font(textFont)
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
     

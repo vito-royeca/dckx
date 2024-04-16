@@ -1,5 +1,5 @@
 //
-//  dckxButtonStyle.swift
+//  NavigationButtonStyle.swift
 //  dckx
 //
 //  Created by Vito Royeca on 4/16/24.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct dckxButtonStyle: ButtonStyle {
+struct NavigationButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         dckxButton(configuration: configuration)
     }
@@ -21,6 +21,7 @@ struct dckxButtonStyle: ButtonStyle {
         var body: some View {
             configuration
                 .label
+                .fixedSize(horizontal: true, vertical: false)
                 .foregroundColor(isEnabled ? .white : .gray)
                 .font(.system(size: 24, weight: .bold))
                 .padding(.top, 3)
@@ -31,7 +32,8 @@ struct dckxButtonStyle: ButtonStyle {
                 .cornerRadius(3)
                 .overlay(
                     RoundedRectangle(cornerRadius: 3)
-                        .stroke(isEnabled ? (colorScheme == .dark ? Color.accentColor : .black) : .gray, lineWidth: 2)
+                        .stroke(isEnabled ? (colorScheme == .dark ? Color.accentColor : .black) : .gray,
+                                lineWidth: 2)
                 )
         }
     }
@@ -43,29 +45,29 @@ struct dckxButtonView: View {
             Button("|<") {
                 print("Button pressed!")
             }
-            .buttonStyle(dckxButtonStyle())
+            .buttonStyle(NavigationButtonStyle())
             
             Button("< Prev") {
                 print("Button pressed!")
             }
-            .buttonStyle(dckxButtonStyle())
+            .buttonStyle(NavigationButtonStyle())
             
             Button("Random") {
                 print("Button pressed!")
             }
-            .buttonStyle(dckxButtonStyle())
+            .buttonStyle(NavigationButtonStyle())
             
             Button("Next >") {
                 print("Button pressed!")
             }
             .disabled(true)
-            .buttonStyle(dckxButtonStyle())
+            .buttonStyle(NavigationButtonStyle())
             
             Button(">|") {
                 print("Button pressed!")
             }
             .disabled(true)
-            .buttonStyle(dckxButtonStyle())
+            .buttonStyle(NavigationButtonStyle())
         }
     }
 }

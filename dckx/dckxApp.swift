@@ -19,7 +19,7 @@ struct dckxApp: App {
                 ComicModel.self,
                 WhatIfModel.self
             ])
-            let storeURL = URL.documentsDirectory.appending(path: "dckx.sqlite")
+            let storeURL = URL.documentsDirectory.appending(path: "dckx2.sqlite")
             let config1 = ModelConfiguration(url: storeURL,
                                              cloudKitDatabase: .automatic)
             

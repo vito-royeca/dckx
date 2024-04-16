@@ -13,29 +13,21 @@ import SwiftData
 
 struct  ComicListView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State var viewModel: ComicListViewModel
+    
     var selectComicAction: (ComicModel) -> Void
     
-    init(modelContext: ModelContext, selectComicAction: @escaping (ComicModel) -> Void) {
-        let model = ComicListViewModel(modelContext: modelContext)
-        _viewModel = State(initialValue: model)
+    @State private var predicate: Predicate<ComicModel>?
+    @State private var numSorter = SortDescriptor(\ComicModel.num, order: .reverse)
+    @State private var searchText = ""
+    
+    init(selectComicAction: @escaping (ComicModel) -> Void) {
         self.selectComicAction = selectComicAction
     }
 
     var body: some View {
-        List {
-            ForEach(viewModel.comics, id: \.num) { comic in
-                ListRowView(num: comic.num,
-                            thumbnail: comic.img,
-                            title: comic.title,
-                            isFavorite: comic.isFavorite,
-                            date: comic.displayDate)
-                    .listRowSeparator(.hidden)
-                    .onTapGesture {
-                        select(comic: comic)
-                    }
-            }
-        }
+        ComicListDisplayView(predicate: predicate,
+                             sorter: [numSorter],
+                             selectComicAction: selectComicAction)
         .listStyle(.plain)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -43,12 +35,12 @@ struct  ComicListView: View {
             }
         }
         .navigationTitle(Text("xkcd"))
-        .searchable(text: $viewModel.searchText,
+        .searchable(text: $searchText,
                     prompt: "Search")
         .onSubmit(of: .search) {
             doSearch()
         }
-        .onChange(of: viewModel.searchText) {
+        .onChange(of: searchText) {
             doSearch()
         }
     }
@@ -62,19 +54,66 @@ struct  ComicListView: View {
         }
     }
     
+    func doSearch() {
+        predicate = nil
+
+        if searchText.count == 1 {
+            predicate = #Predicate { comic in
+                comic.title.starts(with: searchText)
+            }
+        } else if searchText.count > 1 {
+            predicate = #Predicate { comic in
+                comic.title.localizedStandardContains(searchText)
+            }
+        }
+    }
+}
+
+struct ComicListDisplayView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @Query private var comics: [ComicModel]
+
+    var selectComicAction: (ComicModel) -> Void
+    
+    init(predicate: Predicate<ComicModel>?,
+         sorter: [SortDescriptor<ComicModel>],
+         selectComicAction: @escaping (ComicModel) -> Void) {
+        var descriptor = FetchDescriptor<ComicModel>(predicate: predicate,
+                                                     sortBy: sorter)
+        descriptor.propertiesToFetch = [\.num,
+                                        \.title,
+                                        \.year,
+                                        \.month,
+                                        \.day,
+                                        \.img,
+                                        \.isFavorite]
+        
+        _comics = Query(FetchDescriptor<ComicModel>(predicate: predicate,
+                                                    sortBy: [SortDescriptor(\.num, order: .reverse)]))
+        self.selectComicAction = selectComicAction
+        
+    }
+    
+    var body: some View {
+        List {
+            ForEach(comics, id: \.num) { comic in
+                ListRowView(num: comic.num,
+                            thumbnail: comic.img,
+                            title: comic.title,
+                            isFavorite: comic.isFavorite,
+                            date: comic.displayDate)
+                    .listRowSeparator(.hidden)
+                    .onTapGesture {
+                        select(comic: comic)
+                    }
+            }
+        }
+        .listStyle(.plain)
+    }
+    
     func select(comic: ComicModel) {
         selectComicAction(comic)
         presentationMode.wrappedValue.dismiss()
-    }
-    
-    func doSearch() {
-        Task {
-            do {
-                try await viewModel.loadComics()
-            } catch {
-                print(error)
-            }
-        }
     }
 }
 
@@ -85,8 +124,8 @@ struct  ComicListView: View {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: ComicModel.self,
                                            configurations: config)
-        return ComicListView(modelContext: container.mainContext,
-                             selectComicAction: { comic in } )
+        return ComicListView(selectComicAction: { comic in } )
+            .modelContainer(container)
     } catch {
         return EmptyView()
     }

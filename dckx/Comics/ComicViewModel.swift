@@ -56,7 +56,14 @@ class ComicViewModel {
     
     var comicTitle: String {
         get {
-            (isBusy ? "" : (currentComic?.title ?? "")).uppercased()
+            guard !isBusy,
+                let currentComic = currentComic else {
+                return ""
+            }
+            
+            let sensitiveData = SensitiveData()
+            let title = sensitiveData.showSensitiveContent ? currentComic.safeTitle : currentComic.title
+            return title.uppercased()
         }
     }
 

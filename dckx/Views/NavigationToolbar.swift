@@ -49,7 +49,7 @@ struct NavigationToolbar: ToolbarContent  {
                 }
             }
             .disabled(!delegate.canDoPrevious || delegate.isBusy)
-            .buttonStyle(dckxButtonStyle())
+            .buttonStyle(NavigationButtonStyle())
         }
 
         ToolbarItem(placement: .bottomBar) {
@@ -67,7 +67,7 @@ struct NavigationToolbar: ToolbarContent  {
                 }
             }
             .disabled(!delegate.canDoPrevious || delegate.isBusy)
-            .buttonStyle(dckxButtonStyle())
+            .buttonStyle(NavigationButtonStyle())
         }
 
         ToolbarItem(placement: .bottomBar) {
@@ -85,7 +85,7 @@ struct NavigationToolbar: ToolbarContent  {
                 }
             }
             .disabled(delegate.isBusy)
-            .buttonStyle(dckxButtonStyle())
+            .buttonStyle(NavigationButtonStyle())
         }
 
         ToolbarItem(placement: .bottomBar) {
@@ -103,7 +103,7 @@ struct NavigationToolbar: ToolbarContent  {
                 }
             }
             .disabled(!delegate.canDoNext || delegate.isBusy)
-            .buttonStyle(dckxButtonStyle())
+            .buttonStyle(NavigationButtonStyle())
         }
 
         ToolbarItem(placement: .bottomBar) {
@@ -121,7 +121,7 @@ struct NavigationToolbar: ToolbarContent  {
                 }
             }
             .disabled(!delegate.canDoNext || delegate.isBusy)
-            .buttonStyle(dckxButtonStyle())
+            .buttonStyle(NavigationButtonStyle())
         }
     }
 }
