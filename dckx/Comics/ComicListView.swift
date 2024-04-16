@@ -45,6 +45,14 @@ struct  ComicListView: View {
                 }
             }
             .navigationTitle(Text("xkcd"))
+            .searchable(text: $viewModel.searchText,
+                        prompt: "Search")
+            .onSubmit(of: .search) {
+                doSearch()
+            }
+            .onChange(of: viewModel.searchText) {
+                doSearch()
+            }
     }
     
     var closeButton: some View {
@@ -62,6 +70,15 @@ struct  ComicListView: View {
         presentationMode.wrappedValue.dismiss()
     }
     
+    func doSearch() {
+        Task {
+            do {
+                try await viewModel.loadComics()
+            } catch {
+                print(error)
+            }
+        }
+    }
 }
 
 // MARK: - ListView_Previews
