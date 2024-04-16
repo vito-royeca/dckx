@@ -39,7 +39,7 @@ struct NavigationToolbar: ToolbarContent  {
     
     var body: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
-            Button(action: {
+            Button("|<") {
                 Task {
                     do {
                         try await delegate.loadFirst()
@@ -47,18 +47,17 @@ struct NavigationToolbar: ToolbarContent  {
                         print(error)
                     }
                 }
-            }) {
-                Image(systemName: "backward.end")
-                    .imageScale(.large)
             }
             .disabled(!delegate.canDoPrevious || delegate.isBusy)
+            .buttonStyle(dckxButtonStyle())
         }
+
         ToolbarItem(placement: .bottomBar) {
             Spacer()
         }
 
         ToolbarItem(placement: .bottomBar) {
-            Button(action: {
+            Button("< Prev") {
                 Task {
                     do {
                         try await delegate.loadPrevious()
@@ -66,18 +65,17 @@ struct NavigationToolbar: ToolbarContent  {
                         print(error)
                     }
                 }
-            }) {
-                Image(systemName: "arrowtriangle.backward")
-                    .imageScale(.large)
             }
             .disabled(!delegate.canDoPrevious || delegate.isBusy)
+            .buttonStyle(dckxButtonStyle())
         }
+
         ToolbarItem(placement: .bottomBar) {
             Spacer()
         }
 
         ToolbarItem(placement: .bottomBar) {
-            Button(action: {
+            Button("Random") {
                 Task {
                     do {
                         try await delegate.loadRandom()
@@ -85,11 +83,9 @@ struct NavigationToolbar: ToolbarContent  {
                         print(error)
                     }
                 }
-            }) {
-                Image(systemName: "shuffle")
-                    .imageScale(.large)
             }
             .disabled(delegate.isBusy)
+            .buttonStyle(dckxButtonStyle())
         }
 
         ToolbarItem(placement: .bottomBar) {
@@ -97,7 +93,7 @@ struct NavigationToolbar: ToolbarContent  {
         }
         
         ToolbarItem(placement: .bottomBar) {
-            Button(action: {
+            Button("Next >") {
                 Task {
                     do {
                         try await delegate.loadNext()
@@ -105,18 +101,17 @@ struct NavigationToolbar: ToolbarContent  {
                         print(error)
                     }
                 }
-            }) {
-                Image(systemName: "arrowtriangle.forward")
-                    .imageScale(.large)
             }
             .disabled(!delegate.canDoNext || delegate.isBusy)
+            .buttonStyle(dckxButtonStyle())
         }
+
         ToolbarItem(placement: .bottomBar) {
             Spacer()
         }
 
         ToolbarItem(placement: .bottomBar) {
-            Button(action: {
+            Button(">|") {
                 Task {
                     do {
                         try await delegate.loadLast()
@@ -124,11 +119,9 @@ struct NavigationToolbar: ToolbarContent  {
                         print(error)
                     }
                 }
-            }) {
-                Image(systemName: "forward.end")
-                    .imageScale(.large)
             }
             .disabled(!delegate.canDoNext || delegate.isBusy)
+            .buttonStyle(dckxButtonStyle())
         }
     }
 }

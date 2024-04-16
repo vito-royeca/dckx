@@ -32,7 +32,6 @@ extension Font {
 }
 
 extension Color {
-    static let buttonColor     = Color("ButtonColor")
     static let backgroundColor = Color("BackgroundColor")
     static let dckxBlue        = Color(red: 0.59, green: 0.66, blue: 0.78) // RGB: 150,168,200
 }

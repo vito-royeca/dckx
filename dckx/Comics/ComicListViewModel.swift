@@ -32,7 +32,7 @@ class ComicListViewModel {
     
     // MARK: - Custom methods
 
-    func loadComics() async throws{
+    func loadComics() async throws {
         do {
             var predicate: Predicate<ComicModel>?
             

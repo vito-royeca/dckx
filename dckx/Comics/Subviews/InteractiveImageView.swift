@@ -17,6 +17,9 @@ struct InteractiveImageView: View {
     var url: URL?
     var reloadAction: () -> Void
 
+    private let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
+    Font.system(size: 16) : Font.dckxRegularText
+    
     var body: some View {
         GeometryReader { proxy in
             AsyncImage(url: url,
@@ -48,9 +51,6 @@ struct InteractiveImageView: View {
     
     var errorView: some View {
         VStack(alignment: .center) {
-            let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-            Font.system(size: 16) : Font.dckxRegularText
-            
             Spacer()
             
             HStack {

@@ -18,6 +18,11 @@ struct ListRowView: View {
     var isFavorite: Bool
     var date: String
     
+    private let titleFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
+    nil : Font.dckxRegularText
+    private let smallFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
+    Font.system(.subheadline) : Font.dckxSmallText
+    
     init(num: Int,
          thumbnail: String,
          title: String,
@@ -31,45 +36,70 @@ struct ListRowView: View {
     }
     
     var body: some View {
-        HStack(alignment: .top, spacing: 10) {
-            let titleFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-            nil : Font.dckxRegularText
-            let smallFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-            Font.system(.subheadline) : Font.dckxSmallText
-            
-            AsyncImage(url: URL(string: thumbnail)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 70, height: 70)
-                    .background(colorScheme == .dark ? Color.init(UIColor.lightGray) : Color.clear)
-                    .cornerRadius(5)
-            } placeholder: {
-                ProgressView()
+        VStack {
+            VStack(alignment: .leading) {
+                HStack(alignment: .top) {
+                    HStack(alignment: .center, spacing: 5) {
+                        AsyncImage(url: URL(string: thumbnail)) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 80, height: 60)
+                                .background(Color.backgroundColor)
+                                .cornerRadius(5)
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        
+                        Text(title)
+                            .font(titleFont)
+                    }
+                    
+                    Spacer()
+                    Image(systemName: isFavorite ? "bookmark.fill" : "bookmark")
+                        .imageScale(.small)
+                        .foregroundStyle(Color.accentColor)
+                }
+                .padding(10)
             }
             
-            VStack(alignment: .leading) {
-                Text("#\(String(num)): \(title)")
-                    .font(titleFont)
-                Text(date)
+            Divider()
+                .background(Color.secondary)
+            
+            HStack {
+                Text("#\(num)")
                     .font(smallFont)
                 Spacer()
+                Text(date)
+                    .font(smallFont)
             }
-            
-            Spacer()
-            
-            Image(systemName: isFavorite ? "bookmark.fill" : "bookmark")
-                .imageScale(.small)
+            .padding(5)
         }
+        .cornerRadius(10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.secondary, lineWidth: 1)
+        )
     }
 }
 
-struct ListRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        ListRowView(num: 100,
-                    thumbnail: "",
-                    title: "Test",
-                    isFavorite: false,
-                    date: "2000-01-01")
+#Preview {
+    NavigationView {
+        List {
+            ListRowView(num: 2918,
+                        thumbnail: "https://imgs.xkcd.com/comics/sitting_in_a_tree.png",
+                        title: "Sitting in a Tree",
+                        isFavorite: false,
+                        date: "2024-04-12")
+                .listRowSeparator(.hidden)
+            
+            ListRowView(num: 2918,
+                        thumbnail: "https://imgs.xkcd.com/comics/tick_marks.png",
+                        title: "Tick Marks",
+                        isFavorite: false,
+                        date: "2024-04-10")
+                .listRowSeparator(.hidden)
+        }
+        .listStyle(.plain)
     }
 }

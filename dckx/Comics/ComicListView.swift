@@ -24,35 +24,33 @@ struct  ComicListView: View {
 
     var body: some View {
         List {
-            ForEach(viewModel.groupedComics.sorted(by: { $0.key > $1.key }), id: \.key) { group in
-                Section(header: Text(group.key)) {
-                    ForEach(group.value, id: \.num) { comic in
-                        ListRowView(num: comic.num,
-                                    thumbnail: comic.img,
-                                    title: comic.title,
-                                    isFavorite: comic.isFavorite,
-                                    date: comic.displayDate)
-                            .onTapGesture {
-                                select(comic: comic)
-                            }
+            ForEach(viewModel.comics, id: \.num) { comic in
+                ListRowView(num: comic.num,
+                            thumbnail: comic.img,
+                            title: comic.title,
+                            isFavorite: comic.isFavorite,
+                            date: comic.displayDate)
+                    .listRowSeparator(.hidden)
+                    .onTapGesture {
+                        select(comic: comic)
                     }
-                }
             }
         }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    closeButton
-                }
+        .listStyle(.plain)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                closeButton
             }
-            .navigationTitle(Text("xkcd"))
-            .searchable(text: $viewModel.searchText,
-                        prompt: "Search")
-            .onSubmit(of: .search) {
-                doSearch()
-            }
-            .onChange(of: viewModel.searchText) {
-                doSearch()
-            }
+        }
+        .navigationTitle(Text("xkcd"))
+        .searchable(text: $viewModel.searchText,
+                    prompt: "Search")
+        .onSubmit(of: .search) {
+            doSearch()
+        }
+        .onChange(of: viewModel.searchText) {
+            doSearch()
+        }
     }
     
     var closeButton: some View {
@@ -66,7 +64,6 @@ struct  ComicListView: View {
     
     func select(comic: ComicModel) {
         selectComicAction(comic)
-//        viewModel.setRead(comic: comic)
         presentationMode.wrappedValue.dismiss()
     }
     
