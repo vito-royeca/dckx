@@ -15,7 +15,7 @@ extension UIFont {
     static let dckxTitleText      = UIFont(name: "xkcd-Script-Regular",
                                            size: 22)!
     static let dckxRegularText    = UIFont(name: "xkcd-Script-Regular",
-                                           size: 17)!
+                                           size: 18)!
     static let dckxSmallText    = UIFont(name: "xkcd-Script-Regular",
                                            size: 15)!
 }
@@ -26,7 +26,7 @@ extension Font {
     static let dckxTitleText      = Font.custom("xkcd-Script-Regular",
                                                 size: 22)
     static let dckxRegularText    = Font.custom("xkcd-Script-Regular",
-                                                size: 17)
+                                                size: 18)
     static let dckxSmallText      = Font.custom("xkcd-Script-Regular",
                                                 size: 15)
 }

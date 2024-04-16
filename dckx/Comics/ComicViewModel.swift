@@ -52,19 +52,6 @@ class ComicViewModel {
         }
     }
     
-    func toggle(isReadEnabled: Bool) {
-        guard let currentComic = currentComic else {
-            return
-        }
-
-        do {
-            currentComic.isRead = isReadEnabled
-            try modelContext.save()
-        } catch {
-            print(error)
-        }
-    }
-
     // MARK: - Helper variables
     
     var comicTitle: String {
@@ -186,7 +173,6 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 currentComic = comicModel
             }
 
-            toggle(isReadEnabled: true)
             loadImage()
         } catch {
             print(error)
@@ -233,7 +219,6 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 lastComic = comicModel
             }
 
-            toggle(isReadEnabled: true)
             loadImage()
         } catch {
             print(error)
@@ -272,7 +257,6 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 currentComic = comicModel
             }
 
-            toggle(isReadEnabled: true)
             loadImage()
         } catch {
             print(error)

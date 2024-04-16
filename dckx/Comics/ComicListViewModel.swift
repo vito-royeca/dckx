@@ -12,8 +12,9 @@ import SwiftData
 @Observable
 class ComicListViewModel {
     var modelContext: ModelContext
-   var searchText = ""
+    var searchText = ""
     var comics = [ComicModel]()
+    var groupedComics = [String: [ComicModel]]()
     
     // MARK: - Initializer
 
@@ -77,19 +78,14 @@ class ComicListViewModel {
 //        return fetchRequest
 //    }
     
-//    func setRead(comic: ComicModel) {
-//        do {
-//            comic.isRead = true
-//            try modelContext.save()
-//        } catch {
-//            print(error)
-//        }
-//    }
-
     func loadComics() async throws{
         do {
             let descriptor = FetchDescriptor<ComicModel>(sortBy: [SortDescriptor(\.num, order: .reverse)])
             comics = try modelContext.fetch(descriptor)
+            
+            groupedComics = Dictionary(grouping: comics) { (element) -> String in
+                return element.year
+            }
         } catch {
             print("Fetch failed")
         }

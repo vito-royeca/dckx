@@ -16,25 +16,27 @@ struct ListRowView: View {
     var thumbnail: String
     var title: String
     var isFavorite: Bool
-    var isSeen: Bool
-    var font: Font
+    var date: String
     
     init(num: Int,
          thumbnail: String,
          title: String,
          isFavorite: Bool,
-         isSeen: Bool,
-         font: Font) {
+         date: String) {
         self.num = num
         self.thumbnail = thumbnail
         self.title = title
         self.isFavorite = isFavorite
-        self.isSeen = isSeen
-        self.font = font
+        self.date = date
     }
     
     var body: some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .top, spacing: 10) {
+            let titleFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
+            nil : Font.dckxRegularText
+            let smallFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
+            Font.system(.subheadline) : Font.dckxSmallText
+            
             AsyncImage(url: URL(string: thumbnail)) { image in
                 image
                     .resizable()
@@ -46,21 +48,18 @@ struct ListRowView: View {
                 ProgressView()
             }
             
-            VStack {
-                Spacer()
+            VStack(alignment: .leading) {
                 Text("#\(String(num)): \(title)")
-                    .font(font)
+                    .font(titleFont)
+                Text(date)
+                    .font(smallFont)
                 Spacer()
             }
             
             Spacer()
             
-            HStack {
-                Image(systemName: isFavorite ? "bookmark.fill" : "bookmark")
-                    .imageScale(.small)
-                Image(systemName: isSeen ? "eye.fill" : "eye")
-                    .imageScale(.small)
-            }
+            Image(systemName: isFavorite ? "bookmark.fill" : "bookmark")
+                .imageScale(.small)
         }
     }
 }
@@ -71,7 +70,6 @@ struct ListRowView_Previews: PreviewProvider {
                     thumbnail: "",
                     title: "Test",
                     isFavorite: false,
-                    isSeen: false,
-                    font: Font.dckxSmallText)
+                    date: "2000-01-01")
     }
 }

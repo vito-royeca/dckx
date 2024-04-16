@@ -89,9 +89,9 @@ struct ComicView: View {
     var displayView: some View {
         VStack {
             let titleFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-            Font.system(size: 24) : Font.dckxLargeTitleText
+            Font.system(.largeTitle) : Font.dckxLargeTitleText
             let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-            Font.system(size: 16) : Font.dckxRegularText
+            Font.system(.body) : Font.dckxRegularText
             
             Text("\(viewModel.comicTitle)")
                 .font(titleFont)

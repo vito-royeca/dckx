@@ -61,7 +61,7 @@ extension ComicViewModel {
         reader += "  imageSrc: '\(cachePath)',"
         reader += "  controls: true,"
         reader += "  num: '#\(comic.num)',"
-        reader += "  date: '\(dateToString(date: comic.date))&nbsp;',"
+        reader += "  date: '\(comic.displayDate))&nbsp;',"
         reader += "  altText: '\(altText)'"
         reader += " });"
         reader += " reader.start();"

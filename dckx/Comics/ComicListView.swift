@@ -23,23 +23,28 @@ struct  ComicListView: View {
     }
 
     var body: some View {
-        List(viewModel.comics) { comic in
-            ListRowView(num: comic.num,
-                        thumbnail: comic.img,
-                        title: comic.title,
-                        isFavorite: comic.isFavorite,
-                        isSeen: comic.isRead,
-                        font: Font.dckxSmallText)
-                .onTapGesture {
-                    select(comic: comic)
+        List {
+            ForEach(viewModel.groupedComics.sorted(by: { $0.key > $1.key }), id: \.key) { group in
+                Section(header: Text(group.key)) {
+                    ForEach(group.value, id: \.num) { comic in
+                        ListRowView(num: comic.num,
+                                    thumbnail: comic.img,
+                                    title: comic.title,
+                                    isFavorite: comic.isFavorite,
+                                    date: comic.displayDate)
+                            .onTapGesture {
+                                select(comic: comic)
+                            }
+                    }
                 }
+            }
         }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     closeButton
                 }
             }
-            .navigationTitle(Text("Comics"))
+            .navigationTitle(Text("xkcd"))
     }
     
     var closeButton: some View {

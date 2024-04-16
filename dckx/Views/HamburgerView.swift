@@ -85,7 +85,7 @@ struct HMenuView: View {
                     Image(systemName: "photo.on.rectangle.angled")
                         .foregroundColor(.gray)
                         .imageScale(.large)
-                    Text("Comics")
+                    Text("xkcd")
                         .foregroundColor(.gray)
                         .font(Font.dckxRegularText)
                     }

@@ -28,7 +28,7 @@ struct SettingsView: View {
                         .font(Font.dckxRegularText)
                 }
                 
-                Section(header: Text("Comics")
+                Section(header: Text("xkcd")
                                     .font(Font.dckxRegularText)) {
                     Toggle("Use System Font in Viewer", isOn: $settings.comicsViewerUseSystemFont)
                         .onChange(of: settings.comicsViewerUseSystemFont) { value in
