@@ -9,6 +9,7 @@
 
 import Foundation
 import SwiftData
+//import SDWebImage
 
 @Model class ComicModel: Codable {
     enum CodingKeys: String, CodingKey {
@@ -73,19 +74,12 @@ import SwiftData
         try container.encode(year, forKey: .year)
     }
 
-    var explainURL: String {
-        get {
-            let baseUrl = "https://www.explainxkcd.com/wiki/index.php"
-            let comicUrl = "\(num):_\((title).components(separatedBy: " ").joined(separator: "_"))"
-            return "\(baseUrl)/\(comicUrl)"
-        }
-    }
-    
     var displayDate: String {
         get {
             "\(year)-\(month)-\(day)"
         }
     }
+    
     var description: String {
         get {
             """
@@ -99,6 +93,20 @@ import SwiftData
                 title: \(title)
                 transcript: \(transcript)
             """
+        }
+    }
+    
+    var explainURL: String {
+        get {
+            let baseUrl = "https://www.explainxkcd.com/wiki/index.php"
+            let comicUrl = "\(num):_\((title).components(separatedBy: " ").joined(separator: "_"))"
+            return "\(baseUrl)/\(comicUrl)"
+        }
+    }
+    
+    var imageURL: URL? {
+        get {
+            URL(string: img)
         }
     }
 }

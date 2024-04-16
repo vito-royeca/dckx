@@ -8,12 +8,13 @@
 
 import SwiftUI
 import SwiftData
+import SDWebImageSwiftUI
 
 struct ListRowView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var num: Int
-    var thumbnail: String
+    var thumbnail: URL?
     var title: String
     var isFavorite: Bool
     var date: String
@@ -24,7 +25,7 @@ struct ListRowView: View {
     Font.system(.subheadline) : Font.dckxSmallText
     
     init(num: Int,
-         thumbnail: String,
+         thumbnail: URL?,
          title: String,
          isFavorite: Bool,
          date: String) {
@@ -39,7 +40,7 @@ struct ListRowView: View {
         VStack {
             VStack(alignment: .leading) {
                 HStack(alignment: .top, spacing: 5) {
-                    AsyncImage(url: URL(string: thumbnail)) { image in
+                    WebImage(url: thumbnail) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -89,26 +90,26 @@ struct ListRowView: View {
     NavigationView {
         List {
             ListRowView(num: 2918,
-                        thumbnail: "https://imgs.xkcd.com/comics/sitting_in_a_tree.png",
+                        thumbnail: URL(string: "https://imgs.xkcd.com/comics/sitting_in_a_tree.png"),
                         title: "Sitting in a Tree",
                         isFavorite: false,
                         date: "2024-04-12")
                 .listRowSeparator(.hidden)
             
             ListRowView(num: 2918,
-                        thumbnail: "https://imgs.xkcd.com/comics/tick_marks.png",
+                        thumbnail: URL(string: "https://imgs.xkcd.com/comics/tick_marks.png"),
                         title: "Tick Marks",
                         isFavorite: false,
                         date: "2024-04-10")
                 .listRowSeparator(.hidden)
             ListRowView(num: 404,
-                        thumbnail: "",
+                        thumbnail: URL(string: ""),
                         title: "Handle 404",
                         isFavorite: false,
                         date: "2024-04-10")
                 .listRowSeparator(.hidden)
             ListRowView(num: 2918,
-                        thumbnail: "https://imgs.xkcd.com/comics/tick_marks.png",
+                        thumbnail: URL(string: "https://imgs.xkcd.com/comics/tick_marks.png"),
                         title: "A very very very long title here indeed hahaha. How many lines can this fit in? Hahaha! Could this be another line here?",
                         isFavorite: false,
                         date: "2024-04-10")

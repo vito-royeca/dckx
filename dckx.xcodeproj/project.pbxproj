@@ -54,6 +54,7 @@
 		76A0FDE52BCB931200C0002E /* ComicItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE42BCB931200C0002E /* ComicItemSource.swift */; };
 		76A0FDE62BCB931200C0002E /* ComicItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE42BCB931200C0002E /* ComicItemSource.swift */; };
 		76A0FDE72BCB931200C0002E /* ComicItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE42BCB931200C0002E /* ComicItemSource.swift */; };
+		76F753B22BCF1CF9000E6053 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 76F753B12BCF1CF9000E6053 /* SDWebImageSwiftUI */; };
 		8B0DBE00262DFB81004FA0DB /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B2C33262C930500B35825 /* HamburgerView.swift */; };
 		8B0DBE01262DFB82004FA0DB /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B2C33262C930500B35825 /* HamburgerView.swift */; };
 		8B23368223F6683C00C88BA1 /* ComicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23368123F6683C00C88BA1 /* ComicViewModel.swift */; };
@@ -289,6 +290,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76F753B22BCF1CF9000E6053 /* SDWebImageSwiftUI in Frameworks */,
 				7633F81F2BCC9EE300B2F1A4 /* SDWebImage in Frameworks */,
 				580566AC2BC9E2E900187556 /* FirebaseAnalyticsSwift in Frameworks */,
 				580566AA2BC9E2E900187556 /* FirebaseAnalytics in Frameworks */,
@@ -577,6 +579,7 @@
 				580566AE2BC9E38100187556 /* Kanna */,
 				76A0FD802BCB26A200C0002E /* BetterSafariView */,
 				7633F81E2BCC9EE300B2F1A4 /* SDWebImage */,
+				76F753B12BCF1CF9000E6053 /* SDWebImageSwiftUI */,
 			);
 			productName = dckx;
 			productReference = 8B4F4B9523F5F444008446F4 /* dckx.app */;
@@ -678,6 +681,7 @@
 				580566AD2BC9E38100187556 /* XCRemoteSwiftPackageReference "kanna" */,
 				580566B12BC9E66900187556 /* XCRemoteSwiftPackageReference "SwiftRater" */,
 				7633F81D2BCC9EE300B2F1A4 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				76F753B02BCF1CF9000E6053 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 8B4F4B9623F5F444008446F4 /* Products */;
 			projectDirPath = "";
@@ -1366,6 +1370,14 @@
 				minimumVersion = 5.19.1;
 			};
 		};
+		76F753B02BCF1CF9000E6053 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.2;
+			};
+		};
 		8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stleamist/BetterSafariView.git";
@@ -1451,6 +1463,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 580566A82BC9E2E900187556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsSwift;
+		};
+		76F753B12BCF1CF9000E6053 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76F753B02BCF1CF9000E6053 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

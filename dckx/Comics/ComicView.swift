@@ -73,7 +73,7 @@ struct ComicView: View {
             
             Spacer()
             
-            InteractiveImageView(url: viewModel.comicImageURL,
+            InteractiveImageView(url: viewModel.currentComic?.imageURL,
                                  reloadAction: viewModel.reloadComic)
             
             Spacer()
@@ -107,7 +107,9 @@ struct ComicView: View {
         }
             .disabled(viewModel.isBusy)
     }
-    
+}
+
+extension ComicView {
     func select(comic: ComicModel) {
         Task {
             do {

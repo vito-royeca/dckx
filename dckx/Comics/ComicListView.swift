@@ -9,6 +9,10 @@
 import SwiftUI
 import SwiftData
 
+enum SearchScope: String, CaseIterable {
+    case all, bookmark
+}
+
 // MARK: - ComicListView
 
 struct  ComicListView: View {
@@ -19,6 +23,7 @@ struct  ComicListView: View {
     @State private var predicate: Predicate<ComicModel>?
     @State private var numSorter = SortDescriptor(\ComicModel.num, order: .reverse)
     @State private var searchText = ""
+    @State private var searchScope = SearchScope.all
     
     init(selectComicAction: @escaping (ComicModel) -> Void) {
         self.selectComicAction = selectComicAction
@@ -37,10 +42,18 @@ struct  ComicListView: View {
         .navigationTitle(Text("xkcd"))
         .searchable(text: $searchText,
                     prompt: "Search")
+        .searchScopes($searchScope) {
+            ForEach(SearchScope.allCases, id: \.self) { scope in
+                Text(scope.rawValue.capitalized)
+            }
+        }
         .onSubmit(of: .search) {
             doSearch()
         }
         .onChange(of: searchText) {
+            doSearch()
+        }
+        .onChange(of: searchScope) {
             doSearch()
         }
     }
@@ -53,17 +66,41 @@ struct  ComicListView: View {
                 .imageScale(.large)
         }
     }
-    
-    func doSearch() {
-        predicate = nil
+}
 
+extension ComicListView {
+    func doSearch() {
         if searchText.count == 1 {
-            predicate = #Predicate { comic in
-                comic.title.starts(with: searchText)
+            let lowerSearchText = searchText.localizedUppercase
+
+            if searchScope == .all {
+                predicate = #Predicate { comic in
+                    comic.title.starts(with: lowerSearchText)
+                }
+            } else {
+                predicate = #Predicate { comic in
+                    comic.isFavorite == true &&
+                    comic.title.starts(with: lowerSearchText)
+                }
             }
         } else if searchText.count > 1 {
-            predicate = #Predicate { comic in
-                comic.title.localizedStandardContains(searchText)
+            if searchScope == .all {
+                predicate = #Predicate { comic in
+                    comic.title.localizedStandardContains(searchText)
+                }
+            } else {
+                predicate = #Predicate { comic in
+                    comic.isFavorite == true &&
+                    comic.title.localizedStandardContains(searchText)
+                }
+            }
+        } else {
+            if searchScope == .all {
+                predicate = nil
+            } else {
+                predicate = #Predicate { comic in
+                    comic.isFavorite == true
+                }
             }
         }
     }
@@ -102,7 +139,7 @@ struct ComicListDisplayView: View {
         List {
             ForEach(comics, id: \.num) { comic in
                 ListRowView(num: comic.num,
-                            thumbnail: comic.img,
+                            thumbnail: comic.imageURL,
                             title: comic.title,
                             isFavorite: comic.isFavorite,
                             date: comic.displayDate)

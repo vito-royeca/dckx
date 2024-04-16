@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct InteractiveImageView: View {
     @State private var zoomScale: CGFloat = 1
@@ -22,29 +23,20 @@ struct InteractiveImageView: View {
     
     var body: some View {
         GeometryReader { proxy in
-            AsyncImage(url: url,
-                       transaction: .init(animation: .bouncy(duration: 1))) { phase in
-                switch phase {
-                case .empty:
-                    EmptyView()
-
-                case .success(let image):
-                    ScrollView([.vertical, .horizontal],
-                               showsIndicators: false) {
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .onTapGesture(count: 2, perform: onImageDoubleTapped)
-                            .gesture(zoomGesture)
-                            .frame(width: proxy.size.width * max(minZoomScale, zoomScale))
-                            .frame(maxHeight: .infinity)
-                    }
-
-                case .failure:
-                    errorView
-                @unknown default:
-                    EmptyView()
+            WebImage(url: url) { image in
+                ScrollView([.vertical, .horizontal],
+                           showsIndicators: false) {
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .onTapGesture(count: 2, perform: onImageDoubleTapped)
+                        .gesture(zoomGesture)
+                        .frame(width: proxy.size.width * max(minZoomScale, zoomScale))
+                        .frame(maxHeight: .infinity)
                 }
+            } placeholder: {
+                ProgressView()
+                    .frame(width: proxy.size.width, height: proxy.size.height)
             }
         }
     }

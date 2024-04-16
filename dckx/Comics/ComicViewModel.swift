@@ -9,7 +9,6 @@
 import Foundation
 import SwiftUI
 import SwiftData
-import SDWebImage
 
 @Observable
 class ComicViewModel {
@@ -20,7 +19,6 @@ class ComicViewModel {
     var isError = false
     var canDoPrevious = false
     var canDoNext = false
-    var comicImageURL: URL?
 
     // MARK: - Initializer
     
@@ -84,50 +82,6 @@ class ComicViewModel {
             }
         }
     }
-    
-    private func loadImage() {
-        fetchImage(callback: fetchImageCallback)
-    }
-    
-    private func fetchImage(callback: @escaping SDImageLoaderCompletedBlock) {
-        comicImageURL = nil
-        
-        guard let currentComic = currentComic,
-            let url = URL(string: currentComic.img) else {
-            return
-        }
-        
-        toggle(isNavigationEnabled: true)
-        if let cachePath = SDImageCache.shared.cachePath(forKey: currentComic.img),
-           FileManager.default.fileExists(atPath: cachePath) {
-            comicImageURL = URL(filePath: cachePath)
-        } else {
-            SDWebImageManager.shared.imageLoader.requestImage(with: url,
-                                                              options: .highPriority,
-                                                              context: nil,
-                                                              progress: nil,
-                                                              completed: callback)
-        }
-    }
-    
-    private func fetchImageCallback(image: UIImage?, data: Data?, error: Error?, finished: Bool) {
-        guard let currentComic = currentComic,
-              let image = image,
-              let data = data else {
-            return
-        }
-
-        SDWebImageManager.shared.imageCache.store(image,
-                                                  imageData: data,
-                                                  forKey: currentComic.img,
-                                                  cacheType: .disk)
-        
-        guard let cachePath = SDImageCache.shared.cachePath(forKey: currentComic.img) else {
-            return
-        }
-        
-        comicImageURL = URL(filePath: cachePath)
-    }
 }
 
 // MARK: - NavigationBarViewDelegate
@@ -166,21 +120,21 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 modelContext.insert(model)
                 comicModel = try modelContext.fetch(descriptor).first
             }
-            toggle(isNavigationEnabled: true)
 
             guard let comicModel = comicModel else {
+                toggle(isNavigationEnabled: true)
                 return
             }
 
             let sensitiveData = SensitiveData()
             if !sensitiveData.showSensitiveContent &&
                 sensitiveData.containsSensitiveData(comicModel) {
+                toggle(isNavigationEnabled: true)
                 try await loadRandom()
             } else {
                 currentComic = comicModel
+                toggle(isNavigationEnabled: true)
             }
-
-            loadImage()
         } catch {
             print(error)
             toggle(isNavigationEnabled: true)
@@ -210,9 +164,9 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 modelContext.insert(model)
                 comicModel = try modelContext.fetch(descriptor).first
             }
-            toggle(isNavigationEnabled: true)
             
             guard let comicModel = comicModel else {
+                toggle(isNavigationEnabled: true)
                 return
             }
             
@@ -220,13 +174,15 @@ extension ComicViewModel: NavigationToolbarDelegate {
             if !sensitiveData.showSensitiveContent &&
                 sensitiveData.containsSensitiveData(comicModel) {
                 let newNum = comicModel.num - 1
+                toggle(isNavigationEnabled: true)
                 try await load(num: newNum)
             } else {
                 currentComic = comicModel
                 lastComic = comicModel
+                toggle(isNavigationEnabled: true)
             }
 
-            loadImage()
+            
         } catch {
             print(error)
             toggle(isNavigationEnabled: true)
@@ -249,9 +205,9 @@ extension ComicViewModel: NavigationToolbarDelegate {
                 modelContext.insert(model)
                 comicModel = try modelContext.fetch(descriptor).first
             }
-            toggle(isNavigationEnabled: true)
 
             guard let comicModel = comicModel else {
+                toggle(isNavigationEnabled: true)
                 return
             }
 
@@ -259,12 +215,12 @@ extension ComicViewModel: NavigationToolbarDelegate {
             if !sensitiveData.showSensitiveContent &&
                 sensitiveData.containsSensitiveData(comicModel) {
                 let newNum = (num > comicModel.num) ? num + 1 : num - 1
+                toggle(isNavigationEnabled: true)
                 try await load(num: newNum)
             } else {
                 currentComic = comicModel
+                toggle(isNavigationEnabled: true)
             }
-
-            loadImage()
         } catch {
             print(error)
             toggle(isNavigationEnabled: true)
@@ -273,14 +229,17 @@ extension ComicViewModel: NavigationToolbarDelegate {
 
     private func toggle(isNavigationEnabled: Bool) {
         if isNavigationEnabled {
-            canDoPrevious = currentComic?.num ?? 0 > 1
-            
-            if let currentComic = currentComic,
-                let lastComic = lastComic {
-                canDoNext = currentComic.num < lastComic.num
+            if let currentComic = currentComic {
+                canDoPrevious = currentComic.num > 1
+                
+                if let lastComic = lastComic {
+                    canDoNext = currentComic.num < lastComic.num
+                }
             } else {
+                canDoPrevious = false
                 canDoNext = false
             }
+
             isBusy = false
         } else {
             canDoPrevious = false
