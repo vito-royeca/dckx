@@ -30,7 +30,7 @@ struct ComicView: View {
                     displayView
                         .padding()
                 } else {
-                    ActivityIndicatorView(shouldAnimate: $viewModel.isBusy)
+                    ProgressView()
                 }
             }
             .toolbar {

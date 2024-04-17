@@ -120,7 +120,11 @@ extension WhatIfModel {
     
     var displayDate: String {
         get {
-            "\(year)-\(month)-\(day)"
+            if year.isEmpty && month.isEmpty && day.isEmpty {
+                ""
+            } else {
+                "\(year)-\(month)-\(day)"
+            }
         }
     }
     

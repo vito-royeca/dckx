@@ -39,7 +39,9 @@ struct SettingsView: View {
                             .font(regularFont)) {
                     Text("xkcd is created by Randall Munroe.")
                         .font(regularFont)
-                    Text("dckx is an xkcd reader created by Vito Royeca.")
+                    Text("What If? is created by Randall Munroe.")
+                        .font(regularFont)
+                    Text("dckx is a web comics reader created by Vito Royeca.")
                         .font(regularFont)
                     Text("Version \(dckxApp.getVersion())")
                         .font(regularFont)
