@@ -31,34 +31,6 @@ import SwiftData
     var title: String
 
     var isFavorite: Bool
-    var isRead: Bool
-    
-    required init(from decoder : Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        answer = try container.decode(String.self, forKey: .answer)
-        link = try container.decode(String.self, forKey: .link)
-        num = try container.decode(Int.self, forKey: .num)
-        question = try container.decode(String.self, forKey: .question)
-        questioner = try container.decode(String.self, forKey: .questioner)
-        thumbnail = try container.decode(String.self, forKey: .thumbnail)
-        title = try container.decode(String.self, forKey: .title)
-        
-        isFavorite = false
-        isRead = false
-    }
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        
-        try container.encode(answer, forKey: .answer)
-        try container.encode(link, forKey: .link)
-        try container.encode(num, forKey: .num)
-        try container.encode(question, forKey: .question)
-        try container.encode(questioner, forKey: .questioner)
-        try container.encode(thumbnail, forKey: .thumbnail)
-        try container.encode(title, forKey: .title)
-    }
 
     init(answer: String,
          link: String,
@@ -76,6 +48,45 @@ import SwiftData
         self.title = title
         
         isFavorite = false
-        isRead = false
+    }
+
+    required init(from decoder : Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        answer = try container.decode(String.self, forKey: .answer)
+        link = try container.decode(String.self, forKey: .link)
+        num = try container.decode(Int.self, forKey: .num)
+        question = try container.decode(String.self, forKey: .question)
+        questioner = try container.decode(String.self, forKey: .questioner)
+        thumbnail = try container.decode(String.self, forKey: .thumbnail)
+        title = try container.decode(String.self, forKey: .title)
+        
+        isFavorite = false
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(answer, forKey: .answer)
+        try container.encode(link, forKey: .link)
+        try container.encode(num, forKey: .num)
+        try container.encode(question, forKey: .question)
+        try container.encode(questioner, forKey: .questioner)
+        try container.encode(thumbnail, forKey: .thumbnail)
+        try container.encode(title, forKey: .title)
+    }
+
+    var description: String {
+        get {
+            """
+                answer: \(answer)
+                link: \(link)
+                num: \(num)
+                question: \(question)
+                questioner: \(questioner)
+                thumbnail: \(thumbnail)
+                title: \(title)
+            """
+        }
     }
 }

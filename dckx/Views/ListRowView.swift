@@ -40,18 +40,20 @@ struct ListRowView: View {
         VStack {
             VStack(alignment: .leading) {
                 HStack(alignment: .top, spacing: 5) {
-                    WebImage(url: thumbnail) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 90, height: 90)
-                            .background(Color.backgroundColor)
-                            .cornerRadius(5)
-                    } placeholder: {
-                        ProgressView()
-                            .frame(width: 90, height: 90)
+                    if let thumbnail = thumbnail {
+                        WebImage(url: thumbnail) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 90, height: 90)
+                                .background(Color.backgroundColor)
+                                .cornerRadius(5)
+                        } placeholder: {
+                            ProgressView()
+                                .frame(width: 90, height: 90)
+                        }
                     }
-                    
+
                     Text(title)
                         .font(titleFont)
                         .fixedSize(horizontal: false, vertical: true)

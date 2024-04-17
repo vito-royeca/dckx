@@ -10,13 +10,13 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct InteractiveImageView: View {
+    var url: URL?
+    var reloadAction: () -> Void
+    
     @State private var zoomScale: CGFloat = 1
     @State private var previousZoomScale: CGFloat = 1
     private let minZoomScale: CGFloat = 1
     private let maxZoomScale: CGFloat = 5
-    
-    var url: URL?
-    var reloadAction: () -> Void
 
     private let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
     Font.system(size: 16) : Font.dckxRegularText
@@ -35,8 +35,7 @@ struct InteractiveImageView: View {
                         .frame(maxHeight: .infinity)
                 }
             } placeholder: {
-                ProgressView()
-                    .frame(width: proxy.size.width, height: proxy.size.height)
+                Text("")
             }
         }
     }

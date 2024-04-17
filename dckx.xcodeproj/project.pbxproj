@@ -55,6 +55,8 @@
 		76A0FDE62BCB931200C0002E /* ComicItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE42BCB931200C0002E /* ComicItemSource.swift */; };
 		76A0FDE72BCB931200C0002E /* ComicItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE42BCB931200C0002E /* ComicItemSource.swift */; };
 		76F753B22BCF1CF9000E6053 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 76F753B12BCF1CF9000E6053 /* SDWebImageSwiftUI */; };
+		76F753B42BCF5B4C000E6053 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 76F753B32BCF5B4C000E6053 /* SDWebImageSwiftUI */; };
+		76F753B62BCF5B55000E6053 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 76F753B52BCF5B55000E6053 /* SDWebImageSwiftUI */; };
 		8B0DBE00262DFB81004FA0DB /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B2C33262C930500B35825 /* HamburgerView.swift */; };
 		8B0DBE01262DFB82004FA0DB /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B2C33262C930500B35825 /* HamburgerView.swift */; };
 		8B23368223F6683C00C88BA1 /* ComicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23368123F6683C00C88BA1 /* ComicViewModel.swift */; };
@@ -304,6 +306,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76F753B42BCF5B4C000E6053 /* SDWebImageSwiftUI in Frameworks */,
 				7633F8252BCC9F0E00B2F1A4 /* FirebaseAnalyticsSwift in Frameworks */,
 				7633F8232BCC9F0E00B2F1A4 /* FirebaseAnalytics in Frameworks */,
 				7633F8272BCC9F0E00B2F1A4 /* Kanna in Frameworks */,
@@ -316,6 +319,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76F753B62BCF5B55000E6053 /* SDWebImageSwiftUI in Frameworks */,
 				76A0FD872BCB286C00C0002E /* FirebaseAnalyticsSwift in Frameworks */,
 				76A0FD852BCB286C00C0002E /* FirebaseAnalytics in Frameworks */,
 				7633F82B2BCC9F2100B2F1A4 /* Kanna in Frameworks */,
@@ -605,6 +609,7 @@
 				7633F8242BCC9F0E00B2F1A4 /* FirebaseAnalyticsSwift */,
 				7633F8262BCC9F0E00B2F1A4 /* Kanna */,
 				7633F8282BCC9F0E00B2F1A4 /* SDWebImage */,
+				76F753B32BCF5B4C000E6053 /* SDWebImageSwiftUI */,
 			);
 			productName = dckxTests;
 			productReference = 8B4F4BAB23F5F445008446F4 /* dckxTests.xctest */;
@@ -630,6 +635,7 @@
 				76A0FD862BCB286C00C0002E /* FirebaseAnalyticsSwift */,
 				7633F82A2BCC9F2100B2F1A4 /* Kanna */,
 				7633F82C2BCC9F2100B2F1A4 /* SDWebImage */,
+				76F753B52BCF5B55000E6053 /* SDWebImageSwiftUI */,
 			);
 			productName = dckxUITests;
 			productReference = 8B4F4BB623F5F445008446F4 /* dckxUITests.xctest */;
@@ -1465,6 +1471,16 @@
 			productName = FirebaseAnalyticsSwift;
 		};
 		76F753B12BCF1CF9000E6053 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76F753B02BCF1CF9000E6053 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		76F753B32BCF5B4C000E6053 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76F753B02BCF1CF9000E6053 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		76F753B52BCF5B55000E6053 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 76F753B02BCF1CF9000E6053 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;

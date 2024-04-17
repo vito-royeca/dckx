@@ -20,40 +20,65 @@ class XkcdAPITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testFetchLastComic() {
-        let expectation = self.expectation(description: "perform concurrent tasks")
-        
-        
-//        firstly {
-//            XkcdAPI.mockInstance.fetchLastComic()
-//        }.done { comic in
-//            XCTAssertEqual(comic.num, 1)
-//            expectation.fulfill()
-//        }.catch { error in
-//            XCTFail(error.localizedDescription)
-//            expectation.fulfill()
-//        }
-        
-        waitForExpectations(timeout: 100.0, handler: nil)
+    func testFetchLastComic() async throws {
+        do {
+            let comic = try await XkcdAPI.sharedInstance.fetchLastComic()
+            print(comic.description)
+        } catch {
+            print(error)
+            XCTFail("testFetchLastComic() failed")
+        }
     }
 
-    func testFetchComic() {
-//        firstly {
-//            XkcdAPI.mockInstance.fetchComic(num: Int32(100))
-//        }.done { comic in
-//            XCTAssertEqual(comic.num, 100)
-//        }.catch { error in
-//            XCTFail(error.localizedDescription)
-//        }
+    func testFetchFirstComic() async throws {
+        do {
+            let comic = try await XkcdAPI.sharedInstance.fetchComic(num: 1)
+            print(comic.description)
+        } catch {
+            print(error)
+            XCTFail("testFetchFirstComic() failed")
+        }
     }
 
-    func testFetchRandomComic() {
-//        firstly {
-//            XkcdAPI.mockInstance.fetchRandomComic()
-//        }.done { comic in
-//            XCTAssert(comic.num > 0)
-//        }.catch { error in
-//            XCTFail(error.localizedDescription)
-//        }
+    func testFetchRandomComic() async throws {
+        do {
+            let random = Int.random(in: 1 ... 2900)
+            let comic = try await XkcdAPI.sharedInstance.fetchComic(num: random)
+            print(comic.description)
+        } catch {
+            print(error)
+            XCTFail("testFetchComic() failed")
+        }
+    }
+
+    func testFetchLastWhatIf() async throws {
+        do {
+            let whatIf = try await XkcdAPI.sharedInstance.fetchLastWhatIf()
+            print(whatIf.description)
+        } catch {
+            print(error)
+            XCTFail("testFetchLastWhatIf() failed")
+        }
+    }
+    
+    func testFetchFirstWhatIf() async throws {
+        do {
+            let whatIf = try await XkcdAPI.sharedInstance.fetchWhatIf(num: 1)
+            print(whatIf.description)
+        } catch {
+            print(error)
+            XCTFail("testFetchLastWhatIf() failed")
+        }
+    }
+    
+    func testFetchRandomWhatIf() async throws {
+        do {
+            let random = Int.random(in: 1 ... 162)
+            let whatIf = try await XkcdAPI.sharedInstance.fetchWhatIf(num: random)
+            print(whatIf.description)
+        } catch {
+            print(error)
+            XCTFail("testFetchLastWhatIf() failed")
+        }
     }
 }

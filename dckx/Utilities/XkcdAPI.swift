@@ -57,40 +57,93 @@ class XkcdAPI {
     }
     
     // MARK: - Whatif API methods
+    
+    func fetchLastWhatIf() async throws -> WhatIfModel {
+        do {
+            let url = "https://what-if.xkcd.com"
+            let result = try await scrapeWhatIf(link: url)
+            return result
+        } catch {
+            throw XkcdAPIError.unknownError
+        }
+    }
 
-    func scrapeWhatIf(link: String) -> WhatIfModel {
+    func fetchWhatIf(num: Int) async throws -> WhatIfModel {
+        do {
+            let url = "https://what-if.xkcd.com/\(num)"
+            let result = try await scrapeWhatIf(link: url)
+            return result
+        } catch {
+            throw XkcdAPIError.httpError
+        }
+    }
+
+    private func scrapeWhatIf(link: String) async throws -> WhatIfModel {
         do {
             guard let url = URL(string: link) else {
-                fatalError("Malformed url")
+                throw XkcdAPIError.invalidURL
             }
-            
+
             let document = try HTML(url: url, encoding: .utf8)
             var dict = [String: Any]()
 
-            for div in document.xpath("//section[@id='entry-wrapper']") {
-                for div in document.xpath("//nav[@class='main-nav']") {
-                    // get num here
+            for _ in document.xpath("//section[@id='entry-wrapper']") {
+                for nav in document.xpath("//nav[@class='main-nav']") {
+                    var previous = ""
+                    var next = ""
+                    var current = 0
+                
+                    for link in nav.xpath("a") {
+                        if let href = link["href"],
+                           let number = href.components(separatedBy: "/").last {
+                            
+                            if previous == "" {
+                                previous = number
+                            } else {
+                                next = number
+                            }
+                        }
+                    }
+                    
+                    if previous == "#" {
+                        current = 1
+                    } else if next == "#" {
+                        current = (Int(previous) ?? 0)  + 1
+                    } else {
+                        current = (Int(next) ?? 0) - 1
+                    }
+
+                    dict["num"] = current
                 }
 
-                for div in document.xpath("//article[@id='entry']") {
-                    if let title = div.xpath("a").first,
-                       let titleContent = title.content,
-                       let question = div.xpath("p[@id='question']").first,
+                for article in document.xpath("//h2[@id='title']") {
+                    if let title = article.xpath("a").first,
+                       let titleContent = title.content {
+                        dict["title"] = titleContent
+                    }
+                }
+
+                for article in document.xpath("//article[@id='entry']") {
+                    if let question = article.xpath("p[@id='question']").first,
                        let questionContent = question.content,
-                       let questioner = div.xpath("p[@id='attribute']").first,
+                       let questioner = article.xpath("p[@id='attribute']").first,
                        let questionerContent = questioner.content {
                         
-                        div.removeChild(title)
-                        div.removeChild(question)
-                        div.removeChild(questioner)
+                        article.removeChild(question)
+                        article.removeChild(questioner)
                         
-                        dict["title"] = titleContent
+                        var cleanQuestionerContent = questionerContent
+                        if cleanQuestionerContent.hasPrefix("— ") || cleanQuestionerContent.hasPrefix("- "){
+                            cleanQuestionerContent = String(cleanQuestionerContent.dropFirst(2))
+                        }
+                        if cleanQuestionerContent.hasPrefix("—") || cleanQuestionerContent.hasPrefix("-"){
+                            cleanQuestionerContent = String(cleanQuestionerContent.dropFirst(1))
+                        }
+                        
                         dict["question"] = questionContent
-                        dict["questioner"] = questionerContent
-                            .replacingOccurrences(of: "—", with: "")
-                            .trimmingCharacters(in: CharacterSet.whitespaces)
+                        dict["questioner"] = cleanQuestionerContent
                         
-                        if let innerHTML = div.innerHTML {
+                        if let innerHTML = article.innerHTML {
                             let answer = innerHTML
                                 .replacingOccurrences(of: "\n", with: "")
                                 .replacingOccurrences(of: "/imgs", with: "https://what-if.xkcd.com/imgs")
@@ -112,26 +165,6 @@ class XkcdAPI {
             fatalError(error.localizedDescription)
         }
     }
-    
-//    func fetchLastWhatIf() -> Promise<WhatIf> {
-//        return Promise { seal in
-//            let url = "https://what-if.xkcd.com"
-//            
-//            firstly {
-//                createScrapeWhatIfPromise(link: url)
-//            }.then { data in
-//                self.generateNewWhatIf(data: data)
-//            }.then {  data in
-//                self.coreData.saveWhatIf(data: data)
-//            }.then {
-//                self.coreData.loadLastWhatIf()
-//            }.done { whatIf in
-//                seal.fulfill(whatIf)
-//            }.catch { error in
-//                seal.reject(error)
-//            }
-//        }
-//    }
     
 //    private func createScrapeWhatIfPromise(link: String) -> Promise<[String: Any]> {
 //        return Promise { seal in
