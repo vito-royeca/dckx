@@ -15,6 +15,13 @@
 		761312C72BD03A9D00A425EC /* WhatIfViewModel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761312C42BD02EC000A425EC /* WhatIfViewModel+HTML.swift */; };
 		761312C82BD03A9D00A425EC /* WhatIfViewModel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761312C42BD02EC000A425EC /* WhatIfViewModel+HTML.swift */; };
 		761312C92BD03A9E00A425EC /* WhatIfViewModel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761312C42BD02EC000A425EC /* WhatIfViewModel+HTML.swift */; };
+		761312CB2BD05F2A00A425EC /* WhatIfListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761312CA2BD05F2A00A425EC /* WhatIfListView.swift */; };
+		761312CC2BD0648500A425EC /* WhatIfListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761312CA2BD05F2A00A425EC /* WhatIfListView.swift */; };
+		761312CD2BD0648500A425EC /* WhatIfListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761312CA2BD05F2A00A425EC /* WhatIfListView.swift */; };
+		761312CE2BD0648600A425EC /* WhatIfListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761312CA2BD05F2A00A425EC /* WhatIfListView.swift */; };
+		761312CF2BD064CE00A425EC /* ComicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7633F8342BCCC90700B2F1A4 /* ComicListView.swift */; };
+		761312D02BD064E800A425EC /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2B32618C6AD008AD11D /* ListRowView.swift */; };
+		761312D22BD0651500A425EC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 761312D12BD0651500A425EC /* SDWebImageSwiftUI */; };
 		7633F81B2BCC9D9800B2F1A4 /* dckxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */; };
 		7633F81C2BCC9D9900B2F1A4 /* dckxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */; };
 		7633F81F2BCC9EE300B2F1A4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 7633F81E2BCC9EE300B2F1A4 /* SDWebImage */; };
@@ -221,6 +228,7 @@
 
 /* Begin PBXFileReference section */
 		761312C42BD02EC000A425EC /* WhatIfViewModel+HTML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WhatIfViewModel+HTML.swift"; sourceTree = "<group>"; };
+		761312CA2BD05F2A00A425EC /* WhatIfListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatIfListView.swift; sourceTree = "<group>"; };
 		7633F82F2BCCBA4F00B2F1A4 /* InteractiveImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveImageView.swift; sourceTree = "<group>"; };
 		7633F8342BCCC90700B2F1A4 /* ComicListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicListView.swift; sourceTree = "<group>"; };
 		76389FC72BCE331600E2A4D0 /* NavigationButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButtonStyle.swift; sourceTree = "<group>"; };
@@ -307,6 +315,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				761312D22BD0651500A425EC /* SDWebImageSwiftUI in Frameworks */,
 				76F753D32BCF966C000E6053 /* Kanna in Frameworks */,
 				8B27AE42262FB9AB00351106 /* SwiftUI.framework in Frameworks */,
 				8B27AE40262FB9AB00351106 /* WidgetKit.framework in Frameworks */,
@@ -543,6 +552,7 @@
 			isa = PBXGroup;
 			children = (
 				76F753CA2BCF9445000E6053 /* Subviews */,
+				761312CA2BD05F2A00A425EC /* WhatIfListView.swift */,
 				76F753B72BCF811D000E6053 /* WhatIfView.swift */,
 				76F753BC2BCF85D1000E6053 /* WhatIfViewModel.swift */,
 				761312C42BD02EC000A425EC /* WhatIfViewModel+HTML.swift */,
@@ -596,6 +606,7 @@
 			name = "dckx WidgetExtension";
 			packageProductDependencies = (
 				76F753D22BCF966C000E6053 /* Kanna */,
+				761312D12BD0651500A425EC /* SDWebImageSwiftUI */,
 			);
 			productName = "dckx WidgetExtension";
 			productReference = 8B27AE3E262FB9AB00351106 /* dckx WidgetExtension.appex */;
@@ -813,12 +824,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				76F753C82BCF90C7000E6053 /* XkcdAPI.swift in Sources */,
+				761312CE2BD0648600A425EC /* WhatIfListView.swift in Sources */,
 				761312C92BD03A9E00A425EC /* WhatIfViewModel+HTML.swift in Sources */,
 				761312C62BD039E100A425EC /* WebView.swift in Sources */,
 				76389FCB2BCE359600E2A4D0 /* NavigationButtonStyle.swift in Sources */,
 				8B7E51DD262FECF9002A094E /* AppGroup.swift in Sources */,
 				76F753C72BCF8F89000E6053 /* SensitiveData.swift in Sources */,
+				761312D02BD064E800A425EC /* ListRowView.swift in Sources */,
 				76F753C62BCF8B5A000E6053 /* WhatIfModel.swift in Sources */,
+				761312CF2BD064CE00A425EC /* ComicListView.swift in Sources */,
 				76F753C12BCF85D1000E6053 /* WhatIfViewModel.swift in Sources */,
 				8B7E5045262FBDD4002A094E /* NavigationToolbar.swift in Sources */,
 				76F753D02BCF9563000E6053 /* ShareSheetView.swift in Sources */,
@@ -847,6 +861,7 @@
 				8B7E51DA262FECF9002A094E /* AppGroup.swift in Sources */,
 				8B5307262602E6DF008BA7AB /* NavigationSearchBar.swift in Sources */,
 				76F753CC2BCF9465000E6053 /* WhatIfToolbarView.swift in Sources */,
+				761312CB2BD05F2A00A425EC /* WhatIfListView.swift in Sources */,
 				76389FC82BCE331600E2A4D0 /* NavigationButtonStyle.swift in Sources */,
 				8B7E509D262FBF62002A094E /* SensitiveData.swift in Sources */,
 				8B626D702401B0A900972EED /* Constants.swift in Sources */,
@@ -895,6 +910,7 @@
 				7633F8392BCCC90700B2F1A4 /* ComicListView.swift in Sources */,
 				8B626D8C2402291B00972EED /* ComicView.swift in Sources */,
 				8B626D792401EB1200972EED /* XkcdAPITests.swift in Sources */,
+				761312CC2BD0648500A425EC /* WhatIfListView.swift in Sources */,
 				7633F81B2BCC9D9800B2F1A4 /* dckxApp.swift in Sources */,
 				8B4F4BE123F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				76A0FDE22BCB92C600C0002E /* ComicToolbarView.swift in Sources */,
@@ -932,6 +948,7 @@
 				8B626D892402122C00972EED /* BrowserView.swift in Sources */,
 				7633F83A2BCCC90700B2F1A4 /* ComicListView.swift in Sources */,
 				8B7E509F262FBF62002A094E /* SensitiveData.swift in Sources */,
+				761312CD2BD0648500A425EC /* WhatIfListView.swift in Sources */,
 				8BA50E6E240A425500138D11 /* WebView.swift in Sources */,
 				7633F81C2BCC9D9900B2F1A4 /* dckxApp.swift in Sources */,
 				8B4A1285240828FD00D4F8B2 /* SnapshotHelper.swift in Sources */,
@@ -1468,6 +1485,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 580566AD2BC9E38100187556 /* XCRemoteSwiftPackageReference "kanna" */;
 			productName = Kanna;
+		};
+		761312D12BD0651500A425EC /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76F753B02BCF1CF9000E6053 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 		7633F81E2BCC9EE300B2F1A4 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;

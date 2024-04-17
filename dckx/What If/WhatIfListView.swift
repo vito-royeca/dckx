@@ -7,258 +7,162 @@
 //
 
 import SwiftUI
-import Combine
-import CoreData
-//import PromiseKit
+import SwiftData
 
 // MARK: - WhatIfListView
 
 struct WhatIfListView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var fetcher: WhatIfFetcher
-//    @EnvironmentObject var settings: Settings
-    @State var query: String?
-    @State var scopeSelection: Int = 0
     
-    @State var viewModel: WhatIfListViewModel = WhatIfListViewModel(query: nil,
-                                                                    scopeIndex: 0)
-    @State var shouldAnimate: Bool = false
+    var selectWhatIfAction: (WhatIfModel) -> Void
+    
+    @State private var predicate: Predicate<WhatIfModel>?
+    @State private var numSorter = SortDescriptor(\WhatIfModel.num, order: .reverse)
+    @State private var searchText = ""
+    @State private var searchScope = SearchScope.all
+    
+    init(selectWhatIfAction: @escaping (WhatIfModel) -> Void) {
+        self.selectWhatIfAction = selectWhatIfAction
+    }
     
     var body: some View {
-        SearchNavigation(query: $query,
-                         scopeSelection: $scopeSelection,
-                         delegate: self) {
-            ZStack(alignment: .center) {
-                if viewModel.whatIfs.isEmpty {
-                    Text("No results found.")
-                        .font(Font.dckxRegularText)
-                } else {
-                    WhatIfTextListView(viewModel: $viewModel,
-                                       action: selectWhatIf(num:))
-                }
-                ActivityIndicatorView(shouldAnimate: $shouldAnimate)
+        WhatIfListDisplayView(predicate: predicate,
+                              sorter: [numSorter],
+                              selectWhatIfAction: select(whatIf:))
+        .listStyle(.plain)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                closeButton
             }
-                .navigationBarTitle(Text("What If?"), displayMode: .automatic)
-                .navigationBarItems(
-                    leading: closeButton
-                )
-            
         }
-            .edgesIgnoringSafeArea(.top)
+        .navigationTitle(Text("xkcd"))
+        .searchable(text: $searchText,
+                    prompt: "Search")
+        .searchScopes($searchScope) {
+            ForEach(SearchScope.allCases, id: \.self) { scope in
+                Text(scope.rawValue.capitalized)
+            }
+        }
+        .onSubmit(of: .search) {
+            doSearch()
+        }
+        .onChange(of: searchText) {
+            doSearch()
+        }
+        .onChange(of: searchScope) {
+            doSearch()
+        }
     }
     
     var closeButton: some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            Image(systemName: "xmark.circle.fill")
+            Image(systemName: "xmark.circle")
                 .imageScale(.large)
         }
     }
-    
-    func selectWhatIf(num: Int32) {
-        fetcher.load(num: num)
-        presentationMode.wrappedValue.dismiss()
-    }
-    
-    // MARK: - SearchBar methods
-    
+}
+
+extension WhatIfListView {
     func doSearch() {
-        DispatchQueue.global(qos: .background).async {
-            self.shouldAnimate = true
-            self.viewModel = WhatIfListViewModel(query: self.query,
-                                                 scopeIndex: self.scopeSelection)
-            
-            DispatchQueue.main.async {
-                self.shouldAnimate = false
+        if searchText.count == 1 {
+            let lowerSearchText = searchText.localizedUppercase
+
+            if searchScope == .all {
+                predicate = #Predicate { comic in
+                    comic.title.starts(with: lowerSearchText)
+                }
+            } else {
+                predicate = #Predicate { comic in
+                    comic.isFavorite == true &&
+                    comic.title.starts(with: lowerSearchText)
+                }
             }
-        }
-    }
-}
-
-// MARK: - ListView_Previews
-
-struct WhatIfListView_Previews: PreviewProvider {
-    static var previews: some View {
-        WhatIfListView().environmentObject(WhatIfFetcher())
-    }
-}
-
-// MARK: - SearchNavigation
-
-extension WhatIfListView: SearchNavigationDelegate {
-    var options: [SearchNavigationOptionKey : Any]? {
-        return [
-            .automaticallyShowsSearchBar: true,
-            .obscuresBackgroundDuringPresentation: true,
-            .hidesNavigationBarDuringPresentation: true,
-            .hidesSearchBarWhenScrolling: false,
-            .placeholder: "Search",
-            .showsBookmarkButton: false,
-            .scopeButtonTitles: ["All", "Bookmarked", "Seen"],
-            .scopeBarButtonTitleTextAttributes: [NSAttributedString.Key.font: UIFont.dckxRegularText],
-            .searchTextFieldFont: UIFont.dckxRegularText
-         ]
-    }
-    
-    func search() {
-        DispatchQueue.global(qos: .background).async {
-            self.shouldAnimate = true
-            self.viewModel = WhatIfListViewModel(query: self.query,
-                                                scopeIndex: self.scopeSelection)
-            DispatchQueue.main.async {
-                self.shouldAnimate = false
+        } else if searchText.count > 1 {
+            if searchScope == .all {
+                predicate = #Predicate { comic in
+                    comic.title.localizedStandardContains(searchText)
+                }
+            } else {
+                predicate = #Predicate { comic in
+                    comic.isFavorite == true &&
+                    comic.title.localizedStandardContains(searchText)
+                }
+            }
+        } else {
+            if searchScope == .all {
+                predicate = nil
+            } else {
+                predicate = #Predicate { comic in
+                    comic.isFavorite == true
+                }
             }
         }
     }
     
-    func scope() {
-        search()
-    }
-    
-    func cancel() {
-        search()
+    func select(whatIf: WhatIfModel) {
+        presentationMode.wrappedValue.dismiss()
+        selectWhatIfAction(whatIf)
     }
 }
 
-// MARK: - WhatIfTextListView
+// MARK: - Previews
 
-struct WhatIfTextListView: View {
-    @Binding var viewModel: WhatIfListViewModel
-    var action: (Int32) -> Void
+#Preview {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: WhatIfModel.self,
+                                           configurations: config)
+        return WhatIfListView(selectWhatIfAction: { whatIf in } )
+            .modelContainer(container)
+    } catch {
+        return EmptyView()
+    }
+}
+
+// MARK: - WhatIfListDisplayView
+
+struct WhatIfListDisplayView: View {
+    var selectWhatIfAction: (WhatIfModel) -> Void
+    
+    @Query private var whatIfs: [WhatIfModel]
+
+    init(predicate: Predicate<WhatIfModel>?,
+         sorter: [SortDescriptor<WhatIfModel>],
+         selectWhatIfAction: @escaping (WhatIfModel) -> Void) {
+        var descriptor = FetchDescriptor<WhatIfModel>(predicate: predicate,
+                                                      sortBy: sorter)
+        descriptor.propertiesToFetch = [\.num,
+                                        \.title,
+                                        \.year,
+                                        \.month,
+                                        \.day,
+                                        \.question,
+                                        \.questioner,
+                                        \.answer,
+                                        \.isFavorite]
+        
+        _whatIfs = Query(FetchDescriptor<WhatIfModel>(predicate: predicate,
+                                                      sortBy: [SortDescriptor(\.num, order: .reverse)]))
+        self.selectWhatIfAction = selectWhatIfAction
+    }
     
     var body: some View {
-        VStack {
-            List(viewModel.whatIfs) { whatIf in
+        List {
+            ForEach(whatIfs, id: \.num) { whatIf in
                 ListRowView(num: whatIf.num,
-                            thumbnail: whatIf.thumbnail ?? "",
-                            title: whatIf.title ?? "",
+                            thumbnail: whatIf.imageURL,
+                            title: whatIf.title,
                             isFavorite: whatIf.isFavorite,
-                            isSeen: whatIf.isRead,
-                            font: Font.dckxRegularText,
-                            action: self.action)
-                    .onTapGesture {
-                        self.action(whatIf.num)
-                    }
-                    .onAppear(perform: {
-                        if self.viewModel.shouldLoadMore(whatIf: whatIf) {
-                            self.viewModel.loadData()
-                        }
-                    })
+                            date: whatIf.displayDate)
+                .listRowSeparator(.hidden)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    selectWhatIfAction(whatIf)
+                }
             }
-                .resignKeyboardOnDragGesture()
         }
+        .listStyle(.plain)
     }
 }
-
-// MARK: - WhatIfListViewModel
-
-class WhatIfListViewModel: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
-    @Published var query: String?
-    @Published var scopeIndex: Int
-    @Published var whatIfs: [WhatIf] = []
-    
-    private var controller: NSFetchedResultsController<WhatIf>?
-    var fetchBatchSize = 20
-//    var fetchLimit = 20
-    var fetchOffset = 0
-    
-    
-    // MARK: - Initializer
-
-    init(query: String?, scopeIndex: Int) {
-        self.query = query
-        self.scopeIndex = scopeIndex
-        super.init()
-        
-        loadData()
-    }
- 
-    // MARK: - NSFetchedResultsControllerDelegate
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        guard let result = controller.fetchedObjects as? [WhatIf] else {
-            return
-        }
-
-        whatIfs = result
-    }
-    
-    // MARK: - Custom methods
-    
-    func createFetchRequest(query: String?, scopeIndex: Int) -> NSFetchRequest<WhatIf> {
-        let sensitiveData = SensitiveData()
-        var predicate: NSPredicate?
-        
-        if let query = query {
-            if query.count == 1 {
-                predicate = NSPredicate(format: "title BEGINSWITH[cd] %@ OR title ==[cd] %@", query, query)
-            } else if query.count > 1 {
-                predicate = NSPredicate(format: "title CONTAINS[cd] %@ OR title ==[cd] %@", query, query)
-            }
-            if let num = Int(query) {
-                let newPredicate = NSPredicate(format: "num == %i", num)
-                predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [predicate!, newPredicate])
-            }
-        }
-
-        switch scopeIndex {
-        case 1:
-            let newPredicate = NSPredicate(format: "isFavorite == true")
-            if predicate != nil {
-                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
-            } else {
-                predicate = newPredicate
-            }
-        case 2:
-            let newPredicate = NSPredicate(format: "isRead == true")
-            if predicate != nil {
-                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, newPredicate])
-            } else {
-                predicate = newPredicate
-            }
-        default:
-            ()
-        }
-        
-        predicate = sensitiveData.createWhatIfPredicate(basePredicate: predicate)
-        
-        let fetchRequest: NSFetchRequest<WhatIf> = WhatIf.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "num", ascending: false)]
-        fetchRequest.predicate = predicate
-//        fetchRequest.fetchOffset = fetchOffset
-//        fetchRequest.fetchLimit = fetchLimit
-        
-        return fetchRequest
-    }
-    
-    func shouldLoadMore(whatIf: WhatIf) -> Bool{
-        if let last = whatIfs.last {
-            return whatIf.num ==  last.num
-        }
-        return false
-    }
-    
-    func loadData() {
-        let fetchRequest = createFetchRequest(query: query,
-                                              scopeIndex: scopeIndex)
-        
-//        controller = NSFetchedResultsController<WhatIf>(fetchRequest: fetchRequest,
-//                                                        managedObjectContext: CoreData.sharedInstance.dataStack.viewContext,
-//                                                        sectionNameKeyPath: nil,
-//                                                        cacheName: "WhatIfCache")
-//        controller!.delegate = self
-        
-        do {
-            NSFetchedResultsController<WhatIf>.deleteCache(withName: controller!.cacheName)
-            try controller!.performFetch()
-            whatIfs = controller!.fetchedObjects ?? []
-//            fetchOffset += fetchBatchSize
-//            fetchLimit += fetchOffset
-        } catch {
-            print(error)
-        }
-    }
-}
-
-

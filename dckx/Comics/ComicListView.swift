@@ -111,6 +111,8 @@ extension ComicListView {
     }
 }
 
+// MARK: - ComicListDisplayView
+
 struct ComicListDisplayView: View {
     var selectComicAction: (ComicModel) -> Void
     
@@ -132,7 +134,6 @@ struct ComicListDisplayView: View {
         _comics = Query(FetchDescriptor<ComicModel>(predicate: predicate,
                                                     sortBy: [SortDescriptor(\.num, order: .reverse)]))
         self.selectComicAction = selectComicAction
-        
     }
     
     var body: some View {
@@ -154,7 +155,7 @@ struct ComicListDisplayView: View {
     }
 }
 
-// MARK: - ListView_Previews
+// MARK: - Previews
 
 #Preview {
     do {

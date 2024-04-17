@@ -123,5 +123,10 @@ extension WhatIfModel {
             "\(year)-\(month)-\(day)"
         }
     }
+    
+    var imageURL: URL? {
+        get {
+            URL(string: thumbnail)
+        }
+    }
 }
-

@@ -28,14 +28,6 @@ struct WhatIfView: View {
 
     var body: some View {
         NavigationView {
-//            VStack(alignment: .center) {
-//                if !viewModel.isBusy {
-//                    displayView
-//                        .padding()
-//                } else {
-//                    ActivityIndicatorView(shouldAnimate: $viewModel.isBusy)
-//                }
-//            }
             WebView(link: nil,
                     html: viewModel.composeHTML(),
                     baseURL: nil)
@@ -53,9 +45,9 @@ struct WhatIfView: View {
                 NavigationToolbar(delegate: viewModel)
             }
             .sheet(isPresented: $showingSearch) {
-//                NavigationView {
-//                    ComicListView(selectComicAction: select(comic:))
-//                }
+                NavigationView {
+                    WhatIfListView(selectWhatIfAction: select(whatIf:))
+                }
             }
         }
             .environmentObject(viewModel)
@@ -106,6 +98,18 @@ struct WhatIfView: View {
                 .imageScale(.large)
         }
             .disabled(viewModel.isBusy)
+    }
+}
+
+extension WhatIfView {
+    func select(whatIf: WhatIfModel) {
+        Task {
+            do {
+                try await viewModel.load(num: whatIf.num)
+            } catch {
+                print(error)
+            }
+        }
     }
 }
 
