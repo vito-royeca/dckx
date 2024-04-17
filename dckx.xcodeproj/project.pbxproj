@@ -10,6 +10,11 @@
 		580566AA2BC9E2E900187556 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 580566A92BC9E2E900187556 /* FirebaseAnalytics */; };
 		580566AC2BC9E2E900187556 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 580566AB2BC9E2E900187556 /* FirebaseAnalyticsSwift */; };
 		580566AF2BC9E38100187556 /* Kanna in Frameworks */ = {isa = PBXBuildFile; productRef = 580566AE2BC9E38100187556 /* Kanna */; };
+		761312C52BD02EC000A425EC /* WhatIfViewModel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761312C42BD02EC000A425EC /* WhatIfViewModel+HTML.swift */; };
+		761312C62BD039E100A425EC /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
+		761312C72BD03A9D00A425EC /* WhatIfViewModel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761312C42BD02EC000A425EC /* WhatIfViewModel+HTML.swift */; };
+		761312C82BD03A9D00A425EC /* WhatIfViewModel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761312C42BD02EC000A425EC /* WhatIfViewModel+HTML.swift */; };
+		761312C92BD03A9E00A425EC /* WhatIfViewModel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761312C42BD02EC000A425EC /* WhatIfViewModel+HTML.swift */; };
 		7633F81B2BCC9D9800B2F1A4 /* dckxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */; };
 		7633F81C2BCC9D9900B2F1A4 /* dckxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */; };
 		7633F81F2BCC9EE300B2F1A4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 7633F81E2BCC9EE300B2F1A4 /* SDWebImage */; };
@@ -215,6 +220,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		761312C42BD02EC000A425EC /* WhatIfViewModel+HTML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WhatIfViewModel+HTML.swift"; sourceTree = "<group>"; };
 		7633F82F2BCCBA4F00B2F1A4 /* InteractiveImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveImageView.swift; sourceTree = "<group>"; };
 		7633F8342BCCC90700B2F1A4 /* ComicListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicListView.swift; sourceTree = "<group>"; };
 		76389FC72BCE331600E2A4D0 /* NavigationButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButtonStyle.swift; sourceTree = "<group>"; };
@@ -539,6 +545,7 @@
 				76F753CA2BCF9445000E6053 /* Subviews */,
 				76F753B72BCF811D000E6053 /* WhatIfView.swift */,
 				76F753BC2BCF85D1000E6053 /* WhatIfViewModel.swift */,
+				761312C42BD02EC000A425EC /* WhatIfViewModel+HTML.swift */,
 			);
 			path = "What If";
 			sourceTree = "<group>";
@@ -806,6 +813,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				76F753C82BCF90C7000E6053 /* XkcdAPI.swift in Sources */,
+				761312C92BD03A9E00A425EC /* WhatIfViewModel+HTML.swift in Sources */,
+				761312C62BD039E100A425EC /* WebView.swift in Sources */,
 				76389FCB2BCE359600E2A4D0 /* NavigationButtonStyle.swift in Sources */,
 				8B7E51DD262FECF9002A094E /* AppGroup.swift in Sources */,
 				76F753C72BCF8F89000E6053 /* SensitiveData.swift in Sources */,
@@ -850,6 +859,7 @@
 				7633F8302BCCBA4F00B2F1A4 /* InteractiveImageView.swift in Sources */,
 				76A0FDA32BCB4B3300C0002E /* ContentView.swift in Sources */,
 				8B82B2C426192A9C008AD11D /* SettingsView.swift in Sources */,
+				761312C52BD02EC000A425EC /* WhatIfViewModel+HTML.swift in Sources */,
 				8B3569182631D74700719BB8 /* ComicWidgetProvider.swift in Sources */,
 				8B3049A3241830CC00D549DE /* ActivityIndicatorView.swift in Sources */,
 				8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
@@ -869,6 +879,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				761312C72BD03A9D00A425EC /* WhatIfViewModel+HTML.swift in Sources */,
 				8B23368323F6683C00C88BA1 /* ComicViewModel.swift in Sources */,
 				7633F8322BCCC53000B2F1A4 /* InteractiveImageView.swift in Sources */,
 				8BA50E6D240A425500138D11 /* WebView.swift in Sources */,
@@ -905,6 +916,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				761312C82BD03A9D00A425EC /* WhatIfViewModel+HTML.swift in Sources */,
 				8B626D8B2402291A00972EED /* ComicView.swift in Sources */,
 				7633F8312BCCBA4F00B2F1A4 /* InteractiveImageView.swift in Sources */,
 				8B658022240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,

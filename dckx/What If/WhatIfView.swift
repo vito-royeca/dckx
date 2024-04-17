@@ -28,14 +28,17 @@ struct WhatIfView: View {
 
     var body: some View {
         NavigationView {
-            VStack(alignment: .center) {
-                if !viewModel.isBusy {
-                    displayView
-                        .padding()
-                } else {
-                    ActivityIndicatorView(shouldAnimate: $viewModel.isBusy)
-                }
-            }
+//            VStack(alignment: .center) {
+//                if !viewModel.isBusy {
+//                    displayView
+//                        .padding()
+//                } else {
+//                    ActivityIndicatorView(shouldAnimate: $viewModel.isBusy)
+//                }
+//            }
+            WebView(link: nil,
+                    html: viewModel.composeHTML(),
+                    baseURL: nil)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     menuButton
@@ -66,14 +69,18 @@ struct WhatIfView: View {
             HStack {
                 Text("#\(viewModel.currentWhatIf?.num ?? 0)")
                     .font(textFont)
-//                Spacer()
-//                Text(viewModel.currentWhatIf?.displayDate ?? "")
-//                    .font(textFont)
+                Spacer()
+                Text(viewModel.currentWhatIf?.displayDate ?? "")
+                    .font(textFont)
             }
             
             Spacer()
             
-            Text("HTML text here")
+            WebView(link: nil,
+                    html: viewModel.composeHTML(),
+                    baseURL: nil)
+            
+            Spacer()
         }
     }
     

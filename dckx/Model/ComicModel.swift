@@ -12,20 +12,6 @@ import SwiftData
 //import SDWebImage
 
 @Model class ComicModel: Codable {
-    enum CodingKeys: String, CodingKey {
-        case alt
-        case day
-        case img
-        case link
-        case month
-        case news
-        case num
-        case safeTitle = "safe_title"
-        case title
-        case transcript
-        case year
-    }
-    
     var alt: String
     var day = ""
     var img: String
@@ -40,6 +26,22 @@ import SwiftData
     
     var isFavorite: Bool
     
+    // MARK: - Codable
+    
+    enum CodingKeys: String, CodingKey {
+        case alt
+        case day
+        case img
+        case link
+        case month
+        case news
+        case num
+        case safeTitle = "safe_title"
+        case title
+        case transcript
+        case year
+    }
+
     required init(from decoder : Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -73,13 +75,9 @@ import SwiftData
         try container.encode(transcript, forKey: .transcript)
         try container.encode(year, forKey: .year)
     }
+}
 
-    var displayDate: String {
-        get {
-            "\(year)-\(month)-\(day)"
-        }
-    }
-    
+extension ComicModel {
     var description: String {
         get {
             """
@@ -95,7 +93,13 @@ import SwiftData
             """
         }
     }
-    
+
+    var displayDate: String {
+        get {
+            "\(year)-\(month)-\(day)"
+        }
+    }
+
     var explainURL: String {
         get {
             let baseUrl = "https://www.explainxkcd.com/wiki/index.php"

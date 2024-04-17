@@ -145,8 +145,6 @@ class XkcdAPI {
                         
                         if let innerHTML = article.innerHTML {
                             let answer = innerHTML
-                                .replacingOccurrences(of: "\n", with: "")
-                                .replacingOccurrences(of: "/imgs", with: "https://what-if.xkcd.com/imgs")
                                 .trimmingCharacters(in: CharacterSet.whitespaces)
                             dict["answer"] = answer
                         }
@@ -155,102 +153,17 @@ class XkcdAPI {
             }
             
             return WhatIfModel(answer: dict["answer"] as? String ?? "",
+                               day: "",
                                link: link,
+                               month: "",
                                num: dict["num"] as? Int ?? 0,
                                question: dict["question"] as? String ?? "",
                                questioner: dict["questioner"] as? String ?? "",
                                thumbnail: dict["thumbnail"] as? String ?? "",
-                               title: dict["title"] as? String ?? "")
+                               title: dict["title"] as? String ?? "",
+                               year: "")
         } catch {
             fatalError(error.localizedDescription)
         }
     }
-    
-//    private func createScrapeWhatIfPromise(link: String) -> Promise<[String: Any]> {
-//        return Promise { seal in
-//            seal.fulfill(Database.sharedInstance.scrapeWhatIf(link: link))
-//        }
-//    }
-//    
-//    private func generateNewWhatIf(data: [String: Any]) -> Promise<[String: Any]> {
-//        return Promise { seal in
-//            
-//            firstly {
-//                // trigger dataStack init
-//                self.coreData.loadWhatIf(num: Int32(1))
-//            }.then {  _ in
-//                self.coreData.loadLastWhatIf()
-//            }.done { whatIf in
-//                var newData = [String: Any]()
-//                
-//                for (k,v) in data {
-//                    newData[k] = v
-//                }
-//                
-//                if whatIf.title == data["title"] as? String {
-//                    newData["num"] = whatIf.num
-//                } else {
-//                    newData["num"] = Int32(whatIf.num + 1)
-//                }
-//                
-//                seal.fulfill(newData)
-//            }.catch { error in
-//                seal.reject(error)
-//            }
-//        }
-//    }
-    
-//    func fetchWhatIf(num: Int32) -> Promise<WhatIf> {
-//        return Promise { seal in
-//            firstly {
-//                self.coreData.loadWhatIf(num: num)
-//            }.done { whatIf in
-//                seal.fulfill(whatIf)
-//            }.catch { error in
-//                seal.reject(error)
-////                // comic not found locally, should fetch remotely
-////                let url = "http://xkcd.com/\(num)/info.0.json"
-////
-////                firstly {
-////                    self.fetchData(urlString: url)
-////                }.compactMap { (data, result) in
-////                    try JSONSerialization.jsonObject(with: data) as? [String: Any]
-////                }.then { data in
-////                    self.coreData.saveComic(data: data)
-////                }.then {
-////                    self.coreData.loadComic(num: num)
-////                }.done { comic in
-////                    print("Done fetching Comic #\(comic.num))")
-////                    seal.fulfill(comic)
-////                }.catch { error in
-////                    seal.reject(error)
-////                }
-//            }
-//        }
-//    }
-    
-//    func fetchRandomWhatIf() -> Promise<WhatIf> {
-//        return Promise { seal in
-//            firstly {
-//                fetchLastWhatIf()
-//            }.then { whatIf in
-//                self.generateRandomNumber(max: Int(whatIf.num))
-//            }.then { random in
-//                self.fetchWhatIf(num: Int32(random))
-//            }.done { whatIf in
-//                seal.fulfill(whatIf)
-//            }.catch { error in
-//                seal.reject(error)
-//            }
-//        }
-//    }
-    
-    // MARK: - Helper methods
-
-//    private func generateRandomNumber(max: Int) -> Promise<Int> {
-//        return Promise { seal in
-//            let random = Int.random(in: 0 ... max)
-//            seal.fulfill(random)
-//        }
-//    }
 }

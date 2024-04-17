@@ -14,132 +14,25 @@
   --color: #000000;
 }
   
-body {
-	margin: 0;
-	width: 96vw;
-	height: 96vh;
-	margin-top: 2vh;
-	margin-left: 2vw;
-    font-family: xkcd;
-	color: var(--color);
-    background-color: var(--background);
-}
-
-.center {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
-  }
-
-/*****  CONTAINERS & BUTTONS  *****/
-
-.kumiko-reader {
-	z-index: 1;
-	height: 600px;
-	width:  600px;
-	cursor: pointer;
-	/* border: 1px dotted blue; */
-	padding: 1px; /* make sure to see panel borders even for pages with no margin (e.g. xkcd) */
-	overflow: hidden;
-}
-
-img {
-	color: var(--color);
-    background-color: var(--background);
-}
-
-.prev, .next {
-	z-index: 20;
-	padding: 0.1em 0.4em;
-	background-color: #34495e;
-	color: #ecf0f1;
-	font-weight: bold;
-}
-
-/* Comics */
-.leftText {
-	position: absolute;
-	top: 0;
-	left: 10;
-	font-family: xkcd-script;
-    color: var(--color);
-    background-color: var(--background);
-}
-.rightText {
-	position: absolute;
-	top: 0;
-	right: 0;
-	font-family: xkcd-script;
-    color: var(--color);
-    background-color: var(--background);
-}
-.altText {
-	position: absolute;
-	bottom: 0;
-	font-family: xkcd-script;
-	text-align: center;
-    color: var(--color);
-    background-color: var(--background);
-}
-
 /* What If */
+.title {
+    font-family: xkcd-script;
+    font-size: 70px;
+	text-align: center;
+}
 .numdate {
     font-family: xkcd-script;
     font-size: 60px;
-    color: var(--color);
-    background-color: var(--background);
 }
 .question {
     font-family: xkcd-script;
     font-size: 40px;
     font-style: italic;
     font-weight: 700;
-    color: var(--color);
-    background-color: var(--background);
-    
 }
 .questioner, .answer {
     font-family: xkcd-script;
     font-size: 40px;
-    color: var(--color);
-    background-color: var(--background);
-}
-
-/* Fading corner icons/infos */
-.prev {
-	position: absolute;
-	top: 0;
-	left: 0;
-	font-size: 6vmin;
-	font-style: normal;
-	height: 100%;
-}
-.next {
-	position: absolute;
-	top: 0;
-	right: 0;
-	font-size: 6vmin;
-	font-style: normal;
-	height: 100%;
-}
-.prev, .next {
-	transition-property: opacity;
-	transition-duration: 2s;
-	opacity: 0.1;
-}
-.prev:active, .next:active {
-	transition-duration: 0s;
-	opacity: 1;
-}
-
-/*****  PANELS  *****/
-.panel {
-	z-index: 10;
-	position: absolute;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
 /* Dark Theme */
@@ -149,39 +42,17 @@ img {
       --color: #ffffff;
     }
     
-    body {
+    body, img, .leftText, .rightText, .altText, .customTitle, .question, .questioner, .answer {
         color: var(--color);
         background-color: var(--background);
     }
-    
-    img {
-		color: var(--color);
-        background-color: var(--color);
-    }
-    
-    .leftText {
-        color: var(--color);
-        background-color: var(--background);
-    }
-    .rightText {
-        color: var(--color);
-        background-color: var(--background);
-    }
-    .altText {
-        color: var(--color);
-        background-color: var(--background);
-    }
-    
-    .question {
-        color: var(--color);
-        background-color: var(--background);
-    }
-    .questioner {
-        color: var(--color);
-        background-color: var(--background);
-    }
-    .answer {
-        color: var(--color);
-        background-color: var(--background);
-    }
+
+	.illustration {
+		display: block;
+		max-width: 100%;
+		margin: 0 auto;
+		padding: 0.7em 0;
+		--background: #ffffff;
+  		--color: #000000;
+	}
 }
