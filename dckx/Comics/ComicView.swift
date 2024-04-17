@@ -16,9 +16,9 @@ struct ComicView: View {
     @State private var showingSearch = false
     
     private let titleFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-    Font.system(.largeTitle) : Font.dckxLargeTitleText
+        Font.system(.largeTitle) : Font.dckxLargeTitleText
     private let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-    Font.system(.body) : Font.dckxRegularText
+        Font.system(.body) : Font.dckxRegularText
 
     init(modelContext: ModelContext, showingMenu: Binding<Bool>) {
         let model = ComicViewModel(modelContext: modelContext)
@@ -120,6 +120,8 @@ extension ComicView {
         }
     }
 }
+
+// MARK: - Previews
 
 struct ComicView_Previews: PreviewProvider {
     @State static private var showingMenu = false

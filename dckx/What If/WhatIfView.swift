@@ -7,126 +7,113 @@
 //
 
 import SwiftUI
-import Combine
+import SwiftData
 import WebKit
 
 struct WhatIfView: View {
-    @ObservedObject var fetcher = WhatIfFetcher()
+    @State var viewModel: WhatIfViewModel
     @Binding var showingMenu: Bool
     @State private var showingSearch = false
     
+    private let titleFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
+        Font.system(.largeTitle) : Font.dckxLargeTitleText
+    private let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
+        Font.system(.body) : Font.dckxRegularText
+
+    init(modelContext: ModelContext, showingMenu: Binding<Bool>) {
+        let model = WhatIfViewModel(modelContext: modelContext)
+        _viewModel = State(initialValue: model)
+        _showingMenu = showingMenu
+    }
+
     var body: some View {
         NavigationView {
             VStack(alignment: .center) {
-                if !fetcher.isBusy {
-                    WebView(link: nil,
-                            html: fetcher.composeHTML(),
-                            baseURL: nil)
-                        .gesture(DragGesture(minimumDistance: 30, coordinateSpace: .local)
-                            .onEnded({ value in
-                                if value.translation.width < 0 {
-                                    if fetcher.canDoNext {
-                                        fetcher.loadNext()
-                                    }
-                                }
-
-                                if value.translation.width > 0 {
-                                    if fetcher.canDoPrevious {
-                                        fetcher.loadPrevious()
-                                    }
-                                }
-                            }))
+                if !viewModel.isBusy {
+                    displayView
+                        .padding()
                 } else {
-                    ActivityIndicatorView(shouldAnimate: $fetcher.isBusy)
+                    ActivityIndicatorView(shouldAnimate: $viewModel.isBusy)
                 }
             }
-                .navigationBarTitle(Text((fetcher.isBusy ? "" : (fetcher.currentWhatIf?.title ?? "")).uppercased()),
-                                    displayMode: .large)
-                .navigationBarItems(leading: menuButton,
-                                    trailing: WhatIfToolBarView(fetcher: fetcher))
-                .toolbar {
-                    NavigationToolbar(loadFirst: fetcher.loadFirst,
-                                      loadPrevious: fetcher.loadPrevious,
-                                      loadRandom: fetcher.loadRandom,
-                                      search: {
-                                          self.showingSearch.toggle()
-                                      },
-                                      loadNext: fetcher.loadNext,
-                                      loadLast: fetcher.loadLast,
-                                      canDoPrevious: fetcher.canDoPrevious,
-                                      canDoNext: fetcher.canDoNext,
-                                      isBusy: fetcher.isBusy)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    menuButton
                 }
-                .sheet(isPresented: $showingSearch) {
-                    WhatIfListView()
+                ToolbarItem(placement: .navigationBarLeading) {
+                    searchButton
                 }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    WhatIfToolbarView()
+                }
+                
+                NavigationToolbar(delegate: viewModel)
+            }
+            .sheet(isPresented: $showingSearch) {
+//                NavigationView {
+//                    ComicListView(selectComicAction: select(comic:))
+//                }
+            }
         }
-            .environmentObject(fetcher)
+            .environmentObject(viewModel)
+    }
+    
+    var displayView: some View {
+        VStack {
+            Text("\(viewModel.currentWhatIf?.title ?? "")")
+                .font(titleFont)
+                .fixedSize(horizontal: false, vertical: true)
+            HStack {
+                Text("#\(viewModel.currentWhatIf?.num ?? 0)")
+                    .font(textFont)
+//                Spacer()
+//                Text(viewModel.currentWhatIf?.displayDate ?? "")
+//                    .font(textFont)
+            }
+            
+            Spacer()
+            
+            Text("HTML text here")
+        }
     }
     
     var menuButton: some View {
         Button(action: {
             withAnimation {
-                self.showingMenu.toggle()
+                showingMenu.toggle()
             }
         }) {
             Image(systemName: "line.horizontal.3")
                 .imageScale(.large)
         }
-            .disabled(fetcher.isBusy)
+            .disabled(viewModel.isBusy)
+    }
+    
+    var searchButton: some View {
+        Button(action: {
+            withAnimation {
+                showingSearch.toggle()
+            }
+        }) {
+            Image(systemName: "magnifyingglass")
+                .imageScale(.large)
+        }
+            .disabled(viewModel.isBusy)
     }
 }
+
+// MARK: - Previews
 
 struct WhatIfView_Previews: PreviewProvider {
     @State static private var showingMenu = false
     
     static var previews: some View {
         ForEach(["iPhone SE", "iPhone XS Max"], id: \.self) { deviceName in
-            WhatIfView(showingMenu: $showingMenu)
+            WhatIfView(modelContext: try! ModelContainer(for: WhatIfModel.self).mainContext,
+                       showingMenu: $showingMenu)
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
         }
     }
 }
 
-struct WhatIfToolBarView: View {
-    @ObservedObject var fetcher: WhatIfFetcher
-    @State private var showingShare = false
-    
-    var body: some View {
-        HStack {
-            Button(action: {
-                self.fetcher.toggleIsFavorite()
-            }) {
-                Image(systemName: fetcher.currentWhatIf?.isFavorite ?? false ? "bookmark.fill" : "bookmark")
-                    .imageScale(.large)
-            }
-                .disabled(fetcher.isBusy)
-            Spacer()
-            
-            Button(action: {
-                self.showingShare.toggle()
-            }) {
-                Image(systemName: "square.and.arrow.up")
-                    .imageScale(.large)
-            }
-                .disabled(fetcher.isBusy)
-                .sheet(isPresented: $showingShare) {
-                    ShareSheetView(activityItems: self.activityItems(),
-                                   applicationActivities: nil)
-                }
-        }
-    }
-    
-    func activityItems() -> [Any] {
-        var items = [Any]()
-        
-        if let whatIf = fetcher.currentWhatIf,
-            let link = whatIf.link,
-            let url = URL(string: link) {
-            items.append(url)
-        }
-        
-        return items
-    }
-}

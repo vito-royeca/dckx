@@ -33,8 +33,8 @@ struct HamburgerView: View {
                     ComicView(modelContext: modelContext,
                               showingMenu: $showingMenu)
                 case .whatIfs:
-                    //                    WhatIfView(showingMenu: $showingMenu)
-                    Text("What Ifs")
+                    WhatIfView(modelContext: modelContext,
+                               showingMenu: $showingMenu)
                 case .settings:
                     SettingsView(showingMenu: $showingMenu)
                 }

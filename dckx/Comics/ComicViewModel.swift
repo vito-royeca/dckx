@@ -42,11 +42,14 @@ class ComicViewModel {
             return
         }
         
+        isError = false
+        
         do {
             currentComic.isFavorite = isFavoriteEnabled
             try modelContext.save()
         } catch {
             print(error)
+            isError = true
         }
     }
     
