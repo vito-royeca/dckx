@@ -116,6 +116,7 @@ extension ComicListView {
 struct ComicListDisplayView: View {
     var selectComicAction: (ComicModel) -> Void
     
+    @AppStorage(SettingsKey.useSystemFont) private var useSystemFont = false
     @Query private var comics: [ComicModel]
 
     init(predicate: Predicate<ComicModel>?,
@@ -143,7 +144,8 @@ struct ComicListDisplayView: View {
                             thumbnail: comic.imageURL,
                             title: comic.title,
                             isFavorite: comic.isFavorite,
-                            date: comic.displayDate)
+                            date: comic.displayDate,
+                            useSystemFont: useSystemFont)
                 .listRowSeparator(.hidden)
                 .contentShape(Rectangle())
                 .onTapGesture {

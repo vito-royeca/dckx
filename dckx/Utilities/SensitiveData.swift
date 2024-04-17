@@ -20,47 +20,48 @@ struct SensitiveData {
                           "vaccine",
                           "virus",
                           "viral"]
-    let showSensitiveContent = UserDefaults.standard.bool(forKey: SettingsKey.showSensitiveContent)
+
+    let showSensitiveContent = UserDefaults.standard.bool(forKey: SettingsKey.showAdvanceContent)
     
-    func createComicsPredicate(basePredicate: NSPredicate?) -> NSPredicate? {
-        if !showSensitiveContent {
-            var predicates = [NSPredicate]()
-            for word in sensitiveWords {
-                let predicate = NSPredicate(format: "NOT (title CONTAINS[cd] %@) AND NOT (alt CONTAINS[cd] %@)", word, word)
-                predicates.append(predicate)
-            }
-            
-            let newPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-            
-            if basePredicate != nil {
-                return NSCompoundPredicate(andPredicateWithSubpredicates: [basePredicate!, newPredicate])
-            } else {
-                return newPredicate
-            }
-        } else {
-            return basePredicate
-        }
-    }
-    
-    func createWhatIfPredicate(basePredicate: NSPredicate?) -> NSPredicate? {
-        if !showSensitiveContent {
-            var predicates = [NSPredicate]()
-            for word in sensitiveWords {
-                let predicate = NSPredicate(format: "NOT (title CONTAINS[cd] %@) AND NOT (question CONTAINS[cd] %@) AND NOT (answer CONTAINS[cd] %@)", word, word, word)
-                predicates.append(predicate)
-            }
-            
-            let newPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-            
-            if basePredicate != nil {
-                return NSCompoundPredicate(andPredicateWithSubpredicates: [basePredicate!, newPredicate])
-            } else {
-                return newPredicate
-            }
-        } else {
-            return basePredicate
-        }
-    }
+//    func createComicsPredicate(basePredicate: NSPredicate?) -> NSPredicate? {
+//        if !showSensitiveContent {
+//            var predicates = [NSPredicate]()
+//            for word in sensitiveWords {
+//                let predicate = NSPredicate(format: "NOT (title CONTAINS[cd] %@) AND NOT (alt CONTAINS[cd] %@)", word, word)
+//                predicates.append(predicate)
+//            }
+//            
+//            let newPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+//            
+//            if basePredicate != nil {
+//                return NSCompoundPredicate(andPredicateWithSubpredicates: [basePredicate!, newPredicate])
+//            } else {
+//                return newPredicate
+//            }
+//        } else {
+//            return basePredicate
+//        }
+//    }
+//    
+//    func createWhatIfPredicate(basePredicate: NSPredicate?) -> NSPredicate? {
+//        if !showSensitiveContent {
+//            var predicates = [NSPredicate]()
+//            for word in sensitiveWords {
+//                let predicate = NSPredicate(format: "NOT (title CONTAINS[cd] %@) AND NOT (question CONTAINS[cd] %@) AND NOT (answer CONTAINS[cd] %@)", word, word, word)
+//                predicates.append(predicate)
+//            }
+//            
+//            let newPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+//            
+//            if basePredicate != nil {
+//                return NSCompoundPredicate(andPredicateWithSubpredicates: [basePredicate!, newPredicate])
+//            } else {
+//                return newPredicate
+//            }
+//        } else {
+//            return basePredicate
+//        }
+//    }
     
     func containsSensitiveData(_ comic: ComicModel) -> Bool {
         var result = false

@@ -15,14 +15,12 @@ enum HMainView {
 }
 
 struct HamburgerView: View {
-    @StateObject var settings = Settings()
     @State var mainView: HMainView = .comics
     @State var showingMenu = false
     var modelContext: ModelContext
     
     var body: some View {
         contentView
-            .environmentObject(settings)
     }
     
     var contentView: some View {
@@ -61,16 +59,18 @@ struct HMenuView: View {
     @Binding var mainView: HMainView
     @Binding var showingMenu: Bool
     
+    @AppStorage(SettingsKey.useSystemFont) private var useSystemFont = false
+    
     var body: some View {
         VStack(alignment: .leading) {
+            let regularFont = useSystemFont ? Font.system(.body) : Font.dckxRegularText
+            
             HStack {
                 Spacer()
                 Image(uiImage: UIImage(named: "logo")!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 70, height: 70)
-                    .cornerRadius(5)
-                
                 Spacer()
             }
                 .padding(.top, 30)
@@ -83,11 +83,11 @@ struct HMenuView: View {
                     }
                 }) {
                     Image(systemName: "photo.on.rectangle.angled")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.white)
                         .imageScale(.large)
                     Text("xkcd")
-                        .foregroundColor(.gray)
-                        .font(Font.dckxRegularText)
+                        .foregroundColor(.white)
+                        .font(regularFont)
                     }
                 }
                     .padding(.top, 30)
@@ -100,11 +100,11 @@ struct HMenuView: View {
                     }
                 }) {
                     Image(systemName: "questionmark.diamond")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.white)
                         .imageScale(.large)
-                    Text("What Ifs")
-                        .foregroundColor(.gray)
-                        .font(Font.dckxRegularText)
+                    Text("What If?")
+                        .foregroundColor(.white)
+                        .font(regularFont)
                 }
             }
                 .padding(.top, 30)
@@ -117,11 +117,11 @@ struct HMenuView: View {
                     }
                 }) {
                     Image(systemName: "gear")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.white)
                         .imageScale(.large)
                     Text("Settings")
-                        .foregroundColor(.gray)
-                        .font(Font.dckxRegularText)
+                        .foregroundColor(.white)
+                        .font(regularFont)
                 }
             }
                 .padding(.top, 30)
@@ -130,7 +130,7 @@ struct HMenuView: View {
         }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color(red: 32/255, green: 32/255, blue: 32/255))
+            .background(Color.backgroundColor)
             .edgesIgnoringSafeArea(.all)
             .gesture(DragGesture(minimumDistance: 30, coordinateSpace: .local)
                 .onEnded({ value in

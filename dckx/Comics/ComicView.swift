@@ -13,13 +13,10 @@ import BetterSafariView
 struct ComicView: View {
     @State var viewModel: ComicViewModel
     @Binding var showingMenu: Bool
+    
+    @AppStorage(SettingsKey.useSystemFont) private var useSystemFont = false
     @State private var showingSearch = false
     
-    private let titleFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-        Font.system(.largeTitle) : Font.dckxLargeTitleText
-    private let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-        Font.system(.body) : Font.dckxRegularText
-
     init(modelContext: ModelContext, showingMenu: Binding<Bool>) {
         let model = ComicViewModel(modelContext: modelContext)
         _viewModel = State(initialValue: model)
@@ -60,15 +57,20 @@ struct ComicView: View {
     
     var displayView: some View {
         VStack {
+            let largeFont = useSystemFont ?
+                Font.largeTitle : Font.dckxLargeTitleText
+            let regularFont = useSystemFont ?
+                Font.system(.body) : Font.dckxRegularText
+            
             Text("\(viewModel.comicTitle)")
-                .font(titleFont)
+                .font(largeFont)
                 .fixedSize(horizontal: false, vertical: true)
             HStack {
                 Text("#\(viewModel.currentComic?.num ?? 0)")
-                    .font(textFont)
+                    .font(regularFont)
                 Spacer()
                 Text(viewModel.currentComic?.displayDate ?? "")
-                    .font(textFont)
+                    .font(regularFont)
             }
             
             Spacer()
@@ -79,7 +81,7 @@ struct ComicView: View {
             Spacer()
             
             Text(viewModel.currentComic?.alt ?? "")
-                .font(textFont)
+                .font(regularFont)
                 .fixedSize(horizontal: false, vertical: true)
         }
     }

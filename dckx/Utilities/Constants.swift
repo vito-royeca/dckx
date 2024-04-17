@@ -17,7 +17,7 @@ extension UIFont {
     static let dckxRegularText    = UIFont(name: "xkcd-Script-Regular",
                                            size: 18)!
     static let dckxSmallText    = UIFont(name: "xkcd-Script-Regular",
-                                           size: 15)!
+                                           size: 12)!
 }
 
 extension Font {
@@ -28,7 +28,7 @@ extension Font {
     static let dckxRegularText    = Font.custom("xkcd-Script-Regular",
                                                 size: 18)
     static let dckxSmallText      = Font.custom("xkcd-Script-Regular",
-                                                size: 15)
+                                                size: 12)
 }
 
 extension Color {
@@ -37,11 +37,8 @@ extension Color {
 }
 
 enum SettingsKey {
-    static let showSensitiveContent              = "showSensitiveContent"
-    static let comicsViewerUseSystemFont         = "comicsViewerUseSystemFont"
-    static let comicsExplanationUseSystemFont    = "comicsExplanationUseSystemFont"
-    static let comicsExplanationUseSafariBrowser = "comicsExplanationUseSafariBrowser"
-    static let whatIfViewerUseSystemFont         = "whatIfViewerUseSystemFont"
+    static let showAdvanceContent = "showAdvanceContent"
+    static let useSystemFont      = "useSystemFont"
 }
 
 

@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftData
+import SDWebImage
 import SDWebImageSwiftUI
 
 struct ListRowView: View {
@@ -18,26 +19,29 @@ struct ListRowView: View {
     var title: String
     var isFavorite: Bool
     var date: String
-    
-    private let titleFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-    nil : Font.dckxRegularText
-    private let smallFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-    Font.system(.subheadline) : Font.dckxSmallText
+    var useSystemFont: Bool
     
     init(num: Int,
          thumbnail: URL?,
          title: String,
          isFavorite: Bool,
-         date: String) {
+         date: String,
+         useSystemFont: Bool) {
         self.num = num
         self.thumbnail = thumbnail
         self.title = title
         self.isFavorite = isFavorite
         self.date = date
+        self.useSystemFont = useSystemFont
     }
     
     var body: some View {
         VStack {
+            let regularFont = useSystemFont ?
+                Font.system(.body) : Font.dckxRegularText
+            let smallFont = useSystemFont ?
+                Font.system(.subheadline) : Font.dckxSmallText
+            
             VStack(alignment: .leading) {
                 HStack(alignment: .top, spacing: 5) {
                     if let thumbnail = thumbnail {
@@ -55,7 +59,7 @@ struct ListRowView: View {
                     }
 
                     Text(title)
-                        .font(titleFont)
+                        .font(regularFont)
                         .fixedSize(horizontal: false, vertical: true)
                     
                     Spacer()
@@ -72,9 +76,11 @@ struct ListRowView: View {
             HStack {
                 Text("#\(num)")
                     .font(smallFont)
+                    .foregroundStyle(.gray)
                 Spacer()
                 Text(date)
                     .font(smallFont)
+                    .foregroundStyle(.gray)
             }
             .padding(.leading, 3)
             .padding(.trailing, 3)
@@ -95,26 +101,30 @@ struct ListRowView: View {
                         thumbnail: URL(string: "https://imgs.xkcd.com/comics/sitting_in_a_tree.png"),
                         title: "Sitting in a Tree",
                         isFavorite: false,
-                        date: "2024-04-12")
+                        date: "2024-04-12",
+                        useSystemFont: false)
                 .listRowSeparator(.hidden)
             
             ListRowView(num: 2918,
                         thumbnail: URL(string: "https://imgs.xkcd.com/comics/tick_marks.png"),
                         title: "Tick Marks",
                         isFavorite: false,
-                        date: "2024-04-10")
+                        date: "2024-04-10",
+                        useSystemFont: false)
                 .listRowSeparator(.hidden)
             ListRowView(num: 404,
                         thumbnail: URL(string: ""),
                         title: "Handle 404",
                         isFavorite: false,
-                        date: "2024-04-10")
+                        date: "2024-04-10",
+                        useSystemFont: false)
                 .listRowSeparator(.hidden)
             ListRowView(num: 2918,
                         thumbnail: URL(string: "https://imgs.xkcd.com/comics/tick_marks.png"),
                         title: "A very very very long title here indeed hahaha. How many lines can this fit in? Hahaha! Could this be another line here?",
                         isFavorite: false,
-                        date: "2024-04-10")
+                        date: "2024-04-10",
+                        useSystemFont: false)
                 .listRowSeparator(.hidden)
         }
         .listStyle(.plain)

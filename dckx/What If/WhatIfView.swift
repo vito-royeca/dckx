@@ -13,13 +13,10 @@ import WebKit
 struct WhatIfView: View {
     @State var viewModel: WhatIfViewModel
     @Binding var showingMenu: Bool
+    
+    @AppStorage(SettingsKey.useSystemFont) private var useSystemFont = false
     @State private var showingSearch = false
     
-    private let titleFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-        Font.system(.largeTitle) : Font.dckxLargeTitleText
-    private let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-        Font.system(.body) : Font.dckxRegularText
-
     init(modelContext: ModelContext, showingMenu: Binding<Bool>) {
         let model = WhatIfViewModel(modelContext: modelContext)
         _viewModel = State(initialValue: model)
@@ -28,9 +25,14 @@ struct WhatIfView: View {
 
     var body: some View {
         NavigationView {
-            WebView(link: nil,
-                    html: viewModel.composeHTML(),
-                    baseURL: nil)
+            VStack(alignment: .center) {
+                if !viewModel.isBusy {
+                    displayView
+                        .padding()
+                } else {
+                    ActivityIndicatorView(shouldAnimate: $viewModel.isBusy)
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     menuButton
@@ -54,28 +56,11 @@ struct WhatIfView: View {
     }
     
     var displayView: some View {
-        VStack {
-            Text("\(viewModel.currentWhatIf?.title ?? "")")
-                .font(titleFont)
-                .fixedSize(horizontal: false, vertical: true)
-            HStack {
-                Text("#\(viewModel.currentWhatIf?.num ?? 0)")
-                    .font(textFont)
-                Spacer()
-                Text(viewModel.currentWhatIf?.displayDate ?? "")
-                    .font(textFont)
-            }
-            
-            Spacer()
-            
-            WebView(link: nil,
-                    html: viewModel.composeHTML(),
-                    baseURL: nil)
-            
-            Spacer()
-        }
+        WebView(link: nil,
+                html: viewModel.composeHTML(useSystemFont: useSystemFont),
+                baseURL: nil)
     }
-    
+
     var menuButton: some View {
         Button(action: {
             withAnimation {

@@ -7,20 +7,19 @@
 //
 
 import SwiftUI
+import SDWebImage
 import SDWebImageSwiftUI
 
 struct InteractiveImageView: View {
     var url: URL?
     var reloadAction: () -> Void
     
+    @AppStorage(SettingsKey.useSystemFont) private var useSystemFont = false
     @State private var zoomScale: CGFloat = 1
     @State private var previousZoomScale: CGFloat = 1
     private let minZoomScale: CGFloat = 1
     private let maxZoomScale: CGFloat = 5
 
-    private let textFont = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont) ?
-    Font.system(size: 16) : Font.dckxRegularText
-    
     var body: some View {
         GeometryReader { proxy in
             WebImage(url: url) { image in
@@ -42,16 +41,19 @@ struct InteractiveImageView: View {
     
     var errorView: some View {
         VStack(alignment: .center) {
+            let regularFont = useSystemFont ?
+                Font.system(.body) : Font.dckxRegularText
+            
             Spacer()
             
             HStack {
                 Spacer(minLength: 0)
                 VStack {
                     Text("Ooops... the image can't be loaded.")
-                        .font(textFont)
+                        .font(regularFont)
                     Button(action: reloadAction) {
                         Text("Try again")
-                            .font(textFont)
+                            .font(regularFont)
                     }
                 }
                 Spacer(minLength: 0)

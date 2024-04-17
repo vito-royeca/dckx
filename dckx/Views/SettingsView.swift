@@ -10,70 +10,44 @@ import Combine
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var settings: Settings
     @Binding var showingMenu: Bool
+    
+    @AppStorage(SettingsKey.showAdvanceContent) private var showAdvanceContent = false
+    @AppStorage(SettingsKey.useSystemFont) private var useSystemFont = false
     
     var body: some View {
         NavigationView {
+            let regularFont = useSystemFont ? Font.system(.body) : Font.dckxRegularText
+            let footerFont = useSystemFont ? Font.system(.footnote) : Font.dckxRegularText
+            
             List {
                 Section(header: Text("General")
-                                    .font(Font.dckxRegularText),
+                            .font(regularFont),
                         footer: Text("Advance content may include references to sensitive or health-related topics.")
-                                    .font(Font.dckxSmallText)
-                                    .foregroundColor(Color.gray)) {
-                    Toggle("Show Advance Content", isOn: $settings.showSensitiveContent)
-                        .onChange(of: settings.showSensitiveContent) { value in
-                            settings.showSensitiveContent = value
-                        }
-                        .font(Font.dckxRegularText)
+                            .font(footerFont)) {
+                    Toggle("Show Advance Content", isOn: $showAdvanceContent)
+                        .font(regularFont)
                 }
                 
-                Section(header: Text("xkcd")
-                                    .font(Font.dckxRegularText)) {
-                    Toggle("Use System Font in Viewer", isOn: $settings.comicsViewerUseSystemFont)
-                        .onChange(of: settings.comicsViewerUseSystemFont) { value in
-                            settings.comicsViewerUseSystemFont = value
-                        }
-                        .font(Font.dckxRegularText)
-                    Toggle("Use System Font in Explanation", isOn: $settings.comicsExplanationUseSystemFont)
-                        .onChange(of: settings.comicsExplanationUseSystemFont) { value in
-                            settings.comicsExplanationUseSystemFont = value
-                        }
-                        .font(Font.dckxRegularText)
-                    Toggle("Use Safari Browser in Explanation", isOn: $settings.comicsExplanationUseSafariBrowser)
-                        .onChange(of: settings.comicsExplanationUseSafariBrowser) { value in
-                            settings.comicsExplanationUseSafariBrowser = value
-                        }
-                        .font(Font.dckxRegularText)
+                Section(header: Text("User Interface")
+                            .font(regularFont)) {
+                    Toggle("Use System Font", isOn: $useSystemFont)
+                            .font(regularFont)
                 }
 
-                Section(header: Text("What If?")
-                                    .font(Font.dckxRegularText)) {
-                    Toggle("Use System Font in Viewer", isOn: $settings.whatIfViewerUseSystemFont)
-                        .onChange(of: settings.whatIfViewerUseSystemFont) { value in
-                            settings.whatIfViewerUseSystemFont = value
-                        }
-                        .font(Font.dckxRegularText)
-                }
-                
                 Section(header: Text("About")
-                            .font(Font.dckxRegularText)) {
+                            .font(regularFont)) {
                     Text("xkcd is created by Randall Munroe.")
-                        .font(Font.dckxRegularText)
-                    VStack {
-                        Text("dckx is an xkcd reader created by Vito Royeca.")
-                            .font(Font.dckxRegularText)
-                        Link("vitoroyeca.com", destination: URL(string: "https://www.vitoroyeca.com")!)
-                            .font(Font.dckxRegularText)
-                            .foregroundColor(.blue)
-                    }
-                    Text("Version \(dckxApp.getVersion()) Build \(dckxApp.getBuild())")
-                        .font(Font.dckxRegularText)
+                        .font(regularFont)
+                    Text("dckx is an xkcd reader created by Vito Royeca.")
+                        .font(regularFont)
+                    Text("Version \(dckxApp.getVersion())")
+                        .font(regularFont)
                 }
             }
                 .navigationBarTitle(Text("Settings"), displayMode: .large)
                 .navigationBarItems(leading: menuButton)
-                .listStyle(PlainListStyle.init())
+                .listStyle(.insetGrouped)
         }
     }
     
@@ -94,52 +68,5 @@ struct SettingsView_Previews: PreviewProvider {
     
     static var previews: some View {
         SettingsView(showingMenu: $showingMenu)
-    }
-}
-
-// MARK: - Settings
-
-class Settings: ObservableObject {
-    @Published var showSensitiveContent: Bool {
-        didSet {
-            UserDefaults.standard.set(showSensitiveContent, forKey: SettingsKey.showSensitiveContent)
-            UserDefaults.standard.synchronize()
-        }
-    }
-    
-    @Published var comicsViewerUseSystemFont: Bool {
-        didSet {
-            UserDefaults.standard.set(comicsViewerUseSystemFont, forKey: SettingsKey.comicsViewerUseSystemFont)
-            UserDefaults.standard.synchronize()
-        }
-    }
-    
-    @Published var comicsExplanationUseSystemFont: Bool{
-        didSet {
-            UserDefaults.standard.set(comicsExplanationUseSystemFont, forKey: SettingsKey.comicsExplanationUseSystemFont)
-            UserDefaults.standard.synchronize()
-        }
-    }
-    
-    @Published var comicsExplanationUseSafariBrowser: Bool{
-        didSet {
-            UserDefaults.standard.set(comicsExplanationUseSafariBrowser, forKey: SettingsKey.comicsExplanationUseSafariBrowser)
-            UserDefaults.standard.synchronize()
-        }
-    }
-    
-    @Published var whatIfViewerUseSystemFont: Bool{
-        didSet {
-            UserDefaults.standard.set(whatIfViewerUseSystemFont, forKey: SettingsKey.whatIfViewerUseSystemFont)
-            UserDefaults.standard.synchronize()
-        }
-    }
-    
-    init() {
-        showSensitiveContent              = UserDefaults.standard.bool(forKey: SettingsKey.showSensitiveContent)
-        comicsViewerUseSystemFont         = UserDefaults.standard.bool(forKey: SettingsKey.comicsViewerUseSystemFont)
-        comicsExplanationUseSystemFont    = UserDefaults.standard.bool(forKey: SettingsKey.comicsExplanationUseSystemFont)
-        comicsExplanationUseSafariBrowser = UserDefaults.standard.bool(forKey: SettingsKey.comicsExplanationUseSafariBrowser)
-        whatIfViewerUseSystemFont         = UserDefaults.standard.bool(forKey: SettingsKey.whatIfViewerUseSystemFont)
     }
 }

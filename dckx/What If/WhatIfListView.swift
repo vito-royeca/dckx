@@ -35,7 +35,7 @@ struct WhatIfListView: View {
                 closeButton
             }
         }
-        .navigationTitle(Text("xkcd"))
+        .navigationTitle(Text("What If?"))
         .searchable(text: $searchText,
                     prompt: "Search")
         .searchScopes($searchScope) {
@@ -126,6 +126,7 @@ extension WhatIfListView {
 struct WhatIfListDisplayView: View {
     var selectWhatIfAction: (WhatIfModel) -> Void
     
+    @AppStorage(SettingsKey.useSystemFont) private var useSystemFont = false
     @Query private var whatIfs: [WhatIfModel]
 
     init(predicate: Predicate<WhatIfModel>?,
@@ -155,7 +156,8 @@ struct WhatIfListDisplayView: View {
                             thumbnail: whatIf.imageURL,
                             title: whatIf.title,
                             isFavorite: whatIf.isFavorite,
-                            date: whatIf.displayDate)
+                            date: whatIf.displayDate,
+                            useSystemFont: useSystemFont)
                 .listRowSeparator(.hidden)
                 .contentShape(Rectangle())
                 .onTapGesture {

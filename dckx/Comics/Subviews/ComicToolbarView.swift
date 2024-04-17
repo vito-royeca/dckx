@@ -25,44 +25,29 @@ struct ComicToolbarView: View {
                 .disabled(viewModel.isBusy)
             Spacer()
             
-            if UserDefaults.standard.bool(forKey: SettingsKey.comicsExplanationUseSafariBrowser) {
-                Button(action: {
-                    self.showingBrowser.toggle()
-                }) {
-                    Image(systemName: "info.circle")
-                        .imageScale(.large)
-                }
-                    .disabled(viewModel.isBusy)
-                    // comment out if running in XCTests
-                    .safariView(isPresented: $showingBrowser) {
-                        SafariView(
-                            url: URL(string: viewModel.currentComic?.explainURL ?? "")!,
-                            configuration: SafariView.Configuration(
-                                entersReaderIfAvailable: true,
-                                barCollapsingEnabled: true
-                            )
-                        )
-                        .accentColor(.dckxBlue)
-                        .preferredBarAccentColor(.clear)
-                        .preferredControlAccentColor(.dckxBlue)
-                        .dismissButtonStyle(.close)
-                    }
-            } else {
-                Button(action: {
-                    self.showingBrowser.toggle()
-                }) {
-                    Image(systemName: "info.circle")
-                        .imageScale(.large)
-                }
-                    .disabled(viewModel.isBusy)
-                    .sheet(isPresented: $showingBrowser, content: {
-                        viewModel.currentComic.map({
-                            BrowserView(title: "Explanation",
-                                        link: $0.explainURL,
-                                        baseURL: nil/*URL(string: "https://xkcd.com/")*/)
-                        })
-                    })
+            
+            Button(action: {
+                self.showingBrowser.toggle()
+            }) {
+                Image(systemName: "info.circle")
+                    .imageScale(.large)
             }
+                .disabled(viewModel.isBusy)
+                // comment out if running in XCTests
+                .safariView(isPresented: $showingBrowser) {
+                    SafariView(
+                        url: URL(string: viewModel.currentComic?.explainURL ?? "")!,
+                        configuration: SafariView.Configuration(
+                            entersReaderIfAvailable: true,
+                            barCollapsingEnabled: true
+                        )
+                    )
+                    .accentColor(.dckxBlue)
+                    .preferredBarAccentColor(.clear)
+                    .preferredControlAccentColor(.dckxBlue)
+                    .dismissButtonStyle(.close)
+                }
+            
             Spacer()
             
             Button(action: {

@@ -9,12 +9,12 @@
 import Foundation
 
 extension WhatIfViewModel {
-    func composeHTML() -> String {
+    func composeHTML(useSystemFont: Bool) -> String {
         guard let whatIf = currentWhatIf else {
             return ""
         }
 
-        let css = UserDefaults.standard.bool(forKey: SettingsKey.whatIfViewerUseSystemFont) ? "system.css" : "dckx.css"
+        let css = useSystemFont ? "system.css" : "dckx.css"
         var head = "<head><title>\(whatIf.title)</title>"
         head += "<script type='text/javascript' src='jquery-3.2.1.min.js'></script>"
         head += "<link href='\(css)' rel='stylesheet'>"

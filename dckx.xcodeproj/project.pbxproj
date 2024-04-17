@@ -22,6 +22,7 @@
 		761312CF2BD064CE00A425EC /* ComicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7633F8342BCCC90700B2F1A4 /* ComicListView.swift */; };
 		761312D02BD064E800A425EC /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2B32618C6AD008AD11D /* ListRowView.swift */; };
 		761312D22BD0651500A425EC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 761312D12BD0651500A425EC /* SDWebImageSwiftUI */; };
+		761312D42BD06F4900A425EC /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 761312D32BD06F4900A425EC /* SDWebImage */; };
 		7633F81B2BCC9D9800B2F1A4 /* dckxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */; };
 		7633F81C2BCC9D9900B2F1A4 /* dckxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */; };
 		7633F81F2BCC9EE300B2F1A4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 7633F81E2BCC9EE300B2F1A4 /* SDWebImage */; };
@@ -319,6 +320,7 @@
 				76F753D32BCF966C000E6053 /* Kanna in Frameworks */,
 				8B27AE42262FB9AB00351106 /* SwiftUI.framework in Frameworks */,
 				8B27AE40262FB9AB00351106 /* WidgetKit.framework in Frameworks */,
+				761312D42BD06F4900A425EC /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,6 +609,7 @@
 			packageProductDependencies = (
 				76F753D22BCF966C000E6053 /* Kanna */,
 				761312D12BD0651500A425EC /* SDWebImageSwiftUI */,
+				761312D32BD06F4900A425EC /* SDWebImage */,
 			);
 			productName = "dckx WidgetExtension";
 			productReference = 8B27AE3E262FB9AB00351106 /* dckx WidgetExtension.appex */;
@@ -1490,6 +1493,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 76F753B02BCF1CF9000E6053 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		761312D32BD06F4900A425EC /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7633F81D2BCC9EE300B2F1A4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 		7633F81E2BCC9EE300B2F1A4 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
