@@ -1,5 +1,5 @@
 //
-//  OpenCVWrapper.m
+//  OpenCVWrapper.mm
 //  dckx
 //
 //  Created by Vito Royeca on 3/22/21.
@@ -8,13 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+#import "OpenCVWrapper.h"
 #include "ComicsPanelExtractor.hpp"
 #include "Panel.hpp"
 
 using namespace cv;
 using namespace std;
 
-//@implementation OpenCVWrapper : NSObject
+@implementation OpenCVWrapper : NSObject
+
++ (NSString *)getOpenCVVersion {
+    return [NSString stringWithFormat:@"OpenCV Version %s",  CV_VERSION];
+}
 
 //+ (NSDictionary*) splitComics:(NSString*) path minimumPanelSizeRatio:(float) ratio {
 //    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
@@ -64,5 +69,5 @@ using namespace std;
 //    return NULL;
 //}
 
-//@end
+@end
 

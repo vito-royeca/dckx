@@ -226,12 +226,12 @@
 /* Begin PBXFileReference section */
 		761312C42BD02EC000A425EC /* WhatIfViewModel+HTML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WhatIfViewModel+HTML.swift"; sourceTree = "<group>"; };
 		761312CA2BD05F2A00A425EC /* WhatIfListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatIfListView.swift; sourceTree = "<group>"; };
+		7616B3DE2BD0D132002CA3A5 /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 		7633F82F2BCCBA4F00B2F1A4 /* InteractiveImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveImageView.swift; sourceTree = "<group>"; };
 		7633F8342BCCC90700B2F1A4 /* ComicListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicListView.swift; sourceTree = "<group>"; };
 		76389FC72BCE331600E2A4D0 /* NavigationButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButtonStyle.swift; sourceTree = "<group>"; };
 		7649C7D72BCA026200A54E5F /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../Downloads/opencv2.framework; sourceTree = "<group>"; };
 		7649C7DD2BCA0BF600A54E5F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		7649C8762BCA50C100A54E5F /* OpenCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCV.h; sourceTree = "<group>"; };
 		7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
 		7649C87A2BCA5E5B00A54E5F /* ComicsData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComicsData.cpp; sourceTree = "<group>"; };
 		7649C87B2BCA5E5B00A54E5F /* ComicsData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComicsData.hpp; sourceTree = "<group>"; };
@@ -405,6 +405,8 @@
 			children = (
 				8B7E51D4262FEC80002A094E /* dckx WidgetExtension.entitlements */,
 				8B7E51CF262FEAC7002A094E /* dckx.entitlements */,
+				7649C7DD2BCA0BF600A54E5F /* PrefixHeader.pch */,
+				8B1A4BF32624430F00DBCD7B /* dckx-Bridging-Header.h */,
 				765579702BCB19EE009EB2E0 /* opencv2.xcframework */,
 				8B4F4B9723F5F444008446F4 /* dckx */,
 				8B4F4BAE23F5F445008446F4 /* dckxTests */,
@@ -444,8 +446,6 @@
 				8B4F4BA323F5F445008446F4 /* LaunchScreen.storyboard */,
 				8B4F4BA623F5F445008446F4 /* Info.plist */,
 				8BBA24E2262B7E86000483DE /* GoogleService-Info.plist */,
-				8B1A4BF32624430F00DBCD7B /* dckx-Bridging-Header.h */,
-				7649C7DD2BCA0BF600A54E5F /* PrefixHeader.pch */,
 			);
 			path = dckx;
 			sourceTree = "<group>";
@@ -563,8 +563,8 @@
 				7649C87B2BCA5E5B00A54E5F /* ComicsData.hpp */,
 				7649C8832BCA63EE00A54E5F /* ComicsPanelExtractor.cpp */,
 				7649C8822BCA63EE00A54E5F /* ComicsPanelExtractor.hpp */,
-				7649C8762BCA50C100A54E5F /* OpenCV.h */,
 				7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */,
+				7616B3DE2BD0D132002CA3A5 /* OpenCVWrapper.h */,
 				7649C8802BCA63EE00A54E5F /* Panel.cpp */,
 				7649C8812BCA63EE00A54E5F /* Panel.hpp */,
 			);
@@ -1205,6 +1205,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = dckx/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1215,7 +1216,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckx;
 				PRODUCT_NAME = dckx;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1242,6 +1243,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = dckx/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1252,7 +1254,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckx;
 				PRODUCT_NAME = dckx;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1277,7 +1279,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckxTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1304,7 +1306,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckxTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dckx.app/dckx";
@@ -1329,7 +1331,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckxUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1355,7 +1357,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitoroyeca.dckxUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx/dckx-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = dckx;
