@@ -11,7 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OpenCVWrapper : NSObject
+
 + (NSString *)getOpenCVVersion;
++ (void) split:(NSString*) fileName :(float) ratio :(void(^)(NSDictionary*))callback;
+
 @end
 
 NS_ASSUME_NONNULL_END

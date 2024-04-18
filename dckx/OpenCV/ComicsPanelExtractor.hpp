@@ -12,6 +12,7 @@
 
 #include <numeric>
 
+#include "ComicsData.hpp"
 #include "Panel.hpp"
 
 using namespace cv;
@@ -22,7 +23,7 @@ class ComicsPanelExtractor {
 public:
     float minimumPanelSizeRatio;
     Mat image;
-//    json splitComics(const std::string& path, const float minimumPanelSizeRatio);
+    ComicsData splitComics(const std::string& path, const float minimumPanelSizeRatio);
     
     ComicsPanelExtractor() {
         subpanelColours = {{0,255,0},{255,0,0},{200,200,0},{200,0,200},{0,200,200},{150,150,150}};
@@ -30,12 +31,12 @@ public:
 private:
     vector<vector<int>> subpanelColours;
     
-//    void parse(Mat gray, const std::string& bgColor, json& dictionary);
+    void parse(Mat gray, const std::string& bgColor, ComicsData& data);
     vector<vector<cv::Point>> getContours(Mat gray, const std::string& bgColor);
     void splitPanels(vector<Panel>& panels, Mat img, const int contourSize);
     void mergePanels(std::vector<Panel>& panels);
     void deoverlapPanels(std::vector<Panel>& panels);
-//    json actualGutters(std::vector<Panel>& panels);
+    Panel actualGutters(std::vector<Panel>& panels);
     void expandPanels(std::vector<Panel>& panels);
 };
 

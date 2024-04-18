@@ -23,6 +23,8 @@
 		761312D02BD064E800A425EC /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2B32618C6AD008AD11D /* ListRowView.swift */; };
 		761312D22BD0651500A425EC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 761312D12BD0651500A425EC /* SDWebImageSwiftUI */; };
 		761312D42BD06F4900A425EC /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 761312D32BD06F4900A425EC /* SDWebImage */; };
+		7616B3E12BD0EA11002CA3A5 /* ComicsData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7616B3DF2BD0EA11002CA3A5 /* ComicsData.cpp */; };
+		7616B3EE2BD0FE39002CA3A5 /* OpenCVTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616B3ED2BD0FE38002CA3A5 /* OpenCVTestView.swift */; };
 		7633F81B2BCC9D9800B2F1A4 /* dckxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */; };
 		7633F81C2BCC9D9900B2F1A4 /* dckxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */; };
 		7633F81F2BCC9EE300B2F1A4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 7633F81E2BCC9EE300B2F1A4 /* SDWebImage */; };
@@ -45,7 +47,6 @@
 		76389FCB2BCE359600E2A4D0 /* NavigationButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76389FC72BCE331600E2A4D0 /* NavigationButtonStyle.swift */; };
 		76389FCC2BCE359B00E2A4D0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D6F2401B0A900972EED /* Constants.swift */; };
 		7649C8782BCA50C100A54E5F /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */; };
-		7649C87C2BCA5E5B00A54E5F /* ComicsData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C87A2BCA5E5B00A54E5F /* ComicsData.cpp */; };
 		7649C8842BCA63EE00A54E5F /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8802BCA63EE00A54E5F /* Panel.cpp */; };
 		7649C8882BCA63EE00A54E5F /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8832BCA63EE00A54E5F /* ComicsPanelExtractor.cpp */; };
 		765579712BCB19EE009EB2E0 /* opencv2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765579702BCB19EE009EB2E0 /* opencv2.xcframework */; };
@@ -169,9 +170,6 @@
 		8B8D963D260C5DFF00A3C273 /* dckx.css in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D963C260C5DFF00A3C273 /* dckx.css */; };
 		8B8D963E260C5DFF00A3C273 /* dckx.css in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D963C260C5DFF00A3C273 /* dckx.css */; };
 		8B8D963F260C5DFF00A3C273 /* dckx.css in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D963C260C5DFF00A3C273 /* dckx.css */; };
-		8B8D9657260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */; };
-		8B8D9658260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */; };
-		8B8D9659260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */; };
 		8BA50E6C240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
 		8BA50E6D240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
 		8BA50E6E240A425500138D11 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA50E6B240A425500138D11 /* WebView.swift */; };
@@ -227,14 +225,15 @@
 		761312C42BD02EC000A425EC /* WhatIfViewModel+HTML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WhatIfViewModel+HTML.swift"; sourceTree = "<group>"; };
 		761312CA2BD05F2A00A425EC /* WhatIfListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatIfListView.swift; sourceTree = "<group>"; };
 		7616B3DE2BD0D132002CA3A5 /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
+		7616B3DF2BD0EA11002CA3A5 /* ComicsData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComicsData.cpp; sourceTree = "<group>"; };
+		7616B3E02BD0EA11002CA3A5 /* ComicsData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComicsData.hpp; sourceTree = "<group>"; };
+		7616B3ED2BD0FE38002CA3A5 /* OpenCVTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenCVTestView.swift; sourceTree = "<group>"; };
 		7633F82F2BCCBA4F00B2F1A4 /* InteractiveImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveImageView.swift; sourceTree = "<group>"; };
 		7633F8342BCCC90700B2F1A4 /* ComicListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicListView.swift; sourceTree = "<group>"; };
 		76389FC72BCE331600E2A4D0 /* NavigationButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButtonStyle.swift; sourceTree = "<group>"; };
 		7649C7D72BCA026200A54E5F /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../Downloads/opencv2.framework; sourceTree = "<group>"; };
 		7649C7DD2BCA0BF600A54E5F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
-		7649C87A2BCA5E5B00A54E5F /* ComicsData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComicsData.cpp; sourceTree = "<group>"; };
-		7649C87B2BCA5E5B00A54E5F /* ComicsData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComicsData.hpp; sourceTree = "<group>"; };
 		7649C8802BCA63EE00A54E5F /* Panel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Panel.cpp; sourceTree = "<group>"; };
 		7649C8812BCA63EE00A54E5F /* Panel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Panel.hpp; sourceTree = "<group>"; };
 		7649C8822BCA63EE00A54E5F /* ComicsPanelExtractor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ComicsPanelExtractor.hpp; sourceTree = "<group>"; };
@@ -297,7 +296,6 @@
 		8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.2.1.min.js"; sourceTree = "<group>"; };
 		8B8D9632260C5DEF00A3C273 /* reader.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = reader.js; sourceTree = "<group>"; };
 		8B8D963C260C5DFF00A3C273 /* dckx.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = dckx.css; sourceTree = "<group>"; };
-		8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = epistemic_uncertainty.png; sourceTree = "<group>"; };
 		8B9ADC0E260AC46600B0DED8 /* Ji.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ji.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BA50E6B240A425500138D11 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		8BA5921825FEBEC1001CD883 /* HideScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideScrollView.swift; sourceTree = "<group>"; };
@@ -510,7 +508,6 @@
 			isa = PBXGroup;
 			children = (
 				8B8D963C260C5DFF00A3C273 /* dckx.css */,
-				8B8D9656260C84BE00A3C273 /* epistemic_uncertainty.png */,
 				8B8D9628260C5DE100A3C273 /* jquery-3.2.1.min.js */,
 				8B8D9632260C5DEF00A3C273 /* reader.js */,
 				8B658012240AE94400A245DC /* system.css */,
@@ -528,6 +525,7 @@
 			children = (
 				8BA5921825FEBEC1001CD883 /* HideScrollView.swift */,
 				8B5307252602E6DF008BA7AB /* NavigationSearchBar.swift */,
+				7616B3ED2BD0FE38002CA3A5 /* OpenCVTestView.swift */,
 			);
 			path = Experimental;
 			sourceTree = "<group>";
@@ -559,8 +557,8 @@
 		8BFDD2A826097E2800B7B5F9 /* OpenCV */ = {
 			isa = PBXGroup;
 			children = (
-				7649C87A2BCA5E5B00A54E5F /* ComicsData.cpp */,
-				7649C87B2BCA5E5B00A54E5F /* ComicsData.hpp */,
+				7616B3DF2BD0EA11002CA3A5 /* ComicsData.cpp */,
+				7616B3E02BD0EA11002CA3A5 /* ComicsData.hpp */,
 				7649C8832BCA63EE00A54E5F /* ComicsPanelExtractor.cpp */,
 				7649C8822BCA63EE00A54E5F /* ComicsPanelExtractor.hpp */,
 				7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */,
@@ -772,7 +770,6 @@
 				8B4F4B9F23F5F445008446F4 /* Assets.xcassets in Resources */,
 				8B8D9629260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */,
 				8BFA14B5262A4E0000BAD359 /* whatif.css in Resources */,
-				8B8D9657260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */,
 				8B658004240AD42600A245DC /* xkcd.otf in Resources */,
 				8B626D742401BB6800972EED /* xkcd-script.ttf in Resources */,
 			);
@@ -788,7 +785,6 @@
 				8B626DD82403C6C700972EED /* xkcd-script.ttf in Resources */,
 				8B658008240AD42600A245DC /* xkcd-Regular.otf in Resources */,
 				8B658014240AE94400A245DC /* system.css in Resources */,
-				8B8D9658260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */,
 				8BBA24E4262B7E86000483DE /* GoogleService-Info.plist in Resources */,
 				8B8D962A260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */,
 				8B8D9634260C5DEF00A3C273 /* reader.js in Resources */,
@@ -806,7 +802,6 @@
 				8B658009240AD42600A245DC /* xkcd-Regular.otf in Resources */,
 				8BBA24E5262B7E86000483DE /* GoogleService-Info.plist in Resources */,
 				8B626D762401C74600972EED /* Assets.xcassets in Resources */,
-				8B8D9659260C84BE00A3C273 /* epistemic_uncertainty.png in Resources */,
 				8B8D963F260C5DFF00A3C273 /* dckx.css in Resources */,
 				8B626D752401BB6800972EED /* xkcd-script.ttf in Resources */,
 				8B8D962B260C5DE100A3C273 /* jquery-3.2.1.min.js in Resources */,
@@ -850,7 +845,6 @@
 				76A0FD9B2BCB44D100C0002E /* WhatIfModel.swift in Sources */,
 				76A0FDA12BCB4AEA00C0002E /* dckxApp.swift in Sources */,
 				7633F8382BCCC90700B2F1A4 /* ComicListView.swift in Sources */,
-				7649C87C2BCA5E5B00A54E5F /* ComicsData.cpp in Sources */,
 				8BA5921925FEBEC1001CD883 /* HideScrollView.swift in Sources */,
 				8B7B2C34262C930500B35825 /* HamburgerView.swift in Sources */,
 				8BA50E6C240A425500138D11 /* WebView.swift in Sources */,
@@ -874,8 +868,10 @@
 				8B3569182631D74700719BB8 /* ComicWidgetProvider.swift in Sources */,
 				8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				76A0FDE52BCB931200C0002E /* ComicItemSource.swift in Sources */,
+				7616B3E12BD0EA11002CA3A5 /* ComicsData.cpp in Sources */,
 				7649C8882BCA63EE00A54E5F /* ComicsPanelExtractor.cpp in Sources */,
 				8B82B2B42618C6AD008AD11D /* ListRowView.swift in Sources */,
+				7616B3EE2BD0FE39002CA3A5 /* OpenCVTestView.swift in Sources */,
 				8B658020240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
 				7649C8842BCA63EE00A54E5F /* Panel.cpp in Sources */,
 				8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,

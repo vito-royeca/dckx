@@ -21,53 +21,46 @@ using namespace std;
     return [NSString stringWithFormat:@"OpenCV Version %s",  CV_VERSION];
 }
 
-//+ (NSDictionary*) splitComics:(NSString*) path minimumPanelSizeRatio:(float) ratio {
-//    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-//    ComicsPanelExtractor comics;
-//    json j = comics.splitComics(std::string([path UTF8String]), ratio);
-//    
-//    for (const auto& item : j.items()) {
-//        NSString *key = [NSString stringWithCString: item.key().c_str()
-//                                           encoding: [NSString defaultCStringEncoding]];
-//        NSObject *value;
-//
-//        if ([key isEqualToString:@"size"] ||
-//                   [key isEqualToString:@"gutters"]) {
-//            vector<int> size = item.value().get<vector<int>>();
-//            NSMutableArray *array = [[NSMutableArray alloc] init];
-//
-//            for(vector<int>::iterator it = std::begin(size); it != std::end(size); ++it) {
-//                [array addObject: [NSNumber numberWithInt: *it]];
-//            }
-//            value = array;
-//        } else if ([key isEqualToString:@"background"]) {
-//            value = [NSString stringWithCString: item.value().get<std::string>().c_str()
-//                                       encoding: [NSString defaultCStringEncoding]];
-//        } else if ([key isEqualToString:@"panels"]) {
-//            vector<vector<int>> size = item.value().get<vector<vector<int>>>();
-//            NSMutableArray *array = [[NSMutableArray alloc] init];
-//
-//            for(vector<vector<int>>::iterator it = std::begin(size); it != std::end(size); ++it) {
-//                NSMutableArray *array2 = [[NSMutableArray alloc] init];
-//                for(vector<int>::iterator it2 = std::begin(*it); it2 != std::end(*it); ++it2) {
-//                    [array2 addObject: [NSNumber numberWithInt: *it2]];
-//                }
-//                [array addObject:array2];
-//            }
-//            value = array;
-//        }
-//
-//        dictionary[key] = value;
-//    }
-//    
-//    return dictionary;
-//}
-
-//+ (ComicsData*) splitComics:(NSString*) path minimumPanelSizeRatio:(float) ratio {
-//    Cat *cat = [Cat create];
-//    ComicsData *comicsData = ComicsData ini
-//    return NULL;
-//}
++ (void) split:(NSString*) fileName :(float) ratio :(void(^)(NSDictionary*))callback {
+    void (^callbackCopy)(NSDictionary*) = [callback copy];
+    
+    NSLog(@"From Objective-C");
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    ComicsPanelExtractor comics;
+    ComicsData data = comics.splitComics(std::string([fileName UTF8String]), ratio);
+    
+    dictionary[@"background"] = [NSString stringWithUTF8String:data.background.c_str()];;
+    
+    id sizeArray = [NSMutableArray new];
+    for (auto foo : data.size) {
+        id number = [NSNumber numberWithInt:foo];
+        [sizeArray addObject:number];
+    }
+    dictionary[@"size"] = sizeArray;
+    
+    id guttersArray = [NSMutableArray new];
+    for (auto foo : data.gutters) {
+        id number = [NSNumber numberWithInt:foo];
+        [guttersArray addObject:number];
+    }
+    dictionary[@"gutters"] = guttersArray;
+    
+    id panelsArray = [NSMutableArray new];
+    for (auto foo : data.panels) {
+        id array = [NSMutableArray new];
+        for (auto foo2 : foo) {
+            id number = [NSNumber numberWithInt:foo2];
+            [array addObject:number];
+        }
+        
+        [panelsArray addObject:array];
+    }
+    dictionary[@"panels"] = panelsArray;
+    
+    callbackCopy(dictionary);
+//    [callback release];
+    callbackCopy = nil;
+}
 
 @end
 
