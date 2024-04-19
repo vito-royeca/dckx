@@ -25,6 +25,7 @@
 		761312D42BD06F4900A425EC /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 761312D32BD06F4900A425EC /* SDWebImage */; };
 		7616B3E12BD0EA11002CA3A5 /* ComicsData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7616B3DF2BD0EA11002CA3A5 /* ComicsData.cpp */; };
 		7616B3EE2BD0FE39002CA3A5 /* OpenCVTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616B3ED2BD0FE38002CA3A5 /* OpenCVTestView.swift */; };
+		762725E32BD1950100CE66FC /* Segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 762725E12BD1950100CE66FC /* Segment.cpp */; };
 		7633F81B2BCC9D9800B2F1A4 /* dckxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */; };
 		7633F81C2BCC9D9900B2F1A4 /* dckxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */; };
 		7633F81F2BCC9EE300B2F1A4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 7633F81E2BCC9EE300B2F1A4 /* SDWebImage */; };
@@ -228,6 +229,8 @@
 		7616B3DF2BD0EA11002CA3A5 /* ComicsData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComicsData.cpp; sourceTree = "<group>"; };
 		7616B3E02BD0EA11002CA3A5 /* ComicsData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComicsData.hpp; sourceTree = "<group>"; };
 		7616B3ED2BD0FE38002CA3A5 /* OpenCVTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenCVTestView.swift; sourceTree = "<group>"; };
+		762725E12BD1950100CE66FC /* Segment.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Segment.cpp; sourceTree = "<group>"; };
+		762725E22BD1950100CE66FC /* Segment.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Segment.hpp; sourceTree = "<group>"; };
 		7633F82F2BCCBA4F00B2F1A4 /* InteractiveImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveImageView.swift; sourceTree = "<group>"; };
 		7633F8342BCCC90700B2F1A4 /* ComicListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicListView.swift; sourceTree = "<group>"; };
 		76389FC72BCE331600E2A4D0 /* NavigationButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButtonStyle.swift; sourceTree = "<group>"; };
@@ -565,6 +568,8 @@
 				7616B3DE2BD0D132002CA3A5 /* OpenCVWrapper.h */,
 				7649C8802BCA63EE00A54E5F /* Panel.cpp */,
 				7649C8812BCA63EE00A54E5F /* Panel.hpp */,
+				762725E12BD1950100CE66FC /* Segment.cpp */,
+				762725E22BD1950100CE66FC /* Segment.hpp */,
 			);
 			path = OpenCV;
 			sourceTree = "<group>";
@@ -868,6 +873,7 @@
 				8B3569182631D74700719BB8 /* ComicWidgetProvider.swift in Sources */,
 				8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				76A0FDE52BCB931200C0002E /* ComicItemSource.swift in Sources */,
+				762725E32BD1950100CE66FC /* Segment.cpp in Sources */,
 				7616B3E12BD0EA11002CA3A5 /* ComicsData.cpp in Sources */,
 				7649C8882BCA63EE00A54E5F /* ComicsPanelExtractor.cpp in Sources */,
 				8B82B2B42618C6AD008AD11D /* ListRowView.swift in Sources */,

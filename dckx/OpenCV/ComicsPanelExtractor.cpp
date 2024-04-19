@@ -15,7 +15,7 @@ using namespace std;
 
 ComicsData ComicsPanelExtractor::splitComics(const std::string& path, const float minimumPanelSizeRatio) {
     this->minimumPanelSizeRatio = minimumPanelSizeRatio;
-    this->image = imread(path, IMREAD_COLOR);
+    this->image = imread(path);
     ComicsData data;
     
     if (image.empty()) {
@@ -23,105 +23,189 @@ ComicsData ComicsPanelExtractor::splitComics(const std::string& path, const floa
     }
 
     cv::Size s = this->image.size();
-    data.size = {s.width, s.height};
+    this->imageSize = {s.width, s.height};
+    data.size = this->imageSize;
 
-    Mat gray;
-    cv::cvtColor(this->image, gray, COLOR_BGR2GRAY);
+    calculateSobel();
+    getContours();
+    getSegments();
 
-    for (std::string bgColor : {"white", "black"}) {
-        this->parse(gray, bgColor, data);
-        
-        if (!data.panels.empty()) {
-            return data;
-        }
-    }
+//    self.get_initial_panels()
+//    self.group_small_panels()
+//    self.split_panels()
+//    self.exclude_small_panels()
+//    self.merge_panels()
+//    self.deoverlap_panels()
+//    self.exclude_small_panels()
+//
+//    if self.panel_expansion:
+//        self.panels.sort()  # TODO: move this below before panels sort-fix, when panels expansion is smarter
+//        self.expand_panels()
+//
+//    if len(self.panels) == 0:
+//        self.panels.append(Panel(page = self, xywh = [0, 0, self.img_size[0], self.img_size[1]]))
+//
+//    self.group_big_panels()
+//
+//    self.fix_panels_numbering()
+                
+//    for (std::string bgColor : {"white", "black"}) {
+//        this->parse(gray, bgColor, data);
+//        
+//        if (!data.panels.empty()) {
+//            return data;
+//        }
+//    }
     
     return data;
 }
 
-void ComicsPanelExtractor::parse(Mat gray, const std::string& bgColor, ComicsData& data) {
-    vector<vector<cv::Point>> contours = this->getContours(gray, bgColor);
-    data.background = bgColor;
-    
-    // Get (square) panels out of contours
-    std::vector<int> sizeArray = data.size;
-    int contourSize = std::accumulate(sizeArray.begin(), sizeArray.end(), 0) / 2 * 0.004;
+void ComicsPanelExtractor::calculateSobel() {
+    int ddepth = CV_16S;
+    Mat grad_x, grad_y;
+    Mat abs_grad_x, abs_grad_y;
 
-    vector<Panel> panels;
-    
-    for(std::vector<vector<cv::Point>>::iterator it = std::begin(contours); it != std::end(contours); ++it) {
-        double arcLength = cv::arcLength(*it, true);
-        double epsilon = 0.001 * arcLength;
-        vector<cv::Point> approx;
-        cv::approxPolyDP(*it, approx, epsilon, true);
-        
-        Panel panel(NULL, &approx);
-        
-        // exclude very small panels
-        int w = data.size[0];
-        int h = data.size[1];
-        if (panel.w < (w * this->minimumPanelSizeRatio) ||
-            panel.h < (h * this->minimumPanelSizeRatio)) {
-            continue;
-        }
-        
-        panels.push_back(panel);
-    }
-    
-    // See if panels can be cut into several (two non-consecutive points are close)
-    this->splitPanels(panels, this->image, contourSize);
-    
-    // Merge panels that shouldn't have been split (speech bubble diving in a panel)
-    this->mergePanels(panels);
-    
-    
-    // splitting polygons may result in panels slightly overlapping, de-overlap them
-    this->deoverlapPanels(panels);
-    
-    // get actual gutters before expanding panels
-    Panel actualGutters = this->actualGutters(panels);
-    data.gutters = { actualGutters.x, actualGutters.y };
-    
-//    std::sort (panels.begin(), panels.end());
-    this->expandPanels(panels);
-    
-    if (panels.size() == 0) {
-        cv::Rect rect(0, 0, data.size[0], data.size[1]);
-        Panel panel(&rect, NULL);
-        panels.push_back(panel);
-    }
-    
-    // Number panels comics-wise (left to right for now)
-    sort(panels.begin(), panels.end(), [](Panel p1, Panel p2) {
-        return p1.x < p2.x;
-    });
-    
-    // Simplify panels back to lists (x,y,w,h)
-    vector<vector<int>> panelsArray;
-    for (Panel p : panels) {
-        panelsArray.push_back(p.toXywh());
-    }
-    
-    data.panels = panelsArray;
+    cvtColor(this->image, this->gray, COLOR_BGR2GRAY);
+    Sobel(this->gray, grad_x, ddepth, 1, 0);
+    Sobel(this->gray, grad_y, ddepth, 0, 1);
+    convertScaleAbs(grad_x, abs_grad_x);
+    convertScaleAbs(grad_y, abs_grad_y);
+    addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0, this->sobel);
 }
 
-vector<vector<cv::Point>> ComicsPanelExtractor::getContours(Mat gray, const std::string& bgColor) {
+void ComicsPanelExtractor::getContours() {
+//    Mat thresh;
+//    vector<vector<cv::Point>> contours;
+//    vector<Vec4i> hierarchy;
+//    
+//    if (bgColor =="white") {
+//        // White background: values below 220 will be black, the rest white
+//        cv::threshold(gray, thresh, 220, 255, THRESH_BINARY_INV);
+//        cv::findContours(thresh, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+//    } else if (bgColor == "black") {
+//        // Black background: values above 25 will be black, the rest white
+//        cv::threshold(gray, thresh, 25, 255, THRESH_BINARY_INV);
+//        cv::findContours(thresh, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+//    }
+//    
+//    return contours;
+    
     Mat thresh;
-    vector<vector<cv::Point>> contours;
-    vector<Vec4i> hierarchy;
-    
-    if (bgColor =="white") {
-        // White background: values below 220 will be black, the rest white
-        cv::threshold(gray, thresh, 220, 255, THRESH_BINARY_INV);
-        cv::findContours(thresh, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
-    } else if (bgColor == "black") {
-        // Black background: values above 25 will be black, the rest white
-        cv::threshold(gray, thresh, 25, 255, THRESH_BINARY_INV);
-        cv::findContours(thresh, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
-    }
-    
-    return contours;
+    Mat hierarchy;
+    cv::threshold(this->sobel, thresh, 100, 255, THRESH_BINARY);
+    cv::findContours(thresh, this->contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
 }
+
+void ComicsPanelExtractor::getSegments() {
+    Ptr<LineSegmentDetector> lsd = cv::createLineSegmentDetector();
+    Mat dlines;
+    
+    lsd->detect(this->gray, dlines);
+    int minDist = min(this->imageSize[0], this->imageSize[1]) * this->minimumPanelSizeRatio;
+    
+//    self.segments = None
+//
+//    lsd = cv.createLineSegmentDetector(0)
+//    dlines = lsd.detect(self.gray)
+//
+//    Debug.show_time("Detected segments")
+//
+//    min_dist = min(self.img_size) * self.small_panel_ratio
+//
+//    while self.segments is None or len(self.segments) > 500:
+//        self.segments = []
+//
+//        if dlines is None or dlines[0] is None:
+//            break
+//
+//        for dline in dlines[0]:
+//            x0 = int(round(dline[0][0]))
+//            y0 = int(round(dline[0][1]))
+//            x1 = int(round(dline[0][2]))
+//            y1 = int(round(dline[0][3]))
+//
+//            a = x0 - x1
+//            b = y0 - y1
+//            dist = math.sqrt(a**2 + b**2)
+//            if dist >= min_dist:
+//                self.segments.append(Segment([x0, y0], [x1, y1]))
+//
+//        min_dist *= 1.1
+//
+//    self.segments = Segment.union_all(self.segments)
+//
+//    Debug.draw_segments(self.segments, Debug.colours['green'])
+//    Debug.add_image("Segment Detector")
+//    Debug.show_time("Compiled segments")
+}
+
+//void ComicsPanelExtractor::parse(Mat gray, const std::string& bgColor, ComicsData& data) {
+//    vector<vector<cv::Point>> contours = this->getContours(gray, bgColor);
+//    data.background = bgColor;
+//    
+//    // Get (square) panels out of contours
+//    std::vector<int> sizeArray = data.size;
+//    int contourSize = std::accumulate(sizeArray.begin(), sizeArray.end(), 0) / 2 * 0.004;
+//
+//    vector<Panel> panels;
+//    
+//    for(std::vector<vector<cv::Point>>::iterator it = std::begin(contours); it != std::end(contours); ++it) {
+//        double arcLength = cv::arcLength(*it, true);
+//        double epsilon = 0.001 * arcLength;
+//        vector<cv::Point> approx;
+//        cv::approxPolyDP(*it, approx, epsilon, true);
+//        
+//        Panel panel(NULL, &approx);
+//        
+//        // exclude very small panels
+//        int w = data.size[0];
+//        int h = data.size[1];
+//        if (panel.w < (w * this->minimumPanelSizeRatio) ||
+//            panel.h < (h * this->minimumPanelSizeRatio)) {
+//            continue;
+//        }
+//        
+//        panels.push_back(panel);
+//    }
+//    
+//    // See if panels can be cut into several (two non-consecutive points are close)
+//    this->splitPanels(panels, this->image, contourSize);
+//    
+//    // Merge panels that shouldn't have been split (speech bubble diving in a panel)
+//    this->mergePanels(panels);
+//    
+//    
+//    // splitting polygons may result in panels slightly overlapping, de-overlap them
+//    this->deoverlapPanels(panels);
+//    
+//    // get actual gutters before expanding panels
+//    Panel actualGutters = this->actualGutters(panels);
+//    data.gutters = { actualGutters.x, actualGutters.y };
+//    
+////    std::sort (panels.begin(), panels.end());
+//    this->expandPanels(panels);
+//    
+//    if (panels.size() == 0) {
+//        cv::Rect rect(0, 0, data.size[0], data.size[1]);
+//        Panel panel(&rect, NULL);
+//        panels.push_back(panel);
+//    }
+//    
+//    // Number panels comics-wise (left to right for now)
+//    sort(panels.begin(), panels.end(), [](Panel p1, Panel p2) {
+//        return p1.x < p2.x;
+//    });
+//    
+//    // Simplify panels back to lists (x,y,w,h)
+//    vector<vector<int>> panelsArray;
+//    for (Panel p : panels) {
+//        panelsArray.push_back(p.toXywh());
+//    }
+//    
+//    data.panels = panelsArray;
+//}
+
+
 
 void ComicsPanelExtractor::splitPanels(vector<Panel>& panels, Mat img, const int contourSize) {
     vector<Panel> newPanels;

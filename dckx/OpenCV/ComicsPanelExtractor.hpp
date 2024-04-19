@@ -22,7 +22,6 @@ class ComicsPanelExtractor {
     
 public:
     float minimumPanelSizeRatio;
-    Mat image;
     ComicsData splitComics(const std::string& path, const float minimumPanelSizeRatio);
     
     ComicsPanelExtractor() {
@@ -30,9 +29,21 @@ public:
     }
 private:
     vector<vector<int>> subpanelColours;
+    vector<int> imageSize;
+    Mat image;
+    Mat gray;
+    Mat sobel;
+    Mat contours;
     
-    void parse(Mat gray, const std::string& bgColor, ComicsData& data);
-    vector<vector<cv::Point>> getContours(Mat gray, const std::string& bgColor);
+//    void parse(Mat gray, const std::string& bgColor, ComicsData& data);
+    void calculateSobel();
+
+//    vector<vector<cv::Point>> getContours(Mat gray, const std::string& bgColor);
+    void getContours();
+    void getSegments();
+    
+    
+    
     void splitPanels(vector<Panel>& panels, Mat img, const int contourSize);
     void mergePanels(std::vector<Panel>& panels);
     void deoverlapPanels(std::vector<Panel>& panels);
