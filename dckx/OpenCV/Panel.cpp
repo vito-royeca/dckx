@@ -9,11 +9,12 @@
 #include <iostream>
 #include <stdexcept>
 
+#include "Page.hpp"
 #include "Panel.hpp"
 
 Panel::Panel(Page* page,
              Rect* xywh,
-             std::vector<Point2f>* polygon,
+             std::vector<Point>* polygon,
              bool splittable) {
     this->page = page;
     
@@ -329,15 +330,15 @@ Panel Panel::cachedSplit() {
     float minDistBetweenDotsX = maxDistX / 10.0;
     float minDistBetweenDotsY = maxDistY / 10.0;
 
-    std::vector<Point2f> originalPolygon = polygon;
-    std::vector<Point2f> composedPolygon;
-    std::vector<Point2f> intermediaryDots;
-    std::vector<Point2f> extraDots;
+    std::vector<Point> originalPolygon = polygon;
+    std::vector<Point> composedPolygon;
+    std::vector<Point> intermediaryDots;
+    std::vector<Point> extraDots;
 
     for (size_t i = 0; i < originalPolygon.size(); ++i) {
         size_t j = (i + 1) % originalPolygon.size();
-        Point2f dot1 = originalPolygon[i];
-        Point2f dot2 = originalPolygon[j];
+        Point dot1 = originalPolygon[i];
+        Point dot2 = originalPolygon[j];
         Segment seg(dot1, dot2);
 
         if (seg.distX() < minDistBetweenDotsX && seg.distY() < minDistBetweenDotsY) {
@@ -357,8 +358,8 @@ Panel Panel::cachedSplit() {
             if (std::abs(static_cast<int>(k) - static_cast<int>(i)) < minHops) {
                 continue;
             }
-            Point2f dot3 = originalPolygon[k];
-            Point2f projectedDot3 = seg.projectedPoint(dot3);
+            Point dot3 = originalPolygon[k];
+            Point projectedDot3 = seg.projectedPoint(dot3);
             Segment project(dot3, projectedDot3);
 
             if (!seg.mayContain(projectedDot3) ||
@@ -374,14 +375,14 @@ Panel Panel::cachedSplit() {
         int distX = std::cos(alphaX) * dotsAlongLinesDist;
         int distY = std::sin(alphaY) * dotsAlongLinesDist;
 
-        Point2f dot1b(dot1.x + distX, dot1.y + distY);
+        Point dot1b(dot1.x + distX, dot1.y + distY);
         if (intermediaryDots.empty() ||
             Segment(dot1b, intermediaryDots[0]).dist() > dotsAlongLinesDist) {
             addDots.push_back(dot1b);
             extraDots.push_back(dot1b);
         }
 
-        Point2f dot2b(dot2.x - distX, dot2.y - distY);
+        Point dot2b(dot2.x - distX, dot2.y - distY);
         if (intermediaryDots.empty() ||
             Segment(dot2b, intermediaryDots.back()).dist() > dotsAlongLinesDist) {
             addDots.push_back(dot2b);
@@ -398,8 +399,8 @@ Panel Panel::cachedSplit() {
 
     for (size_t i = 0; i < originalPolygon.size(); ++i) {
         size_t j = (i + 1) % originalPolygon.size();
-        Point2f dot1 = originalPolygon[i];
-        Point2f dot2 = originalPolygon[j];
+        Point dot1 = originalPolygon[i];
+        Point dot2 = originalPolygon[j];
         Segment seg(dot1, dot2);
 
         if (seg.distX() < minDistBetweenDotsX && seg.distY() < minDistBetweenDotsY) {
@@ -417,8 +418,8 @@ Panel Panel::cachedSplit() {
     std::vector<std::vector<int>> nearbyDots;
     for (size_t i = 0; i < composedPolygon.size() - minHops; ++i) {
         for (size_t j = i + minHops; j < composedPolygon.size(); ++j) {
-            Point2f dot1 = composedPolygon[i];
-            Point2f dot2 = composedPolygon[j];
+            Point dot1 = composedPolygon[i];
+            Point dot2 = composedPolygon[j];
             Segment seg(dot1, dot2);
             
             if (seg.distX() <= maxDistX && seg.distY() <= maxDistY) {
@@ -439,8 +440,8 @@ Panel Panel::cachedSplit() {
         if (std::min(poly1len, poly2len) <= 2) {
             continue;
         }
-        std::vector<Point2f> poly1(poly1len);
-        std::vector<Point2f> poly2(poly2len);
+        std::vector<Point> poly1(poly1len);
+        std::vector<Point> poly2(poly2len);
         int x = 0, y = 0;
         for (size_t i = 0; i < composedPolygon.size(); ++i) {
             if (i <= dots[0] || i > dots[1]) {
@@ -493,7 +494,7 @@ int Panel::h() const {
 }
 
 Segment Panel::diagonal() const {
-    return Segment(Point2f(x, y), Point2f(r, b));
+    return Segment(Point(x, y), Point(r, b));
 }
 
 float Panel::wt() const {
@@ -556,8 +557,8 @@ size_t Panel::hash() const {
 }
 
 bool Panel::isSmall(const float extraRatio) const {
-    return w() < page->imageSize[0] * page->smallPanelRatio * extraRatio ||
-           h() < page->imageSize[1] * page->smallPanelRatio * extraRatio;
+    return w() < page->imageSize.width * page->smallPanelSizeRatio * extraRatio ||
+           h() < page->imageSize.height * page->smallPanelSizeRatio * extraRatio;
 }
 
 bool Panel::isVerySmall() const {

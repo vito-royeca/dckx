@@ -23,14 +23,14 @@ class Panel {
 public:
     Page *page;
     int x, y, r, b;
-    std::vector<Point2f> polygon;
+    std::vector<cv::Point> polygon;
     bool splittable;
     std::vector<Segment> segments;
     float coverage;
 
     Panel(Page* page,
           cv::Rect* xywh,
-          std::vector<Point2f>* polygon = nullptr,
+          std::vector<cv::Point>* polygon = nullptr,
           bool splittable = true);
 
     static Panel fromXyrb(Page* page, int x, int y, int r, int b);
