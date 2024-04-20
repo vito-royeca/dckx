@@ -13,7 +13,9 @@
 #include <numeric>
 
 #include "ComicsData.hpp"
-#include "Panel.hpp"
+//#include "Page.hpp"
+//#include "Panel.hpp"
+//#include "Segment.hpp"
 
 using namespace cv;
 using namespace std;
@@ -44,11 +46,11 @@ private:
     
     
     
-    void splitPanels(vector<Panel>& panels, Mat img, const int contourSize);
-    void mergePanels(std::vector<Panel>& panels);
-    void deoverlapPanels(std::vector<Panel>& panels);
-    Panel actualGutters(std::vector<Panel>& panels);
-    void expandPanels(std::vector<Panel>& panels);
+//    void splitPanels(vector<Panel>& panels, Mat img, const int contourSize);
+//    void mergePanels(std::vector<Panel>& panels);
+//    void deoverlapPanels(std::vector<Panel>& panels);
+//    Panel actualGutters(std::vector<Panel>& panels);
+//    void expandPanels(std::vector<Panel>& panels);
 };
 
 #endif /* ComicsPanelExtractor_hpp */

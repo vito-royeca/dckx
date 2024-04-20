@@ -10,7 +10,9 @@
 
 #import "OpenCVWrapper.h"
 #include "ComicsPanelExtractor.hpp"
+#include "Page.hpp"
 #include "Panel.hpp"
+#include "Segment.hpp"
 
 using namespace cv;
 using namespace std;

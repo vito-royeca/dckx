@@ -14,21 +14,21 @@ using namespace cv;
 using namespace std;
 
 ComicsData ComicsPanelExtractor::splitComics(const std::string& path, const float minimumPanelSizeRatio) {
-    this->minimumPanelSizeRatio = minimumPanelSizeRatio;
-    this->image = imread(path);
+//    this->minimumPanelSizeRatio = minimumPanelSizeRatio;
+//    this->image = imread(path);
     ComicsData data;
-    
-    if (image.empty()) {
-        return data;
-    }
-
-    cv::Size s = this->image.size();
-    this->imageSize = {s.width, s.height};
-    data.size = this->imageSize;
-
-    calculateSobel();
-    getContours();
-    getSegments();
+//    
+//    if (image.empty()) {
+//        return data;
+//    }
+//
+//    cv::Size s = this->image.size();
+//    this->imageSize = {s.width, s.height};
+//    data.size = this->imageSize;
+//
+//    calculateSobel();
+//    getContours();
+//    getSegments();
 
 //    self.get_initial_panels()
 //    self.group_small_panels()
@@ -61,16 +61,16 @@ ComicsData ComicsPanelExtractor::splitComics(const std::string& path, const floa
 }
 
 void ComicsPanelExtractor::calculateSobel() {
-    int ddepth = CV_16S;
-    Mat grad_x, grad_y;
-    Mat abs_grad_x, abs_grad_y;
-
-    cvtColor(this->image, this->gray, COLOR_BGR2GRAY);
-    Sobel(this->gray, grad_x, ddepth, 1, 0);
-    Sobel(this->gray, grad_y, ddepth, 0, 1);
-    convertScaleAbs(grad_x, abs_grad_x);
-    convertScaleAbs(grad_y, abs_grad_y);
-    addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0, this->sobel);
+//    int ddepth = CV_16S;
+//    Mat grad_x, grad_y;
+//    Mat abs_grad_x, abs_grad_y;
+//
+//    cvtColor(this->image, this->gray, COLOR_BGR2GRAY);
+//    Sobel(this->gray, grad_x, ddepth, 1, 0);
+//    Sobel(this->gray, grad_y, ddepth, 0, 1);
+//    convertScaleAbs(grad_x, abs_grad_x);
+//    convertScaleAbs(grad_y, abs_grad_y);
+//    addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0, this->sobel);
 }
 
 void ComicsPanelExtractor::getContours() {
@@ -90,18 +90,18 @@ void ComicsPanelExtractor::getContours() {
 //    
 //    return contours;
     
-    Mat thresh;
-    Mat hierarchy;
-    cv::threshold(this->sobel, thresh, 100, 255, THRESH_BINARY);
-    cv::findContours(thresh, this->contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+//    Mat thresh;
+//    Mat hierarchy;
+//    cv::threshold(this->sobel, thresh, 100, 255, THRESH_BINARY);
+//    cv::findContours(thresh, this->contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
 }
 
 void ComicsPanelExtractor::getSegments() {
-    Ptr<LineSegmentDetector> lsd = cv::createLineSegmentDetector();
-    Mat dlines;
-    
-    lsd->detect(this->gray, dlines);
-    int minDist = min(this->imageSize[0], this->imageSize[1]) * this->minimumPanelSizeRatio;
+//    Ptr<LineSegmentDetector> lsd = cv::createLineSegmentDetector();
+//    Mat dlines;
+//    
+//    lsd->detect(this->gray, dlines);
+//    int minDist = min(this->imageSize[0], this->imageSize[1]) * this->minimumPanelSizeRatio;
     
 //    self.segments = None
 //
@@ -207,212 +207,212 @@ void ComicsPanelExtractor::getSegments() {
 
 
 
-void ComicsPanelExtractor::splitPanels(vector<Panel>& panels, Mat img, const int contourSize) {
-    vector<Panel> newPanels;
-    vector<Panel> oldPanels;
-    
-    for (Panel p : panels) {
-        std::vector<Panel> splitPanels = p.split();
-        
-        if (splitPanels.size() > 0) {
-            oldPanels.push_back(p);
-            
-            for (Panel np : newPanels) {
-                newPanels.push_back(np);
-            }
-        }
-    }
-    
-    for (Panel op : oldPanels) {
-        for (int i=0; i<panels.size()-1; i++) {
-            if (op == panels[i]) {
-                panels.erase(panels.begin()+i);
-            }
-        }
-    }
-    for (Panel np : newPanels) {
-        panels.push_back(np);
-    }
-}
+//void ComicsPanelExtractor::splitPanels(vector<Panel>& panels, Mat img, const int contourSize) {
+//    vector<Panel> newPanels;
+//    vector<Panel> oldPanels;
+//    
+//    for (Panel p : panels) {
+//        std::vector<Panel> splitPanels = p.split();
+//        
+//        if (splitPanels.size() > 0) {
+//            oldPanels.push_back(p);
+//            
+//            for (Panel np : newPanels) {
+//                newPanels.push_back(np);
+//            }
+//        }
+//    }
+//    
+//    for (Panel op : oldPanels) {
+//        for (int i=0; i<panels.size()-1; i++) {
+//            if (op == panels[i]) {
+//                panels.erase(panels.begin()+i);
+//            }
+//        }
+//    }
+//    for (Panel np : newPanels) {
+//        panels.push_back(np);
+//    }
+//}
 
 // Merge every two panels where one contains the other
-void ComicsPanelExtractor::mergePanels(std::vector<Panel>& panels) {
-    if (panels.size() == 0) {
-        return;
-    }
-    
-    vector<Panel> panelsToRemove;
-    
-    for (int i=0; i<panels.size()-1; i++) {
-        for (int j=i+1; j<panels.size()-1; j++) {
-            if (panels[i].contains(panels[j])) {
-                panelsToRemove.push_back(panels[j]);
-            }
-            if (panels[j].contains(panels[i])) {
-                panelsToRemove.push_back(panels[i]);
-            }
-            
-        }
-    }
-    
-    std::sort(panelsToRemove.begin(), panelsToRemove.end(), std::greater<Panel>());
-    for (long i=panelsToRemove.size()-1; i==0; i--) {
-        panels.erase(panels.begin()+i);
-    }
-}
+//void ComicsPanelExtractor::mergePanels(std::vector<Panel>& panels) {
+//    if (panels.size() == 0) {
+//        return;
+//    }
+//    
+//    vector<Panel> panelsToRemove;
+//    
+//    for (int i=0; i<panels.size()-1; i++) {
+//        for (int j=i+1; j<panels.size()-1; j++) {
+//            if (panels[i].contains(panels[j])) {
+//                panelsToRemove.push_back(panels[j]);
+//            }
+//            if (panels[j].contains(panels[i])) {
+//                panelsToRemove.push_back(panels[i]);
+//            }
+//            
+//        }
+//    }
+//    
+//    std::sort(panelsToRemove.begin(), panelsToRemove.end(), std::greater<Panel>());
+//    for (long i=panelsToRemove.size()-1; i==0; i--) {
+//        panels.erase(panels.begin()+i);
+//    }
+//}
 
-void ComicsPanelExtractor::deoverlapPanels(std::vector<Panel>& panels) {
-    if (panels.size() == 0) {
-        return;
-    }
+//void ComicsPanelExtractor::deoverlapPanels(std::vector<Panel>& panels) {
+//    if (panels.size() == 0) {
+//        return;
+//    }
 
-    for (int i=0; i<panels.size()-1; i++) {
-        for (int j=0; j<panels.size()-1; j++) {
-            if (panels[i] == panels[j]) {
-                continue;
-            }
-            
-            Panel *opanel = panels[i].overlapPanel(panels[j]);
-            if (opanel == NULL) {
-                continue;
-            }
-            
-            if (opanel->w < opanel->h && panels[i].r == opanel->r) {
-                panels[i].r = opanel->x;
-                panels[j].x = opanel->r;
-//                free(opanel);
-                continue;
-            }
-            
-            if (opanel->w > opanel->h && panels[i].b == opanel->b) {
-                panels[i].b = opanel->y;
-                panels[j].y = opanel->b;
-//                free(opanel);
-                continue;
-            }
-        }
-    }
-}
+//    for (int i=0; i<panels.size()-1; i++) {
+//        for (int j=0; j<panels.size()-1; j++) {
+//            if (panels[i] == panels[j]) {
+//                continue;
+//            }
+//            
+//            Panel *opanel = panels[i].overlapPanel(panels[j]);
+//            if (opanel == NULL) {
+//                continue;
+//            }
+//            
+//            if (opanel->w < opanel->h && panels[i].r == opanel->r) {
+//                panels[i].r = opanel->x;
+//                panels[j].x = opanel->r;
+////                free(opanel);
+//                continue;
+//            }
+//            
+//            if (opanel->w > opanel->h && panels[i].b == opanel->b) {
+//                panels[i].b = opanel->y;
+//                panels[j].y = opanel->b;
+////                free(opanel);
+//                continue;
+//            }
+//        }
+//    }
+//}
     
 // Find out actual gutters between panels
-Panel ComicsPanelExtractor::actualGutters(std::vector<Panel>& panels) {
-    std::vector<int> guttersX;
-    std::vector<int> guttersY;
-    Rect xywh;
-    Panel gutters(&xywh, NULL);
-    
-    for (Panel p : panels) {
-        Panel *leftPanel = p.findLeftPanel(panels);
-        if (leftPanel != NULL) {
-            guttersX.push_back(p.x - leftPanel->r);
-        }
-        
-        Panel *topPanel = p.findTopPanel(panels);
-        if (topPanel != NULL) {
-            guttersY.push_back(p.y - topPanel->b);
-        }
-    }
-    
-    if (guttersX.size() == 0) {
-        guttersX.push_back(1);
-    }
-    if (guttersY.size() == 0) {
-        guttersY.push_back(1);
-    }
-    
-    gutters.x = *min_element(guttersX.begin(), guttersX.end());
-    gutters.y = *min_element(guttersY.begin(), guttersY.end());
-    gutters.r = -*min_element(guttersX.begin(), guttersX.end());
-    gutters.b = -*min_element(guttersY.begin(), guttersY.end());
-    return gutters;
-}
+//Panel ComicsPanelExtractor::actualGutters(std::vector<Panel>& panels) {
+//    std::vector<int> guttersX;
+//    std::vector<int> guttersY;
+//    Rect xywh;
+//    Panel gutters(&xywh, NULL);
+//    
+//    for (Panel p : panels) {
+//        Panel *leftPanel = p.findLeftPanel(panels);
+//        if (leftPanel != NULL) {
+//            guttersX.push_back(p.x - leftPanel->r);
+//        }
+//        
+//        Panel *topPanel = p.findTopPanel(panels);
+//        if (topPanel != NULL) {
+//            guttersY.push_back(p.y - topPanel->b);
+//        }
+//    }
+//    
+//    if (guttersX.size() == 0) {
+//        guttersX.push_back(1);
+//    }
+//    if (guttersY.size() == 0) {
+//        guttersY.push_back(1);
+//    }
+//    
+//    gutters.x = *min_element(guttersX.begin(), guttersX.end());
+//    gutters.y = *min_element(guttersY.begin(), guttersY.end());
+//    gutters.r = -*min_element(guttersX.begin(), guttersX.end());
+//    gutters.b = -*min_element(guttersY.begin(), guttersY.end());
+//    return gutters;
+//}
 
 // Expand panels to their neighbour's edge, or page frame
-void ComicsPanelExtractor::expandPanels(std::vector<Panel>& panels) {
-    Panel gutters = this->actualGutters(panels);
-    
-    for (Panel p : panels) {
-        for (std::string d : {"x", "y", "r", "b"}) {
-//            ComicsData pcoords;
-//            pcoords.x = p.x;
-//            pcoords.x = p.y;
-//            pcoords.r = p.r;
-//            pcoords.b = p.b;
-            
-            int newCoord = -1;
-            int pAttribute = -1;
-            Panel *neighbor = p.findNeighbourPanel(d, panels);
-            
-            if (neighbor != NULL) {
-                cout << "d=" << d << ", neihgbor=" << "[left:" << neighbor->x << ", right: " << neighbor->r << ", top: " << neighbor->y << ", bottom: " << neighbor->b << " (" << neighbor->w << "x" << neighbor->y << ")]" << endl;
-                
-                // expand to that neighbour's edge (minus gutter)
-                if (d == "x") {
-                    newCoord = neighbor->r;
-                    pAttribute = p.x;
-                    newCoord += gutters.x;
-                } else if (d == "y") {
-                    newCoord = neighbor->b;
-                    pAttribute = p.y;
-                    newCoord += gutters.y;
-                } else if (d == "r") {
-                    newCoord = neighbor->x;
-                    pAttribute = p.r;
-                    newCoord += gutters.r;
-                } else if (d == "b") {
-                    newCoord = neighbor->y;
-                    pAttribute = p.b;
-                    newCoord += gutters.b;
-                }
-            } else {
-                // expand to the furthest known edge (frame around all panels)
-                std::vector<Panel> sortedPanels;
-                for (int i=0; i<panels.size(); i++) {
-                    sortedPanels.push_back(panels[i]);
-                }
-                Panel *minPanel;
-                
-                
-                if (d == "x" || d == "y") {
-                    sort(sortedPanels.begin(), sortedPanels.end(), [](Panel p1, Panel p2) {
-                        return p1.b > p2.b;
-                    });
-                } else {
-                    sort(sortedPanels.begin(), sortedPanels.end(), [](Panel p1, Panel p2) {
-                        return p1.b < p2.b;
-                    });
-                }
-                minPanel = &sortedPanels.front();
-                
-                if (d == "x") {
-                    newCoord = minPanel->x;
-                    pAttribute = p.x;
-                } else if (d == "y") {
-                    newCoord = minPanel->y;
-                    pAttribute = p.y;
-                } else if (d == "r") {
-                    newCoord = minPanel->r;
-                    pAttribute = p.r;
-                } else if (d == "b") {
-                    newCoord = minPanel->b;
-                    pAttribute = p.b;
-                }
-            }
-            
-            if (newCoord != -1) {
-                if (((d == "r" || d == "b") && newCoord > pAttribute) ||
-                    ((d == "x" || d == "y") && newCoord < pAttribute)) {
-                    if (d == "x") {
-                        p.x = newCoord;
-                    } else if (d == "y") {
-                        p.y = newCoord;
-                    } else if (d == "r") {
-                        p.r = newCoord;
-                    } else if (d == "b") {
-                        p.b = newCoord;
-                    }
-                }
-            }
-        }
-    }
-}
+//void ComicsPanelExtractor::expandPanels(std::vector<Panel>& panels) {
+//    Panel gutters = this->actualGutters(panels);
+//    
+//    for (Panel p : panels) {
+//        for (std::string d : {"x", "y", "r", "b"}) {
+////            ComicsData pcoords;
+////            pcoords.x = p.x;
+////            pcoords.x = p.y;
+////            pcoords.r = p.r;
+////            pcoords.b = p.b;
+//            
+//            int newCoord = -1;
+//            int pAttribute = -1;
+//            Panel *neighbor = p.findNeighbourPanel(d, panels);
+//            
+//            if (neighbor != NULL) {
+//                cout << "d=" << d << ", neihgbor=" << "[left:" << neighbor->x << ", right: " << neighbor->r << ", top: " << neighbor->y << ", bottom: " << neighbor->b << " (" << neighbor->w << "x" << neighbor->y << ")]" << endl;
+//                
+//                // expand to that neighbour's edge (minus gutter)
+//                if (d == "x") {
+//                    newCoord = neighbor->r;
+//                    pAttribute = p.x;
+//                    newCoord += gutters.x;
+//                } else if (d == "y") {
+//                    newCoord = neighbor->b;
+//                    pAttribute = p.y;
+//                    newCoord += gutters.y;
+//                } else if (d == "r") {
+//                    newCoord = neighbor->x;
+//                    pAttribute = p.r;
+//                    newCoord += gutters.r;
+//                } else if (d == "b") {
+//                    newCoord = neighbor->y;
+//                    pAttribute = p.b;
+//                    newCoord += gutters.b;
+//                }
+//            } else {
+//                // expand to the furthest known edge (frame around all panels)
+//                std::vector<Panel> sortedPanels;
+//                for (int i=0; i<panels.size(); i++) {
+//                    sortedPanels.push_back(panels[i]);
+//                }
+//                Panel *minPanel;
+//                
+//                
+//                if (d == "x" || d == "y") {
+//                    sort(sortedPanels.begin(), sortedPanels.end(), [](Panel p1, Panel p2) {
+//                        return p1.b > p2.b;
+//                    });
+//                } else {
+//                    sort(sortedPanels.begin(), sortedPanels.end(), [](Panel p1, Panel p2) {
+//                        return p1.b < p2.b;
+//                    });
+//                }
+//                minPanel = &sortedPanels.front();
+//                
+//                if (d == "x") {
+//                    newCoord = minPanel->x;
+//                    pAttribute = p.x;
+//                } else if (d == "y") {
+//                    newCoord = minPanel->y;
+//                    pAttribute = p.y;
+//                } else if (d == "r") {
+//                    newCoord = minPanel->r;
+//                    pAttribute = p.r;
+//                } else if (d == "b") {
+//                    newCoord = minPanel->b;
+//                    pAttribute = p.b;
+//                }
+//            }
+//            
+//            if (newCoord != -1) {
+//                if (((d == "r" || d == "b") && newCoord > pAttribute) ||
+//                    ((d == "x" || d == "y") && newCoord < pAttribute)) {
+//                    if (d == "x") {
+//                        p.x = newCoord;
+//                    } else if (d == "y") {
+//                        p.y = newCoord;
+//                    } else if (d == "r") {
+//                        p.r = newCoord;
+//                    } else if (d == "b") {
+//                        p.b = newCoord;
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}

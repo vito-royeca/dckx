@@ -51,6 +51,7 @@
 		7649C8842BCA63EE00A54E5F /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8802BCA63EE00A54E5F /* Panel.cpp */; };
 		7649C8882BCA63EE00A54E5F /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8832BCA63EE00A54E5F /* ComicsPanelExtractor.cpp */; };
 		765579712BCB19EE009EB2E0 /* opencv2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765579702BCB19EE009EB2E0 /* opencv2.xcframework */; };
+		7663474B2BD2EF2F00CE1A84 /* Page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 766347492BD2EF2F00CE1A84 /* Page.cpp */; };
 		76A0FD812BCB26A200C0002E /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 76A0FD802BCB26A200C0002E /* BetterSafariView */; };
 		76A0FD832BCB27C200C0002E /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 76A0FD822BCB27C200C0002E /* BetterSafariView */; };
 		76A0FD852BCB286C00C0002E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 76A0FD842BCB286C00C0002E /* FirebaseAnalytics */; };
@@ -242,6 +243,8 @@
 		7649C8822BCA63EE00A54E5F /* ComicsPanelExtractor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ComicsPanelExtractor.hpp; sourceTree = "<group>"; };
 		7649C8832BCA63EE00A54E5F /* ComicsPanelExtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ComicsPanelExtractor.cpp; sourceTree = "<group>"; };
 		765579702BCB19EE009EB2E0 /* opencv2.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = opencv2.xcframework; sourceTree = "<group>"; };
+		766347492BD2EF2F00CE1A84 /* Page.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Page.cpp; sourceTree = "<group>"; };
+		7663474A2BD2EF2F00CE1A84 /* Page.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Page.hpp; sourceTree = "<group>"; };
 		76A0FD982BCB44D100C0002E /* ComicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicModel.swift; sourceTree = "<group>"; };
 		76A0FD992BCB44D100C0002E /* WhatIfModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfModel.swift; sourceTree = "<group>"; };
 		76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dckxApp.swift; sourceTree = "<group>"; };
@@ -568,6 +571,8 @@
 				7616B3DE2BD0D132002CA3A5 /* OpenCVWrapper.h */,
 				7649C8802BCA63EE00A54E5F /* Panel.cpp */,
 				7649C8812BCA63EE00A54E5F /* Panel.hpp */,
+				766347492BD2EF2F00CE1A84 /* Page.cpp */,
+				7663474A2BD2EF2F00CE1A84 /* Page.hpp */,
 				762725E12BD1950100CE66FC /* Segment.cpp */,
 				762725E22BD1950100CE66FC /* Segment.hpp */,
 			);
@@ -846,6 +851,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7663474B2BD2EF2F00CE1A84 /* Page.cpp in Sources */,
 				76A0FD9A2BCB44D100C0002E /* ComicModel.swift in Sources */,
 				76A0FD9B2BCB44D100C0002E /* WhatIfModel.swift in Sources */,
 				76A0FDA12BCB4AEA00C0002E /* dckxApp.swift in Sources */,
