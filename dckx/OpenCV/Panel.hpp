@@ -34,6 +34,7 @@ public:
           bool splittable = true);
 
     static Panel fromXyrb(Page* page, int x, int y, int r, int b);
+    cv::Rect toXywh();
 
     Panel overlapPanel(const Panel& other) const ;
 
@@ -47,19 +48,19 @@ public:
 
     bool sameCol(const Panel& other) const;
 
-    Panel findTopPanel() const;
+    std::unique_ptr<Panel> findTopPanel() const;
 
-    Panel findBottomPanel() const;
+    std::unique_ptr<Panel> findBottomPanel() const;
 
-    std::vector<Panel> findAllLeftPanels() const ;
+    std::unique_ptr<Panel> findLeftPanel() const;
+    
+    std::vector<std::unique_ptr<Panel>> findAllLeftPanels() const ;
 
-    Panel findLeftPanel() const;
+    std::unique_ptr<Panel> findRightPanel() const;
 
-    std::vector<Panel> findAllRightPanels() const ;
+    std::vector<std::unique_ptr<Panel>> findAllRightPanels() const ;
 
-    Panel findRightPanel() const;
-
-    Panel findNeighbourPanel(const char d) const;
+    std::unique_ptr<Panel> findNeighbourPanel(const char d) const;
 
     Panel groupWith(const Panel& other) const;
 
@@ -86,8 +87,6 @@ public:
     float wt() const;
 
     float ht() const;
-
-    cv::Rect toXywh();
 
     bool operator==(const Panel& other) const;
 

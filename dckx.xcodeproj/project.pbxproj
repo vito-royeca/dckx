@@ -23,7 +23,6 @@
 		761312D02BD064E800A425EC /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82B2B32618C6AD008AD11D /* ListRowView.swift */; };
 		761312D22BD0651500A425EC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 761312D12BD0651500A425EC /* SDWebImageSwiftUI */; };
 		761312D42BD06F4900A425EC /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 761312D32BD06F4900A425EC /* SDWebImage */; };
-		7616B3E12BD0EA11002CA3A5 /* ComicsData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7616B3DF2BD0EA11002CA3A5 /* ComicsData.cpp */; };
 		7616B3EE2BD0FE39002CA3A5 /* OpenCVTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616B3ED2BD0FE38002CA3A5 /* OpenCVTestView.swift */; };
 		762725E32BD1950100CE66FC /* Segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 762725E12BD1950100CE66FC /* Segment.cpp */; };
 		7633F81B2BCC9D9800B2F1A4 /* dckxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDA02BCB4AEA00C0002E /* dckxApp.swift */; };
@@ -49,7 +48,6 @@
 		76389FCC2BCE359B00E2A4D0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B626D6F2401B0A900972EED /* Constants.swift */; };
 		7649C8782BCA50C100A54E5F /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */; };
 		7649C8842BCA63EE00A54E5F /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8802BCA63EE00A54E5F /* Panel.cpp */; };
-		7649C8882BCA63EE00A54E5F /* ComicsPanelExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8832BCA63EE00A54E5F /* ComicsPanelExtractor.cpp */; };
 		765579712BCB19EE009EB2E0 /* opencv2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765579702BCB19EE009EB2E0 /* opencv2.xcframework */; };
 		7663474B2BD2EF2F00CE1A84 /* Page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 766347492BD2EF2F00CE1A84 /* Page.cpp */; };
 		76A0FD812BCB26A200C0002E /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 76A0FD802BCB26A200C0002E /* BetterSafariView */; };
@@ -70,6 +68,41 @@
 		76A0FDE52BCB931200C0002E /* ComicItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE42BCB931200C0002E /* ComicItemSource.swift */; };
 		76A0FDE62BCB931200C0002E /* ComicItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE42BCB931200C0002E /* ComicItemSource.swift */; };
 		76A0FDE72BCB931200C0002E /* ComicItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0FDE42BCB931200C0002E /* ComicItemSource.swift */; };
+		76EE777C2BD46A0400492165 /* OpenCVTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616B3ED2BD0FE38002CA3A5 /* OpenCVTestView.swift */; };
+		76EE777D2BD46A0500492165 /* OpenCVTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616B3ED2BD0FE38002CA3A5 /* OpenCVTestView.swift */; };
+		76EE777E2BD46A2000492165 /* OpenCVTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616B3ED2BD0FE38002CA3A5 /* OpenCVTestView.swift */; };
+		76EE777F2BD46A6600492165 /* ComicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23368123F6683C00C88BA1 /* ComicViewModel.swift */; };
+		76EE77802BD46BAF00492165 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */; };
+		76EE77812BD46BAF00492165 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */; };
+		76EE77822BD46BB000492165 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */; };
+		76EE77832BD46BC700492165 /* InteractiveImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7633F82F2BCCBA4F00B2F1A4 /* InteractiveImageView.swift */; };
+		76EE77842BD46C4900492165 /* opencv2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765579702BCB19EE009EB2E0 /* opencv2.xcframework */; };
+		76EE77852BD46C4900492165 /* opencv2.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 765579702BCB19EE009EB2E0 /* opencv2.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		76EE77872BD46CF800492165 /* Page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 766347492BD2EF2F00CE1A84 /* Page.cpp */; };
+		76EE77882BD46D0800492165 /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8802BCA63EE00A54E5F /* Panel.cpp */; };
+		76EE77892BD46D0900492165 /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8802BCA63EE00A54E5F /* Panel.cpp */; };
+		76EE778A2BD46D0A00492165 /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7649C8802BCA63EE00A54E5F /* Panel.cpp */; };
+		76EE778B2BD46D0C00492165 /* Page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 766347492BD2EF2F00CE1A84 /* Page.cpp */; };
+		76EE778C2BD46D0D00492165 /* Page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 766347492BD2EF2F00CE1A84 /* Page.cpp */; };
+		76EE778D2BD46D1000492165 /* Segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 762725E12BD1950100CE66FC /* Segment.cpp */; };
+		76EE778E2BD46D1000492165 /* Segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 762725E12BD1950100CE66FC /* Segment.cpp */; };
+		76EE778F2BD46D1100492165 /* Segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 762725E12BD1950100CE66FC /* Segment.cpp */; };
+		76EE77902BD46D4C00492165 /* opencv2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765579702BCB19EE009EB2E0 /* opencv2.xcframework */; };
+		76EE77912BD46D4C00492165 /* opencv2.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 765579702BCB19EE009EB2E0 /* opencv2.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		76EE77932BD46D5000492165 /* opencv2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765579702BCB19EE009EB2E0 /* opencv2.xcframework */; };
+		76EE77942BD46D5000492165 /* opencv2.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 765579702BCB19EE009EB2E0 /* opencv2.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		76EE77972BD46E9300492165 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 76EE77962BD46E9300492165 /* BetterSafariView */; };
+		76EE77992BD46E9C00492165 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 76EE77982BD46E9C00492165 /* FirebaseAnalytics */; };
+		76EE779B2BD46E9C00492165 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 76EE779A2BD46E9C00492165 /* FirebaseAnalyticsSwift */; };
+		76EE779D2BD4718A00492165 /* OpenCVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EE779C2BD4718A00492165 /* OpenCVTests.swift */; };
+		76EE77A02BD4802D00492165 /* Writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76EE779E2BD4802D00492165 /* Writer.cpp */; };
+		76EE77A12BD4802D00492165 /* Writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76EE779E2BD4802D00492165 /* Writer.cpp */; };
+		76EE77A22BD4802D00492165 /* Writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76EE779E2BD4802D00492165 /* Writer.cpp */; };
+		76EE77A32BD4802D00492165 /* Writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76EE779E2BD4802D00492165 /* Writer.cpp */; };
+		76EE77A52BD4943100492165 /* ComicPanelsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EE77A42BD4943100492165 /* ComicPanelsModel.swift */; };
+		76EE77A62BD4943100492165 /* ComicPanelsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EE77A42BD4943100492165 /* ComicPanelsModel.swift */; };
+		76EE77A72BD4943100492165 /* ComicPanelsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EE77A42BD4943100492165 /* ComicPanelsModel.swift */; };
+		76EE77A82BD4943100492165 /* ComicPanelsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EE77A42BD4943100492165 /* ComicPanelsModel.swift */; };
 		76F753B22BCF1CF9000E6053 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 76F753B12BCF1CF9000E6053 /* SDWebImageSwiftUI */; };
 		76F753B42BCF5B4C000E6053 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 76F753B32BCF5B4C000E6053 /* SDWebImageSwiftUI */; };
 		76F753B62BCF5B55000E6053 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 76F753B52BCF5B55000E6053 /* SDWebImageSwiftUI */; };
@@ -210,6 +243,39 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		76EE77862BD46C4900492165 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				76EE77852BD46C4900492165 /* opencv2.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76EE77922BD46D4C00492165 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				76EE77912BD46D4C00492165 /* opencv2.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76EE77952BD46D5000492165 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				76EE77942BD46D5000492165 /* opencv2.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8B27AE4C262FB9AD00351106 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -227,8 +293,6 @@
 		761312C42BD02EC000A425EC /* WhatIfViewModel+HTML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WhatIfViewModel+HTML.swift"; sourceTree = "<group>"; };
 		761312CA2BD05F2A00A425EC /* WhatIfListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatIfListView.swift; sourceTree = "<group>"; };
 		7616B3DE2BD0D132002CA3A5 /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
-		7616B3DF2BD0EA11002CA3A5 /* ComicsData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComicsData.cpp; sourceTree = "<group>"; };
-		7616B3E02BD0EA11002CA3A5 /* ComicsData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComicsData.hpp; sourceTree = "<group>"; };
 		7616B3ED2BD0FE38002CA3A5 /* OpenCVTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenCVTestView.swift; sourceTree = "<group>"; };
 		762725E12BD1950100CE66FC /* Segment.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Segment.cpp; sourceTree = "<group>"; };
 		762725E22BD1950100CE66FC /* Segment.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Segment.hpp; sourceTree = "<group>"; };
@@ -240,8 +304,6 @@
 		7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
 		7649C8802BCA63EE00A54E5F /* Panel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Panel.cpp; sourceTree = "<group>"; };
 		7649C8812BCA63EE00A54E5F /* Panel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Panel.hpp; sourceTree = "<group>"; };
-		7649C8822BCA63EE00A54E5F /* ComicsPanelExtractor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ComicsPanelExtractor.hpp; sourceTree = "<group>"; };
-		7649C8832BCA63EE00A54E5F /* ComicsPanelExtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ComicsPanelExtractor.cpp; sourceTree = "<group>"; };
 		765579702BCB19EE009EB2E0 /* opencv2.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = opencv2.xcframework; sourceTree = "<group>"; };
 		766347492BD2EF2F00CE1A84 /* Page.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Page.cpp; sourceTree = "<group>"; };
 		7663474A2BD2EF2F00CE1A84 /* Page.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Page.hpp; sourceTree = "<group>"; };
@@ -251,6 +313,10 @@
 		76A0FDA22BCB4B3300C0002E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		76A0FDE02BCB92C600C0002E /* ComicToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicToolbarView.swift; sourceTree = "<group>"; };
 		76A0FDE42BCB931200C0002E /* ComicItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicItemSource.swift; sourceTree = "<group>"; };
+		76EE779C2BD4718A00492165 /* OpenCVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenCVTests.swift; sourceTree = "<group>"; };
+		76EE779E2BD4802D00492165 /* Writer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Writer.cpp; sourceTree = "<group>"; };
+		76EE779F2BD4802D00492165 /* Writer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Writer.hpp; sourceTree = "<group>"; };
+		76EE77A42BD4943100492165 /* ComicPanelsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicPanelsModel.swift; sourceTree = "<group>"; };
 		76F753B72BCF811D000E6053 /* WhatIfView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatIfView.swift; sourceTree = "<group>"; };
 		76F753BC2BCF85D1000E6053 /* WhatIfViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatIfViewModel.swift; sourceTree = "<group>"; };
 		76F753CB2BCF9465000E6053 /* WhatIfToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfToolbarView.swift; sourceTree = "<group>"; };
@@ -315,10 +381,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76EE779B2BD46E9C00492165 /* FirebaseAnalyticsSwift in Frameworks */,
 				761312D22BD0651500A425EC /* SDWebImageSwiftUI in Frameworks */,
 				76F753D32BCF966C000E6053 /* Kanna in Frameworks */,
+				76EE77992BD46E9C00492165 /* FirebaseAnalytics in Frameworks */,
 				8B27AE42262FB9AB00351106 /* SwiftUI.framework in Frameworks */,
+				76EE77842BD46C4900492165 /* opencv2.xcframework in Frameworks */,
 				8B27AE40262FB9AB00351106 /* WidgetKit.framework in Frameworks */,
+				76EE77972BD46E9300492165 /* BetterSafariView in Frameworks */,
 				761312D42BD06F4900A425EC /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +417,7 @@
 				7633F8272BCC9F0E00B2F1A4 /* Kanna in Frameworks */,
 				7633F8212BCC9F0E00B2F1A4 /* BetterSafariView in Frameworks */,
 				7633F8292BCC9F0E00B2F1A4 /* SDWebImage in Frameworks */,
+				76EE77932BD46D5000492165 /* opencv2.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +431,7 @@
 				7633F82B2BCC9F2100B2F1A4 /* Kanna in Frameworks */,
 				76A0FD832BCB27C200C0002E /* BetterSafariView in Frameworks */,
 				7633F82D2BCC9F2100B2F1A4 /* SDWebImage in Frameworks */,
+				76EE77902BD46D4C00492165 /* opencv2.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				76A0FD982BCB44D100C0002E /* ComicModel.swift */,
+				76EE77A42BD4943100492165 /* ComicPanelsModel.swift */,
 				76A0FD992BCB44D100C0002E /* WhatIfModel.swift */,
 			);
 			path = Model;
@@ -468,6 +541,7 @@
 				8B4F4BAF23F5F445008446F4 /* dckxTests.swift */,
 				8B4F4BB123F5F445008446F4 /* Info.plist */,
 				8B626D782401EB1200972EED /* XkcdAPITests.swift */,
+				76EE779C2BD4718A00492165 /* OpenCVTests.swift */,
 			);
 			path = dckxTests;
 			sourceTree = "<group>";
@@ -563,10 +637,6 @@
 		8BFDD2A826097E2800B7B5F9 /* OpenCV */ = {
 			isa = PBXGroup;
 			children = (
-				7616B3DF2BD0EA11002CA3A5 /* ComicsData.cpp */,
-				7616B3E02BD0EA11002CA3A5 /* ComicsData.hpp */,
-				7649C8832BCA63EE00A54E5F /* ComicsPanelExtractor.cpp */,
-				7649C8822BCA63EE00A54E5F /* ComicsPanelExtractor.hpp */,
 				7649C8772BCA50C100A54E5F /* OpenCVWrapper.mm */,
 				7616B3DE2BD0D132002CA3A5 /* OpenCVWrapper.h */,
 				7649C8802BCA63EE00A54E5F /* Panel.cpp */,
@@ -575,6 +645,8 @@
 				7663474A2BD2EF2F00CE1A84 /* Page.hpp */,
 				762725E12BD1950100CE66FC /* Segment.cpp */,
 				762725E22BD1950100CE66FC /* Segment.hpp */,
+				76EE779E2BD4802D00492165 /* Writer.cpp */,
+				76EE779F2BD4802D00492165 /* Writer.hpp */,
 			);
 			path = OpenCV;
 			sourceTree = "<group>";
@@ -602,6 +674,7 @@
 				8B27AE3A262FB9AB00351106 /* Sources */,
 				8B27AE3B262FB9AB00351106 /* Frameworks */,
 				8B27AE3C262FB9AB00351106 /* Resources */,
+				76EE77862BD46C4900492165 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -612,6 +685,9 @@
 				76F753D22BCF966C000E6053 /* Kanna */,
 				761312D12BD0651500A425EC /* SDWebImageSwiftUI */,
 				761312D32BD06F4900A425EC /* SDWebImage */,
+				76EE77962BD46E9300492165 /* BetterSafariView */,
+				76EE77982BD46E9C00492165 /* FirebaseAnalytics */,
+				76EE779A2BD46E9C00492165 /* FirebaseAnalyticsSwift */,
 			);
 			productName = "dckx WidgetExtension";
 			productReference = 8B27AE3E262FB9AB00351106 /* dckx WidgetExtension.appex */;
@@ -651,6 +727,7 @@
 				8B4F4BA723F5F445008446F4 /* Sources */,
 				8B4F4BA823F5F445008446F4 /* Frameworks */,
 				8B4F4BA923F5F445008446F4 /* Resources */,
+				76EE77952BD46D5000492165 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -677,6 +754,7 @@
 				8B4F4BB223F5F445008446F4 /* Sources */,
 				8B4F4BB323F5F445008446F4 /* Frameworks */,
 				8B4F4BB423F5F445008446F4 /* Resources */,
+				76EE77922BD46D4C00492165 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -831,17 +909,26 @@
 				761312C62BD039E100A425EC /* WebView.swift in Sources */,
 				76389FCB2BCE359600E2A4D0 /* NavigationButtonStyle.swift in Sources */,
 				8B7E51DD262FECF9002A094E /* AppGroup.swift in Sources */,
+				76EE77872BD46CF800492165 /* Page.cpp in Sources */,
 				76F753C72BCF8F89000E6053 /* SensitiveData.swift in Sources */,
+				76EE77882BD46D0800492165 /* Panel.cpp in Sources */,
 				761312D02BD064E800A425EC /* ListRowView.swift in Sources */,
 				76F753C62BCF8B5A000E6053 /* WhatIfModel.swift in Sources */,
 				761312CF2BD064CE00A425EC /* ComicListView.swift in Sources */,
+				76EE77A82BD4943100492165 /* ComicPanelsModel.swift in Sources */,
 				76F753C12BCF85D1000E6053 /* WhatIfViewModel.swift in Sources */,
 				8B7E5045262FBDD4002A094E /* NavigationToolbar.swift in Sources */,
+				76EE77822BD46BB000492165 /* OpenCVWrapper.mm in Sources */,
+				76EE778F2BD46D1100492165 /* Segment.cpp in Sources */,
+				76EE777F2BD46A6600492165 /* ComicViewModel.swift in Sources */,
 				76F753D02BCF9563000E6053 /* ShareSheetView.swift in Sources */,
 				76F753D12BCF95E8000E6053 /* ComicModel.swift in Sources */,
 				76F753BB2BCF811D000E6053 /* WhatIfView.swift in Sources */,
 				76F753CF2BCF9465000E6053 /* WhatIfToolbarView.swift in Sources */,
 				8B27AE55262FBA3C00351106 /* dckxWidgetView.swift in Sources */,
+				76EE777E2BD46A2000492165 /* OpenCVTestView.swift in Sources */,
+				76EE77A32BD4802D00492165 /* Writer.cpp in Sources */,
+				76EE77832BD46BC700492165 /* InteractiveImageView.swift in Sources */,
 				8B27AE45262FB9AB00351106 /* dckx_Widget.swift in Sources */,
 				76389FCC2BCE359B00E2A4D0 /* Constants.swift in Sources */,
 			);
@@ -880,13 +967,13 @@
 				8B4F4BE023F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
 				76A0FDE52BCB931200C0002E /* ComicItemSource.swift in Sources */,
 				762725E32BD1950100CE66FC /* Segment.cpp in Sources */,
-				7616B3E12BD0EA11002CA3A5 /* ComicsData.cpp in Sources */,
-				7649C8882BCA63EE00A54E5F /* ComicsPanelExtractor.cpp in Sources */,
 				8B82B2B42618C6AD008AD11D /* ListRowView.swift in Sources */,
+				76EE77A52BD4943100492165 /* ComicPanelsModel.swift in Sources */,
 				7616B3EE2BD0FE39002CA3A5 /* OpenCVTestView.swift in Sources */,
 				8B658020240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
 				7649C8842BCA63EE00A54E5F /* Panel.cpp in Sources */,
 				8BFEFFFD24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
+				76EE77A02BD4802D00492165 /* Writer.cpp in Sources */,
 				8B658017240AFED800A245DC /* MailView.swift in Sources */,
 				7649C8782BCA50C100A54E5F /* OpenCVWrapper.mm in Sources */,
 				8B626D872402122C00972EED /* BrowserView.swift in Sources */,
@@ -897,10 +984,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76EE77A62BD4943100492165 /* ComicPanelsModel.swift in Sources */,
+				76EE778C2BD46D0D00492165 /* Page.cpp in Sources */,
 				761312C72BD03A9D00A425EC /* WhatIfViewModel+HTML.swift in Sources */,
+				76EE779D2BD4718A00492165 /* OpenCVTests.swift in Sources */,
 				8B23368323F6683C00C88BA1 /* ComicViewModel.swift in Sources */,
 				7633F8322BCCC53000B2F1A4 /* InteractiveImageView.swift in Sources */,
+				76EE778A2BD46D0A00492165 /* Panel.cpp in Sources */,
+				76EE77A12BD4802D00492165 /* Writer.cpp in Sources */,
 				8BA50E6D240A425500138D11 /* WebView.swift in Sources */,
+				76EE77802BD46BAF00492165 /* OpenCVWrapper.mm in Sources */,
+				76EE778D2BD46D1000492165 /* Segment.cpp in Sources */,
 				76A0FD9C2BCB44D100C0002E /* ComicModel.swift in Sources */,
 				76A0FD9D2BCB44D100C0002E /* WhatIfModel.swift in Sources */,
 				8B4F4BB023F5F445008446F4 /* dckxTests.swift in Sources */,
@@ -911,6 +1005,7 @@
 				8B7E509E262FBF62002A094E /* SensitiveData.swift in Sources */,
 				7633F8392BCCC90700B2F1A4 /* ComicListView.swift in Sources */,
 				8B626D8C2402291B00972EED /* ComicView.swift in Sources */,
+				76EE777C2BD46A0400492165 /* OpenCVTestView.swift in Sources */,
 				8B626D792401EB1200972EED /* XkcdAPITests.swift in Sources */,
 				761312CC2BD0648500A425EC /* WhatIfListView.swift in Sources */,
 				7633F81B2BCC9D9800B2F1A4 /* dckxApp.swift in Sources */,
@@ -934,10 +1029,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76EE778B2BD46D0C00492165 /* Page.cpp in Sources */,
 				761312C82BD03A9D00A425EC /* WhatIfViewModel+HTML.swift in Sources */,
 				8B626D8B2402291A00972EED /* ComicView.swift in Sources */,
 				7633F8312BCCBA4F00B2F1A4 /* InteractiveImageView.swift in Sources */,
+				76EE77892BD46D0900492165 /* Panel.cpp in Sources */,
 				8B658022240B1C6E00A245DC /* NavigationToolbar.swift in Sources */,
+				76EE77812BD46BAF00492165 /* OpenCVWrapper.mm in Sources */,
+				76EE778E2BD46D1000492165 /* Segment.cpp in Sources */,
 				8B65801E240B12E100A245DC /* ShareSheetView.swift in Sources */,
 				76389FC92BCE331600E2A4D0 /* NavigationButtonStyle.swift in Sources */,
 				76A0FD9E2BCB44D100C0002E /* ComicModel.swift in Sources */,
@@ -948,12 +1047,14 @@
 				8B4F4BBB23F5F445008446F4 /* dckxUITests.swift in Sources */,
 				8B626D892402122C00972EED /* BrowserView.swift in Sources */,
 				7633F83A2BCCC90700B2F1A4 /* ComicListView.swift in Sources */,
+				76EE777D2BD46A0500492165 /* OpenCVTestView.swift in Sources */,
 				8B7E509F262FBF62002A094E /* SensitiveData.swift in Sources */,
 				761312CD2BD0648500A425EC /* WhatIfListView.swift in Sources */,
 				8BA50E6E240A425500138D11 /* WebView.swift in Sources */,
 				7633F81C2BCC9D9900B2F1A4 /* dckxApp.swift in Sources */,
 				8B4A1285240828FD00D4F8B2 /* SnapshotHelper.swift in Sources */,
 				76F753C02BCF85D1000E6053 /* WhatIfViewModel.swift in Sources */,
+				76EE77A72BD4943100492165 /* ComicPanelsModel.swift in Sources */,
 				76A0FDE32BCB92C600C0002E /* ComicToolbarView.swift in Sources */,
 				76A0FDE72BCB931200C0002E /* ComicItemSource.swift in Sources */,
 				8B4F4BE223F5F9D5008446F4 /* XkcdAPI.swift in Sources */,
@@ -961,6 +1062,7 @@
 				8B82B2B62618C6AD008AD11D /* ListRowView.swift in Sources */,
 				8BFEFFFF24046D400090188A /* UIApplication+ResignKeyboardOnDragGesture.swift in Sources */,
 				8B626D8A2402274A00972EED /* Constants.swift in Sources */,
+				76EE77A22BD4802D00492165 /* Writer.cpp in Sources */,
 				8B82B2C626192A9C008AD11D /* SettingsView.swift in Sources */,
 				76F753BA2BCF811D000E6053 /* WhatIfView.swift in Sources */,
 				76F753CE2BCF9465000E6053 /* WhatIfToolbarView.swift in Sources */,
@@ -1012,7 +1114,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
 				EXCLUDED_ARCHS = "";
-				GCC_PREFIX_HEADER = "";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = "dckx Widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1025,7 +1127,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(inherited) $(SRCROOT)/Ji/Sources/Clibxml2";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 5.0;
@@ -1045,7 +1147,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				EXCLUDED_ARCHS = "";
-				GCC_PREFIX_HEADER = "";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = "dckx Widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1059,7 +1161,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(inherited) $(SRCROOT)/Ji/Sources/Clibxml2";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/dckx-Bridging-Header.h";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1276,7 +1378,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				EXCLUDED_ARCHS = "";
-				GCC_PREFIX_HEADER = "";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = dckxTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1303,7 +1405,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				EXCLUDED_ARCHS = "";
-				GCC_PREFIX_HEADER = "";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = dckxTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1328,7 +1430,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				EXCLUDED_ARCHS = "";
-				GCC_PREFIX_HEADER = "";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = dckxUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1354,7 +1456,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				EXCLUDED_ARCHS = "";
-				GCC_PREFIX_HEADER = "";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = dckxUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1555,6 +1657,21 @@
 			productName = FirebaseAnalytics;
 		};
 		76A0FD862BCB286C00C0002E /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 580566A82BC9E2E900187556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		76EE77962BD46E9300492165 /* BetterSafariView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B2C042E2606662C00AF58E0 /* XCRemoteSwiftPackageReference "BetterSafariView" */;
+			productName = BetterSafariView;
+		};
+		76EE77982BD46E9C00492165 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 580566A82BC9E2E900187556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		76EE779A2BD46E9C00492165 /* FirebaseAnalyticsSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 580566A82BC9E2E900187556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsSwift;

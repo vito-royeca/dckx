@@ -33,8 +33,8 @@ struct dckxApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HamburgerView(modelContext: container.mainContext)
-//            OpenCVTestView()
+//            HamburgerView(modelContext: container.mainContext)
+            OpenCVTestView(modelContext: container.mainContext)
         }
         .modelContainer(container)
     }

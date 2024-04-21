@@ -13,6 +13,7 @@ import SDWebImageSwiftUI
 struct InteractiveImageView: View {
     var url: URL?
     var reloadAction: () -> Void
+    var successAction: (() -> Void)?
     
     @AppStorage(SettingsKey.useSystemFont) private var useSystemFont = false
     @State private var zoomScale: CGFloat = 1
@@ -35,6 +36,11 @@ struct InteractiveImageView: View {
                 }
             } placeholder: {
                 Text("")
+            }
+            .onSuccess { image, data, cache in
+                if let _ = data {
+                    successAction?()
+                }
             }
         }
     }

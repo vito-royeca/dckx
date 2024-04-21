@@ -56,7 +56,7 @@ void Page::split() {
         panels.emplace_back(nullptr, nullptr, &polygon);
     }
     
-    groupBigPanels();
+//    groupBigPanels();
     fixPanelsNumbering();
 }
 
@@ -122,7 +122,7 @@ void Page::getInitialPanels() {
         vector<Point> approx;
         approxPolyDP(contour, approx, epsilon, true);
         
-        Panel panel(nullptr, nullptr, &approx);
+        Panel panel(this, nullptr, &approx);
         if (!panel.isVerySmall()) {
             panels.push_back(panel);
         }
@@ -254,14 +254,14 @@ Point Page::actualGutters(function<int(vector<int>)> func) const {
     vector<int> guttersX, guttersY;
 
     for (const Panel& panel : panels) {
-        Panel leftPanel = panel.findLeftPanel();
-        if (!leftPanel.polygon.empty()) {
-            guttersX.push_back(panel.x - leftPanel.r);
+        unique_ptr<Panel> leftPanel = panel.findLeftPanel();
+        if (leftPanel != nullptr && !leftPanel->polygon.empty()) {
+            guttersX.push_back(panel.x - leftPanel->r);
         }
         
-        Panel topPanel = panel.findTopPanel();
-        if (!topPanel.polygon.empty()) {
-            guttersY.push_back(panel.y - topPanel.b);
+        unique_ptr<Panel> topPanel = panel.findTopPanel();
+        if (topPanel != nullptr && !topPanel->polygon.empty()) {
+            guttersY.push_back(panel.y - topPanel->b);
         }
     }
     
@@ -298,7 +298,6 @@ void Page::expandPanels() {
 //        panel.polygon = vector<Point>(rect);
     }
     
-//        gutters = self.actual_gutters()
 //        for p in self.panels:
 //            for d in ['x', 'y', 'r', 'b']:  # expand in all four directions
 //                newcoord = -1
@@ -326,22 +325,27 @@ void Page::fixPanelsNumbering() {
 
         for (size_t i = 0; i < panels.size(); ++i) {
             const Panel& panel = panels[i];
-            vector<Panel> neighboursBefore;
-            Panel topPanel = panel.findTopPanel();
+            vector<unique_ptr<Panel>> neighboursBefore;
+            unique_ptr<Panel> topPanel = panel.findTopPanel();
 
-            if (!topPanel.polygon.empty()) {
-                neighboursBefore.push_back(topPanel);
+            if (topPanel != nullptr && !topPanel->polygon.empty()) {
+                neighboursBefore.push_back(std::make_unique<Panel>(*topPanel));
             }
+
             if (numbering == "rtl") {
-                vector<Panel> rightPanels = panel.findAllRightPanels();
-                neighboursBefore.insert(neighboursBefore.end(), rightPanels.begin(), rightPanels.end());
+                vector<unique_ptr<Panel>> rightPanels = panel.findAllRightPanels();
+                for (const auto& panel : rightPanels) {
+                    neighboursBefore.push_back(std::make_unique<Panel>(*panel));
+                }
             } else {
-                vector<Panel> leftPanels = panel.findAllLeftPanels();
-                neighboursBefore.insert(neighboursBefore.end(), leftPanels.begin(), leftPanels.end());
+                vector<unique_ptr<Panel>> leftPanels = panel.findAllLeftPanels();
+                for (const auto& panel : leftPanels) {
+                    neighboursBefore.push_back(std::make_unique<Panel>(*panel));
+                }
             }
             
-            for (const Panel& neighbour : neighboursBefore) {
-                auto neighbourPos = find(panels.begin(), panels.end(), neighbour) - panels.begin();
+            for (const auto& neighbour : neighboursBefore) {
+                auto neighbourPos = find(panels.begin(), panels.end(), *neighbour) - panels.begin();
                 if (i < neighbourPos) {
                     changes = true;
                     swap(panels[i], panels[neighbourPos]);
@@ -402,3 +406,4 @@ void Page::groupBigPanels() {
         }
     }
 }
+

@@ -9,16 +9,6 @@
 #ifndef Page_hpp
 #define Page_hpp
 
-
-//class Page {
-//public:
-//    std::vector<Panel> panels;
-//    std::vector<Segment> segments;
-//    std::vector<int> imageSize;
-//    float smallPanelRatio;
-//    std::string numbering;
-//};
-
 #include <iostream>
 #include <vector>
 #include <string>
@@ -46,14 +36,15 @@ private:
 class Page {
 public:
     static constexpr double DEFAULT_MIN_PANEL_SIZE_RATIO = 0.1;
-    
+
+    Mat image;
     vector<Panel> panels;
     vector<Segment> segments;
     string filename;
+    vector<string> panelFiles;
     string numbering;
-    double smallPanelSizeRatio = DEFAULT_MIN_PANEL_SIZE_RATIO;
-    bool panelExpansion;
     cv::Size imageSize;
+    double smallPanelSizeRatio = DEFAULT_MIN_PANEL_SIZE_RATIO;
 
     Page(const string& filename,
          const string& numbering = "ltr",
@@ -63,10 +54,10 @@ public:
     void split();
 
 private:
-    Mat image;
     Mat gray;
     Mat sobel;
     vector<vector<cv::Point>> contours;
+    bool panelExpansion;
     
     void getSobel();
     
@@ -95,6 +86,7 @@ private:
     void fixPanelsNumbering();
     
     void groupBigPanels();
+    
 };
 
                 

@@ -35,13 +35,19 @@ Panel::Panel(Page* page,
         this->b = this->y + xywh->height;
     }
     
-    this->polygon = *polygon;
+    if (polygon != nullptr) {
+        this->polygon = *polygon;
+    }
     this->splittable = splittable;
 }
 
 Panel Panel::fromXyrb(Page* page, int x, int y, int r, int b) {
     Rect rect(x, y, r - x, b - y);
     return Panel(page, &rect);
+}
+
+Rect Panel::toXywh() {
+    return Rect(x, y, w(), h());
 }
 
 Panel Panel::overlapPanel(const Panel& other) const {
@@ -123,7 +129,7 @@ bool Panel::sameCol(const Panel& other) const {
     return intersectionX / std::min(left.w(), right.w()) >= 1 / 3.0;
 }
 
-Panel Panel::findTopPanel() const {
+std::unique_ptr<Panel> Panel::findTopPanel() const {
     std::vector<Panel> allTop;
 
     for (auto& p : page->panels) {
@@ -132,12 +138,19 @@ Panel Panel::findTopPanel() const {
         }
     }
 
-    return *std::max_element(allTop.begin(), allTop.end(), [](const Panel& p1, const Panel& p2) {
+    auto it = std::max_element(allTop.begin(), allTop.end(), [](const Panel& p1, const Panel& p2) {
         return p1.b < p2.b;
     });
+    
+    if (it != allTop.end()) {
+        Panel panel = *it;
+        return std::make_unique<Panel>(panel);
+    } else {
+        return nullptr;
+    }
 }
 
-Panel Panel::findBottomPanel() const {
+std::unique_ptr<Panel> Panel::findBottomPanel() const {
     std::vector<Panel> allBottom;
     
     for (auto& p : page->panels) {
@@ -146,52 +159,73 @@ Panel Panel::findBottomPanel() const {
         }
     }
 
-    return *std::min_element(allBottom.begin(), allBottom.end(), [](const Panel& p1, const Panel& p2) {
+    auto it = std::min_element(allBottom.begin(), allBottom.end(), [](const Panel& p1, const Panel& p2) {
         return p1.y < p2.y;
     });
+    
+    if (it != allBottom.end()) {
+        Panel panel = *it;
+        return std::make_unique<Panel>(panel);
+    } else {
+        return nullptr;
+    }
 }
 
-std::vector<Panel> Panel::findAllLeftPanels() const {
-    std::vector<Panel> allLeft;
+std::unique_ptr<Panel>  Panel::findLeftPanel() const {
+    std::vector<std::unique_ptr<Panel>> allLeft = findAllLeftPanels();
+
+    auto it = std::max_element(allLeft.begin(), allLeft.end(), [](const unique_ptr<Panel>& p1, const unique_ptr<Panel>& p2) {
+        return p1->r < p2->r;
+    });
+    
+    if (it != allLeft.end()) {
+        Panel panel = **it;
+        return std::make_unique<Panel>(panel);
+    } else {
+        return nullptr;
+    }
+}
+
+std::vector<std::unique_ptr<Panel>> Panel::findAllLeftPanels() const {
+    std::vector<std::unique_ptr<Panel>> allLeft;
 
     for (auto& p : page->panels) {
         if (p.r <= x && p.sameRow(*this)) {
-            allLeft.push_back(p);
+            allLeft.push_back(std::make_unique<Panel>(p));
         }
     }
 
     return allLeft;
 }
 
-Panel Panel::findLeftPanel() const {
-    std::vector<Panel> allLeft = findAllLeftPanels();
+std::unique_ptr<Panel>  Panel::findRightPanel() const {
+    std::vector<std::unique_ptr<Panel>> allRight = findAllRightPanels();
 
-    return *std::max_element(allLeft.begin(), allLeft.end(), [](const Panel& p1, const Panel& p2) {
-        return p1.r < p2.r;
+    auto it = std::min_element(allRight.begin(), allRight.end(), [](const unique_ptr<Panel>& p1, const unique_ptr<Panel>& p2) {
+        return p1->x < p2->x;
     });
+    
+    if (it != allRight.end()) {
+        Panel panel = **it;
+        return std::make_unique<Panel>(panel);
+    } else {
+        return nullptr;
+    }
 }
 
-std::vector<Panel> Panel::findAllRightPanels() const {
-    std::vector<Panel> allRight;
+std::vector<std::unique_ptr<Panel>> Panel::findAllRightPanels() const {
+    std::vector<std::unique_ptr<Panel>> allRight;
 
     for (auto& p : page->panels) {
         if (p.x >= r && p.sameRow(*this)) {
-            allRight.push_back(p);
+            allRight.push_back(std::make_unique<Panel>(p));
         }
     }
 
     return allRight;
 }
 
-Panel Panel::findRightPanel() const {
-    std::vector<Panel> allRight = findAllRightPanels();
-
-    return *std::min_element(allRight.begin(), allRight.end(), [](Panel& p1, Panel& p2) {
-        return p1.x < p2.x;
-    });
-}
-
-Panel Panel::findNeighbourPanel(const char d) const {
+std::unique_ptr<Panel> Panel::findNeighbourPanel(const char d) const {
     switch (d) {
         case 'x':
             return findLeftPanel();
@@ -202,7 +236,7 @@ Panel Panel::findNeighbourPanel(const char d) const {
         case 'b':
             return findBottomPanel();
         default:
-            return findLeftPanel();
+            return nullptr;
     }
 }
 
@@ -503,10 +537,6 @@ float Panel::wt() const {
 
 float Panel::ht() const {
     return h() / 10.0;
-}
-
-Rect Panel::toXywh() {
-    return Rect(x, y, w(), h());
 }
 
 bool Panel::operator==(const Panel& other) const{
